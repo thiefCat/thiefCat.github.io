@@ -137,24 +137,24 @@ content:
 
 
   - title: Experience # Title for the section
-    layout: list # Type of content section (list/text)
+    layout: text # Type of content section (list/text)
     content:
       - layout: top
         title: The Chinese Uniersity of Hong Kong, Shenzhen
         # link: boringcompany.com
         # link_text: boringcompany.com
-        sub_title: 
+        sub_title: |
+          - Computational Laboratory, Spring 2022
+          - Discrete Mathematics, Fall 2022
+          
           Undergraduate Student Teaching Fellow
-
-          Computational Laboratory, Spring 2022
-
-          Discrete Mathematics, Fall 2022
         # caption: November 2017 - Present
         # quote: >
         #   Solving 21st century problems by diging holes and making game changing products like the *not a flamethrower*
         description: | # this will include new lines to allow paragraphs
           - Computational Laboratory, Spring 2022
           - Discrete Mathematics, Fall 2022
+
           - Prepared tutorial materials and conducted weekly tutorial
           - Homework grading and office hours
 
