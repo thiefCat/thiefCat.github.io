@@ -75,12 +75,12 @@ content:
   - title: Projects # Title for the section
     layout: list # Type of content section (list/text)
     content:
-      - layout: top-middle
+      - layout: top
         title: Computer vision project of video stitching and deblurring
         link: github.com/thiefCat/thiefCat.github.io/blob/main/reports/video_stitching_report.pdf
         link_text: Link to Report
         additional_links:
-          - title:  Computer vision project of video stitching and deblurring
+          - title:  Github page for project
             icon: fab fa-github
             url: github.com/thiefCat/EIE4512_pano_proj
           # - title:  Github page for project (eg. sproogen/modern-resume-theme)
@@ -93,12 +93,12 @@ content:
           -	Achieved cylindrical projection of a set of images
           -	Estimated the motion of the camera by the vedeo and then deblurred the panorama
       
-      - layout: top-middle
+      - layout: top
         title: Computer vision project of segmentation and image inpainting
         link: github.com/thiefCat/thiefCat.github.io/blob/main/reports/image_inpainting_report.pdf
         link_text: Link to Report
         additional_links:
-          - title:  Computer vision project of segmentation and image inpainting
+          - title:  Github page for project
             icon: fab fa-github
             url: github.com/orgs/ECE-Img-Inpainting/repositories
           # - title:  Github page for project (eg. sproogen/modern-resume-theme)
@@ -109,23 +109,41 @@ content:
         description: | # this will include new lines to allow paragraphs
           -	Realized interactively image segmentation algorithm using graph cut
           -	Achieved Exemplar-based image inpainting and scene matching image inpainting algorithm
+        
+      - layout: top
+        title: Numerical Analysis project on singular value decomposition and QR iteration
+        link: github.com/thiefCat/thiefCat.github.io/blob/main/reports/SVD_report.pdf
+        link_text: Link to Report
+        additional_links:
+          - title:  Github page for project
+            icon: fab fa-github
+            url: https://github.com/Linnore/DDA3005_114514
+          # - title:  Github page for project (eg. sproogen/modern-resume-theme)
+          #   icon: fab fa-github
+          #   url: Link to project (eg. sproogen.github.io/modern-resume-theme)
+        # quote: >
+        #   This is probably one of the greatest apps ever created, if you don't agree you're probably wrong.
+        description: | # this will include new lines to allow paragraphs
+          - Implemented a two-phase method to perform SVD
+          - Performed SVD to solve image deblurring problem
+          -	Performed SVD and QR iteration to solve video background extraction problem
+
 
   - title: Experience # Title for the section
     layout: list # Type of content section (list/text)
     content:
       - layout: top
-        title: Undergraduate Student Teaching Fellow
+        title: The Chinese Uniersity of Hong Kong, Shenzhen
         # link: boringcompany.com
         # link_text: boringcompany.com
         sub_title: |
-          - Computational Laboratory, Spring 2022
-          - Discrete Mathematics, Fall 2022
+          Undergraduate Student Teaching Fellow
         # caption: November 2017 - Present
         # quote: >
         #   Solving 21st century problems by diging holes and making game changing products like the *not a flamethrower*
         description: | # this will include new lines to allow paragraphs
-          - Prepared tutorial materials and conducted weekly tutorial
-          - Homework grading and office hours
+          - Computational Laboratory, Spring 2022
+          - Discrete Mathematics, Fall 2022
 
   # - title: A Little More About Me
   #   layout: text
