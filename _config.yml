@@ -55,23 +55,29 @@ content:
   - title: Education # Title for the section
     layout: list # Type of content section (list/text)
     content:
-      - layout: left
+      - layout: top
         title: The Chinese Uniersity of Hong Kong, Shenzhen
         caption: Expected graduation June 2024
         sub_title: BSc Data Science and Big Data Technology
         # quote: >
         #   Established in 1636, Harvard is the oldest higher education institution in the United States, and is widely regarded in terms of its influence, reputation, and academic pedigree as a leading university in not just the US but also the world.
         description: | # this will include new lines to allow paragraphs
-          I major in Data Science and Big Data Technology
+          I major in Data Science and Big Data Technology at CUHKSZ. Important courses: Machine Learning, Numerical Methods, Stochastic Process,
+          Optimization, Digital Image Processing and Computer Vision.
+          
+          My honors & rewards are as follows:
           - Dean's List, 2020-2021
           - Academic Performance Scholarship: class B, 2020-2021
           - Dean's List, 2021-2022
           - Academic Performance Scholarship: class B, 2021-2022
+        
 
-      - layout: left
+      - layout: top
         title: University of California, Berkeley
         sub_title: January 2023 - March 2023
         caption: Visiting student
+        description: | # this will include new lines to allow paragraphs
+          Majoring in Computer Science, I learned Algorithm, Deep Learning, and Data Structure at UC Berkeley.
           
   - title: Projects # Title for the section
     layout: list # Type of content section (list/text)
