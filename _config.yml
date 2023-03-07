@@ -64,7 +64,7 @@ content:
         description: | # this will include new lines to allow paragraphs
           I major in Data Science and Big Data Technology at CUHKSZ. Important courses: Machine Learning, Numerical Methods, Stochastic Process,
           Optimization, Digital Image Processing and Computer Vision.
-          
+
           My honors & rewards are as follows:
           - Dean's List, 2020-2021
           - Academic Performance Scholarship: class B, 2020-2021
@@ -143,13 +143,12 @@ content:
         title: The Chinese Uniersity of Hong Kong, Shenzhen
         # link: boringcompany.com
         # link_text: boringcompany.com
-        sub_title: |
+        sub_title: 
           Undergraduate Student Teaching Fellow
-        jobs:
-          - title: Computational Laboratory, Spring 2022
-            dates: Januray 2022 - March 2022
-          - title: Discrete Mathematics, Fall 2022
-            dates: September 2022 - December 2022
+
+          Computational Laboratory, Spring 2022
+
+          Discrete Mathematics, Fall 2022
         # caption: November 2017 - Present
         # quote: >
         #   Solving 21st century problems by diging holes and making game changing products like the *not a flamethrower*
