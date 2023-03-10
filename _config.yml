@@ -131,7 +131,25 @@ content:
         # quote: >
         #   This is probably one of the greatest apps ever created, if you don't agree you're probably wrong.
         description: | # this will include new lines to allow paragraphs
-          - Implemented a two-phase method to perform SVD
+          - Implemented an improved two-phase method to perform SVD
+          - Performed SVD to solve image deblurring problem
+          -	Performed SVD and QR iteration to solve video background extraction problem
+      
+      - layout: top
+        title: Database Design and Data Analysis of a Vocabulary Building App
+        link: github.com/CSC3170
+        link_text: Link to Report
+        additional_links:
+          - title:  Github page for project
+            icon: fab fa-github
+            url: github.com/CSC3170
+          # - title:  Github page for project (eg. sproogen/modern-resume-theme)
+          #   icon: fab fa-github
+          #   url: Link to project (eg. sproogen.github.io/modern-resume-theme)
+        # quote: >
+        #   This is probably one of the greatest apps ever created, if you don't agree you're probably wrong.
+        description: | # this will include new lines to allow paragraphs
+          - Implemented an improved two-phase method to perform SVD
           - Performed SVD to solve image deblurring problem
           -	Performed SVD and QR iteration to solve video background extraction problem
 
@@ -149,7 +167,7 @@ content:
         # quote: >
         #   Solving 21st century problems by diging holes and making game changing products like the *not a flamethrower*
         description: | # this will include new lines to allow paragraphs
-          I works as teaching assistant for two courses:
+          I worked as teaching assistant for two courses:
           - Computational Laboratory, Spring 2022
           - Discrete Mathematics, Fall 2022
 
