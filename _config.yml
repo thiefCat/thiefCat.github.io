@@ -137,7 +137,7 @@ content:
       
       - layout: top
         title: Database Design and Data Analysis of a Vocabulary Building App
-        link: github.com/CSC3170
+        link: github.com/thiefCat/thiefCat.github.io/blob/main/reports/database.pdf
         link_text: Link to Report
         additional_links:
           - title:  Github page for project
@@ -149,9 +149,9 @@ content:
         # quote: >
         #   This is probably one of the greatest apps ever created, if you don't agree you're probably wrong.
         description: | # this will include new lines to allow paragraphs
-          - Implemented an improved two-phase method to perform SVD
-          - Performed SVD to solve image deblurring problem
-          -	Performed SVD and QR iteration to solve video background extraction problem
+          - Designed the Entity-Relationship model and relational schema of a vocabulary building app
+          - Analyzed and visualized the data in the vocabulary database using sql and data analysis software
+          -	Used data mining and data analysis to extract useful information of the database
 
 
   - title: Experience # Title for the section
