@@ -74,8 +74,8 @@ content:
 
       - layout: top
         title: University of California, Berkeley
-        sub_title: January 2023 - March 2023
-        caption: Visiting student
+        caption: January 2023 - March 2023
+        sub_title: Visiting Student, Computer Science Major
         description: | # this will include new lines to allow paragraphs
           Majoring in Computer Science, I learned Algorithm, Deep Learning, and Data Structure at UC Berkeley.
           
