@@ -115,7 +115,7 @@ content:
         #   This is probably one of the greatest apps ever created, if you don't agree you're probably wrong.
         description: | # this will include new lines to allow paragraphs
           -	Realized interactively image segmentation algorithm using graph cut
-          -	Achieved Exemplar-based image inpainting and scene matching image inpainting algorithm
+          -	Combined Exemplar-based and scene matching algorithm to improve the inpainting result
         
       - layout: top
         title: Numerical Analysis project on singular value decomposition and QR iteration
