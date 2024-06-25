@@ -16,24 +16,23 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This is the excerpt">
+    <meta name="description" content="This blog post introduces the syntax of bash scripting language">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="https://thiefcat.github.io/2024/06/23/test/index.html">
+<meta property="og:title" content="Computer Science Basis - Shell Scripting (Bash)">
+<meta property="og:url" content="https://thiefcat.github.io/2024/06/25/Shell-Scripting/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This is the excerpt">
+<meta property="og:description" content="This blog post introduces the syntax of bash scripting language">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://thiefcat.github.io/img/test.jpeg">
-<meta property="article:published_time" content="2024-06-23T10:42:14.000Z">
-<meta property="article:modified_time" content="2024-06-23T11:05:55.005Z">
+<meta property="article:published_time" content="2024-06-25T02:08:27.000Z">
+<meta property="article:modified_time" content="2024-06-25T08:35:36.840Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="test">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="bash">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://thiefcat.github.io/img/test.jpeg">
   
   
   
-  <title>test - Songlin&#39;s Space</title>
+  <title>Computer Science Basis - Shell Scripting (Bash) - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,13 +221,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/sky_castle.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/background.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">test</span>
+            <span id="subtitle">Computer Science Basis - Shell Scripting (Bash)</span>
           
         </div>
 
@@ -244,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-23 18:42" pubdate>
-          June 23, 2024 pm
+        <time datetime="2024-06-25 10:08" pubdate>
+          June 25, 2024 am
         </time>
       </span>
     
@@ -256,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          44 words
+          254 words
         
       </span>
     
@@ -267,7 +266,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -312,28 +311,74 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">test</h1>
+            <h1 id="seo-header">Computer Science Basis - Shell Scripting (Bash)</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;Name&quot;</span><br></code></pre></td></tr></table></figure>
+                <h2 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h2><p>Bash (Bourne Again Shell) is a powerful command-line interpreter and scripting language. Bash scripting can significantly enhance productivity by automating repetitive tasks.</p>
+<h3 id="Structure-of-bash"><a href="#Structure-of-bash" class="headerlink" title="Structure of bash"></a>Structure of bash</h3><p>Example of a bash script script.sh:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash  </span><br><br><span class="hljs-comment"># This is a comment</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World!&quot;</span>  <span class="hljs-comment"># This is an inline comment</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Script name: <span class="hljs-variable">$0</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;First argument: <span class="hljs-variable">$1</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Second argument: <span class="hljs-variable">$2</span>&quot;</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo g<br></code></pre></td></tr></table></figure>
+<p>To execute the above script, run <code>./script.sh arg1 arg2</code>.</p>
+<h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">name=<span class="hljs-string">&quot;Alice&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, <span class="hljs-variable">$name</span>&quot;</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo s<br></code></pre></td></tr></table></figure>
+<p>Note that there should be no spaces around the <code>=</code>.</p>
+<h4 id="Command-Substitution"><a href="#Command-Substitution" class="headerlink" title="Command Substitution"></a>Command Substitution</h4><p>Whenever you place $( CMD ) it will execute CMD, get the output of the command and substitute it in place. For example:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;We are in <span class="hljs-subst">$(pwd)</span>&quot;</span><br>We are <span class="hljs-keyword">in</span> /Users/zhaosonglin/Desktop/programming/python/numpy<br>% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Today is <span class="hljs-subst">$(date)</span>&quot;</span><br>Today is Tue Jun 25 15:48:09 CST 2024<br></code></pre></td></tr></table></figure>
 
-<h3 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo d<br></code></pre></td></tr></table></figure>
+<h3 id="Exit-codes"><a href="#Exit-codes" class="headerlink" title="Exit codes"></a>Exit codes</h3><p>An exit code is a number returned by a command or script to the calling environment. By convention:</p>
+<ul>
+<li>An exit code of 0 indicates that the command or script executed successfully.</li>
+<li>A non-zero exit code indicates that an error occurred.</li>
+</ul>
+<h3 id="Special-Variables"><a href="#Special-Variables" class="headerlink" title="Special Variables"></a>Special Variables</h3><ul>
+<li><code>$0</code> - Name of the script</li>
+<li><code>$1</code> to <code>$9</code> - Arguments to the script. $1 is the first argument and so on.</li>
+<li><code>$@</code> - All the arguments</li>
+<li><code>$#</code> - Number of arguments</li>
+<li><code>$?</code> - Return code of the previous command</li>
+<li><code>$$</code> - Process identification number (PID) for the current script</li>
+<li><code>!!</code> - Entire last command, including arguments. A common pattern is to execute a command only for it to fail due to missing permissions; you can quickly re-execute the command with sudo by doing sudo !!</li>
+<li><code>$_</code> - Last argument from the last command.</li>
+</ul>
+<h3 id="Special-Functions"><a href="#Special-Functions" class="headerlink" title="Special Functions"></a>Special Functions</h3><p><code>?</code> and <code>*</code> can be used to match one or any amount of characters respectively.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">% <span class="hljs-built_in">ls</span><br>01 hstack.py		04 mask.py		basic.ipynb<br>02 transpose.py		04 slicing.ipynb<br>03 least-square.py	05 histogram.py<br>% <span class="hljs-built_in">ls</span> *.ipynb<br>04 slicing.ipynb	basic.ipynb<br>% <span class="hljs-built_in">ls</span> b?sic.ipynb<br>basic.ipynb<br></code></pre></td></tr></table></figure>
 
-<h3 id="Generate-and-Deploy"><a href="#Generate-and-Deploy" class="headerlink" title="Generate and Deploy"></a>Generate and Deploy</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo g -d<br></code></pre></td></tr></table></figure>
+<p><code>&#123;&#125;</code> can be used when a set of strings have common substrings.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">% <span class="hljs-built_in">mkdir</span> a b<br>% <span class="hljs-built_in">touch</span> &#123;a,b&#125;/&#123;x,y,z&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="Insert-new-image"><a href="#Insert-new-image" class="headerlink" title="Insert new image"></a>Insert new image</h3><p>Insert the image to &#x2F;source&#x2F;img directory, and then generate static files.</p>
-<h3 id="Create-a-new-page"><a href="#Create-a-new-page" class="headerlink" title="Create a new page"></a>Create a new page</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new page <span class="hljs-string">&quot;name&quot;</span><br></code></pre></td></tr></table></figure>
+<p>The above command will create three files inside a and b folder (a&#x2F;x, a&#x2F;y, a&#x2F;z, b&#x2F;x, b&#x2F;y, b&#x2F;z) respectively.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> *&#123;.py,.ipynb&#125; dest<br><span class="hljs-comment"># Will move all *.py and *.sh files to folder dest</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="Creating-a-new-navigation-bar"><a href="#Creating-a-new-navigation-bar" class="headerlink" title="Creating a new navigation bar:"></a>Creating a new navigation bar:</h3><ul>
-<li>Create a new ejs file in &#x2F;themes&#x2F;fluid&#x2F;layout&#x2F;</li>
-<li>Add page attributes in _confid.fluid.yml, and add a new menu inside navbar.menu</li>
-<li>Modify the &#x2F;themes&#x2F;fluid&#x2F;languages&#x2F;en.yml, adding titles and subtitles</li>
+<h3 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-function"><span class="hljs-title">greet</span></span>() &#123;<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, <span class="hljs-variable">$1</span>&quot;</span><br>&#125;<br><br>greet <span class="hljs-string">&quot;Alice&quot;</span><br>greet <span class="hljs-string">&quot;Bob&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="If-Statement"><a href="#If-Statement" class="headerlink" title="If Statement"></a>If Statement</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>number=10<br><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$number</span> -gt 5 ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number is greater than 5.&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number is 5 or less.&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Loops"><a href="#Loops" class="headerlink" title="Loops"></a>Loops</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> item1 item2 item3; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$item</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>counter=1<br><br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$counter</span> -le 5 ]; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Counter: <span class="hljs-variable">$counter</span>&quot;</span><br>    counter=$((counter + <span class="hljs-number">1</span>))<br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Finding-files"><a href="#Finding-files" class="headerlink" title="Finding files"></a>Finding files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find . -name src -<span class="hljs-built_in">type</span> d<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>find .: Start searching in the current directory.</li>
+<li>-name src: Match directories named src.</li>
+<li>-type d: Ensure that the match is a directory.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find . -path <span class="hljs-string">&#x27;*/test/*.py&#x27;</span> -<span class="hljs-built_in">type</span> f<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>find .: Start searching in the current directory.</li>
+<li>-path ‘<em>&#x2F;test&#x2F;</em>.py’: Match files where test appears as a directory in their path and the filename ends with .py (<code>*</code> can substitute any string).</li>
+<li>-type f: Ensure that the match is a regular file (not a directory).</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find . -name <span class="hljs-string">&#x27;*.tmp&#x27;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> &#123;&#125; \;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>find .: Start searching in the current directory.</li>
+<li>-name ‘*.tmp’: Match files ends with .tmp.</li>
+<li>-exec rm {} ;: For each file found, execute the rm command to delete it. {} is replaced by the current file’s path.</li>
 </ul>
 
                 
@@ -353,7 +398,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/test/" class="category-chain-item">test</a>
+  <a href="/categories/Computer-Science-Basis/" class="category-chain-item">Computer Science Basis</a>
   
   
 
@@ -368,7 +413,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/test/" class="print-no-link">#test</a>
+        <a href="/tags/shell/" class="print-no-link">#shell</a>
+      
+        <a href="/tags/bash/" class="print-no-link">#bash</a>
       
     </div>
   
@@ -380,8 +427,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>test</div>
-      <div>https://thiefcat.github.io/2024/06/23/test/</div>
+      <div>Computer Science Basis - Shell Scripting (Bash)</div>
+      <div>https://thiefcat.github.io/2024/06/25/Shell-Scripting/</div>
     </div>
     <div class="license-meta">
       
@@ -393,7 +440,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 23, 2024</div>
+          <div>June 25, 2024</div>
         </div>
       
       
@@ -425,15 +472,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/24/Shell/" title="Computer Science Basis - Shell">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Computer Science Basis - Shell</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/06/24/Web-Basis/" title="Web Development - (1) Basis">
+                        <span class="hidden-mobile">Web Development - (1) Basis</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
