@@ -26,8 +26,9 @@
 <meta property="og:image" content="https://thiefcat.github.io/2024/06/24/Web-HTML-CSS/box.png">
 <meta property="og:image" content="https://thiefcat.github.io/2024/06/24/Web-HTML-CSS/inspect.png">
 <meta property="og:image" content="https://thiefcat.github.io/2024/06/24/Web-HTML-CSS/flex.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/06/24/Web-HTML-CSS/flex1.png">
 <meta property="article:published_time" content="2024-06-24T09:03:38.000Z">
-<meta property="article:modified_time" content="2024-06-26T07:19:54.655Z">
+<meta property="article:modified_time" content="2024-06-26T07:32:59.337Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta property="article:tag" content="HTML">
@@ -260,7 +261,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          562 words
+          584 words
         
       </span>
     
@@ -343,21 +344,22 @@
 
 <h4 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;image.png&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="Syntax-1"><a href="#Syntax-1" class="headerlink" title="Syntax"></a>Syntax</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;https://fonts.googleapis.com/css?family=Open+Sans:300,600&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="Syntax-1"><a href="#Syntax-1" class="headerlink" title="Syntax"></a>Syntax</h3><p>Import fonts from <code>https://fonts.google.com/</code>.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;https://fonts.googleapis.com/css?family=Open+Sans:300,600&quot;</span>);<br></code></pre></td></tr></table></figure>
 
-<p>Import fonts from <code>https://fonts.google.com/</code>.</p>
+<h4 id="Global-Definition"><a href="#Global-Definition" class="headerlink" title="Global Definition"></a>Global Definition</h4><p>Root variables, defining CSS custom properties (variables) for colors that can be reused throughout the stylesheet. Other parts of the css file can use it by <code>var(--grey)</code>.</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-pseudo">:root</span> &#123;<br>  <span class="hljs-attr">--primary</span>: <span class="hljs-number">#396dff</span>;<br>  <span class="hljs-attr">--grey</span>: <span class="hljs-number">#f7f7f7</span>;<br>  <span class="hljs-attr">--white</span>: <span class="hljs-number">#fff</span>;<br><br>  <span class="hljs-attr">--xs</span>: <span class="hljs-number">4px</span>;<br>  <span class="hljs-attr">--s</span>: <span class="hljs-number">8px</span>;<br>  <span class="hljs-attr">--m</span>: <span class="hljs-number">16px</span>;<br>  <span class="hljs-attr">--l</span>: <span class="hljs-number">24px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>Root variables, defining CSS custom properties (variables) for colors that can be reused throughout the stylesheet. Other parts of the css file can use it by <code>var(--grey)</code>.</p>
+<h4 id="Element"><a href="#Element" class="headerlink" title="Element"></a>Element</h4><p>The style defined here automatically applies to the entire body of the document (inside <code>&lt;body&gt;</code> and <code>&lt;/body&gt;</code>).</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-tag">body</span> &#123;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<br>  <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&quot;Open Sans&quot;</span>, sans-serif;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>The style defined here automatically applies to the entire body of the document (inside <code>&lt;body&gt;</code> and <code>&lt;/body&gt;</code>).</p>
+<h4 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h4><p>Style for class. <code>&lt;div class=&quot;navTitle&quot;&gt;</code>. <strong>An element can have multiple classes. Can use the same class on multiple elements.</strong></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-class">.navTitle</span> &#123;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--primary);<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<br>  <span class="hljs-attribute">font-weight</span>: normal;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
-<p>Style for class. <code>&lt;div class=&quot;navTitle&quot;&gt;</code>. <strong>An element can have multiple classes. Can use the same class on multiple elements.</strong></p>
+<h4 id="ID"><a href="#ID" class="headerlink" title="ID"></a>ID</h4><p>Style for ID. <code>&lt;div id=&quot;unique&quot;&gt;</code>. An element can only have one ID. ID must be unique in any give HTML document.</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-id">#unique</span> &#123;<br>  <span class="hljs-attribute">color</span>:red;<br>  <span class="hljs-attribute">font-family</span>: Arial;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>Style for ID. <code>&lt;div id=&quot;unique&quot;&gt;</code>. An element can only have one ID. ID must be unique in any give HTML document.</p>
+
 <h3 id="Style-Rules"><a href="#Style-Rules" class="headerlink" title="Style Rules"></a>Style Rules</h3><p>Priority:</p>
 <ol>
 <li>Inline Style</li>
@@ -371,28 +373,27 @@
 
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-class">.xxClass</span> &#123;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0px</span>;<br>  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid black;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>To see an element’s box model,</p>
-<ol>
-<li>Open the browser</li>
-<li>Inspect</li>
-<li>Command + Shift + C</li>
-<li>Click on the element to inspect</li>
-</ol>
+<p><strong>To inspect an element’s box model and other detailed attributes:</strong></p>
+<p><strong>1. Open the browser</strong><br><strong>2. Inspect</strong><br><strong>3. Command + Shift + C</strong><br><strong>4. Click on the element to inspect</strong></p>
 <div style="text-align: center;">
   <img src="/2024/06/24/Web-HTML-CSS/inspect.png" srcset="/img/loading.gif" lazyload class="">
 </div>
 
 <h3 id="Margin-Ordering"><a href="#Margin-Ordering" class="headerlink" title="Margin Ordering"></a>Margin Ordering</h3><p>Margin orders in the sequence of top, right, bottom, left</p>
 <ol>
-<li>margin: 10px: All sides 10px</li>
-<li>margin: 10px 20px: top and bottom 10px, left and right 20px</li>
-<li>margin: 10px 20px 20px: top 10px, right 20px, bottom</li>
+<li>margin: 10px;: All sides 10px</li>
+<li>margin: 10px 20px;: top and bottom 10px, left and right 20px</li>
+<li>margin: 10px 20px 30px;: top 10px, right 20px, bottom 30px, left 20px</li>
+<li>margin: 10px 20px 30px 40px;: top 10px, right 20px, bottom 30px, left 40px</li>
 </ol>
 <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">See this demo</a></p>
-<h3 id="Flex"><a href="#Flex" class="headerlink" title="Flex"></a>Flex</h3><p>Flex is a flexible box. It can control direction, sizing, distribution. All direct children of a flexible container becomes flexible items. <a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css3_flexbox_items.asp">See this flex demo</a></p>
+<h3 id="Flex"><a href="#Flex" class="headerlink" title="Flex"></a>Flex</h3><p>Flex is a flexible box. It can control direction, sizing, distribution. All direct children of a flexible container becomes flexible items. <a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css3_flexbox_items.asp">See this flex demo</a>.</p>
 <div style="text-align: center; width: 50%">
   <img src="/2024/06/24/Web-HTML-CSS/flex.png" srcset="/img/loading.gif" lazyload class="">
 </div>
+
+<p>An example flex container defined in CSS:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-class">.flex-container</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;  # this attribute makes this class <span class="hljs-selector-tag">a</span> <span class="hljs-attribute">flex</span> container<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f1f1f1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h4 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;flex-container&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;order: 3&quot;</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;order: 2&quot;</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;order: 4&quot;</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;order: 1&quot;</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
@@ -402,10 +403,14 @@
 <p>Set the initial length of the third flex item to 200 pixels:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;flex-container&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;flex-basis: 200px&quot;</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>An example of horizontal direction: The two sections are now in a row and equally distributed.</p>
+<p>An example of horizontal direction: The two sections are now in a row and evenly distributed in the flex container.</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;u-flex&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;subContainer u-textCenter&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>About Me<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>      I am more of a turtle person but I&#x27;m just trying to fit in and get a catbook.<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span><br><br>  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;subContainer u-textCenter&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>My Favorite Type of Cat<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>      I actually prefer turtles.<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-class">.u-flex</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-comment">/* justify-content: space-between; */</span><br>&#125;<br><span class="hljs-selector-class">.subContainer</span> &#123;<br>  <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;<br>  <span class="hljs-attribute">flex-basis</span>: <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<div style="text-align: center;%">
+  <img src="/2024/06/24/Web-HTML-CSS/flex1.png" srcset="/img/loading.gif" lazyload class="">
+</div>
 
                 
               </div>
