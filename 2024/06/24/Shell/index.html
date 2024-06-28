@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-24T03:59:13.000Z">
-<meta property="article:modified_time" content="2024-06-25T16:03:56.156Z">
+<meta property="article:modified_time" content="2024-06-28T09:16:22.232Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          287 words
+          311 words
         
       </span>
     
@@ -344,7 +344,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">which</span> <span class="hljs-built_in">ls</span><br>/bin/ls<br>% <span class="hljs-built_in">which</span> <span class="hljs-built_in">mkdir</span><br>/bin/mkdir<br>% <span class="hljs-built_in">which</span> npm<br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin/npm<br>% <span class="hljs-built_in">which</span> python<br>/opt/anaconda3/bin/python<br></code></pre></td></tr></table></figure>
 
 <p>The commands like <code>ls</code> and <code>mkdir</code> resides in the default directory <code>/bin/</code>, while npm and python are installed in specific locations.</p>
-<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Redirection"><a href="#Redirection" class="headerlink" title="Redirection"></a>Redirection</h3><p>In the shell, each program has one input stream and one output stream, keyboard and terminal respectively. We can redirect the input or output by <code>&lt; file</code> or <code>&gt; file</code>. This is useful for saving the output for later use or for further processing.</p>
+<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Redirection"><a href="#Redirection" class="headerlink" title="Redirection"></a>Redirection</h3><p>In the shell, each program has one input stream and one output stream, which are keyboard and terminal respectively by default. We can redirect the input or output by <code>&lt; file</code> or <code>&gt; file</code>. This is useful for saving the output for later use or for further processing.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World&quot;</span> &gt; output.txt<br></code></pre></td></tr></table></figure>
 
 <ul>
@@ -354,6 +354,7 @@
 <p>As a result, the text “Hello, World” is written to the file <code>output.txt</code>. We can check by the <code>cat</code> command:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">cat</span> output.txt<br>Hello, World<br></code></pre></td></tr></table></figure>
 
+<p><strong><code>&gt;</code> is used to overwrite the contents of a file, while <code>&gt;&gt;</code> is used to append to the contents of a file.</strong></p>
 <h3 id="Pipes"><a href="#Pipes" class="headerlink" title="Pipes"></a>Pipes</h3><p>Pipes <code>|</code> are used to pass the output of one command as input to another command.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span><br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br></code></pre></td></tr></table></figure>
 
@@ -364,6 +365,10 @@
 </ul>
 <p>As a result, the command finds only files ends with “.txt” of the output of <code>ls -l</code>. An example of combining redirection and pipes:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span> &gt; txt_files_list.txt<br>% <span class="hljs-built_in">cat</span> txt_files_list.txt<br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br>-rw-r--r--    1 zhaosonglin  staff     0 Jun 24 16:34 txt_files_list.txt<br></code></pre></td></tr></table></figure>
+
+<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash-3.2$ <span class="hljs-built_in">alias</span> gs=<span class="hljs-string">&quot;git status&quot;</span><br>bash-3.2$ gs<br>On branch main<br>nothing to commit, working tree clean<br>bash-3.2$ git status<br>On branch main<br>nothing to commit, working tree clean<br></code></pre></td></tr></table></figure>
+
+<p>To make an alias persistent you need to include it in dotfiles like .bashrc or .zshrc.</p>
 
                 
               </div>
