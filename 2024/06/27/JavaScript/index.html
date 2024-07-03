@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces basic syntax of JavaScript">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-27T10:23:51.000Z">
-<meta property="article:modified_time" content="2024-06-28T03:03:31.889Z">
+<meta property="article:modified_time" content="2024-07-03T09:30:13.624Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta property="article:tag" content="JavaScript">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          380 words
+          543 words
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          2 mins
+          3 mins
         
       </span>
     
@@ -322,9 +322,14 @@
 <li>Any functions that are called in the global code will be executed <strong>in the order they appear</strong>.</li>
 <li>When both files are included in the HTML with <code>&lt;script&gt;</code> tags, they share the same global scope. This allows functions and variables defined in one file to be accessible in the other.</li>
 </ul>
+<h3 id="Run-Javascript"><a href="#Run-Javascript" class="headerlink" title="Run Javascript"></a>Run Javascript</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">node code.js<br></code></pre></td></tr></table></figure>
+
 <h3 id="Triggering-Javascript"><a href="#Triggering-Javascript" class="headerlink" title="Triggering Javascript"></a>Triggering Javascript</h3><h4 id="Inline-Event-Handlers"><a href="#Inline-Event-Handlers" class="headerlink" title="Inline Event Handlers"></a>Inline Event Handlers</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;buttonClicked()&quot;</span>&gt;</span>Click Me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">buttonClicked</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Button clicked!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;alert(&#x27;Button clicked!&#x27;)&quot;</span>&gt;</span>Click Me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>The onclick attribute in the <code>&lt;button&gt;</code> tag specifies JavaScript code to run when the button is clicked.</p>
 <h4 id="Event-Listeners"><a href="#Event-Listeners" class="headerlink" title="Event Listeners"></a>Event Listeners</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myButton&quot;</span>&gt;</span>Click Me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;myButton&quot;</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Button clicked!&quot;</span>);</span><br><span class="language-javascript">  &#125;);</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
@@ -338,10 +343,13 @@
 <ul>
 <li><code>window</code>: The global window object represents the window containing the DOM document.</li>
 </ul>
-<h4 id="Page-Load"><a href="#Page-Load" class="headerlink" title="Page Load"></a>Page Load</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-variable language_">window</span>.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Page loaded!&#x27;</span>);</span><br><span class="language-javascript">&#125;;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h4 id="Page-Load"><a href="#Page-Load" class="headerlink" title="Page Load"></a>Page Load</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-variable language_">window</span>.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Page loaded!&quot;</span>);</span><br><span class="language-javascript">  &#125;;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <ul>
 <li>The code inside <code>window.onload</code> runs when the entire page has finished loading.</li>
 </ul>
+<h4 id="Timers"><a href="#Timers" class="headerlink" title="Timers"></a>Timers</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;This alert appears after 3 seconds&quot;</span>);<br>&#125;, <span class="hljs-number">3000</span>);<br><br><span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;This message appears every 2 seconds&quot;</span>);<br>&#125;, <span class="hljs-number">2000</span>);<br></code></pre></td></tr></table></figure>
+
 <h2 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h2><h3 id="Data-Types"><a href="#Data-Types" class="headerlink" title="Data Types"></a>Data Types</h3><p>Primitive Types:</p>
 <ul>
 <li>Boolean (true, false)</li>
@@ -383,9 +391,27 @@
 <h3 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">addOne</span> = (<span class="hljs-params">num</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> result = num + <span class="hljs-number">1</span>;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">addOne</span>(<span class="hljs-number">4</span>)); <span class="hljs-comment">// Output: 5</span><br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>Function is unmodifiable, so use <strong>const</strong></li>
-<li>What inside () are parameters</li>
-<li>What the function does is inside {}</li>
+<li>Function is unmodifiable, so use <strong>cons functionNamet</strong></li>
+<li>(parameters) &#x3D;&gt; {function contents}</li>
+</ul>
+<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Callback-Functions"><a href="#Callback-Functions" class="headerlink" title="Callback Functions"></a>Callback Functions</h3><p>Pass functions as parameters: Convert array of Celsius to Fahrenheit.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">modifyArray</span> = (<span class="hljs-params">arr, func</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> newArr = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.<span class="hljs-property">length</span>; i++) &#123;<br>    newArr.<span class="hljs-title function_">push</span>(<span class="hljs-title function_">func</span>(arr[i]));<br>  &#125;<br>  <span class="hljs-keyword">return</span> newArr;<br>&#125;;<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">T2F</span> = (<span class="hljs-params">tempC</span>) =&gt; &#123;<br>  <span class="hljs-keyword">return</span> (tempC * <span class="hljs-number">9</span>) / <span class="hljs-number">5</span> + <span class="hljs-number">32</span>;<br>&#125;;<br><br><span class="hljs-keyword">const</span> tempsC = [<span class="hljs-number">0</span>, <span class="hljs-number">25</span>, <span class="hljs-number">100</span>];<br><span class="hljs-keyword">const</span> tempsF1 = <span class="hljs-title function_">modifyArray</span>(tempsC, <span class="hljs-variable constant_">T2F</span>);<br><span class="hljs-keyword">const</span> tempsF2 = <span class="hljs-title function_">modifyArray</span>(tempsC, <span class="hljs-function">(<span class="hljs-params">tempC</span>) =&gt;</span> (tempC * <span class="hljs-number">9</span>) / <span class="hljs-number">5</span> + <span class="hljs-number">32</span>); <span class="hljs-comment">// directly put the function in the parameter</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>When directly putting the function in the parameter, the function is like <code>(tempC) =&gt; (tempC * 9) / 5 + 32</code>, with no curly braces <code>&#123;&#125;</code> after arrow <code>=&gt;</code>.</li>
+<li>When using <code>&#123;&#125;</code>, the return value should be specified by the <code>return</code> keyword.</li>
+</ul>
+<h3 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myArray = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">const</span> newArray = myArray.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">num</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> num * <span class="hljs-number">3</span>;<br>&#125;); <span class="hljs-comment">// newArray = [3,6,9,12,15]</span><br><span class="hljs-keyword">const</span> newArray = myArray.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">num</span>) =&gt;</span> num * <span class="hljs-number">3</span>); <span class="hljs-comment">// another way to write</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>map() creates a new array.</li>
+<li>map() applies the callback function to every element of the array.</li>
+</ul>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> values = [-<span class="hljs-number">1</span>, -<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">const</span> filteredArray = values.<span class="hljs-title function_">filter</span>(x = &gt; x &gt; <span class="hljs-number">0</span>); <span class="hljs-comment">// filteredArray = [3,4,5]</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>filter() creates a new array.</li>
+<li>map() selects the element which passes the “test”.</li>
 </ul>
 
                 
@@ -478,6 +504,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/07/03/React/" title="Web Development - React Introduction">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Web Development - React Introduction</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
