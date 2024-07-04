@@ -16,22 +16,23 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
+    <meta name="description" content="This blog introduces how React is used in development">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell">
-<meta property="og:url" content="https://thiefcat.github.io/2024/06/24/Shell/index.html">
+<meta property="og:title" content="MIT Weblab笔记 - React Advanced">
+<meta property="og:url" content="https://thiefcat.github.io/2024/07/04/React-Advanced/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
+<meta property="og:description" content="This blog introduces how React is used in development">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-24T03:59:13.000Z">
-<meta property="article:modified_time" content="2024-06-28T09:16:22.232Z">
+<meta property="article:published_time" content="2024-07-04T12:30:22.000Z">
+<meta property="article:modified_time" content="2024-07-04T13:11:45.383Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="Web Development">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Shell - Songlin&#39;s Space</title>
+  <title>MIT Weblab笔记 - React Advanced - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Shell</span>
+            <span id="subtitle">MIT Weblab笔记 - React Advanced</span>
           
         </div>
 
@@ -242,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 11:59" pubdate>
-          June 24, 2024 am
+        <time datetime="2024-07-04 20:30" pubdate>
+          July 4, 2024 pm
         </time>
       </span>
     
@@ -254,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          311 words
+          247 words
         
       </span>
     
@@ -310,65 +311,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Shell</h1>
+            <h1 id="seo-header">MIT Weblab笔记 - React Advanced</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="What-is-the-shell"><a href="#What-is-the-shell" class="headerlink" title="What is the shell?"></a>What is the shell?</h3><p>A shell is a user interface that provides access to various services of an operating system. The shell is a command-line interface. The shell of macOS before Catalina is Bourne Again Shell (bash). The shell allows users to execute commands, run programs, and manage system resources. The GUI has defined many use cases for us to interact with the operating system, however, to take full advantage of the tools our computer provides, we have to use the shell.</p>
-<h3 id="Basic-shell-commands"><a href="#Basic-shell-commands" class="headerlink" title="Basic shell commands"></a>Basic shell commands</h3><ul>
-<li><strong>.</strong>: current directory</li>
-<li><strong>..</strong>: parent directory</li>
-<li><strong>ls</strong></li>
-<li><strong>madir <name></strong></li>
-<li><strong>cd <directory></strong>: change directory</li>
-<li><strong>pwd</strong>: print working directory</li>
-<li><strong>echo “text”</strong>: prints the specified text to the terminal</li>
-<li><strong>cat <file></strong>: displays the contents of the specified file</li>
-<li><strong>touch example.txt</strong>: creates file</li>
-<li><strong>grep “Hello” example.txt</strong>: To search for the string “Hello” in a file named example.txt, return the line containing the string</li>
-</ul>
-<h3 id="How-the-shell-executes-programs"><a href="#How-the-shell-executes-programs" class="headerlink" title="How the shell executes programs"></a>How the shell executes programs</h3><p>When a command is entered in the shell, it follows these steps to execute the program:</p>
-<ol>
-<li><strong>Parsing</strong>: The shell reads the command line input and breaks it into individual components (<strong>splitting by space</strong>). The first word is the command (program), and the folowing words are arguments.</li>
-<li><strong>Command Lookup</strong>: The shell searches for the command in the directories listed in the PATH environment variable. We can view the PATH variable by executing <code>echo $PATH</code>.</li>
-<li><strong>Forking</strong>: The shell creates a new process (child process) to execute the command.</li>
-<li><strong>Return</strong>: After the child process finishes, the shell returns control to the user.</li>
+                <h2 id="React-Lifecycle"><a href="#React-Lifecycle" class="headerlink" title="React Lifecycle"></a>React Lifecycle</h2><ol>
+<li><p><strong>Trigger</strong>: First time component is called or State Change</p>
+</li>
+<li><p><strong>Render</strong>: React runs the Javascript code in component and calls subcomponents</p>
+</li>
+<li><p><strong>Commit</strong>: React puts returned JSX into HTML DOM to be served to viewer</p>
+</li>
+<li><p><strong>Unmounting</strong>: React Removes the component from DOM</p>
+</li>
 </ol>
-<h3 id="Executing-programs"><a href="#Executing-programs" class="headerlink" title="Executing programs"></a>Executing programs</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">(base) zhaosonglin@xiaozeimaodeMacBook-Pro ~ % <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span><br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin:/usr/local/mysql/bin:/opt/anaconda3/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Library/TeX/texbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/bin<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">Steak</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> [doneness, setDoneness] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);<br><br>  <span class="hljs-comment">// Everything below are called again during re-render</span><br>  <span class="hljs-keyword">const</span> &#123; name, imgSrc &#125; = steakLookup[doneness];<br>  <span class="hljs-keyword">const</span> sentence = <span class="hljs-string">`Here is your <span class="hljs-subst">$&#123;name&#125;</span> steak!`</span>;<br><br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">sendToKitchen</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-title function_">setDoneness</span>(doneness + <span class="hljs-number">1</span>);<br>  &#125;;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>&#123;sentence&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#123;imgSrc&#125;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">maxWidth:</span> &quot;<span class="hljs-attr">500px</span>&quot; &#125;&#125; /&gt;</span></span><br><span class="language-xml">      &#123;doneness &lt; 4 &amp;&amp; (</span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">fontSize:</span> &quot;<span class="hljs-attr">24px</span>&quot; &#125;&#125; <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;sendToKitchen&#125;</span>&gt;</span></span><br><span class="language-xml">          Send Back To Kitchen</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">      )&#125;</span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<p>The <code>echo $PATH</code> command essentially executes the program <code>echo</code>. The program named <code>echo</code> is searched through the directories contained in variable <code>$PATH</code>. We can find where the <code>echo</code> program resides by executing <code>which echo</code>.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">(base) zhaosonglin@xiaozeimaodeMacBook-Pro ~ % <span class="hljs-built_in">which</span> <span class="hljs-built_in">echo</span><br><span class="hljs-built_in">echo</span>: shell built-in <span class="hljs-built_in">command</span><br></code></pre></td></tr></table></figure>
-
-<p>The command <code>echo</code> is a shell built-in command. Other command examples:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">which</span> <span class="hljs-built_in">ls</span><br>/bin/ls<br>% <span class="hljs-built_in">which</span> <span class="hljs-built_in">mkdir</span><br>/bin/mkdir<br>% <span class="hljs-built_in">which</span> npm<br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin/npm<br>% <span class="hljs-built_in">which</span> python<br>/opt/anaconda3/bin/python<br></code></pre></td></tr></table></figure>
-
-<p>The commands like <code>ls</code> and <code>mkdir</code> resides in the default directory <code>/bin/</code>, while npm and python are installed in specific locations.</p>
-<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Redirection"><a href="#Redirection" class="headerlink" title="Redirection"></a>Redirection</h3><p>In the shell, each program has one input stream and one output stream, which are keyboard and terminal respectively by default. We can redirect the input or output by <code>&lt; file</code> or <code>&gt; file</code>. This is useful for saving the output for later use or for further processing.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World&quot;</span> &gt; output.txt<br></code></pre></td></tr></table></figure>
+<p>When a state is updated, the javascript code in component is executed again, except the state definition lines (Non-state variables don’t persist!)</p>
+<h2 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h2><h3 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect()"></a>useEffect()</h3><h4 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">useEffect</span>(<br>  <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">  Do something here,</span><br><span class="hljs-comment">  e.g. interacting with an external service</span><br><span class="hljs-comment">  */</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;&#125;;<br>  &#125;,<br>  [<br>    <span class="hljs-comment">/* dependencies */</span><br>  ]<br>);<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><code>echo &quot;Hello, World&quot;:</code> Prints “Hello, World!” to the terminal.</li>
-<li><code>&gt;:</code> The redirection operator takes the output of the command on its left and writes it to the file specified on its right.</li>
+<li><code>useEffect()</code> is used to run function every time a variable in dependency array changes</li>
+<li>Commonly used to load external data into state</li>
+<li>The return is a callback functino that runs when the component dismounts, like cleanup functions</li>
 </ul>
-<p>As a result, the text “Hello, World” is written to the file <code>output.txt</code>. We can check by the <code>cat</code> command:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">cat</span> output.txt<br>Hello, World<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">myFunction</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-comment">// Do something</span><br>&#125;;<br><br><span class="hljs-title function_">useEffect</span>(myFunction, [var1, var2]); <span class="hljs-comment">// Calls myFunction every time var1 or var2 changes</span><br><span class="hljs-title function_">useEffect</span>(myFunction, []); <span class="hljs-comment">// Calls myFunction only once when the component is rendered for the first time (on mount)</span><br><span class="hljs-title function_">useEffect</span>(myFunction); <span class="hljs-comment">// Calls myFunction at every render (first component call + every time any state changes)</span><br></code></pre></td></tr></table></figure>
 
-<p><strong><code>&gt;</code> is used to overwrite the contents of a file, while <code>&gt;&gt;</code> is used to append to the contents of a file.</strong></p>
-<h3 id="Pipes"><a href="#Pipes" class="headerlink" title="Pipes"></a>Pipes</h3><p>Pipes <code>|</code> are used to pass the output of one command as input to another command.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span><br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br></code></pre></td></tr></table></figure>
+<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Conditional-Rendering"><a href="#Conditional-Rendering" class="headerlink" title="Conditional Rendering"></a>Conditional Rendering</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">return</span> (<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;loading ? &quot;Loading...&quot; : &quot;Actual page content&quot;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>);<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><code>ls -l:</code> Lists files and directories in long format.</li>
-<li><code>|:</code> The pipe operator takes the output of <code>ls -l</code> and passes it as input to the next command.</li>
-<li><code>grep &quot;.txt&quot;:</code> Filters the input and displays only lines containing .txt.</li>
+<li>If loading is true, it displays the text “Loading…”.</li>
+<li>If loading is false, it displays “Actual page content”.</li>
 </ul>
-<p>As a result, the command finds only files ends with “.txt” of the output of <code>ls -l</code>. An example of combining redirection and pipes:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span> &gt; txt_files_list.txt<br>% <span class="hljs-built_in">cat</span> txt_files_list.txt<br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br>-rw-r--r--    1 zhaosonglin  staff     0 Jun 24 16:34 txt_files_list.txt<br></code></pre></td></tr></table></figure>
+<h3 id="Rendering-an-Array-of-Data"><a href="#Rendering-an-Array-of-Data" class="headerlink" title="Rendering an Array of Data"></a>Rendering an Array of Data</h3><p>Return an array of html elements</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = [<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;My favorite food is doritos&quot;</span> &#125;,<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I like nachos because they look like doritos&quot;</span> &#125;,<br>];<br><br><span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash-3.2$ <span class="hljs-built_in">alias</span> gs=<span class="hljs-string">&quot;git status&quot;</span><br>bash-3.2$ gs<br>On branch main<br>nothing to commit, working tree clean<br>bash-3.2$ git status<br>On branch main<br>nothing to commit, working tree clean<br></code></pre></td></tr></table></figure>
+<p>Return an array of components</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = [<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;My favorite food is doritos&quot;</span> &#125;,<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I like nachos because they look like doritos&quot;</span> &#125;,<br>];<br><br><span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ItemComponent</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">ItemComponent</span>&gt;</span></span>);<br></code></pre></td></tr></table></figure>
 
-<p>To make an alias persistent you need to include it in dotfiles like .bashrc or .zshrc.</p>
+<ul>
+<li>Reasons for Using <code>key</code> in React Lists: This allows React to determine which elements have changed, added, or removed and to update only the necessary parts of the DOM. Without keys, React would need to re-render the entire list, which can be inefficient.</li>
+</ul>
 
                 
               </div>
@@ -387,7 +371,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Computer-Science-Basis/" class="category-chain-item">Computer Science Basis</a>
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
   
   
 
@@ -402,7 +386,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/shell/" class="print-no-link">#shell</a>
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
+      
+        <a href="/tags/React/" class="print-no-link">#React</a>
       
     </div>
   
@@ -414,8 +400,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Shell</div>
-      <div>https://thiefcat.github.io/2024/06/24/Shell/</div>
+      <div>MIT Weblab笔记 - React Advanced</div>
+      <div>https://thiefcat.github.io/2024/07/04/React-Advanced/</div>
     </div>
     <div class="license-meta">
       
@@ -427,7 +413,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 24, 2024</div>
+          <div>July 4, 2024</div>
         </div>
       
       
@@ -459,18 +445,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/24/Web-HTML-CSS/" title="MIT Weblab笔记 - HTML and CSS Basis">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - HTML and CSS Basis</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/23/test/" title="test">
-                        <span class="hidden-mobile">test</span>
+                      <a href="/2024/07/03/React/" title="MIT Weblab笔记 - React Introduction">
+                        <span class="hidden-mobile">MIT Weblab笔记 - React Introduction</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
