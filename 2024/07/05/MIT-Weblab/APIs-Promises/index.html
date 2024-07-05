@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
+    <meta name="description" content="This blog introduces the basis of APIs and Promises">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell">
-<meta property="og:url" content="https://thiefcat.github.io/2024/06/24/Shell/index.html">
+<meta property="og:title" content="MIT Weblab笔记 - APIs and Promises Introduction">
+<meta property="og:url" content="https://thiefcat.github.io/2024/07/05/MIT-Weblab/APIs-Promises/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
+<meta property="og:description" content="This blog introduces the basis of APIs and Promises">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-24T03:59:13.000Z">
-<meta property="article:modified_time" content="2024-06-28T09:16:22.232Z">
+<meta property="article:published_time" content="2024-07-05T03:27:06.000Z">
+<meta property="article:modified_time" content="2024-07-05T03:57:08.078Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Shell - Songlin&#39;s Space</title>
+  <title>MIT Weblab笔记 - APIs and Promises Introduction - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Shell</span>
+            <span id="subtitle">MIT Weblab笔记 - APIs and Promises Introduction</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 11:59" pubdate>
-          June 24, 2024 am
+        <time datetime="2024-07-05 11:27" pubdate>
+          July 5, 2024 am
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          311 words
+          105 words
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          2 mins
+          1 mins
         
       </span>
     
@@ -310,65 +310,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Shell</h1>
+            <h1 id="seo-header">MIT Weblab笔记 - APIs and Promises Introduction</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="What-is-the-shell"><a href="#What-is-the-shell" class="headerlink" title="What is the shell?"></a>What is the shell?</h3><p>A shell is a user interface that provides access to various services of an operating system. The shell is a command-line interface. The shell of macOS before Catalina is Bourne Again Shell (bash). The shell allows users to execute commands, run programs, and manage system resources. The GUI has defined many use cases for us to interact with the operating system, however, to take full advantage of the tools our computer provides, we have to use the shell.</p>
-<h3 id="Basic-shell-commands"><a href="#Basic-shell-commands" class="headerlink" title="Basic shell commands"></a>Basic shell commands</h3><ul>
-<li><strong>.</strong>: current directory</li>
-<li><strong>..</strong>: parent directory</li>
-<li><strong>ls</strong></li>
-<li><strong>madir <name></strong></li>
-<li><strong>cd <directory></strong>: change directory</li>
-<li><strong>pwd</strong>: print working directory</li>
-<li><strong>echo “text”</strong>: prints the specified text to the terminal</li>
-<li><strong>cat <file></strong>: displays the contents of the specified file</li>
-<li><strong>touch example.txt</strong>: creates file</li>
-<li><strong>grep “Hello” example.txt</strong>: To search for the string “Hello” in a file named example.txt, return the line containing the string</li>
+                <h2 id="APIs"><a href="#APIs" class="headerlink" title="APIs"></a>APIs</h2><p>A set of endpoints a service allows you to make requests to.</p>
+<h3 id="HTTP-S-Methods"><a href="#HTTP-S-Methods" class="headerlink" title="HTTP(S) Methods"></a>HTTP(S) Methods</h3><ul>
+<li>GET: Retrieves data from the server.</li>
+<li>POST: Sends data to the server, often causing a change or creation of new data.</li>
+<li>PUT: Replaces data on the server.</li>
+<li>DELETE: Deletes data on the server.</li>
 </ul>
-<h3 id="How-the-shell-executes-programs"><a href="#How-the-shell-executes-programs" class="headerlink" title="How the shell executes programs"></a>How the shell executes programs</h3><p>When a command is entered in the shell, it follows these steps to execute the program:</p>
-<ol>
-<li><strong>Parsing</strong>: The shell reads the command line input and breaks it into individual components (<strong>splitting by space</strong>). The first word is the command (program), and the folowing words are arguments.</li>
-<li><strong>Command Lookup</strong>: The shell searches for the command in the directories listed in the PATH environment variable. We can view the PATH variable by executing <code>echo $PATH</code>.</li>
-<li><strong>Forking</strong>: The shell creates a new process (child process) to execute the command.</li>
-<li><strong>Return</strong>: After the child process finishes, the shell returns control to the user.</li>
-</ol>
-<h3 id="Executing-programs"><a href="#Executing-programs" class="headerlink" title="Executing programs"></a>Executing programs</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">(base) zhaosonglin@xiaozeimaodeMacBook-Pro ~ % <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span><br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin:/usr/local/mysql/bin:/opt/anaconda3/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Library/TeX/texbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/bin<br></code></pre></td></tr></table></figure>
-
-<p>The <code>echo $PATH</code> command essentially executes the program <code>echo</code>. The program named <code>echo</code> is searched through the directories contained in variable <code>$PATH</code>. We can find where the <code>echo</code> program resides by executing <code>which echo</code>.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">(base) zhaosonglin@xiaozeimaodeMacBook-Pro ~ % <span class="hljs-built_in">which</span> <span class="hljs-built_in">echo</span><br><span class="hljs-built_in">echo</span>: shell built-in <span class="hljs-built_in">command</span><br></code></pre></td></tr></table></figure>
-
-<p>The command <code>echo</code> is a shell built-in command. Other command examples:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">which</span> <span class="hljs-built_in">ls</span><br>/bin/ls<br>% <span class="hljs-built_in">which</span> <span class="hljs-built_in">mkdir</span><br>/bin/mkdir<br>% <span class="hljs-built_in">which</span> npm<br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin/npm<br>% <span class="hljs-built_in">which</span> python<br>/opt/anaconda3/bin/python<br></code></pre></td></tr></table></figure>
-
-<p>The commands like <code>ls</code> and <code>mkdir</code> resides in the default directory <code>/bin/</code>, while npm and python are installed in specific locations.</p>
-<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Redirection"><a href="#Redirection" class="headerlink" title="Redirection"></a>Redirection</h3><p>In the shell, each program has one input stream and one output stream, which are keyboard and terminal respectively by default. We can redirect the input or output by <code>&lt; file</code> or <code>&gt; file</code>. This is useful for saving the output for later use or for further processing.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World&quot;</span> &gt; output.txt<br></code></pre></td></tr></table></figure>
-
+<h3 id="HTTP-Request"><a href="#HTTP-Request" class="headerlink" title="HTTP Request"></a>HTTP Request</h3><ul>
+<li>Request Target (URL) + Params: The endpoint and any parameters.</li>
+<li>HTTP Method: The type of action (GET, POST, etc.).</li>
+<li>Headers: Additional metadata for the request.</li>
+<li>Body: The data sent with the request (for POST and PUT).</li>
+</ul>
+<h3 id="HTTP-Response"><a href="#HTTP-Response" class="headerlink" title="HTTP Response"></a>HTTP Response</h3><ul>
+<li>Status Code: Indicates the result of the request.<ul>
+<li>2xx: Success</li>
+<li>4xx: Client errors</li>
+<li>5xx: Server errors</li>
+</ul>
+</li>
+<li>Headers: Metadata about the response.</li>
+<li>Body: The data returned by the server.</li>
+</ul>
+<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><h3 id="Async-Handling"><a href="#Async-Handling" class="headerlink" title="Async Handling"></a>Async Handling</h3><p>Get or Post returns a promise. Promises allow for asynchronous processing.</p>
+<p>A bad example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myStories = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>);<br><span class="hljs-title function_">setStories</span>(myStories);<br></code></pre></td></tr></table></figure>
+<p>In this example, <code>get(&#39;/api/stories&#39;)</code> returns a promise, but setStories(myStories) is called immediately, before the promise has resolved. As a result, myStories will not contain any data.</p>
+<p>Correct way to handle this:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>)<br>  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>    <span class="hljs-title function_">setStories</span>(data); <span class="hljs-comment">// Set the stories with the fetched data</span><br>  &#125;)<br>  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching stories:&#x27;</span>, error); <span class="hljs-comment">// Handle any errors</span><br>  &#125;);<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>echo &quot;Hello, World&quot;:</code> Prints “Hello, World!” to the terminal.</li>
-<li><code>&gt;:</code> The redirection operator takes the output of the command on its left and writes it to the file specified on its right.</li>
+<li><code>.then()</code> block waits for the promise to resolve. Once the data is fetched, the parsed data is then passed to <code>setStories(data)</code>. This also returns a promise.</li>
+<li>The <code>.catch()</code> block handles any errors. Once the promise is rejected, do stuff (call a callback function). Returns a promise.</li>
+<li>If the fetch is accepted, <code>.catch()</code> will not be executed. If the fetch is rejected, any <code>.then()</code> will not be executed.</li>
 </ul>
-<p>As a result, the text “Hello, World” is written to the file <code>output.txt</code>. We can check by the <code>cat</code> command:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">cat</span> output.txt<br>Hello, World<br></code></pre></td></tr></table></figure>
-
-<p><strong><code>&gt;</code> is used to overwrite the contents of a file, while <code>&gt;&gt;</code> is used to append to the contents of a file.</strong></p>
-<h3 id="Pipes"><a href="#Pipes" class="headerlink" title="Pipes"></a>Pipes</h3><p>Pipes <code>|</code> are used to pass the output of one command as input to another command.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span><br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li><code>ls -l:</code> Lists files and directories in long format.</li>
-<li><code>|:</code> The pipe operator takes the output of <code>ls -l</code> and passes it as input to the next command.</li>
-<li><code>grep &quot;.txt&quot;:</code> Filters the input and displays only lines containing .txt.</li>
-</ul>
-<p>As a result, the command finds only files ends with “.txt” of the output of <code>ls -l</code>. An example of combining redirection and pipes:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span> &gt; txt_files_list.txt<br>% <span class="hljs-built_in">cat</span> txt_files_list.txt<br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br>-rw-r--r--    1 zhaosonglin  staff     0 Jun 24 16:34 txt_files_list.txt<br></code></pre></td></tr></table></figure>
-
-<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash-3.2$ <span class="hljs-built_in">alias</span> gs=<span class="hljs-string">&quot;git status&quot;</span><br>bash-3.2$ gs<br>On branch main<br>nothing to commit, working tree clean<br>bash-3.2$ git status<br>On branch main<br>nothing to commit, working tree clean<br></code></pre></td></tr></table></figure>
-
-<p>To make an alias persistent you need to include it in dotfiles like .bashrc or .zshrc.</p>
 
                 
               </div>
@@ -387,7 +367,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Computer-Science-Basis/" class="category-chain-item">Computer Science Basis</a>
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
   
   
 
@@ -402,7 +382,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/shell/" class="print-no-link">#shell</a>
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
       
     </div>
   
@@ -414,8 +394,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Shell</div>
-      <div>https://thiefcat.github.io/2024/06/24/Shell/</div>
+      <div>MIT Weblab笔记 - APIs and Promises Introduction</div>
+      <div>https://thiefcat.github.io/2024/07/05/MIT-Weblab/APIs-Promises/</div>
     </div>
     <div class="license-meta">
       
@@ -427,7 +407,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 24, 2024</div>
+          <div>July 5, 2024</div>
         </div>
       
       
@@ -459,18 +439,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/24/Web-HTML-CSS/" title="MIT Weblab笔记 - HTML and CSS Basis">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - HTML and CSS Basis</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/23/test/" title="test">
-                        <span class="hidden-mobile">test</span>
+                      <a href="/2024/07/04/MIT-Weblab/React-Advanced/" title="MIT Weblab笔记 - React Advanced">
+                        <span class="hidden-mobile">MIT Weblab笔记 - React Advanced</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

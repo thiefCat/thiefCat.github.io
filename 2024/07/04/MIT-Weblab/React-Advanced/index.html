@@ -16,23 +16,23 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog post introduces the syntax of bash scripting language">
+    <meta name="description" content="This blog introduces how React is used in development">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell Scripting (Bash)">
-<meta property="og:url" content="https://thiefcat.github.io/2024/06/25/Shell-Scripting/index.html">
+<meta property="og:title" content="MIT Weblab笔记 - React Advanced">
+<meta property="og:url" content="https://thiefcat.github.io/2024/07/04/MIT-Weblab/React-Advanced/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog post introduces the syntax of bash scripting language">
+<meta property="og:description" content="This blog introduces how React is used in development">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-25T02:08:27.000Z">
-<meta property="article:modified_time" content="2024-06-25T16:03:43.392Z">
+<meta property="article:published_time" content="2024-07-04T12:30:22.000Z">
+<meta property="article:modified_time" content="2024-07-05T09:29:35.578Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="shell">
-<meta property="article:tag" content="bash">
+<meta property="article:tag" content="Web Development">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Shell Scripting (Bash) - Songlin&#39;s Space</title>
+  <title>MIT Weblab笔记 - React Advanced - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Shell Scripting (Bash)</span>
+            <span id="subtitle">MIT Weblab笔记 - React Advanced</span>
           
         </div>
 
@@ -243,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-25 10:08" pubdate>
-          June 25, 2024 am
+        <time datetime="2024-07-04 20:30" pubdate>
+          July 4, 2024 pm
         </time>
       </span>
     
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          254 words
+          262 words
         
       </span>
     
@@ -311,74 +311,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Shell Scripting (Bash)</h1>
+            <h1 id="seo-header">MIT Weblab笔记 - React Advanced</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h2><p>Bash (Bourne Again Shell) is a powerful command-line interpreter and scripting language. Bash scripting can significantly enhance productivity by automating repetitive tasks.</p>
-<h3 id="Structure-of-bash"><a href="#Structure-of-bash" class="headerlink" title="Structure of bash"></a>Structure of bash</h3><p>Example of a bash script script.sh:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash  </span><br><br><span class="hljs-comment"># This is a comment</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World!&quot;</span>  <span class="hljs-comment"># This is an inline comment</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Script name: <span class="hljs-variable">$0</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;First argument: <span class="hljs-variable">$1</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Second argument: <span class="hljs-variable">$2</span>&quot;</span><br></code></pre></td></tr></table></figure>
+                <h2 id="React-Lifecycle"><a href="#React-Lifecycle" class="headerlink" title="React Lifecycle"></a>React Lifecycle</h2><ol>
+<li><p><strong>Trigger</strong>: First time component is called or State Change</p>
+</li>
+<li><p><strong>Render</strong>: React runs the Javascript code in component and calls subcomponents</p>
+</li>
+<li><p><strong>Commit</strong>: React puts returned JSX into HTML DOM to be served to viewer</p>
+</li>
+<li><p><strong>Unmounting</strong>: React Removes the component from DOM</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">Steak</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> [doneness, setDoneness] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);<br><br>  <span class="hljs-comment">// Everything below are called again during re-render</span><br>  <span class="hljs-keyword">const</span> &#123; name, imgSrc &#125; = steakLookup[doneness];<br>  <span class="hljs-keyword">const</span> sentence = <span class="hljs-string">`Here is your <span class="hljs-subst">$&#123;name&#125;</span> steak!`</span>;<br><br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">sendToKitchen</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-title function_">setDoneness</span>(doneness + <span class="hljs-number">1</span>);<br>  &#125;;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>&#123;sentence&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#123;imgSrc&#125;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">maxWidth:</span> &quot;<span class="hljs-attr">500px</span>&quot; &#125;&#125; /&gt;</span></span><br><span class="language-xml">      &#123;doneness &lt; 4 &amp;&amp; (</span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">fontSize:</span> &quot;<span class="hljs-attr">24px</span>&quot; &#125;&#125; <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;sendToKitchen&#125;</span>&gt;</span></span><br><span class="language-xml">          Send Back To Kitchen</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">      )&#125;</span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<p>To execute the above script, run <code>./script.sh arg1 arg2</code>.</p>
-<h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">name=<span class="hljs-string">&quot;Alice&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, <span class="hljs-variable">$name</span>&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>Note that there should be no spaces around the <code>=</code>.</p>
-<h4 id="Command-Substitution"><a href="#Command-Substitution" class="headerlink" title="Command Substitution"></a>Command Substitution</h4><p>Whenever you place $( CMD ) it will execute CMD, get the output of the command and substitute it in place. For example:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;We are in <span class="hljs-subst">$(pwd)</span>&quot;</span><br>We are <span class="hljs-keyword">in</span> /Users/zhaosonglin/Desktop/programming/python/numpy<br>% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Today is <span class="hljs-subst">$(date)</span>&quot;</span><br>Today is Tue Jun 25 15:48:09 CST 2024<br></code></pre></td></tr></table></figure>
-
-<h3 id="Exit-codes"><a href="#Exit-codes" class="headerlink" title="Exit codes"></a>Exit codes</h3><p>An exit code is a number returned by a command or script to the calling environment. By convention:</p>
-<ul>
-<li>An exit code of 0 indicates that the command or script executed successfully.</li>
-<li>A non-zero exit code indicates that an error occurred.</li>
-</ul>
-<h3 id="Special-Variables"><a href="#Special-Variables" class="headerlink" title="Special Variables"></a>Special Variables</h3><ul>
-<li><code>$0</code> - Name of the script</li>
-<li><code>$1</code> to <code>$9</code> - Arguments to the script. $1 is the first argument and so on.</li>
-<li><code>$@</code> - All the arguments</li>
-<li><code>$#</code> - Number of arguments</li>
-<li><code>$?</code> - Return code of the previous command</li>
-<li><code>$$</code> - Process identification number (PID) for the current script</li>
-<li><code>!!</code> - Entire last command, including arguments. A common pattern is to execute a command only for it to fail due to missing permissions; you can quickly re-execute the command with sudo by doing sudo !!</li>
-<li><code>$_</code> - Last argument from the last command.</li>
-</ul>
-<h3 id="Special-Functions"><a href="#Special-Functions" class="headerlink" title="Special Functions"></a>Special Functions</h3><p><code>?</code> and <code>*</code> can be used to match one or any amount of characters respectively.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">% <span class="hljs-built_in">ls</span><br>01 hstack.py		04 mask.py		basic.ipynb<br>02 transpose.py		04 slicing.ipynb<br>03 least-square.py	05 histogram.py<br>% <span class="hljs-built_in">ls</span> *.ipynb<br>04 slicing.ipynb	basic.ipynb<br>% <span class="hljs-built_in">ls</span> b?sic.ipynb<br>basic.ipynb<br></code></pre></td></tr></table></figure>
-
-<p><code>&#123;&#125;</code> can be used when a set of strings have common substrings.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">% <span class="hljs-built_in">mkdir</span> a b<br>% <span class="hljs-built_in">touch</span> &#123;a,b&#125;/&#123;x,y,z&#125;<br></code></pre></td></tr></table></figure>
-
-<p>The above command will create three files inside a and b folder (a&#x2F;x, a&#x2F;y, a&#x2F;z, b&#x2F;x, b&#x2F;y, b&#x2F;z) respectively.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> *&#123;.py,.ipynb&#125; dest<br><span class="hljs-comment"># Will move all *.py and *.sh files to folder dest</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-function"><span class="hljs-title">greet</span></span>() &#123;<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, <span class="hljs-variable">$1</span>&quot;</span><br>&#125;<br><br>greet <span class="hljs-string">&quot;Alice&quot;</span><br>greet <span class="hljs-string">&quot;Bob&quot;</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="If-Statement"><a href="#If-Statement" class="headerlink" title="If Statement"></a>If Statement</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>number=10<br><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$number</span> -gt 5 ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number is greater than 5.&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number is 5 or less.&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="Loops"><a href="#Loops" class="headerlink" title="Loops"></a>Loops</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> item1 item2 item3; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$item</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>counter=1<br><br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$counter</span> -le 5 ]; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Counter: <span class="hljs-variable">$counter</span>&quot;</span><br>    counter=$((counter + <span class="hljs-number">1</span>))<br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="Finding-files"><a href="#Finding-files" class="headerlink" title="Finding files"></a>Finding files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find . -name src -<span class="hljs-built_in">type</span> d<br></code></pre></td></tr></table></figure>
+<p>When a state is updated, the javascript code in component is executed again, except the state definition lines (Non-state variables don’t persist!)</p>
+<h2 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h2><h3 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect()"></a>useEffect()</h3><h4 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">useEffect</span>(<br>  <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">    Do something here,</span><br><span class="hljs-comment">    e.g. interacting with an external service</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/api/stories&quot;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">storyObjs</span>) =&gt;</span> &#123;<br>      <span class="hljs-title function_">setStories</span>(storyObjs);<br>    &#125;);<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;&#125;;<br>  &#125;,[<span class="hljs-comment">/* dependencies */</span>]<br>);<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>find .: Start searching in the current directory.</li>
-<li>-name src: Match directories named src.</li>
-<li>-type d: Ensure that the match is a directory.</li>
+<li>Setting state (defined by <code>useState()</code> hook) is async</li>
+<li><code>useEffect()</code> is used to run function every time a variable in dependency array changes</li>
+<li>Commonly used to load external data into state</li>
+<li>The return is a callback function that runs when the component dismounts, like cleanup function</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find . -path <span class="hljs-string">&#x27;*/test/*.py&#x27;</span> -<span class="hljs-built_in">type</span> f<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">myFunction</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-comment">// Do something</span><br>&#125;;<br><br><span class="hljs-title function_">useEffect</span>(myFunction, [var1, var2]); <span class="hljs-comment">// Calls myFunction every time var1 or var2 changes</span><br><span class="hljs-title function_">useEffect</span>(myFunction, []); <span class="hljs-comment">// Calls myFunction only once when the component is rendered for the first time (on mount)</span><br><span class="hljs-title function_">useEffect</span>(myFunction); <span class="hljs-comment">// Calls myFunction at every render (first component call + every time any state changes)</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="React-Router"><a href="#React-Router" class="headerlink" title="React Router"></a>React Router</h2><h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Conditional-Rendering"><a href="#Conditional-Rendering" class="headerlink" title="Conditional Rendering"></a>Conditional Rendering</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">return</span> (<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;loading ? &quot;Loading...&quot; : &quot;Actual page content&quot;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>);<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>find .: Start searching in the current directory.</li>
-<li>-path ‘<em>&#x2F;test&#x2F;</em>.py’: Match files where test appears as a directory in their path and the filename ends with .py (<code>*</code> can substitute any string).</li>
-<li>-type f: Ensure that the match is a regular file (not a directory).</li>
+<li>If loading is true, it displays the text “Loading…”.</li>
+<li>If loading is false, it displays “Actual page content”.</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find . -name <span class="hljs-string">&#x27;*.tmp&#x27;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> &#123;&#125; \;<br></code></pre></td></tr></table></figure>
+<h3 id="Rendering-an-Array-of-Data"><a href="#Rendering-an-Array-of-Data" class="headerlink" title="Rendering an Array of Data"></a>Rendering an Array of Data</h3><p>Return an array of html elements</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = [<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;My favorite food is doritos&quot;</span> &#125;,<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I like nachos because they look like doritos&quot;</span> &#125;,<br>];<br><br><span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>Return an array of components</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = [<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;My favorite food is doritos&quot;</span> &#125;,<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I like nachos because they look like doritos&quot;</span> &#125;,<br>];<br><br><span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ItemComponent</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">ItemComponent</span>&gt;</span></span>);<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>find .: Start searching in the current directory.</li>
-<li>-name ‘*.tmp’: Match files ends with .tmp.</li>
-<li>-exec rm {} ;: For each file found, execute the rm command to delete it. {} is replaced by the current file’s path.</li>
+<li>Reasons for Using <code>key</code> in React Lists: This allows React to determine which elements have changed, added, or removed and to update only the necessary parts of the DOM. Without keys, React would need to re-render the entire list, which can be inefficient.</li>
 </ul>
 
                 
@@ -398,7 +372,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Computer-Science-Basis/" class="category-chain-item">Computer Science Basis</a>
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
   
   
 
@@ -413,9 +387,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/shell/" class="print-no-link">#shell</a>
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
       
-        <a href="/tags/bash/" class="print-no-link">#bash</a>
+        <a href="/tags/React/" class="print-no-link">#React</a>
       
     </div>
   
@@ -427,8 +401,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Shell Scripting (Bash)</div>
-      <div>https://thiefcat.github.io/2024/06/25/Shell-Scripting/</div>
+      <div>MIT Weblab笔记 - React Advanced</div>
+      <div>https://thiefcat.github.io/2024/07/04/MIT-Weblab/React-Advanced/</div>
     </div>
     <div class="license-meta">
       
@@ -440,7 +414,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 25, 2024</div>
+          <div>July 4, 2024</div>
         </div>
       
       
@@ -472,9 +446,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/27/JavaScript/" title="MIT Weblab笔记 - JavaScript Basis">
+                      <a href="/2024/07/05/MIT-Weblab/APIs-Promises/" title="MIT Weblab笔记 - APIs and Promises Introduction">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - JavaScript Basis</span>
+                        <span class="hidden-mobile">MIT Weblab笔记 - APIs and Promises Introduction</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -482,8 +456,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/24/Web-HTML-CSS/" title="MIT Weblab笔记 - HTML and CSS Basis">
-                        <span class="hidden-mobile">MIT Weblab笔记 - HTML and CSS Basis</span>
+                      <a href="/2024/07/03/MIT-Weblab/React/" title="MIT Weblab笔记 - React Introduction">
+                        <span class="hidden-mobile">MIT Weblab笔记 - React Introduction</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
