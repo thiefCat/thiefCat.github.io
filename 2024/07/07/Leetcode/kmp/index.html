@@ -16,22 +16,32 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces the basis of APIs and Promises">
+    <meta name="description" content="This blog explains leetcode 28 (Find the Index of the First Occurrence in a String)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MIT Weblab笔记 - APIs and Promises Introduction">
-<meta property="og:url" content="https://thiefcat.github.io/2024/07/05/MIT-Weblab/APIs-Promises/index.html">
+<meta property="og:title" content="KMP Algorithm">
+<meta property="og:url" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces the basis of APIs and Promises">
+<meta property="og:description" content="This blog explains leetcode 28 (Find the Index of the First Occurrence in a String)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-05T03:27:06.000Z">
-<meta property="article:modified_time" content="2024-07-05T03:57:08.078Z">
+<meta property="og:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/demo1.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/demo3.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/demo2.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/ano1.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/ano.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/ano3.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/exp.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/next.png">
+<meta property="article:published_time" content="2024-07-07T04:57:51.000Z">
+<meta property="article:modified_time" content="2024-07-07T10:14:27.035Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="Web Development">
+<meta property="article:tag" content="kmp">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://thiefcat.github.io/2024/07/07/Leetcode/kmp/demo1.png">
   
   
   
-  <title>MIT Weblab笔记 - APIs and Promises Introduction - Songlin&#39;s Space</title>
+  <title>KMP Algorithm - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +236,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">MIT Weblab笔记 - APIs and Promises Introduction</span>
+            <span id="subtitle">KMP Algorithm</span>
           
         </div>
 
@@ -242,8 +252,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-05 11:27" pubdate>
-          July 5, 2024 am
+        <time datetime="2024-07-07 12:57" pubdate>
+          July 7, 2024 pm
         </time>
       </span>
     
@@ -254,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          105 words
+          208 words
         
       </span>
     
@@ -310,45 +320,80 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MIT Weblab笔记 - APIs and Promises Introduction</h1>
+            <h1 id="seo-header">KMP Algorithm</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="APIs"><a href="#APIs" class="headerlink" title="APIs"></a>APIs</h2><p>A set of endpoints a service allows you to make requests to.</p>
-<h3 id="HTTP-S-Methods"><a href="#HTTP-S-Methods" class="headerlink" title="HTTP(S) Methods"></a>HTTP(S) Methods</h3><ul>
-<li>GET: Retrieves data from the server.</li>
-<li>POST: Sends data to the server, often causing a change or creation of new data.</li>
-<li>PUT: Replaces data on the server.</li>
-<li>DELETE: Deletes data on the server.</li>
-</ul>
-<h3 id="HTTP-Request"><a href="#HTTP-Request" class="headerlink" title="HTTP Request"></a>HTTP Request</h3><ul>
-<li>Request Target (URL) + Params: The endpoint and any parameters.</li>
-<li>HTTP Method: The type of action (GET, POST, etc.).</li>
-<li>Headers: Additional metadata for the request.</li>
-<li>Body: The data sent with the request (for POST and PUT).</li>
-</ul>
-<h3 id="HTTP-Response"><a href="#HTTP-Response" class="headerlink" title="HTTP Response"></a>HTTP Response</h3><ul>
-<li>Status Code: Indicates the result of the request.<ul>
-<li>2xx: Success</li>
-<li>4xx: Client errors</li>
-<li>5xx: Server errors</li>
-</ul>
-</li>
-<li>Headers: Metadata about the response.</li>
-<li>Body: The data returned by the server.</li>
-</ul>
-<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><h3 id="Async-Handling"><a href="#Async-Handling" class="headerlink" title="Async Handling"></a>Async Handling</h3><p>Get or Post returns a promise. Promises allow for asynchronous processing.</p>
-<p>A bad example:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myStories = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>);<br><span class="hljs-title function_">setStories</span>(myStories);<br></code></pre></td></tr></table></figure>
-<p>In this example, <code>get(&#39;/api/stories&#39;)</code> returns a promise, but setStories(myStories) is called immediately, before the promise has resolved. As a result, myStories will not contain any data.</p>
-<p>Correct way to handle this:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>)<br>  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>    <span class="hljs-title function_">setStories</span>(data); <span class="hljs-comment">// Set the stories with the fetched data</span><br>  &#125;)<br>  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching stories:&#x27;</span>, error); <span class="hljs-comment">// Handle any errors</span><br>  &#125;);<br></code></pre></td></tr></table></figure>
+                <p>Leetcode 28: </p>
+<p>Given two strings <code>needle</code> and <code>haystack</code>, return the index of the first occurrence of needle in <code>haystack</code>, or -1 if <code>needle</code> is not part of <code>haystack</code>.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Suppose text is <code>abbbbbbbbbbc</code>, and pattern is <code>abbbc</code>, to find the index of the first match, we start matching on index 0, 1, 2, …. The time complexity if <code>O(mn)</code>, where m is the length of text and n is the length of pattern.</p>
+<div style="text-align: center; width: 50%;">
+  <img src="/2024/07/07/Leetcode/kmp/demo1.png" srcset="/img/loading.gif" lazyload class="">
+</div>
+
+<h3 id="Why-KMP"><a href="#Why-KMP" class="headerlink" title="Why KMP"></a>Why KMP</h3><p>Observation: When there is a mismatch at index 4, and all characters match for previous indexes, where do we start the next match? </p>
 <ul>
-<li><code>.then()</code> block waits for the promise to resolve. Once the data is fetched, the parsed data is then passed to <code>setStories(data)</code>. This also returns a promise.</li>
-<li>The <code>.catch()</code> block handles any errors. Once the promise is rejected, do stuff (call a callback function). Returns a promise.</li>
-<li>If the fetch is accepted, <code>.catch()</code> will not be executed. If the fetch is rejected, any <code>.then()</code> will not be executed.</li>
+<li>In the pattern string, the first character <code>a</code> is not contained in index 1 ~ 3.</li>
+<li>We have checked that index 0 ~ 3 is matched (same) for text and pattern string.</li>
+<li>As a result, <code>a</code> will not appear in the index 1 ~ 3 at the text string, and we don’t need to re-match at index 1.</li>
 </ul>
+<p>Bad next match:</p>
+<div style="text-align: center; width: 50%;">
+  <img src="/2024/07/07/Leetcode/kmp/demo3.png" srcset="/img/loading.gif" lazyload class="">
+</div>
+
+<p>We can re-match at the index 4, because there is no <code>a</code> for index 1 ~ 3 at text string.</p>
+<div style="text-align: center; width: 50%;">
+  <img src="/2024/07/07/Leetcode/kmp/demo2.png" srcset="/img/loading.gif" lazyload class="">
+</div>
+
+
+<h3 id="Another-Example"><a href="#Another-Example" class="headerlink" title="Another Example"></a>Another Example</h3><p>Let’s see another example:</p>
+<div style="text-align: center; width: 45%;">
+  <img src="/2024/07/07/Leetcode/kmp/ano1.png" srcset="/img/loading.gif" lazyload class="">
+</div>
+
+<p></p>
+
+<p>There is a mismatch at index 9:</p>
+<div style="text-align: center; width: 45%;">
+  <img src="/2024/07/07/Leetcode/kmp/ano.png" srcset="/img/loading.gif" lazyload class="">
+</div>
+
+<p></p>
+
+<ul>
+<li>The previous pattern: <code>abcxxab</code> matches the text, and mismatches occurs at index 9.</li>
+<li>For the string before the mismatch index: <code>abcxxab</code>, there is a repeated pattern <code>ab</code>: <code>ab</code> occurs at the first two index and the last 2 index.</li>
+<li>If we rematch at the index of the mismatch, we might lose a chance to get a full-match because the first two indexes of the pattern string, <code>ab</code>, also matches the <code>ab</code> at index 7 and 8 in the text string.</li>
+<li>We rematch at the index 2 of the pattern string.</li>
+</ul>
+<div style="text-align: center; width: 50%;">
+  <img src="/2024/07/07/Leetcode/kmp/ano3.png" srcset="/img/loading.gif" lazyload class="">
+</div>
+
+
+<h3 id="How-do-we-know-where-to-start-re-match"><a href="#How-do-we-know-where-to-start-re-match" class="headerlink" title="How do we know where to start re-match?"></a>How do we know where to start re-match?</h3><p>Observe the previous example, we find that:</p>
+<div style="text-align: center; width: 50%;">
+  <img src="/2024/07/07/Leetcode/kmp/exp.png" srcset="/img/loading.gif" lazyload class="">
+</div>
+
+<ul>
+<li><code>pattern[0:7]</code> matches <code>text[2:9]</code>, the index 9 does not match.</li>
+<li>In pattern shring, <code>ab</code> is repeated in <code>abcxxab</code>.</li>
+<li>As a result, <code>pattern[0:1]</code> matches <code>pattern[-2:0]</code>, which also matches <code>text[7:8]</code>.</li>
+<li>We rematch for <code>pattern[2]</code> and <code>text[9]</code>.</li>
+</ul>
+<h2 id="Construct-“next”-Array"><a href="#Construct-“next”-Array" class="headerlink" title="Construct “next” Array"></a>Construct “next” Array</h2><p>We need an array to indicate where to start re-matching if a mismatch occurs.</p>
+<div style="text-align: center; width: 25%;">
+  <img src="/2024/07/07/Leetcode/kmp/next.png" srcset="/img/loading.gif" lazyload class="">
+</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] getNext(<span class="hljs-type">char</span>[] strArr) &#123;<br>    <span class="hljs-type">int</span>[] next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[strArr.length];<br>    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (j &lt; strArr.length) &#123;<br>        <span class="hljs-keyword">if</span> (strArr[i] == strArr[j]) &#123;<br>            next[j] = i+<span class="hljs-number">1</span>;<br>            i++;<br>            j++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) &#123;<br>                next[j] = i;<br>                j++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                i = next[i-<span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> next;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">strStr</span><span class="hljs-params">(String haystack, String needle)</span> &#123;<br>    <span class="hljs-type">char</span>[] haystackArr = haystack.toCharArray();<br>    <span class="hljs-type">char</span>[] needleArr = needle.toCharArray();<br>    <span class="hljs-type">int</span>[] next = getNext(needleArr);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (haystack.length() &lt; needle.length()) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (i &lt; haystack.length()) &#123;<br>        <span class="hljs-keyword">if</span> (haystackArr[i] == needleArr[j]) &#123;<br>            <span class="hljs-keyword">if</span> (j == needle.length()-<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> i - j;<br>            i++;<br>            j++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">if</span> (j == <span class="hljs-number">0</span>) &#123;<br>                i++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                j = next[j-<span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -367,7 +412,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
+  <a href="/categories/Leetcode/" class="category-chain-item">Leetcode</a>
   
   
 
@@ -382,7 +427,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
+        <a href="/tags/kmp/" class="print-no-link">#kmp</a>
+      
+        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
     </div>
   
@@ -394,8 +441,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MIT Weblab笔记 - APIs and Promises Introduction</div>
-      <div>https://thiefcat.github.io/2024/07/05/MIT-Weblab/APIs-Promises/</div>
+      <div>KMP Algorithm</div>
+      <div>https://thiefcat.github.io/2024/07/07/Leetcode/kmp/</div>
     </div>
     <div class="license-meta">
       
@@ -407,7 +454,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 5, 2024</div>
+          <div>July 7, 2024</div>
         </div>
       
       
@@ -439,18 +486,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/07/Leetcode/kmp/" title="KMP Algorithm">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">KMP Algorithm</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/04/MIT-Weblab/React-Advanced/" title="MIT Weblab笔记 - React Advanced">
-                        <span class="hidden-mobile">MIT Weblab笔记 - React Advanced</span>
+                      <a href="/2024/07/05/MIT-Weblab/APIs-Promises/" title="MIT Weblab笔记 - APIs and Promises Introduction">
+                        <span class="hidden-mobile">MIT Weblab笔记 - APIs and Promises Introduction</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
