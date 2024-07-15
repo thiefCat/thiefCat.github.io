@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces the basis of APIs and Promises">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-07-15T04:26:44.000Z">
-<meta property="article:modified_time" content="2024-07-15T08:46:12.910Z">
+<meta property="article:modified_time" content="2024-07-15T08:48:03.448Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          235 words
+          268 words
         
       </span>
     
@@ -343,7 +343,7 @@
 
 <ul>
 <li>Returns a promise that resolves to array of results of input promises</li>
-<li><strong>allResults</strong> represent a list with the result of each promise</li>
+<li><strong>allResults</strong> represent a <strong>list</strong> with the result of each promise</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">race</span>(promises).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">firstResult</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// Do something with the first result</span><br>&#125;).<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// Catch and report any error</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 
@@ -361,11 +361,11 @@
 <li>Only asynchronous functions can use await. Asynchronous function is defined by <code>async</code> keyword. <strong>Asynchronous functions are functions that return control back to the caller before computation is done</strong>.</li>
 <li>await waits for the promise to resolve and uses that value</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">myFunction</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;url1&#x27;</span>);<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;url2&#x27;</span>);<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;url3&#x27;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">myFunction</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Start&#x27;</span>);<br>  <span class="hljs-keyword">const</span> data1 = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-string">&#x27;url1&#x27;</span>);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Data 1:&#x27;</span>, data1);<br>  <span class="hljs-keyword">const</span> data2 = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchData</span>(<span class="hljs-string">&#x27;url2&#x27;</span>);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Data 2:&#x27;</span>, data2);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;End&#x27;</span>);<br>&#125;<br><br><span class="hljs-title function_">myFunction</span>();<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;After myFunction call&#x27;</span>);<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>When await is used, <strong>it pauses the execution of the async function</strong> until the awaited promise is resolved or rejected. This means that the lines of code following the await will not execute until the promise is settled. <strong>This “pause” is local to the async function where await is used.</strong></li>
-<li>While the async function is paused, the rest of the JavaScript (outside the specific function) code can continue to run. This means other tasks, events, and functions can continue to execute, keeping the overall program responsive.</li>
+<li>While the async function is paused, the rest of the JavaScript (outside the specific function) code can continue to run, i.e., <code>console.log(&#39;After myFunction call&#39;);</code>. This means other tasks, events, and functions can continue to execute, keeping the overall program responsive.</li>
 </ul>
 
                 
