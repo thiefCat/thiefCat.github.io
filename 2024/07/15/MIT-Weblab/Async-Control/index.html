@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
+    <meta name="description" content="This blog introduces the basis of APIs and Promises">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell">
-<meta property="og:url" content="https://thiefcat.github.io/2024/06/24/MIT-Missing/Shell/index.html">
+<meta property="og:title" content="MIT Weblab笔记 - Asynchronous Control">
+<meta property="og:url" content="https://thiefcat.github.io/2024/07/15/MIT-Weblab/Async-Control/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
+<meta property="og:description" content="This blog introduces the basis of APIs and Promises">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-24T03:59:13.000Z">
-<meta property="article:modified_time" content="2024-06-28T09:16:22.232Z">
+<meta property="article:published_time" content="2024-07-15T04:26:44.000Z">
+<meta property="article:modified_time" content="2024-07-15T08:46:12.910Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Shell - Songlin&#39;s Space</title>
+  <title>MIT Weblab笔记 - Asynchronous Control - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Shell</span>
+            <span id="subtitle">MIT Weblab笔记 - Asynchronous Control</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 11:59" pubdate>
-          June 24, 2024 am
+        <time datetime="2024-07-15 12:26" pubdate>
+          July 15, 2024 pm
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          311 words
+          235 words
         
       </span>
     
@@ -310,65 +310,63 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Shell</h1>
+            <h1 id="seo-header">MIT Weblab笔记 - Asynchronous Control</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="What-is-the-shell"><a href="#What-is-the-shell" class="headerlink" title="What is the shell?"></a>What is the shell?</h3><p>A shell is a user interface that provides access to various services of an operating system. The shell is a command-line interface. The shell of macOS before Catalina is Bourne Again Shell (bash). The shell allows users to execute commands, run programs, and manage system resources. The GUI has defined many use cases for us to interact with the operating system, however, to take full advantage of the tools our computer provides, we have to use the shell.</p>
-<h3 id="Basic-shell-commands"><a href="#Basic-shell-commands" class="headerlink" title="Basic shell commands"></a>Basic shell commands</h3><ul>
-<li><strong>.</strong>: current directory</li>
-<li><strong>..</strong>: parent directory</li>
-<li><strong>ls</strong></li>
-<li><strong>madir <name></strong></li>
-<li><strong>cd <directory></strong>: change directory</li>
-<li><strong>pwd</strong>: print working directory</li>
-<li><strong>echo “text”</strong>: prints the specified text to the terminal</li>
-<li><strong>cat <file></strong>: displays the contents of the specified file</li>
-<li><strong>touch example.txt</strong>: creates file</li>
-<li><strong>grep “Hello” example.txt</strong>: To search for the string “Hello” in a file named example.txt, return the line containing the string</li>
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Synchronous: Happening consecutively, one after another.</li>
+<li>Asynchronous: Multiple processes can run at the same time.</li>
 </ul>
-<h3 id="How-the-shell-executes-programs"><a href="#How-the-shell-executes-programs" class="headerlink" title="How the shell executes programs"></a>How the shell executes programs</h3><p>When a command is entered in the shell, it follows these steps to execute the program:</p>
-<ol>
-<li><strong>Parsing</strong>: The shell reads the command line input and breaks it into individual components (<strong>splitting by space</strong>). The first word is the command (program), and the folowing words are arguments.</li>
-<li><strong>Command Lookup</strong>: The shell searches for the command in the directories listed in the PATH environment variable. We can view the PATH variable by executing <code>echo $PATH</code>.</li>
-<li><strong>Forking</strong>: The shell creates a new process (child process) to execute the command.</li>
-<li><strong>Return</strong>: After the child process finishes, the shell returns control to the user.</li>
-</ol>
-<h3 id="Executing-programs"><a href="#Executing-programs" class="headerlink" title="Executing programs"></a>Executing programs</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">(base) zhaosonglin@xiaozeimaodeMacBook-Pro ~ % <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span><br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin:/usr/local/mysql/bin:/opt/anaconda3/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Library/TeX/texbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/bin<br></code></pre></td></tr></table></figure>
+<h2 id="then"><a href="#then" class="headerlink" title=".then()"></a>.then()</h2><h3 id="syntax"><a href="#syntax" class="headerlink" title="syntax"></a>syntax</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myStories = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>);<br><span class="hljs-title function_">setStories</span>(myStories);<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>myStories</code> is a promise object immediately after this line runs. The promise represents an operation that hasn’t completed yet. JavaScript continues executing subsequent code without waiting for the promise to resolve.</li>
+<li>setstories is called immediately with the promise <code>myStories</code>, not with the actual data that the promise will resolve to.</li>
+</ul>
+<p>Correct handling:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">stories</span>) =&gt;</span> &#123;<br>  <span class="hljs-title function_">setStories</span>(stories);<br>&#125;).<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error.<span class="hljs-property">message</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p><code>.then((stories) =&gt; &#123; ... &#125;)</code> sets up a handler that waits for the promise to resolve. </p>
+<ul>
+<li>If promise fulfilled, execute .then().</li>
+<li>If promise rejected, execute .catch().</li>
+</ul>
+<h3 id="Async-of-promises"><a href="#Async-of-promises" class="headerlink" title="Async of promises"></a>Async of promises</h3><p>Promises let us keep running other code:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">stories</span>) =&gt;</span> &#123;<br>    <span class="hljs-title function_">setStories</span>(stories);<br>  &#125;)<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;do thing 1&quot;</span>);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;do thing 2&quot;</span>);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;do thing 3&quot;</span>);<br>&#125;, []);<br></code></pre></td></tr></table></figure>
 
-<p>The <code>echo $PATH</code> command essentially executes the program <code>echo</code>. The program named <code>echo</code> is searched through the directories contained in variable <code>$PATH</code>. We can find where the <code>echo</code> program resides by executing <code>which echo</code>.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">(base) zhaosonglin@xiaozeimaodeMacBook-Pro ~ % <span class="hljs-built_in">which</span> <span class="hljs-built_in">echo</span><br><span class="hljs-built_in">echo</span>: shell built-in <span class="hljs-built_in">command</span><br></code></pre></td></tr></table></figure>
-
-<p>The command <code>echo</code> is a shell built-in command. Other command examples:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">which</span> <span class="hljs-built_in">ls</span><br>/bin/ls<br>% <span class="hljs-built_in">which</span> <span class="hljs-built_in">mkdir</span><br>/bin/mkdir<br>% <span class="hljs-built_in">which</span> npm<br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin/npm<br>% <span class="hljs-built_in">which</span> python<br>/opt/anaconda3/bin/python<br></code></pre></td></tr></table></figure>
-
-<p>The commands like <code>ls</code> and <code>mkdir</code> resides in the default directory <code>/bin/</code>, while npm and python are installed in specific locations.</p>
-<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Redirection"><a href="#Redirection" class="headerlink" title="Redirection"></a>Redirection</h3><p>In the shell, each program has one input stream and one output stream, which are keyboard and terminal respectively by default. We can redirect the input or output by <code>&lt; file</code> or <code>&gt; file</code>. This is useful for saving the output for later use or for further processing.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World&quot;</span> &gt; output.txt<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><code>echo &quot;Hello, World&quot;:</code> Prints “Hello, World!” to the terminal.</li>
-<li><code>&gt;:</code> The redirection operator takes the output of the command on its left and writes it to the file specified on its right.</li>
+<li>These <code>console.log</code> statements execute synchronously, meaning they run immediately after the API request is initiated but before the promise resolves.</li>
+<li>When the <code>get</code> function is called, it returns a promise and initiates the asynchronous operation to fetch data. JavaScript does not wait for this operation to complete. Instead, it continues executing the subsequent lines of code immediately. This is known as non-blocking behavior.</li>
 </ul>
-<p>As a result, the text “Hello, World” is written to the file <code>output.txt</code>. We can check by the <code>cat</code> command:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">cat</span> output.txt<br>Hello, World<br></code></pre></td></tr></table></figure>
-
-<p><strong><code>&gt;</code> is used to overwrite the contents of a file, while <code>&gt;&gt;</code> is used to append to the contents of a file.</strong></p>
-<h3 id="Pipes"><a href="#Pipes" class="headerlink" title="Pipes"></a>Pipes</h3><p>Pipes <code>|</code> are used to pass the output of one command as input to another command.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span><br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br></code></pre></td></tr></table></figure>
+<h3 id="Handling-multiple-promises"><a href="#Handling-multiple-promises" class="headerlink" title="Handling multiple promises"></a>Handling multiple promises</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> promise1 = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/comments&#x27;</span>, &#123; <span class="hljs-attr">parent</span>: parentId1 &#125;);<br><span class="hljs-keyword">const</span> promise2 = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/comments&#x27;</span>, &#123; <span class="hljs-attr">parent</span>: parentId2 &#125;);<br><span class="hljs-keyword">const</span> promise3 = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/comments&#x27;</span>, &#123; <span class="hljs-attr">parent</span>: parentId3 &#125;);<br><span class="hljs-keyword">const</span> promise4 = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/comments&#x27;</span>, &#123; <span class="hljs-attr">parent</span>: parentId4 &#125;);<br><span class="hljs-keyword">const</span> promise5 = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/comments&#x27;</span>, &#123; <span class="hljs-attr">parent</span>: parentId5 &#125;);<br><br><span class="hljs-keyword">const</span> promises = [promise1, promise2, promise3, promise4, promise5];<br><br><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(promises).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">allResults</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// allResults represent a list with the result of each promise</span><br>&#125;).<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// Catch and report any error</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><code>ls -l:</code> Lists files and directories in long format.</li>
-<li><code>|:</code> The pipe operator takes the output of <code>ls -l</code> and passes it as input to the next command.</li>
-<li><code>grep &quot;.txt&quot;:</code> Filters the input and displays only lines containing .txt.</li>
+<li>Returns a promise that resolves to array of results of input promises</li>
+<li><strong>allResults</strong> represent a list with the result of each promise</li>
 </ul>
-<p>As a result, the command finds only files ends with “.txt” of the output of <code>ls -l</code>. An example of combining redirection and pipes:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span> &gt; txt_files_list.txt<br>% <span class="hljs-built_in">cat</span> txt_files_list.txt<br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br>-rw-r--r--    1 zhaosonglin  staff     0 Jun 24 16:34 txt_files_list.txt<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">race</span>(promises).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">firstResult</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// Do something with the first result</span><br>&#125;).<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// Catch and report any error</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 
-<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash-3.2$ <span class="hljs-built_in">alias</span> gs=<span class="hljs-string">&quot;git status&quot;</span><br>bash-3.2$ gs<br>On branch main<br>nothing to commit, working tree clean<br>bash-3.2$ git status<br>On branch main<br>nothing to commit, working tree clean<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Return a single Promise</li>
+<li>This returned promise settles as soon as any of the promises in the iterable (list in this example) settles (either fulfills or rejects).</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">any</span>(promises).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">anyResult</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// Do something with the first fullfilled promise</span><br>&#125;).<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// Catch and report any error</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 
-<p>To make an alias persistent you need to include it in dotfiles like .bashrc or .zshrc.</p>
+<ul>
+<li>Return a sinfle Promise</li>
+<li>This returned promise fulfills as soon as any of the promises in the iterable fulfills</li>
+</ul>
+<h2 id="await"><a href="#await" class="headerlink" title="await"></a>await</h2><ul>
+<li>Only asynchronous functions can use await. Asynchronous function is defined by <code>async</code> keyword. <strong>Asynchronous functions are functions that return control back to the caller before computation is done</strong>.</li>
+<li>await waits for the promise to resolve and uses that value</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">myFunction</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;url1&#x27;</span>);<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;url2&#x27;</span>);<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;url3&#x27;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>When await is used, <strong>it pauses the execution of the async function</strong> until the awaited promise is resolved or rejected. This means that the lines of code following the await will not execute until the promise is settled. <strong>This “pause” is local to the async function where await is used.</strong></li>
+<li>While the async function is paused, the rest of the JavaScript (outside the specific function) code can continue to run. This means other tasks, events, and functions can continue to execute, keeping the overall program responsive.</li>
+</ul>
 
                 
               </div>
@@ -387,7 +385,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Computer-Science-Basis/" class="category-chain-item">Computer Science Basis</a>
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
   
   
 
@@ -402,7 +400,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/shell/" class="print-no-link">#shell</a>
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
       
     </div>
   
@@ -414,8 +412,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Shell</div>
-      <div>https://thiefcat.github.io/2024/06/24/MIT-Missing/Shell/</div>
+      <div>MIT Weblab笔记 - Asynchronous Control</div>
+      <div>https://thiefcat.github.io/2024/07/15/MIT-Weblab/Async-Control/</div>
     </div>
     <div class="license-meta">
       
@@ -427,7 +425,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 24, 2024</div>
+          <div>July 15, 2024</div>
         </div>
       
       
@@ -459,18 +457,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/24/MIT-Weblab/%20HTML_CSS/" title="MIT Weblab笔记 - HTML &amp; CSS Basis">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - HTML &amp; CSS Basis</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/23/test/" title="test">
-                        <span class="hidden-mobile">test</span>
+                      <a href="/2024/07/14/MIT-Weblab/CSS/" title="MIT Weblab笔记 - Advanced CSS">
+                        <span class="hidden-mobile">MIT Weblab笔记 - Advanced CSS</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

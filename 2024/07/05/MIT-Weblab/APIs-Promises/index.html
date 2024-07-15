@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://thiefcat.github.io/2024/07/05/MIT-Weblab/APIs-Promises/logic.png">
 <meta property="article:published_time" content="2024-07-05T03:27:06.000Z">
-<meta property="article:modified_time" content="2024-07-09T11:13:57.271Z">
+<meta property="article:modified_time" content="2024-07-15T08:17:35.738Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
@@ -256,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          588 words
+          621 words
         
       </span>
     
@@ -406,7 +406,7 @@
 <h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><h3 id="Async-Handling"><a href="#Async-Handling" class="headerlink" title="Async Handling"></a>Async Handling</h3><p>Get or Post returns a promise. Promises allow for asynchronous processing.</p>
 <p>A bad example:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myStories = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>);<br><span class="hljs-title function_">setStories</span>(myStories);<br></code></pre></td></tr></table></figure>
-<p>In this example, <code>get(&#39;/api/stories&#39;)</code> returns a promise, but setStories(myStories) is called immediately, before the promise has resolved. As a result, myStories will not contain any data.</p>
+<p>In this example, <code>get(&#39;/api/stories&#39;)</code> returns a promise, but setStories(myStories) is called immediately, before the promise has resolved. As a result, the immediately returned promise: myStories, will not contain any data.</p>
 <p>Correct way to handle this:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>)<br>  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>    <span class="hljs-title function_">setStories</span>(data); <span class="hljs-comment">// Set the stories with the fetched data</span><br>  &#125;)<br>  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error fetching stories:&#x27;</span>, error); <span class="hljs-comment">// Handle any errors</span><br>  &#125;);<br></code></pre></td></tr></table></figure>
 
@@ -418,11 +418,16 @@
 <h2 id="Put-Together"><a href="#Put-Together" class="headerlink" title="Put Together"></a>Put Together</h2><p>Get request example:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// In frontend:</span><br><span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/api/comment&quot;</span>, &#123; <span class="hljs-attr">parent</span>: props.<span class="hljs-property">_id</span> &#125;)  <span class="hljs-comment">// send a get request to backend</span><br>  .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">comments</span>) =&gt;</span> &#123;  <br>    <span class="hljs-title function_">setComments</span>(comments);<br>  &#125;); <br><br><span class="hljs-comment">// In backend:</span><br>router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/comment&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;  <span class="hljs-comment">// define the logic to handle the get request from url &quot;/api/comment&quot;</span><br>  <span class="hljs-keyword">const</span> filteredComments = data.<span class="hljs-property">comments</span>.<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">comment</span>) =&gt;</span> comment.<span class="hljs-property">parent</span> == req.<span class="hljs-property">query</span>.<span class="hljs-property">parent</span>);<br>  res.<span class="hljs-title function_">send</span>(filteredComments); <span class="hljs-comment">// send responses back to the client</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>The parameter of get request (parent) can be extracted by <code>req.query.parent</code> in the backend. <code>req.query.parent</code> is a string.</li>
-<li>The backend sends back the filteredComments to the client.</li>
-<li><code>.then()</code> waits for the promise to resolve. The callback function defined in <code>.then()</code> takes the response as the parameter and makes changes.</li>
-</ul>
+<p>The following happens sequentially:</p>
+<ol>
+<li>The <code>get</code> function sends a GET request to the backend at the endpoint “&#x2F;api&#x2F;comment” with a query parameter parent set to props._id.</li>
+<li>The backend’s <code>router.get(&quot;/comment&quot;, (req, res) =&gt; &#123; ... &#125;)</code> function is triggered by the incoming GET request to “&#x2F;comment”.</li>
+<li>The backend extracts the parent parameter from the query string using <code>req.query.parent</code>.</li>
+<li>The backend constructs and sends the <code>filteredComments</code> array back to the frontend using <code>res.send(filteredComments)</code>.</li>
+<li>The frontend’s promise, returned by the <code>get</code> function, resolves with the <code>filteredComments</code> array received from the backend.</li>
+<li>The <code>.then((comments) =&gt; &#123; ... &#125;)</code> method is called with <code>comments</code> as the argument, which is the <code>filteredComments</code> array.</li>
+<li>setComments(comments) is called, triggering a re-render of the component with the new comments.</li>
+</ol>
 <p>Put request example:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// In frontend:</span><br><span class="hljs-keyword">const</span> body = &#123; <span class="hljs-attr">parent</span>: props.<span class="hljs-property">storyId</span>, <span class="hljs-attr">content</span>: value &#125;;<br><span class="hljs-title function_">post</span>(<span class="hljs-string">&quot;/api/comment&quot;</span>, body)  <span class="hljs-comment">// send a get request to backend</span><br>.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">comment</span>) =&gt;</span> &#123;<br>  props.<span class="hljs-title function_">addNewComment</span>(comment);<br>&#125;);<br><br><span class="hljs-comment">// In backend:</span><br>router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&quot;/comment&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> newComment = &#123;<br>    <span class="hljs-attr">_id</span>: data.<span class="hljs-property">comments</span>.<span class="hljs-property">length</span>,<br>    <span class="hljs-attr">creator_name</span>: myName,<br>    <span class="hljs-attr">parent</span>: req.<span class="hljs-property">body</span>.<span class="hljs-property">parent</span>,<br>    <span class="hljs-attr">content</span>: req.<span class="hljs-property">body</span>.<span class="hljs-property">content</span>,<br>  &#125;;<br><br>  data.<span class="hljs-property">comments</span>.<span class="hljs-title function_">push</span>(newComment);<br>  res.<span class="hljs-title function_">send</span>(newComment);<br>&#125;);<br></code></pre></td></tr></table></figure>
 

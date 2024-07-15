@@ -16,22 +16,23 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
+    <meta name="description" content="This blog introduces advanced concepts in CSS, including combinators, display types, content overflow, and animations.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell">
-<meta property="og:url" content="https://thiefcat.github.io/2024/06/24/MIT-Missing/Shell/index.html">
+<meta property="og:title" content="MIT Weblab笔记 - Advanced CSS">
+<meta property="og:url" content="https://thiefcat.github.io/2024/07/14/MIT-Weblab/CSS/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog post introduces the shell, its basic commands, how it executes programs, and advanced functions">
+<meta property="og:description" content="This blog introduces advanced concepts in CSS, including combinators, display types, content overflow, and animations.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-24T03:59:13.000Z">
-<meta property="article:modified_time" content="2024-06-28T09:16:22.232Z">
+<meta property="article:published_time" content="2024-07-14T09:03:38.000Z">
+<meta property="article:modified_time" content="2024-07-15T03:26:13.654Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="Web Development">
+<meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Shell - Songlin&#39;s Space</title>
+  <title>MIT Weblab笔记 - Advanced CSS - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Shell</span>
+            <span id="subtitle">MIT Weblab笔记 - Advanced CSS</span>
           
         </div>
 
@@ -242,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 11:59" pubdate>
-          June 24, 2024 am
+        <time datetime="2024-07-14 17:03" pubdate>
+          July 14, 2024 pm
         </time>
       </span>
     
@@ -254,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          311 words
+          245 words
         
       </span>
     
@@ -310,65 +311,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Shell</h1>
+            <h1 id="seo-header">MIT Weblab笔记 - Advanced CSS</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="What-is-the-shell"><a href="#What-is-the-shell" class="headerlink" title="What is the shell?"></a>What is the shell?</h3><p>A shell is a user interface that provides access to various services of an operating system. The shell is a command-line interface. The shell of macOS before Catalina is Bourne Again Shell (bash). The shell allows users to execute commands, run programs, and manage system resources. The GUI has defined many use cases for us to interact with the operating system, however, to take full advantage of the tools our computer provides, we have to use the shell.</p>
-<h3 id="Basic-shell-commands"><a href="#Basic-shell-commands" class="headerlink" title="Basic shell commands"></a>Basic shell commands</h3><ul>
-<li><strong>.</strong>: current directory</li>
-<li><strong>..</strong>: parent directory</li>
-<li><strong>ls</strong></li>
-<li><strong>madir <name></strong></li>
-<li><strong>cd <directory></strong>: change directory</li>
-<li><strong>pwd</strong>: print working directory</li>
-<li><strong>echo “text”</strong>: prints the specified text to the terminal</li>
-<li><strong>cat <file></strong>: displays the contents of the specified file</li>
-<li><strong>touch example.txt</strong>: creates file</li>
-<li><strong>grep “Hello” example.txt</strong>: To search for the string “Hello” in a file named example.txt, return the line containing the string</li>
-</ul>
-<h3 id="How-the-shell-executes-programs"><a href="#How-the-shell-executes-programs" class="headerlink" title="How the shell executes programs"></a>How the shell executes programs</h3><p>When a command is entered in the shell, it follows these steps to execute the program:</p>
-<ol>
-<li><strong>Parsing</strong>: The shell reads the command line input and breaks it into individual components (<strong>splitting by space</strong>). The first word is the command (program), and the folowing words are arguments.</li>
-<li><strong>Command Lookup</strong>: The shell searches for the command in the directories listed in the PATH environment variable. We can view the PATH variable by executing <code>echo $PATH</code>.</li>
-<li><strong>Forking</strong>: The shell creates a new process (child process) to execute the command.</li>
-<li><strong>Return</strong>: After the child process finishes, the shell returns control to the user.</li>
-</ol>
-<h3 id="Executing-programs"><a href="#Executing-programs" class="headerlink" title="Executing programs"></a>Executing programs</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">(base) zhaosonglin@xiaozeimaodeMacBook-Pro ~ % <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span><br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin:/usr/local/mysql/bin:/opt/anaconda3/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Library/TeX/texbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/bin<br></code></pre></td></tr></table></figure>
+                <h2 id="CSS-Combinators"><a href="#CSS-Combinators" class="headerlink" title="CSS Combinators"></a>CSS Combinators</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;child&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;c1&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>child 1<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;child&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;c2&quot;</span>&gt;</span>child 2<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;child&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;c3&quot;</span>&gt;</span>child 3<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;child&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;c4&quot;</span>&gt;</span>child 4<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>The <code>echo $PATH</code> command essentially executes the program <code>echo</code>. The program named <code>echo</code> is searched through the directories contained in variable <code>$PATH</code>. We can find where the <code>echo</code> program resides by executing <code>which echo</code>.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">(base) zhaosonglin@xiaozeimaodeMacBook-Pro ~ % <span class="hljs-built_in">which</span> <span class="hljs-built_in">echo</span><br><span class="hljs-built_in">echo</span>: shell built-in <span class="hljs-built_in">command</span><br></code></pre></td></tr></table></figure>
+<h3 id="Descendent-Selector"><a href="#Descendent-Selector" class="headerlink" title="Descendent Selector"></a>Descendent Selector</h3><p>Selects all elements that are descendants (children, grandchildren, etc.) of a specified element:<br>All <code>&lt;div&gt;</code> inside class container, which are child 1, 2, 3, 4</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-class">.container</span> <span class="hljs-selector-tag">div</span> &#123;<br>    <span class="hljs-attribute">color</span>: blue; <br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>The command <code>echo</code> is a shell built-in command. Other command examples:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">which</span> <span class="hljs-built_in">ls</span><br>/bin/ls<br>% <span class="hljs-built_in">which</span> <span class="hljs-built_in">mkdir</span><br>/bin/mkdir<br>% <span class="hljs-built_in">which</span> npm<br>/Users/zhaosonglin/.nvm/versions/node/v16.20.2/bin/npm<br>% <span class="hljs-built_in">which</span> python<br>/opt/anaconda3/bin/python<br></code></pre></td></tr></table></figure>
 
-<p>The commands like <code>ls</code> and <code>mkdir</code> resides in the default directory <code>/bin/</code>, while npm and python are installed in specific locations.</p>
-<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Redirection"><a href="#Redirection" class="headerlink" title="Redirection"></a>Redirection</h3><p>In the shell, each program has one input stream and one output stream, which are keyboard and terminal respectively by default. We can redirect the input or output by <code>&lt; file</code> or <code>&gt; file</code>. This is useful for saving the output for later use or for further processing.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World&quot;</span> &gt; output.txt<br></code></pre></td></tr></table></figure>
+<h3 id="Child-Selector"><a href="#Child-Selector" class="headerlink" title="Child Selector"></a>Child Selector</h3><p>Only direct <code>&lt;div&gt;</code> children of class container, which are child 2, 3, 4</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-class">.container</span> &gt; <span class="hljs-selector-tag">div</span> &#123;<br>    <span class="hljs-attribute">color</span>: blue; <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Adjacent-Sibling-Selector"><a href="#Adjacent-Sibling-Selector" class="headerlink" title="Adjacent Sibling Selector"></a>Adjacent Sibling Selector</h3><p>First div sibling after id c1, which are child 2</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-id">#c1</span> + <span class="hljs-selector-tag">div</span> &#123;<br>    <span class="hljs-attribute">color</span>: blue; <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="General-Sibling-Selector"><a href="#General-Sibling-Selector" class="headerlink" title="General Sibling Selector"></a>General Sibling Selector</h3><p>All div elements that are siblings of an id c1, which are child 2, 3, 4</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-id">#c1</span> ~ <span class="hljs-selector-tag">div</span> &#123;<br>    <span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Display-Types"><a href="#Display-Types" class="headerlink" title="Display Types"></a>Display Types</h2><h3 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h3><p>Block makes an element behave as a block-level element. Some elements have <code>display: block</code> by default: <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>,<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code></p>
+<h3 id="Inline"><a href="#Inline" class="headerlink" title="Inline"></a>Inline</h3><p>Inline elements do not start on a new line; they only take up as much width as necessary and can sit next to each other horizontally. <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code> are inline by default.</p>
+<h3 id="Flex"><a href="#Flex" class="headerlink" title="Flex"></a>Flex</h3><p>Flex is a flexible box. It can control direction, sizing, distribution. All direct children of a flexible container becomes flexible items. <a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css3_flexbox_items.asp">See this demo</a>.</p>
+<h3 id="Grid"><a href="#Grid" class="headerlink" title="Grid"></a>Grid</h3><p>Grid containers consist of grid items, placed inside columns and rows. <a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css_grid_container.asp">See this demo</a>.</p>
+<h3 id="None"><a href="#None" class="headerlink" title="None"></a>None</h3><p>Tells the browser to remove an element from the document. Different from <code>visibility: hidden</code>, which hides the element but still takes up space in the layout.</p>
+<h2 id="Content-Overflow"><a href="#Content-Overflow" class="headerlink" title="Content Overflow"></a>Content Overflow</h2><p>The overflow property specifies whether to <strong>clip the content</strong> or to <strong>add scrollbars</strong> when the content of an element is too big to fit in the specified area. <a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css_overflow.asp">see the demo</a>.</p>
+<h2 id="Animations"><a href="#Animations" class="headerlink" title="Animations"></a>Animations</h2><p>Syntax: use percentages to specify intermediate steps</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-keyword">@keyframes</span> animation-name &#123;<br>  <span class="hljs-number">0%</span> &#123;<br>    <span class="hljs-comment">/* initial styles */</span><br>  &#125;<br>  <span class="hljs-number">50%</span> &#123;<br>    <span class="hljs-comment">/* intermediate styles */</span><br>  &#125;<br>  <span class="hljs-number">100%</span> &#123;<br>    <span class="hljs-comment">/* final styles */</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Example:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs CSS">&lt;<span class="hljs-selector-tag">div</span> class=&quot;container&quot;&gt;<br>  &lt;<span class="hljs-selector-tag">p</span>&gt; balabala &lt;/<span class="hljs-selector-tag">p</span>&gt;<br>&lt;/<span class="hljs-selector-tag">div</span>&gt;<br><br><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">animation</span>: fadeIn;<br>  <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">5s</span>;<br>  <span class="hljs-attribute">animation-delay</span>: <span class="hljs-number">2s</span>;<br>&#125;<br><br><span class="hljs-keyword">@keyframes</span> fadeIn &#123;<br>  <span class="hljs-number">0%</span> &#123;<br>    <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;<br>  &#125;<br>  <span class="hljs-number">100%</span> &#123;<br>    <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><code>echo &quot;Hello, World&quot;:</code> Prints “Hello, World!” to the terminal.</li>
-<li><code>&gt;:</code> The redirection operator takes the output of the command on its left and writes it to the file specified on its right.</li>
+<li>opacity changes from 0 to 1 in 5s, after 2s.</li>
 </ul>
-<p>As a result, the text “Hello, World” is written to the file <code>output.txt</code>. We can check by the <code>cat</code> command:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">cat</span> output.txt<br>Hello, World<br></code></pre></td></tr></table></figure>
-
-<p><strong><code>&gt;</code> is used to overwrite the contents of a file, while <code>&gt;&gt;</code> is used to append to the contents of a file.</strong></p>
-<h3 id="Pipes"><a href="#Pipes" class="headerlink" title="Pipes"></a>Pipes</h3><p>Pipes <code>|</code> are used to pass the output of one command as input to another command.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span><br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li><code>ls -l:</code> Lists files and directories in long format.</li>
-<li><code>|:</code> The pipe operator takes the output of <code>ls -l</code> and passes it as input to the next command.</li>
-<li><code>grep &quot;.txt&quot;:</code> Filters the input and displays only lines containing .txt.</li>
-</ul>
-<p>As a result, the command finds only files ends with “.txt” of the output of <code>ls -l</code>. An example of combining redirection and pipes:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span> &gt; txt_files_list.txt<br>% <span class="hljs-built_in">cat</span> txt_files_list.txt<br>-rw-r--r--    1 zhaosonglin  staff    13 Jun 24 16:18 output.txt<br>-rw-r--r--    1 zhaosonglin  staff     0 Jun 24 16:34 txt_files_list.txt<br></code></pre></td></tr></table></figure>
-
-<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash-3.2$ <span class="hljs-built_in">alias</span> gs=<span class="hljs-string">&quot;git status&quot;</span><br>bash-3.2$ gs<br>On branch main<br>nothing to commit, working tree clean<br>bash-3.2$ git status<br>On branch main<br>nothing to commit, working tree clean<br></code></pre></td></tr></table></figure>
-
-<p>To make an alias persistent you need to include it in dotfiles like .bashrc or .zshrc.</p>
 
                 
               </div>
@@ -387,7 +365,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Computer-Science-Basis/" class="category-chain-item">Computer Science Basis</a>
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
   
   
 
@@ -402,7 +380,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/shell/" class="print-no-link">#shell</a>
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
+      
+        <a href="/tags/CSS/" class="print-no-link">#CSS</a>
       
     </div>
   
@@ -414,8 +394,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Shell</div>
-      <div>https://thiefcat.github.io/2024/06/24/MIT-Missing/Shell/</div>
+      <div>MIT Weblab笔记 - Advanced CSS</div>
+      <div>https://thiefcat.github.io/2024/07/14/MIT-Weblab/CSS/</div>
     </div>
     <div class="license-meta">
       
@@ -427,7 +407,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 24, 2024</div>
+          <div>July 14, 2024</div>
         </div>
       
       
@@ -459,9 +439,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/24/MIT-Weblab/%20HTML_CSS/" title="MIT Weblab笔记 - HTML &amp; CSS Basis">
+                      <a href="/2024/07/15/MIT-Weblab/Async-Control/" title="MIT Weblab笔记 - Asynchronous Control">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - HTML &amp; CSS Basis</span>
+                        <span class="hidden-mobile">MIT Weblab笔记 - Asynchronous Control</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -469,8 +449,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/23/test/" title="test">
-                        <span class="hidden-mobile">test</span>
+                      <a href="/2024/07/07/Leetcode/kmp/" title="KMP Algorithm">
+                        <span class="hidden-mobile">KMP Algorithm</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
