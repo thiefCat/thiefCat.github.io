@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://thiefcat.github.io/2024/07/05/MIT-Weblab/APIs-Promises/logic.png">
 <meta property="article:published_time" content="2024-07-05T03:27:06.000Z">
-<meta property="article:modified_time" content="2024-07-15T08:17:35.738Z">
+<meta property="article:modified_time" content="2024-07-16T08:26:23.712Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
@@ -256,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          621 words
+          639 words
         
       </span>
     
@@ -403,7 +403,13 @@
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// server.js</span><br><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();<br><span class="hljs-keyword">const</span> apiRouter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./api&#x27;</span>);<br><br>app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>()); <span class="hljs-comment">// Middleware to parse JSON bodies</span><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/api&#x27;</span>, apiRouter); <span class="hljs-comment">// Middleware to route /api paths to api.js</span><br><br>app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Server is running on port 3000&#x27;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><h3 id="Async-Handling"><a href="#Async-Handling" class="headerlink" title="Async Handling"></a>Async Handling</h3><p>Get or Post returns a promise. Promises allow for asynchronous processing.</p>
+<p>When <code>http://localhost:3000/api/test</code> request is sent to the server, the following sequence happens:</p>
+<ol>
+<li>The JSON parsing middleware <code>express.json()</code> processes the request.</li>
+<li>The request path <code>/api/test</code> is checked against the <code>apiRouter</code>, matches, and then the request is forwarded to <code>apiRouter</code>.</li>
+<li>The router checks its defined routes and finds a match for GET <code>/test</code>, and the handler for <code>/test</code> is executed.</li>
+</ol>
+<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><h3 id="Async-Handling"><a href="#Async-Handling" class="headerlink" title="Async Handling"></a>Async Handling</h3><p>Get or Post returns a promise. <strong>Promises allow for asynchronous processing</strong>.</p>
 <p>A bad example:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myStories = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>);<br><span class="hljs-title function_">setStories</span>(myStories);<br></code></pre></td></tr></table></figure>
 <p>In this example, <code>get(&#39;/api/stories&#39;)</code> returns a promise, but setStories(myStories) is called immediately, before the promise has resolved. As a result, the immediately returned promise: myStories, will not contain any data.</p>

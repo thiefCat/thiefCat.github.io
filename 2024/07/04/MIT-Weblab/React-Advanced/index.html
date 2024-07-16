@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces how React is used in development">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-07-04T12:30:22.000Z">
-<meta property="article:modified_time" content="2024-07-09T08:16:15.269Z">
+<meta property="article:modified_time" content="2024-07-16T10:02:54.083Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta property="article:tag" content="React">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          438 words
+          477 words
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          2 mins
+          3 mins
         
       </span>
     
@@ -349,7 +349,16 @@
 <h2 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h2><p>We can add links to nav bars.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> <span class="hljs-title function_">Home</span> = (<span class="hljs-params"></span>) =&gt; (<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;dashboard&quot;</span>&gt;</span>Dashboard<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>)<br><br><span class="hljs-keyword">let</span> <span class="hljs-title function_">Dash</span> = (<span class="hljs-params"></span>) =&gt; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Dash<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><br><span class="hljs-title function_">render</span>(<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Home</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span> /&gt;</span> // root path</span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Dash</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;dashboard&quot;</span> /&gt;</span> // relative path</span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span></span><br>)<br></code></pre></td></tr></table></figure>
 
-<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Conditional-Rendering"><a href="#Conditional-Rendering" class="headerlink" title="Conditional Rendering"></a>Conditional Rendering</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">return</span> (<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;loading ? &quot;Loading...&quot; : &quot;Actual page content&quot;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript">storiesList = stories.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">storyObj</span>) =&gt;</span> (<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span></span></span><br><span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;</span>`<span class="hljs-attr">Card_</span>$&#123;<span class="hljs-attr">storyObj._id</span>&#125;`&#125;</span></span><br><span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">_id</span>=<span class="hljs-string">&#123;storyObj._id&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">creator_name</span>=<span class="hljs-string">&#123;storyObj.creator_name&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">content</span>=<span class="hljs-string">&#123;storyObj.content&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">  /&gt;</span></span><br>));<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>the “key” prop is a special attribute you need to include when creating lists of elements. Keys help React identify which items have changed, are added, or are removed, improving efficiency of rendering</li>
+<li>In this case, the key is a unique string that combines the word “Card_” with the unique identifier <code>_id</code> from the storyObj</li>
+</ul>
+<h3 id="Conditional-Rendering"><a href="#Conditional-Rendering" class="headerlink" title="Conditional Rendering"></a>Conditional Rendering</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">return</span> (<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;loading ? &quot;Loading...&quot; : &quot;Actual page content&quot;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>);<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>If loading is true, it displays the text “Loading…”.</li>
