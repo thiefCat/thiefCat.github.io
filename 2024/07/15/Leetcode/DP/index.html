@@ -18,13 +18,13 @@
   
     <meta name="description" content="This blog explains leetcode 28 (Find the Index of the First Occurrence in a String)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dynamic Programming and Backtracking Algorithm">
-<meta property="og:url" content="https://thiefcat.github.io/2024/07/15/Leetcode/DP-BackTrack/index.html">
+<meta property="og:title" content="Dynamic Programming">
+<meta property="og:url" content="https://thiefcat.github.io/2024/07/15/Leetcode/DP/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
 <meta property="og:description" content="This blog explains leetcode 28 (Find the Index of the First Occurrence in a String)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-07-15T12:03:34.000Z">
-<meta property="article:modified_time" content="2024-07-15T13:10:57.325Z">
+<meta property="article:modified_time" content="2024-07-17T10:38:33.475Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="Dynamic Programming">
@@ -32,7 +32,7 @@
   
   
   
-  <title>Dynamic Programming and Backtracking Algorithm - Songlin&#39;s Space</title>
+  <title>Dynamic Programming - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Dynamic Programming and Backtracking Algorithm</span>
+            <span id="subtitle">Dynamic Programming</span>
           
         </div>
 
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          183 words
+          456 words
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          1 mins
+          3 mins
         
       </span>
     
@@ -311,12 +311,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Dynamic Programming and Backtracking Algorithm</h1>
+            <h1 id="seo-header">Dynamic Programming</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Many DP problems can be also solved by backtracking algorithm.</p>
+                <h2 id="DP-and-Backtracking"><a href="#DP-and-Backtracking" class="headerlink" title="DP and Backtracking"></a>DP and Backtracking</h2><p>Many DP problems can be also solved by backtracking algorithm.</p>
 <h3 id="LC-416"><a href="#LC-416" class="headerlink" title="LC 416"></a>LC 416</h3><p>Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.</p>
 <ul>
 <li>Solution using backtracking:</li>
@@ -333,6 +333,27 @@
 <li><code>dp[i][j]</code> is boolean, representing whether summation j can be achieved using indexes 0, 1, …, i.</li>
 <li>If <code>nums[i]</code> is used to achieve the summation j, then <code>dp[i-1][j-nums[i]]</code> must be true. If <code>nums[i]</code> is not used to achieve the summation, then <code>dp[i-1][j]</code> must be true.</li>
 <li>Complexity: <code>O(nW)</code>, where n is array size, W is array summation.</li>
+</ul>
+<h2 id="Optimize-Space-Complexity"><a href="#Optimize-Space-Complexity" class="headerlink" title="Optimize Space Complexity"></a>Optimize Space Complexity</h2><h3 id="Knapsack-Problem"><a href="#Knapsack-Problem" class="headerlink" title="Knapsack Problem"></a>Knapsack Problem</h3><p>Given bag space N, what is the most valuable way to put items in the bag? One Item can be used only once.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 2D array</span><br><span class="hljs-comment">// DP[i][j]: most valuable combination of items for space j using items 0-i.</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> M, <span class="hljs-type">int</span> N, <span class="hljs-type">int</span>[] spaces, <span class="hljs-type">int</span>[] values)</span> &#123;<br>    <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M+<span class="hljs-number">1</span>][N+<span class="hljs-number">1</span>];<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> spaces[<span class="hljs-number">0</span>]; j &lt;= N; j++) &#123;<br>        dp[<span class="hljs-number">0</span>][j] = values[<span class="hljs-number">0</span>];<br>    &#125;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= M; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= N; j++) &#123;<br>            <span class="hljs-keyword">if</span> (j &gt;= spaces[i-<span class="hljs-number">1</span>]) &#123;<br>                dp[i][j] = Math.max(dp[i-<span class="hljs-number">1</span>][j], dp[i-<span class="hljs-number">1</span>][j-spaces[i-<span class="hljs-number">1</span>]] + values[i-<span class="hljs-number">1</span>]);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                dp[i][j] = dp[i-<span class="hljs-number">1</span>][j];<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[M][N];<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>Use 1D array to solve this:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> M, <span class="hljs-type">int</span> N, <span class="hljs-type">int</span>[] spaces, <span class="hljs-type">int</span>[] values)</span> &#123;<br>    <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N+<span class="hljs-number">1</span>];<br>        <br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> spaces[<span class="hljs-number">0</span>]; i &lt; N+<span class="hljs-number">1</span>; i++) &#123;<br>        dp[i] = values[<span class="hljs-number">0</span>];<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; M; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> N; j &gt;= <span class="hljs-number">1</span>; j--) &#123; <span class="hljs-comment">// iterate from N to 1!</span><br>            <span class="hljs-keyword">if</span> (j &gt;= spaces[i]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">takei</span> <span class="hljs-operator">=</span> dp[j-spaces[i]] + values[i];<br>                <span class="hljs-type">int</span> <span class="hljs-variable">dtakei</span> <span class="hljs-operator">=</span> dp[j];<br>                dp[j] = Math.max(takei, dtakei);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                dp[j] = dp[j];<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[N];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>In 2D case, each row depends on the values from previous row.</li>
+<li><code>dp[i][j]</code> depends on  <code>dp[i-1][j]</code> and <code>dp[i-1][j-spaces[i-1]]</code>, i.e., one top value, one top-left value.</li>
+<li>As a result, in 1D case, update the <code>dp</code> array from right to left.</li>
+</ul>
+<h3 id="When-to-update-from-left-to-right-LC-518"><a href="#When-to-update-from-left-to-right-LC-518" class="headerlink" title="When to update from left to right? (LC 518)"></a>When to update from left to right? (LC 518)</h3><p>You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.</p>
+<p>Return the number of combinations that make up that amount. If that amount of money cannot be made up by any combination of the coins, return 0.</p>
+<p>You may assume that you have an infinite number of each kind of coin.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">change</span><span class="hljs-params">(<span class="hljs-type">int</span> amount, <span class="hljs-type">int</span>[] coins)</span> &#123;<br>        <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[amount+<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; amount+<span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (i % coins[<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>) dp[i] = <span class="hljs-number">1</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; coins.length; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> coins[i]; j &lt;= amount; j++) &#123;<br>                dp[j] += dp[j-coins[i]];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[amount];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>dp[i]</li>
 </ul>
 
                 
@@ -381,8 +402,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Dynamic Programming and Backtracking Algorithm</div>
-      <div>https://thiefcat.github.io/2024/07/15/Leetcode/DP-BackTrack/</div>
+      <div>Dynamic Programming</div>
+      <div>https://thiefcat.github.io/2024/07/15/Leetcode/DP/</div>
     </div>
     <div class="license-meta">
       
