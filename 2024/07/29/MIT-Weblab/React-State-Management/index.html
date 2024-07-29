@@ -16,23 +16,23 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces how to enable live chat using sockets">
+    <meta name="description" content="This blog introduces React context, reducers, and redux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MIT Weblab笔记 - Sockets">
-<meta property="og:url" content="https://thiefcat.github.io/2024/07/21/MIT-Weblab/socket/index.html">
+<meta property="og:title" content="MIT Weblab笔记 - React State Management">
+<meta property="og:url" content="https://thiefcat.github.io/2024/07/29/MIT-Weblab/React-State-Management/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces how to enable live chat using sockets">
+<meta property="og:description" content="This blog introduces React context, reducers, and redux">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-21T06:38:14.000Z">
-<meta property="article:modified_time" content="2024-07-22T08:16:54.218Z">
+<meta property="article:published_time" content="2024-07-29T08:53:48.000Z">
+<meta property="article:modified_time" content="2024-07-29T09:36:00.510Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
-<meta property="article:tag" content="sockets">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>MIT Weblab笔记 - Sockets - Songlin&#39;s Space</title>
+  <title>MIT Weblab笔记 - React State Management - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">MIT Weblab笔记 - Sockets</span>
+            <span id="subtitle">MIT Weblab笔记 - React State Management</span>
           
         </div>
 
@@ -243,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-21 14:38" pubdate>
-          July 21, 2024 pm
+        <time datetime="2024-07-29 16:53" pubdate>
+          July 29, 2024 pm
         </time>
       </span>
     
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          196 words
+          261 words
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -311,55 +311,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MIT Weblab笔记 - Sockets</h1>
+            <h1 id="seo-header">MIT Weblab笔记 - React State Management</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Steps for a http request:</p>
-<ul>
-<li>Client sends request to Server</li>
-<li>Server responds to client</li>
-</ul>
-<p>If we want to achieve a live chat function, where</p>
-<ul>
-<li>A user sends a message</li>
-<li>All users can see the updates message immediately without refreshing the page</li>
-</ul>
-<p>However, server cannot send a message without a request. Sockets can solve this!</p>
-<h2 id="Sockets"><a href="#Sockets" class="headerlink" title="Sockets"></a>Sockets</h2><h3 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h3><ul>
-<li>Broadcast a message from server to everyone connected:</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">socketManager.<span class="hljs-property">getIo</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&quot;event_name&quot;</span>, data); <span class="hljs-comment">// shout</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>Broadcast a message to a specific client:</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">socketManager.<span class="hljs-title function_">getSocketFromUserID</span>(userID).<span class="hljs-title function_">emit</span>(<span class="hljs-string">&quot;eventName&quot;</span>, data); <span class="hljs-comment">// whisper</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>Listen for messages on client:</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">socket.<span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;event_name&quot;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// do something with data</span><br>&#125;);<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>The <code>socketManager</code> class is defined for demonstration, in real life, please define by yourself.</li>
-</ul>
-<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// Frontend:</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">Chatbook</span> = (<span class="hljs-params">props</span>) =&gt; &#123;<br><br>  <span class="hljs-keyword">const</span> [activeChat, setActiveChat] = <span class="hljs-title function_">useState</span>(&#123;<br>    <span class="hljs-attr">recipient</span>: <span class="hljs-variable constant_">ALL_CHAT</span>,<br>    <span class="hljs-attr">messages</span>: [],<br>  &#125;);<br><br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">addMessages</span> = (<span class="hljs-params">data</span>) =&gt; &#123;<br>    <span class="hljs-title function_">setActiveChat</span>(<span class="hljs-function"><span class="hljs-params">prevActiveChat</span> =&gt;</span> (&#123;<br>      <span class="hljs-attr">recipient</span>: prevActiveChat.<span class="hljs-property">recipient</span>,<br>      <span class="hljs-attr">messages</span>: prevActiveChat.<span class="hljs-property">messages</span>.<span class="hljs-title function_">concat</span>(data),<br>    &#125;));<br>  &#125;;<br><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    socket.<span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;message&quot;</span>, addMessages);<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>      socket.<span class="hljs-title function_">off</span>(<span class="hljs-string">&quot;message&quot;</span>, addMessages);<br>    &#125;;<br>  &#125;, []);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// Backend:</span><br>router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&quot;/message&quot;</span>, auth.<span class="hljs-property">ensureLoggedIn</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Received a chat message from <span class="hljs-subst">$&#123;req.user.name&#125;</span>: <span class="hljs-subst">$&#123;req.body.content&#125;</span>`</span>);<br><br>  <span class="hljs-comment">// insert this message into the database</span><br>  <span class="hljs-keyword">const</span> message = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Message</span>(&#123;<br>    <span class="hljs-attr">recipient</span>: req.<span class="hljs-property">body</span>.<span class="hljs-property">recipient</span>,<br>    <span class="hljs-attr">sender</span>: &#123;<br>      <span class="hljs-attr">_id</span>: req.<span class="hljs-property">user</span>.<span class="hljs-property">_id</span>,<br>      <span class="hljs-attr">name</span>: req.<span class="hljs-property">user</span>.<span class="hljs-property">name</span>,<br>    &#125;,<br>    <span class="hljs-attr">content</span>: req.<span class="hljs-property">body</span>.<span class="hljs-property">content</span>,<br>  &#125;);<br>  message.<span class="hljs-title function_">save</span>();<br>  socketManager.<span class="hljs-title function_">getIo</span>().<span class="hljs-title function_">emit</span>(<span class="hljs-string">&quot;message&quot;</span>, message);<br>&#125;);<br></code></pre></td></tr></table></figure>
-
-<p>What happens in the code:</p>
+                <h2 id="React-Context"><a href="#React-Context" class="headerlink" title="React Context"></a>React Context</h2><p>Previously, we pass state and setState as props through components to allow child component to update states of parent. If the component that needs the state is deep in the tree, this is a problem called “prop drilling”, where props are passed through many intermediate components.</p>
+<p>The <code>useState</code> hook is commonly used to manage local component state. By combining it with Context, we can create a shared state accessible by any component in the tree. It’s particularly useful for global states, such as user authentication status, themes, or other application-wide settings.</p>
 <ol>
-<li>When the Chatbook component mounts, it sets up a socket listener for the “message” event using <code>useEffect</code>. <code>socket.on(&quot;message&quot;, addMessages)</code> adds <strong>a listener that calls addMessages whenever a new message is received</strong>. When the component unmounts, it calls the return statemnet: <code>socket.off(&quot;message&quot;, addMessages)</code>, which cleans up the event listener.</li>
-<li>A user sends a POST request to the <code>/message</code> endpoint with the chat message content and recipient information.</li>
-<li>The backend creates a new message and saves it to the database.</li>
-<li><code>socketManager.getIo().emit(&quot;message&quot;, message)</code>: The message is emitted to all connected clients using Socket.io, with data “message”.</li>
-<li><code>socket.on(&quot;message&quot;, addMessages)</code> listener calls the addMessages function with “message” as parameter, updating the existing messages.</li>
+<li>Create a Context</li>
 </ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123; createContext, useState, useContext &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><span class="hljs-keyword">const</span> <span class="hljs-title class_">MyContext</span> = <span class="hljs-title function_">createContext</span>();<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Create a Provider: Can use context MyContext in any descendant of <code>MyContext.Provider</code>.</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">MyProvider</span> = (<span class="hljs-params">&#123; children &#125;</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> [state, setState] = <span class="hljs-title function_">useState</span>(initialState);<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">MyContext.Provider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">state</span>, <span class="hljs-attr">setState</span> &#125;&#125;&gt;</span></span><br><span class="language-xml">      &#123;children&#125;</span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">MyContext.Provider</span>&gt;</span></span><br>  );<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Wrap Your Application: Make <code>MyComponent</code> a descendent of <code>MyProvider</code>, so <code>MyComponent</code> can use the context.</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">App</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">MyProvider</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">MyComponent</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">MyProvider</span>&gt;</span></span><br>  );<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+<ol start="4">
+<li>Consume the Context: use <code>const &#123; state, setState &#125; = useContext(MyContext)</code> to extract the value provided by <code>MyContext.Provider</code>.</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">MyComponent</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> &#123; state, setState &#125; = <span class="hljs-title function_">useContext</span>(<span class="hljs-title class_">MyContext</span>);<br><br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleChange</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-title function_">setState</span>(newState);<br>  &#125;;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;state.someValue&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;handleChange&#125;</span>&gt;</span>Change State<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="Reducers"><a href="#Reducers" class="headerlink" title="Reducers"></a>Reducers</h2><p>Reducers provide a structured way to manage state transitions, especially for complex state logic or multiple state updates based on different actions.</p>
 <ul>
-<li>setActiveChat here can also accept a function as an argument. This function receives the previous state <code>prevActiveChat</code> as its argument.</li>
+<li><code>const [state, dispatch] = useReducer(reducer, initialState)</code></li>
+<li>Redcer: A function that specifies how the state should be updated based on the action. <code>Reducer: f(state, action) -&gt; newState</code>. The reducer function takes the current state and an action as arguments and returns a new state. The reducer returns a new state object. </li>
+<li>Dispatch: Use the <code>dispatch</code> function to trigger state transitions based on actions.</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123; useReducer &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><br><span class="hljs-keyword">const</span> initialState = &#123; <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> &#125;;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">reducer</span>(<span class="hljs-params">state, action</span>) &#123;<br>  <span class="hljs-keyword">switch</span> (action.<span class="hljs-property">type</span>) &#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;increment&#x27;</span>:<br>      <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">count</span>: state.<span class="hljs-property">count</span> + <span class="hljs-number">1</span> &#125;;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;decrement&#x27;</span>:<br>      <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">count</span>: state.<span class="hljs-property">count</span> - <span class="hljs-number">1</span> &#125;;<br>    <span class="hljs-attr">default</span>:<br>      <span class="hljs-keyword">return</span> state;<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">Counter</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> [state, dispatch] = <span class="hljs-title function_">useReducer</span>(reducer, initialState);<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Count: &#123;state.count&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> dispatch(&#123; type: &#x27;increment&#x27; &#125;)&#125;&gt;Increment<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> dispatch(&#123; type: &#x27;decrement&#x27; &#125;)&#125;&gt;Decrement<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Counter</span>;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -395,7 +382,7 @@
       
         <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
       
-        <a href="/tags/sockets/" class="print-no-link">#sockets</a>
+        <a href="/tags/React/" class="print-no-link">#React</a>
       
     </div>
   
@@ -407,8 +394,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MIT Weblab笔记 - Sockets</div>
-      <div>https://thiefcat.github.io/2024/07/21/MIT-Weblab/socket/</div>
+      <div>MIT Weblab笔记 - React State Management</div>
+      <div>https://thiefcat.github.io/2024/07/29/MIT-Weblab/React-State-Management/</div>
     </div>
     <div class="license-meta">
       
@@ -420,7 +407,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 21, 2024</div>
+          <div>July 29, 2024</div>
         </div>
       
       
@@ -452,18 +439,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/24/MIT-Weblab/typescript/" title="MIT Weblab笔记 - Typescript">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - Typescript</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/18/MIT-Weblab/account/" title="MIT Weblab笔记 - Authentication">
-                        <span class="hidden-mobile">MIT Weblab笔记 - Authentication</span>
+                      <a href="/2024/07/24/MIT-Weblab/typescript/" title="MIT Weblab笔记 - Typescript">
+                        <span class="hidden-mobile">MIT Weblab笔记 - Typescript</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
