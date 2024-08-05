@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-08-02T08:01:34.000Z">
-<meta property="article:modified_time" content="2024-08-02T10:00:27.822Z">
+<meta property="article:modified_time" content="2024-08-04T05:02:45.907Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta property="article:tag" content="JavaScript">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          201 words
+          235 words
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -338,13 +338,16 @@
 </li>
 <li><p>Closures are an advanced programming concept in JavaScript that allow functions to retain access to variables from their lexical scope even after the outer function has finished executing. The <code>embedFunc</code> closure retains access to localVar, argVar, and globalVar even after <code>localFunc</code> has finished executing.</p>
 </li>
-<li><p>Using closures to encapsulate the state</p>
+<li><p>Using closures to encapsulate the state:</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">return</span> (<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>;<br><br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">f</span>(<span class="hljs-params"></span>) &#123;<br>        i++;<br>        <span class="hljs-keyword">return</span> i;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> f;<br>&#125;)();<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> myModule = (<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// Private variables and functions</span><br>  <span class="hljs-keyword">var</span> privateVariable = <span class="hljs-string">&#x27;I am private&#x27;</span>;<br><br>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">privateFunction</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(privateVariable);<br>  &#125;<br><br>  <span class="hljs-comment">// Public API</span><br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">publicMethod</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title function_">privateFunction</span>();<br>    &#125;,<br>    <span class="hljs-attr">publicProperty</span>: <span class="hljs-string">&#x27;I am public&#x27;</span><br>  &#125;;<br>&#125;)();<br><br>myModule.<span class="hljs-title function_">publicMethod</span>(); <br></code></pre></td></tr></table></figure>
 
-
-
+<ul>
+<li>The function is defined and immediately invoked, creating a new scope. <code>var myModule = (function () &#123;do something&#125;)();</code></li>
+<li>myModule is not a function, but the return value of the function, which is an object.</li>
+<li>An IIFE (Immediately Invoked Function Expression) is a function that is executed right after it is defined. <code>myModule</code> is the return value of IIFE.</li>
+</ul>
 <h2 id="“this”-keyword"><a href="#“this”-keyword" class="headerlink" title="“this” keyword"></a>“this” keyword</h2><p>In JavaScript, <code>this</code> is a keyword that refers to an object. <strong>However, the exact object that this refers to depends on how a function is called.</strong></p>
 <ul>
 <li>Global Context</li>
@@ -362,7 +365,7 @@
 <li>Constructor Functions</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>(<span class="hljs-params">name</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>&#125;<br><br><span class="hljs-keyword">const</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&#x27;Alice&#x27;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>); <span class="hljs-comment">// Alice</span><br></code></pre></td></tr></table></figure>
-<p><code>this</code> inside <code>Person</code> refers to the new object being created.</p>
+<p><code>this</code> inside <code>Person</code> refers to the new object being created.<br>The <code>new</code> Keyword creates a new object, sets <code>this</code> to that object inside the constructor function, and returns the object.</p>
 <h3 id="Binding"><a href="#Binding" class="headerlink" title="Binding"></a>Binding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello, &#x27;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>The value of <code>this</code> inside the function is not determined at the time the function is defined. Instead, it is determined at the time the function is called.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> person = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Alice&#x27;</span>,<br>  <span class="hljs-attr">greet</span>: greet<br>&#125;;<br>person.<span class="hljs-title function_">greet</span>(); <span class="hljs-comment">// `this` refers to `person`, so it logs `Hello, Alice`</span><br></code></pre></td></tr></table></figure>
