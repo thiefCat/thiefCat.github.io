@@ -16,23 +16,24 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces first class functions in javascript, &quot;this&quot; keyword, and closures">
+    <meta name="description" content="This blog introduces DOM (Document Object Model)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MIT Weblab笔记 - JavaScript Advanced">
-<meta property="og:url" content="https://thiefcat.github.io/2024/08/02/MIT-Weblab/JavaScript-Advanced/index.html">
+<meta property="og:title" content="MIT Weblab笔记 - DOM">
+<meta property="og:url" content="https://thiefcat.github.io/2024/08/06/MIT-Weblab/DOM/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces first class functions in javascript, &quot;this&quot; keyword, and closures">
+<meta property="og:description" content="This blog introduces DOM (Document Object Model)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-08-02T08:01:34.000Z">
-<meta property="article:modified_time" content="2024-08-05T09:17:32.632Z">
+<meta property="og:image" content="https://thiefcat.github.io/2024/08/06/MIT-Weblab/DOM/dom.png">
+<meta property="article:published_time" content="2024-08-06T03:24:21.000Z">
+<meta property="article:modified_time" content="2024-08-06T08:00:57.949Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
-<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://thiefcat.github.io/2024/08/06/MIT-Weblab/DOM/dom.png">
   
   
   
-  <title>MIT Weblab笔记 - JavaScript Advanced - Songlin&#39;s Space</title>
+  <title>MIT Weblab笔记 - DOM - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +228,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">MIT Weblab笔记 - JavaScript Advanced</span>
+            <span id="subtitle">MIT Weblab笔记 - DOM</span>
           
         </div>
 
@@ -243,8 +244,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-02 16:01" pubdate>
-          August 2, 2024 pm
+        <time datetime="2024-08-06 11:24" pubdate>
+          August 6, 2024 am
         </time>
       </span>
     
@@ -255,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          235 words
+          114 words
         
       </span>
     
@@ -266,7 +267,7 @@
         
         
         
-          2 mins
+          1 mins
         
       </span>
     
@@ -311,74 +312,40 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MIT Weblab笔记 - JavaScript Advanced</h1>
+            <h1 id="seo-header">MIT Weblab笔记 - DOM</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><h3 id="First-Class-Functions"><a href="#First-Class-Functions" class="headerlink" title="First Class Functions"></a>First Class Functions</h3><ul>
-<li>Functions are treated like variables in JavaScript</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> obj = &#123;<span class="hljs-attr">count</span>: <span class="hljs-number">0</span>&#125;; <br>obj.<span class="hljs-property">increment</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">amount</span>) &#123; <br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">count</span> += amount; <br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">count</span>; <br>&#125;<br>obj.<span class="hljs-title function_">increment</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// returns 1 </span><br>obj.<span class="hljs-title function_">increment</span>(<span class="hljs-number">3</span>); <span class="hljs-comment">// returns 4</span><br></code></pre></td></tr></table></figure>
-
-<p><code>this</code> refers to the object that the method was called on. In this case, it refers to <code>obj</code>.</p>
-<ul>
-<li>Functions can have properties</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">plus1</span>(<span class="hljs-params">value</span>) &#123; <br>    <span class="hljs-keyword">if</span> (plus1.<span class="hljs-property">invocations</span> == <span class="hljs-literal">undefined</span>) &#123; <br>        plus1.<span class="hljs-property">invocations</span> = <span class="hljs-number">0</span>; <br>    &#125; <br>    plus1.<span class="hljs-property">invocations</span>++; <br>    <span class="hljs-keyword">return</span> value + <span class="hljs-number">1</span>; <br>&#125;<br></code></pre></td></tr></table></figure>
-<p><code>plus1.invocations</code> will be the number times function is called.</p>
-<h3 id="Closures"><a href="#Closures" class="headerlink" title="Closures"></a>Closures</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> globalVar = <span class="hljs-number">1</span>; <br><span class="hljs-keyword">function</span> <span class="hljs-title function_">localFunc</span>(<span class="hljs-params">argVar</span>) &#123; <br>    <span class="hljs-keyword">let</span> localVar = <span class="hljs-number">0</span>; <br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">embedFunc</span>(<span class="hljs-params"></span>) &#123;<span class="hljs-keyword">return</span> ++localVar + argVar + globalVar;&#125; <br>    <span class="hljs-keyword">return</span> embedFunc; <br>&#125;<br><span class="hljs-keyword">let</span> myFunc = <span class="hljs-title function_">localFunc</span>(<span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li><p>The <code>localFunc</code> returns the <code>embedFunc</code> function.</p>
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The Document Object Model (DOM) is a programming interface provided by web browsers. It represents the structure of an HTML document in a way that JavaScript can interact with it. JavaScript can query or modify the HTML document</p>
+<h3 id="DOM-Hierarchy"><a href="#DOM-Hierarchy" class="headerlink" title="DOM Hierarchy"></a>DOM Hierarchy</h3><ul>
+<li><p>When a web page is loaded, the browser parses the HTML document and creates a tree-like structure called the DOM tree. Each element in the HTML document becomes a node in this tree. For instance, a <code>&lt;div&gt;</code> tag, a piece of text, or an attribute like class are all nodes in the DOM. </p>
 </li>
-<li><p><code>let myFunc = localFunc(10)</code>: This creates a new function <code>myFunc</code> by calling localFunc with 10 as the argument. <code>myFunc</code> now holds the reference to the <code>embedFunc</code> closure, with <code>localVar</code> initialized to 0 and <code>argVar</code> set to 10.</p>
+<li><p>DOM rooted at window.document</p>
 </li>
-<li><p>Each call <code>console.log(myFunc())</code> increases localVar by 1 and returns the updated sum.</p>
-</li>
-<li><p>Closures are an advanced programming concept in JavaScript that allow functions to retain access to variables from their lexical scope even after the outer function has finished executing. The <code>embedFunc</code> closure retains access to localVar, argVar, and globalVar even after <code>localFunc</code> has finished executing.</p>
-</li>
-<li><p>Using closures to encapsulate the state:</p>
+<li><p>The DOM exposes these nodes as JavaScript objects, and each object provides methods and properties to interact with that part. This means that every part of the document can be accessed and manipulated using JavaScript.</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> myModule = (<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// Private variables and functions</span><br>  <span class="hljs-keyword">var</span> privateVariable = <span class="hljs-string">&#x27;I am private&#x27;</span>;<br><br>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">privateFunction</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(privateVariable);<br>  &#125;<br><br>  <span class="hljs-comment">// Public API</span><br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">publicMethod</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title function_">privateFunction</span>();<br>    &#125;,<br>    <span class="hljs-attr">publicProperty</span>: <span class="hljs-string">&#x27;I am public&#x27;</span><br>  &#125;;<br>&#125;)();<br><br>myModule.<span class="hljs-title function_">publicMethod</span>(); <br></code></pre></td></tr></table></figure>
+<p>An example DOM:</p>
+<div style="text-align: center;">
+  <img src="dom.png" srcset="/img/loading.gif" lazyload style="width: 500px; height: auto;" alt="Sample Image">
+</div>
 
-<ul>
-<li>The function is defined and immediately invoked, creating a new scope. <code>var myModule = (function () &#123;do something&#125;)();</code></li>
-<li>myModule is not a function, but the return value of the function, which is an object.</li>
-<li>An IIFE (Immediately Invoked Function Expression) is a function that is executed right after it is defined. <code>myModule</code> is the return value of IIFE.</li>
-</ul>
-<h2 id="“this”-keyword"><a href="#“this”-keyword" class="headerlink" title="“this” keyword"></a>“this” keyword</h2><p>In JavaScript, <code>this</code> is a keyword that refers to an object. <strong>However, the exact object that this refers to depends on how a function is called.</strong></p>
-<ul>
-<li>Global Context</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// outside of any function</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>); <span class="hljs-comment">// In a browser, this will log the window object</span><br></code></pre></td></tr></table></figure>
 
-<p>In browsers, the global object is <code>window</code>.</p>
+<h3 id="DOM-Node-Properties-and-Methods"><a href="#DOM-Node-Properties-and-Methods" class="headerlink" title="DOM Node Properties and Methods"></a>DOM Node Properties and Methods</h3><p>The DOM provides a variety of methods (functions) and properties (attributes) to interact with the nodes: <a target="_blank" rel="noopener" href="https://www.w3schools.com/jsref/dom_obj_document.asp">DOM tutorial</a></p>
+<p>Example methods and properties:</p>
 <ul>
-<li>Function Context</li>
+<li><code>document.getElementById(&quot;myDiv&quot;)</code>: Finds an element with the specified ID.</li>
+<li><code>element = document.createElement(&quot;P&quot;)</code>: Create a new element.</li>
+<li><code>element.innerHTML = &quot;Hello, World!</code>: Changes the content inside an element.</li>
+<li><code>element.setAttribute(&quot;class&quot;, &quot;newClass&quot;)</code>: Sets a new attribute or changes an existing one.</li>
 </ul>
-<p>When a function is called as a method of an object, this refers to the object that the method is called on.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj = &#123;<br>  <span class="hljs-attr">value</span>: <span class="hljs-number">42</span>,<br>  <span class="hljs-attr">getValue</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span>;<br>  &#125;<br>&#125;;<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj.<span class="hljs-title function_">getValue</span>()); <span class="hljs-comment">// 42</span><br></code></pre></td></tr></table></figure>
+<p>Example: </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>My Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myDiv&quot;</span>&gt;</span>Hello, World!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-comment">// JavaScript to interact with the DOM</span></span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> element = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;myDiv&quot;</span>);</span><br><span class="language-javascript">        element.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;Hello, DOM!&quot;</span>;</span><br><span class="language-javascript">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>Constructor Functions</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>(<span class="hljs-params">name</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>&#125;<br><br><span class="hljs-keyword">const</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&#x27;Alice&#x27;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>); <span class="hljs-comment">// Alice</span><br></code></pre></td></tr></table></figure>
-<p><code>this</code> inside <code>Person</code> refers to the new object being created.<br>The <code>new</code> Keyword creates a new object, sets <code>this</code> to that object inside the constructor function, and returns the object.</p>
-<h3 id="Binding"><a href="#Binding" class="headerlink" title="Binding"></a>Binding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello, &#x27;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>The value of <code>this</code> inside the function is not determined at the time the function is defined. Instead, it is determined at the time the function is called.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> person = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Alice&#x27;</span>,<br>  <span class="hljs-attr">greet</span>: greet<br>&#125;;<br>person.<span class="hljs-title function_">greet</span>(); <span class="hljs-comment">// `this` refers to `person`, so it logs `Hello, Alice`</span><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>We can explicitly set <code>this</code>:</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello, &#x27;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);<br>&#125;<br><br><span class="hljs-keyword">const</span> person = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Alice&#x27;</span> &#125;;<br><br>greet.<span class="hljs-title function_">call</span>(person); <span class="hljs-comment">// Hello, Alice</span><br><br><span class="hljs-keyword">const</span> greetPerson = greet.<span class="hljs-title function_">bind</span>(person);<br><span class="hljs-title function_">greetPerson</span>(); <span class="hljs-comment">// Hello, Alice</span><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li><code>.call()</code>: Calls a function with a given <code>this</code> value.</li>
-<li><code>.bind()</code>: Creates a new function that, when called, has its <code>this</code> keyword set to the provided value.</li>
-</ul>
+
 
                 
               </div>
@@ -414,8 +381,6 @@
       
         <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
       
-        <a href="/tags/JavaScript/" class="print-no-link">#JavaScript</a>
-      
     </div>
   
 </div>
@@ -426,8 +391,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MIT Weblab笔记 - JavaScript Advanced</div>
-      <div>https://thiefcat.github.io/2024/08/02/MIT-Weblab/JavaScript-Advanced/</div>
+      <div>MIT Weblab笔记 - DOM</div>
+      <div>https://thiefcat.github.io/2024/08/06/MIT-Weblab/DOM/</div>
     </div>
     <div class="license-meta">
       
@@ -439,7 +404,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 2, 2024</div>
+          <div>August 6, 2024</div>
         </div>
       
       
@@ -471,18 +436,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/06/MIT-Weblab/DOM/" title="MIT Weblab笔记 - DOM">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - DOM</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/29/MIT-Weblab/React-State-Management/" title="MIT Weblab笔记 - React State Management">
-                        <span class="hidden-mobile">MIT Weblab笔记 - React State Management</span>
+                      <a href="/2024/08/02/MIT-Weblab/JavaScript-Advanced/" title="MIT Weblab笔记 - JavaScript Advanced">
+                        <span class="hidden-mobile">MIT Weblab笔记 - JavaScript Advanced</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
