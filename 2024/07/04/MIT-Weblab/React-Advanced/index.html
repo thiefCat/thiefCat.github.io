@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces React Lifecycles, router, and useful tips during Web Development using React">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-07-04T12:30:22.000Z">
-<meta property="article:modified_time" content="2024-07-29T09:37:38.900Z">
+<meta property="article:modified_time" content="2024-08-12T10:07:43.234Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta property="article:tag" content="React">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          477 words
+          516 words
         
       </span>
     
@@ -364,6 +364,8 @@
 <li>If loading is true, it displays the text “Loading…”.</li>
 <li>If loading is false, it displays “Actual page content”.</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> greeting; <br><span class="hljs-keyword">const</span> en = <span class="hljs-string">&quot;Hello&quot;</span>; <br><span class="hljs-keyword">const</span> sp = <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Hola<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span></span>; <br><span class="hljs-keyword">let</span> &#123;useSpanish&#125; = <span class="hljs-variable language_">this</span>.<span class="hljs-property">prop</span>; <br><span class="hljs-keyword">if</span> (useSpanish) &#123;greeting = sp&#125; <span class="hljs-keyword">else</span> &#123;greeting = en&#125;; <br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;greeting&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
 <h3 id="Rendering-an-Array-of-Data"><a href="#Rendering-an-Array-of-Data" class="headerlink" title="Rendering an Array of Data"></a>Rendering an Array of Data</h3><p>Return an array of html elements</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = [<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;My favorite food is doritos&quot;</span> &#125;,<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I like nachos because they look like doritos&quot;</span> &#125;,<br>];<br><br><span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
