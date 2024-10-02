@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="Songlin&#39;s Space">
 <meta property="og:description" content="This blog introduces React Lifecycles, hooks, router, Rendering a list, Controling what to be rendered, and Handling Input.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-04T12:30:22.000Z">
-<meta property="article:modified_time" content="2024-08-15T13:57:58.691Z">
+<meta property="article:published_time" content="2024-07-05T03:30:22.000Z">
+<meta property="article:modified_time" content="2024-08-15T16:42:41.000Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta property="article:tag" content="React">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          743 words
+          750 words
         
       </span>
     
@@ -392,7 +392,7 @@
 <ul>
 <li>Reasons for Using <code>key</code> in React Lists: This allows React to determine which elements have changed, added, or removed and to update only the necessary parts of the DOM. Without keys, React would need to re-render the entire list, which can be inefficient.</li>
 </ul>
-<h2 id="Input-using-DOM-like-handlers"><a href="#Input-using-DOM-like-handlers" class="headerlink" title="Input using DOM-like handlers"></a>Input using DOM-like handlers</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-variable language_">super</span>(props);<br>  &#125;<br><br>  handleChange = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123; <span class="hljs-attr">inputValue</span>: event.<span class="hljs-property">target</span>.<span class="hljs-property">value</span> &#125;);<br>  &#125;<br><br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#123;this.state.inputValue&#125;</span> <span class="hljs-attr">onChange</span>=<span class="hljs-string">&#123;this.handleChange&#125;</span> /&gt;</span></span><br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="Input-using-DOM-like-handlers"><a href="#Input-using-DOM-like-handlers" class="headerlink" title="Input using DOM-like handlers"></a>Input using DOM-like handlers</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-variable language_">super</span>(props);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = &#123;<br>      <span class="hljs-attr">inputValue</span>: <span class="hljs-string">&#x27;&#x27;</span><br>    &#125;;<br>  &#125;<br><br>  handleChange = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123; <span class="hljs-attr">inputValue</span>: event.<span class="hljs-property">target</span>.<span class="hljs-property">value</span> &#125;);<br>  &#125;<br><br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#123;this.state.inputValue&#125;</span> <span class="hljs-attr">onChange</span>=<span class="hljs-string">&#123;this.handleChange&#125;</span> /&gt;</span></span><br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><code>type=&quot;text&quot;</code>: This specifies that the input field is for text input.</li>
@@ -491,9 +491,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/05/MIT-Weblab/APIs-Promises/" title="MIT Weblab笔记 - APIs and Promises Introduction">
+                      <a href="/2024/07/06/Leetcode/kmp/" title="KMP Algorithm">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - APIs and Promises Introduction</span>
+                        <span class="hidden-mobile">KMP Algorithm</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -501,8 +501,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/03/MIT-Weblab/React/" title="MIT Weblab笔记 - React Introduction">
-                        <span class="hidden-mobile">MIT Weblab笔记 - React Introduction</span>
+                      <a href="/2024/07/04/MIT-Weblab/APIs-Promises/" title="MIT Weblab笔记 - APIs and Promises Introduction">
+                        <span class="hidden-mobile">MIT Weblab笔记 - APIs and Promises Introduction</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
