@@ -19,17 +19,22 @@
     <meta name="description" content="This blog introduces basic syntax of HTML and CSS, and some useful formatting techniques when formatting a web page.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIT Weblab笔记 - HTML &amp; CSS Basis">
-<meta property="og:url" content="https://thiefcat.github.io/2024/06/24/MIT-Weblab/%20HTML_CSS/index.html">
+<meta property="og:url" content="https://thiefcat.github.io/2024/06/24/MIT-Weblab/HTML_CSS/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
 <meta property="og:description" content="This blog introduces basic syntax of HTML and CSS, and some useful formatting techniques when formatting a web page.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-24T09:03:38.000Z">
-<meta property="article:modified_time" content="2024-08-05T09:15:29.288Z">
+<meta property="og:image" content="https://thiefcat.github.io/2024/06/24/MIT-Weblab/HTML_CSS/box.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/06/24/MIT-Weblab/HTML_CSS/inspect.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/06/24/MIT-Weblab/HTML_CSS/flex.png">
+<meta property="og:image" content="https://thiefcat.github.io/2024/06/24/MIT-Weblab/HTML_CSS/flex1.png">
+<meta property="article:published_time" content="2024-06-25T00:03:38.000Z">
+<meta property="article:modified_time" content="2024-10-03T03:30:05.017Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta property="article:tag" content="HTML">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://thiefcat.github.io/2024/06/24/MIT-Weblab/HTML_CSS/box.png">
   
   
   
@@ -244,8 +249,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 02:03" pubdate>
-          June 24, 2024 am
+        <time datetime="2024-06-24 17:03" pubdate>
+          June 24, 2024 pm
         </time>
       </span>
     
@@ -256,7 +261,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          605 words
+          681 words
         
       </span>
     
@@ -267,7 +272,7 @@
         
         
         
-          3 mins
+          4 mins
         
       </span>
     
@@ -340,7 +345,18 @@
 <h4 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;image.png&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
 
 
-<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="Syntax-1"><a href="#Syntax-1" class="headerlink" title="Syntax"></a>Syntax</h3><p>Import fonts from <code>https://fonts.google.com/</code>.</p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><ul>
+<li><p>Inline CSS<br>Using the style attribute:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CSS">&lt;<span class="hljs-selector-tag">h1</span> style=&quot;<span class="hljs-attribute">color</span>: red;&quot;&gt;This is <span class="hljs-selector-tag">a</span> heading&lt;/<span class="hljs-selector-tag">h1</span>&gt;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>Internal CSS<br>Define within a <code>&lt;style&gt;</code> tag inside the HTML document’s <code>&lt;head&gt;</code> section:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CSS">&lt;head&gt;<br>  &lt;style&gt;<br>    <span class="hljs-selector-tag">p</span> &#123;<br>      <span class="hljs-attribute">color</span>: green;<br>      <span class="hljs-attribute">font-family</span>: Arial, sans-serif;<br>    &#125;<br>  &lt;/style&gt;<br>&lt;/head&gt;<br></code></pre></td></tr></table></figure>
+
+</li>
+<li><p>External CSS<br>Define in a separate file:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CSS">&lt;head&gt;<br>  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles<span class="hljs-selector-class">.css</span>&quot;&gt;<br>&lt;/head&gt;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Syntax-1"><a href="#Syntax-1" class="headerlink" title="Syntax"></a>Syntax</h3><p>Import fonts from <code>https://fonts.google.com/</code>.</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;https://fonts.googleapis.com/css?family=Open+Sans:300,600&quot;</span>);<br></code></pre></td></tr></table></figure>
 
 <h4 id="Global-Definition"><a href="#Global-Definition" class="headerlink" title="Global Definition"></a>Global Definition</h4><p>Root variables, defining CSS custom properties (variables) for colors that can be reused throughout the stylesheet. Other parts of the css file can use it by <code>var(--grey)</code>.</p>
@@ -368,16 +384,17 @@
 <li>Border: border surrounds the padding of the element.</li>
 <li>Padding: the space between the element’s border and its content. It creates space inside the parent element, around the content area.</li>
 </ul>
-<div style="text-align: center; width: 35%;">
-  
+<div style="text-align: center;">
+  <img src="box.png" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;">
 </div>
 
+<p>Margin and padding are transparent. Width and height are dimensions of the element.</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-class">.xxClass</span> &#123;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0px</span>;<br>  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid black;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><strong>To inspect an element’s box model and other detailed attributes:</strong></p>
 <p><strong>1. Open the browser</strong><br><strong>2. Inspect</strong><br><strong>3. Command + Shift + C</strong><br><strong>4. Click on the element to inspect</strong></p>
 <div style="text-align: center;">
-  
+  <img src="inspect.png" srcset="/img/loading.gif" lazyload style="width: 80%; height: auto;">
 </div>
 
 <h3 id="Margin-Ordering"><a href="#Margin-Ordering" class="headerlink" title="Margin Ordering"></a>Margin Ordering</h3><p>Margin orders in the sequence of top, right, bottom, left</p>
@@ -390,9 +407,15 @@
 <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">See this demo</a></p>
 <h3 id="Positioning"><a href="#Positioning" class="headerlink" title="Positioning"></a>Positioning</h3><p>In HTML, elements are typically laid out according to the normal document flow. This means they appear in the order they are defined in the HTML. If we want to explicitly set an element’s position, we can use the top, bottom, left, and right properties. However, these properties will not work unless the position property is set first.</p>
 <p><a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css_positioning.asp">See this demo</a></p>
+<ul>
+<li>static: Default, position in document flow</li>
+<li>relative: Position relative to default position via top, right, bottom, left properties</li>
+<li>fixed: Position relative to the viewport, which means it always stays in the same place even if the page is scrolled</li>
+<li>absolute: Position relative to the nearest positioned ancestor</li>
+</ul>
 <h3 id="Flex"><a href="#Flex" class="headerlink" title="Flex"></a>Flex</h3><p>Flex is a flexible box. It can control direction, sizing, distribution. All direct children of a flexible container becomes flexible items. <a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css3_flexbox_items.asp">See this flex demo</a>.</p>
 <div style="text-align: center; width: 50%">
-  
+  <img src="/2024/06/24/MIT-Weblab/HTML_CSS/flex.png" srcset="/img/loading.gif" lazyload class="">
 </div>
 
 <p>An example flex container defined in CSS:</p>
@@ -412,7 +435,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CSS"><span class="hljs-selector-class">.u-flex</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-comment">/* justify-content: space-between; */</span><br>&#125;<br><span class="hljs-selector-class">.subContainer</span> &#123;<br>  <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;<br>  <span class="hljs-attribute">flex-basis</span>: <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <div style="text-align: center;">
-  
+  <img src="/2024/06/24/MIT-Weblab/HTML_CSS/flex1.png" srcset="/img/loading.gif" lazyload class="">
 </div>
 
                 
@@ -464,7 +487,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>MIT Weblab笔记 - HTML &amp; CSS Basis</div>
-      <div>https://thiefcat.github.io/2024/06/24/MIT-Weblab/ HTML_CSS/</div>
+      <div>https://thiefcat.github.io/2024/06/24/MIT-Weblab/HTML_CSS/</div>
     </div>
     <div class="license-meta">
       
