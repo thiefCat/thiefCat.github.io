@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces single page application and React Router">
+    <meta name="description" content="This blog introduces how the frontend communicates with backend">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Stanford CS142 笔记 - Single Page Application">
-<meta property="og:url" content="https://thiefcat.github.io/2024/08/13/CS142/SPA/index.html">
+<meta property="og:title" content="Stanford CS142 笔记 - Server Communication">
+<meta property="og:url" content="https://thiefcat.github.io/2024/10/08/CS142/Server-Communication/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces single page application and React Router">
+<meta property="og:description" content="This blog introduces how the frontend communicates with backend">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-08-14T01:35:14.000Z">
-<meta property="article:modified_time" content="2024-10-11T02:29:12.351Z">
+<meta property="article:published_time" content="2024-10-09T02:40:32.000Z">
+<meta property="article:modified_time" content="2024-10-10T06:22:56.265Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Stanford CS142 笔记 - Single Page Application - Songlin&#39;s Space</title>
+  <title>Stanford CS142 笔记 - Server Communication - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Stanford CS142 笔记 - Single Page Application</span>
+            <span id="subtitle">Stanford CS142 笔记 - Server Communication</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-13 18:35" pubdate>
-          August 13, 2024 pm
+        <time datetime="2024-10-08 19:40" pubdate>
+          October 8, 2024 pm
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          299 words
+          182 words
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          2 mins
+          1 mins
         
       </span>
     
@@ -310,38 +310,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Stanford CS142 笔记 - Single Page Application</h1>
+            <h1 id="seo-header">Stanford CS142 笔记 - Server Communication</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>In a traditional web app, changing the URL usually means sending a request to the server for a new HTML document. </p>
-<p>In contrast, SPAs generally involve a single HTML file that serves as the structure for the entire app. Once loaded, this file stays in place, and JavaScript handles any further changes to the page’s content. SPAs dynamically rewrite the current page using JavaScript, allowing for a smoother, faster user experience.</p>
-<h2 id="React-Router"><a href="#React-Router" class="headerlink" title="React Router"></a>React Router</h2><h3 id="HashRouter"><a href="#HashRouter" class="headerlink" title="HashRouter"></a>HashRouter</h3><p>We can use the URL to control which components are rendered by React. The URL becomes the single source of truth for what should be displayed on the screen.</p>
-<p>The primary role of a router in a Single Page Application (SPA) is to manage page navigation without triggering a full page reload. </p>
-<ul>
-<li>The router listens for changes in the browser’s URL. The router intercepts the change and decides which part of the application to render. For example, if the URL changes from <code>/home</code> to <code>/about</code>, the router will swap out the current component for a different one.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-title class_">HashRouter</span>&gt;<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    ...</span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/states&quot;</span> <span class="hljs-attr">component</span>=<span class="hljs-string">&#123;States&#125;</span> /&gt;</span></span><br><span class="language-xml">    ...</span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/states&quot;</span>&gt;</span>States<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span></span><br><span class="language-xml">    ...</span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/<span class="hljs-title class_">HashRouter</span>&gt;<br></code></pre></td></tr></table></figure>
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>In software engineering, server comminicates with browser. Controller fetches the model for the View. There are a lot of tools that enable this functionality.</p>
+<h3 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h3><p>AJAX stands for Asynchronous JavaScript and XML. It is a set of web development techniques that allows a web page to communicate with a server asynchronously, meaning that the web page can update parts of itself (such as data in a table or form) without needing to reload the entire page. AJAX uses JavaScript to make HTTP requests to a server, fetch data, and then update parts of the web page.</p>
+<h3 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a>XMLHttpRequest</h3><p>One of the early methods for enabling browser-server communication was the XMLHttpRequest (XHR) object. It allows browsers to send asynchronous HTTP requests without refreshing the entire page. </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Javascript">xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();<br>xhr.<span class="hljs-property">onreadystatechange</span> = xhrHandler; <span class="hljs-comment">// Event handler for state change</span><br>xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;GET&quot;</span>, url); <span class="hljs-comment">// Open a connection (GET request in this case)</span><br>xhr.<span class="hljs-title function_">send</span>(); <span class="hljs-comment">// Send the request</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">xhrHandler</span>(<span class="hljs-params">event</span>) &#123;<br>    <span class="hljs-comment">// this === xhr (the XMLHttpRequest object)</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">readyState</span> != <span class="hljs-number">4</span>) &#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">status</span> != <span class="hljs-number">200</span>) &#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">let</span> text = <span class="hljs-variable language_">this</span>.<span class="hljs-property">responseText</span>;<br>    <span class="hljs-comment">// You can now use &#x27;text&#x27; as needed (e.g., display it, process it, etc.)</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><code>&lt;HashRouter&gt;</code>: With HashRouter, the URL will contain a <code>#</code> symbol, followed by the client-side route. For example: <code>http://localhost:3000/#/users/123</code>. In this case, the URL before the hash (<a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a>) is what the server handles, and everything after the <code>#</code> (&#x2F;users&#x2F;123) is used by the client-side routing mechanism to render the appropriate view in the React app.</li>
-<li><code>&lt;Route /&gt;</code>: Define a route in application. When the URL matches the path, React Router renders the component specified in the component prop. <strong>If the URL starts with the defined path, the route is considered a match.</strong></li>
-<li><code>&lt;Link /&gt;</code>: Generates a hyperlink with href&#x3D;”#&#x2F;states” and the text “States”.</li>
-<li>In conclusion, when clicking the link with text “States”, the url will be updated to <code>http://localhost:3000/p5.html#/states</code>, where <code>http://localhost:3000/p5.html</code> is the current path, and the component <code>States</code> will be rendered by <code>&lt;Route path=&quot;/states&quot; component=&#123;States&#125; /&gt;</code>. In a URL, the part after the # is called the fragment identifier or hash. The primary purpose of the hash in URLs is to provide a way to navigate to a specific section or state of a page without causing a full page reload.</li>
-<li>When you load a URL with a hash (e.g., <code>http://localhost:3000/#/users/123</code>), the browser doesn’t send anything after the <code>#</code> to the server. It only requests the base URL (in this case, <code>http://localhost:3000/</code>). Then, hashRouter looks at the fragment (#&#x2F;users&#x2F;123) and maps it to the appropriate route defined in your React app (e.g., <code>/users/:userId</code>).</li>
+<li>Create an XMLHttpRequest object, open a connection to the server (GET&#x2F;POST&#x2F;other methods), and send the request.</li>
+<li>The onreadystatechange event listens for changes in the request state. Once the request is completed (readyState &#x3D;&#x3D;&#x3D; 4) and the status is 200 (success), the server’s response is processed (retrieved via responseText). If the response is successful, you can process it and update the DOM or handle the data as needed.</li>
+<li>Nowadays, <code>fetch()</code> api is more widely used. The response is usually JSON object nowadays.</li>
 </ul>
-<p>We can also pass parameters with React Router</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-title class_">Route</span><br>  path=<span class="hljs-string">&quot;/Book/:book/ch/:chapter&quot;</span><br>  component=&#123;<span class="hljs-title class_">BookChapterComponent</span>&#125;<br>/&gt;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">BookChapterComponent</span>(<span class="hljs-params">&#123; match &#125;</span>) &#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Book: &#123;match.params.book&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Chapter: &#123;match.params.chapter&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;<br><br>&lt;<span class="hljs-title class_">Link</span> to=<span class="hljs-string">&quot;/Book/Moby/ch/1&quot;</span>&gt;<span class="hljs-title class_">Moby</span>&lt;/<span class="hljs-title class_">Link</span>&gt;<br></code></pre></td></tr></table></figure>
-
+<h3 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h3><p>REST API (Representational State Transfer Application Programming Interface) is a set of rules that allows systems to communicate with each other over the internet using HTTP methods.</p>
 <ul>
-<li><code>:book</code> and <code>:chapter</code> are placeholders in the URL that will be dynamically replaced by actual values when the route is matched. </li>
-<li><code>match</code> is an object that contains information about how the URL matches the route.</li>
-<li>When this link is clicked, the React Router will navigate to this URL, and the BookChapterComponent will render with <code>match.params.book</code> set to “Moby” and <code>match.params.chapter</code> set to “1”.</li>
-<li>Deep linking: Deep linking refers to the ability to link directly to a specific page or view within a web application. URLs that map directly to certain views (like <code>/photos/57231f1a30e4351f4e9f4bd8</code>) can be shared with others, who can then access the same page or state.</li>
+<li>Resource: A resource in REST is any data or object that can be accessed and manipulated via the API, such as user profiles, blog posts, comments, products, etc.</li>
+<li>URI: Uniform Resource Identifier, typically a URL, e.g., <code>/books</code> might represent the collection of books.</li>
+<li>HTTP methods: GET, POST, DELETE, PUT.</li>
+<li>e.g., <code>GET /photo/78237489</code>, <code>POST /photo/</code>.</li>
+<li>Clients (web apps, mobile apps) send HTTP requests to specific endpoints, and the server responds with data (often in JSON format)</li>
+<li>REST APIs are platform-independent and can be accessed by any client that can send HTTP requests (e.g., web browsers, mobile apps, or servers). With a REST API, the frontend and backend can be developed independently.</li>
+<li>RESTful APIs are stateless, meaning that the server does not store any information about the client between requests.</li>
 </ul>
-<h3 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h3><p>Switch is responsible for rendering the <strong>first child</strong> <code>&lt;Route&gt;</code> that matches the current URL. It ensures that only one route is displayed at a time.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Javascript"><span class="hljs-keyword">let</span> routes = (<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Switch</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Home</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/about&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">About</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/:user&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">User</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">NoMatch</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">Switch</span>&gt;</span></span><br>);<br></code></pre></td></tr></table></figure>
+<p>In conclusion, RESt API provides Standardization (otherwise, we need to customize how browser interacts with the server), Decoupling of frontend and backend, and Scalability.</p>
+<h3 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h3><p>Axios is a JavaScript library that simplifies making HTTP requests. Axios is also promise-based and is widely used for communicating with RESTful APIs. It is a wrapper around XMLHttpRequest but provides a cleaner, more intuitive API, automatic JSON parsing, and better error handling. Axios can be used for making AJAX requests, just like fetch() or XMLHttpRequest. Here is an example usage:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Javascript">axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/user/123&#x27;</span>)<br>  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">data</span>)) <span class="hljs-comment">// Process the JSON response</span><br>  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error));<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><p>Please refer to <a href="https://thiefcat.github.io/2024/07/14/MIT-Weblab/Async-Control/">MIT Weblab笔记 - Asynchronous Control</a></p>
+
                 
               </div>
             
@@ -386,8 +389,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Stanford CS142 笔记 - Single Page Application</div>
-      <div>https://thiefcat.github.io/2024/08/13/CS142/SPA/</div>
+      <div>Stanford CS142 笔记 - Server Communication</div>
+      <div>https://thiefcat.github.io/2024/10/08/CS142/Server-Communication/</div>
     </div>
     <div class="license-meta">
       
@@ -399,7 +402,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 13, 2024</div>
+          <div>October 8, 2024</div>
         </div>
       
       
@@ -431,9 +434,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/08/CS142/Server-Communication/" title="Stanford CS142 笔记 - Server Communication">
+                      <a href="/2024/10/09/SWE/Material-UI/" title="MaterialUI">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Server Communication</span>
+                        <span class="hidden-mobile">MaterialUI</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -441,8 +444,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/12/CS142/How-React-Works/" title="Stanford CS142 笔记 - How React Works">
-                        <span class="hidden-mobile">Stanford CS142 笔记 - How React Works</span>
+                      <a href="/2024/08/13/CS142/SPA/" title="Stanford CS142 笔记 - Single Page Application">
+                        <span class="hidden-mobile">Stanford CS142 笔记 - Single Page Application</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
