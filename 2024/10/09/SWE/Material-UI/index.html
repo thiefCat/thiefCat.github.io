@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces some tips on how to use MaterialUI. For the MaterialUI Documentation, please refer to the official website.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-10-10T06:21:13.000Z">
-<meta property="article:modified_time" content="2024-10-14T03:10:49.089Z">
+<meta property="article:modified_time" content="2024-10-23T08:57:06.515Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          410 words
+          418 words
         
       </span>
     
@@ -351,12 +351,14 @@
 
 <p>The above html becomes the following in the browser, which are modified by materialUI by injecting some new classes:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-container&quot;</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- Grid Item --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-item&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- Content --&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- Grid Item --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-item&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- Content --&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- More Grid Items --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs CSS">sx=&#123;&#123;<br>  maxHeight: <span class="hljs-string">&#x27;80vh&#x27;</span>,<br>  overflowY: <span class="hljs-string">&#x27;auto&#x27;</span>,<br>  <span class="hljs-string">&#x27;&amp; .MuiGrid-root&#x27;</span>: &#123;<br>    paddingLeft: <span class="hljs-string">&#x27;10px&#x27;</span>,<br>    paddingTop: <span class="hljs-string">&#x27;10px&#x27;</span>,<br>    paddingBottom: <span class="hljs-string">&#x27;10px&#x27;</span>,<br>  &#125;,<br>&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span> <span class="hljs-attr">spacing</span>=<span class="hljs-string">&#123;3&#125;</span> <span class="hljs-attr">sx</span>=<span class="hljs-string">&#123;&#123;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">maxHeight:</span> &#x27;<span class="hljs-attr">80vh</span>&#x27;,</span><br><span class="hljs-tag">  <span class="hljs-attr">overflowY:</span> &#x27;<span class="hljs-attr">auto</span>&#x27;,</span><br><span class="hljs-tag">  &#x27;&amp; <span class="hljs-attr">.MuiGrid-root</span>&#x27;<span class="hljs-attr">:</span> &#123;</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingLeft:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingTop:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingBottom:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;</span><br><span class="hljs-tag">  &#125;,</span><br><span class="hljs-tag">&#125;&#125; &gt;</span><br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>The <code>&amp;</code> represents the current component in the context of the sx prop. In this case, &amp; refers to the Grid container component.</li>
 <li><code>&#39;&amp; .MuiGrid-root&#39;</code> targets all elements with the class <code>.MuiGrid-root</code> that are descendants of the Grid container.</li>
 <li>As a result, the <code>&#39;&amp; .MuiGrid-root&#39;</code> applies the specified padding styles to all Grid items within the container.</li>
+<li><a target="_blank" rel="noopener" href="https://mui.com/material-ui/customization/how-to-customize/">Refer to this</a> for how to use this in more detail</li>
 </ul>
 
                 

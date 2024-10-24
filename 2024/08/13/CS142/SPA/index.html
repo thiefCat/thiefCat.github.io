@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces single page application and React Router">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-08-14T01:35:14.000Z">
-<meta property="article:modified_time" content="2024-10-11T02:29:12.351Z">
+<meta property="article:modified_time" content="2024-10-24T00:28:54.880Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          299 words
+          364 words
         
       </span>
     
@@ -338,8 +338,18 @@
 <li><code>:book</code> and <code>:chapter</code> are placeholders in the URL that will be dynamically replaced by actual values when the route is matched. </li>
 <li><code>match</code> is an object that contains information about how the URL matches the route.</li>
 <li>When this link is clicked, the React Router will navigate to this URL, and the BookChapterComponent will render with <code>match.params.book</code> set to “Moby” and <code>match.params.chapter</code> set to “1”.</li>
+<li>this.props.match is passed automatically to any component that is rendered by a <code>Route</code>.</li>
+<li>If your component is supposed to receive props from React Router (like match, location, and history), it must be rendered inside a Route<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HTML">import &#123; Route &#125; from &#x27;react-router-dom&#x27;;<br><span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/users/:userId&quot;</span> <span class="hljs-attr">component</span>=<span class="hljs-string">&#123;YourComponent&#125;</span> /&gt;</span><br></code></pre></td></tr></table></figure></li>
 <li>Deep linking: Deep linking refers to the ability to link directly to a specific page or view within a web application. URLs that map directly to certain views (like <code>/photos/57231f1a30e4351f4e9f4bd8</code>) can be shared with others, who can then access the same page or state.</li>
 </ul>
+<p>React Router provides two main ways to render components when a route matches: the <code>component</code> prop and the <code>render</code> prop.</p>
+<ul>
+<li>component: This is used when you want to simply render a component without needing to pass additional props or logic.</li>
+<li>render: This is used when you want to pass custom props or add additional logic before rendering the component. With render, you can control what props are passed to the component and include any dynamic data. <code>render</code> should be a function that returns the component.</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/users/:userId&quot;</span> <span class="hljs-attr">render</span>=<span class="hljs-string">&#123;props</span> =&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">UserDetail</span> &#123;<span class="hljs-attr">...props</span>&#125; <span class="hljs-attr">extraProp</span>=<span class="hljs-string">&#123;extraProp&#125;</span> <span class="hljs-attr">handler</span>=<span class="hljs-string">&#123;this.handleUserNameChange&#125;</span> /&gt;</span>&#125; /&gt;<br></code></pre></td></tr></table></figure>
+
+
 <h3 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h3><p>Switch is responsible for rendering the <strong>first child</strong> <code>&lt;Route&gt;</code> that matches the current URL. It ensures that only one route is displayed at a time.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Javascript"><span class="hljs-keyword">let</span> routes = (<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Switch</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Home</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/about&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">About</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/:user&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">User</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">NoMatch</span> /&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">Switch</span>&gt;</span></span><br>);<br></code></pre></td></tr></table></figure>
                 
