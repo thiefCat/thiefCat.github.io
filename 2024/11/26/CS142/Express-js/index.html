@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces some tips on how to use MaterialUI. For the MaterialUI Documentation, please refer to the official website.">
+    <meta name="description" content="This blog introduces Express.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MaterialUI">
-<meta property="og:url" content="https://thiefcat.github.io/2024/10/09/SWE/Material-UI/index.html">
+<meta property="og:title" content="Stanford CS142 笔记 - Express.js">
+<meta property="og:url" content="https://thiefcat.github.io/2024/11/26/CS142/Express-js/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces some tips on how to use MaterialUI. For the MaterialUI Documentation, please refer to the official website.">
+<meta property="og:description" content="This blog introduces Express.js">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-10-10T06:21:13.000Z">
-<meta property="article:modified_time" content="2024-10-23T08:57:06.515Z">
+<meta property="article:published_time" content="2024-11-27T04:11:57.000Z">
+<meta property="article:modified_time" content="2024-11-27T04:39:21.854Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>MaterialUI - Songlin&#39;s Space</title>
+  <title>Stanford CS142 笔记 - Express.js - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">MaterialUI</span>
+            <span id="subtitle">Stanford CS142 笔记 - Express.js</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-09 23:21" pubdate>
-          October 9, 2024 pm
+        <time datetime="2024-11-26 20:11" pubdate>
+          November 26, 2024 pm
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          418 words
+          295 words
         
       </span>
     
@@ -310,56 +310,71 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MaterialUI</h1>
+            <h1 id="seo-header">Stanford CS142 笔记 - Express.js</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><h3 id="Grid"><a href="#Grid" class="headerlink" title="Grid"></a>Grid</h3><p><a target="_blank" rel="noopener" href="https://mui.com/material-ui/react-grid2/">Official Documentation</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span> <span class="hljs-attr">spacing</span>=<span class="hljs-string">&#123;2&#125;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">xs</span>=<span class="hljs-string">&#123;12&#125;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">TopBar</span> /&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-topbar-buffer&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">sm</span>=<span class="hljs-string">&#123;3&#125;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Paper</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-grid-item&quot;</span>&gt;</span><br>      ...<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Paper</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">sm</span>=<span class="hljs-string">&#123;9&#125;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Paper</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-grid-item&quot;</span>&gt;</span><br>      ...<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Paper</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br></code></pre></td></tr></table></figure>
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-keyword">let</span> expressApp = <span class="hljs-title function_">express</span>(); <br></code></pre></td></tr></table></figure>
 
+<p>The instance <code>expressAPP</code> provides all the methods to:</p>
+<ol>
+<li>Route HTTP requests (map different URLs to different logic)</li>
+<li>Render HTML</li>
+<li>Configure middleware (Middleware are functions that process requests before they reach routes)</li>
+</ol>
+<h3 id="Express-Routing"><a href="#Express-Routing" class="headerlink" title="Express Routing"></a>Express Routing</h3><p>Routing allows you to define actions for specific HTTP methods:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback);<br>expressApp.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback);<br>expressApp.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback);<br>expressApp.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback);<br>expressApp.<span class="hljs-title function_">all</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback); <span class="hljs-comment">// Handles requests for all HTTP methods (e.g., GET, POST, etc.) on a specific path.</span><br><br>expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:user_id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`User ID is <span class="hljs-subst">$&#123;req.params.user_id&#125;</span>`</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>The order of execution in Express routes is determined by the order in which they are defined in your code. Here’s the principle:</p>
 <ul>
-<li>When my screen size is smaller than any specified screen size, components will take all 12 columns by default. In this case, when the screen size is xs, since no <code>xs=&#123;&#125;</code> is specified and smallest, the Grid item will default to taking up all 12 columns. So the two <code>paper</code> components will stack on one another.</li>
-<li>If a specific size (like md, lg, or xl) is not specified, the grid system will use the settings from the closest smaller breakpoint that is defined.</li>
+<li>When a request is received, Express evaluates routes from top to bottom in the order they are defined in the code.</li>
+<li>It stops at the first match it finds (this is called short-circuiting).</li>
 </ul>
-<h2 id="theme"><a href="#theme" class="headerlink" title="theme"></a>theme</h2><p><a target="_blank" rel="noopener" href="https://mui.com/material-ui/customization/default-theme/">The default Theme Parameters</a></p>
-<h2 id="Miscellaneous"><a href="#Miscellaneous" class="headerlink" title="Miscellaneous"></a>Miscellaneous</h2><h3 id="Template-Literals"><a href="#Template-Literals" class="headerlink" title="Template Literals"></a>Template Literals</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">ListItemText</span> <span class="hljs-attr">primary</span>=<span class="hljs-string">&#123;</span>`$&#123;<span class="hljs-attr">user.first_name</span>&#125; $&#123;<span class="hljs-attr">user.last_name</span>&#125;`&#125; /&gt;</span><br></code></pre></td></tr></table></figure>
-
+<h4 id="httpRequest-Object"><a href="#httpRequest-Object" class="headerlink" title="httpRequest Object"></a>httpRequest Object</h4><p>It represents the HTTP request sent by the client.</p>
 <ul>
-<li>In JavaScript, strings can be created using single quotes (<code>&#39;</code>), double quotes (<code>&quot;</code>), or backticks (<code>`</code>). Backticks are used to create template literals, which is useful for formatting a string.</li>
-<li><code>$&#123;&#125;</code> allows you to interpolate JavaScript expressions or variables directly into the string, as shown in the example</li>
+<li><code>request.params</code>: Access route parameters <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:user_id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">user_id</span>); <span class="hljs-comment">// Logs the user_id</span><br>&#125;);<br></code></pre></td></tr></table></figure></li>
+<li><code>request.query</code>: Contains query string parameters from the URL</li>
 </ul>
-<h3 id="Component-Prop"><a href="#Component-Prop" class="headerlink" title="Component Prop"></a>Component Prop</h3><p>Example:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">ListItem</span> <span class="hljs-attr">component</span>=<span class="hljs-string">&#123;Link&#125;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&#123;</span>`/$&#123;<span class="hljs-attr">user._id</span>&#125;`&#125; <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;list-item&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ListItemText</span> <span class="hljs-attr">primary</span>=<span class="hljs-string">&#123;</span>`$&#123;<span class="hljs-attr">user.first_name</span>&#125; $&#123;<span class="hljs-attr">user.last_name</span>&#125;`&#125; /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ListItem</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/search&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(req.<span class="hljs-property">query</span>); <span class="hljs-comment">// &#123; foo: &#x27;9&#x27; &#125; ?foo=9 becomes &#123;foo: &#x27;9&#x27;&#125;</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>MUI components are built on top of standard HTML elements like div, button, a, etc.</li>
-<li>The component prop allows you to specify which element or component should be rendered in place of the default one. For example, if you have an MUI <code>&lt;ListItem /&gt;</code>, its default rendering might be a <code>li</code> tag. However, you can replace that li tag with something else, like a Link (from react-router-dom or any other component), by passing the component&#x3D;{Link} prop.</li>
-<li>In the example, I’m using the component&#x3D;{Link} prop to turn the ListItem into a Link component from react-router-dom. Since Link expects a <code>to=&#123;&#125;</code> prop (which defines the route path for navigation), I’m able to pass <code>to=&#123;/$&#123;user._id&#125;&#125;</code> as a prop to the ListItem, because the ListItem is now acting as a Link component.</li>
+<li><code>request.body</code>: Contains the body of POST or PUT requests</li>
 </ul>
-<h3 id="Overriding-Styles"><a href="#Overriding-Styles" class="headerlink" title="Overriding Styles"></a>Overriding Styles</h3><p>Every Material UI component accepts a className prop, which allows you to apply custom CSS classes to the component. For example,</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs CSS">&lt;<span class="hljs-selector-tag">Button</span> className=&quot;my-custom-<span class="hljs-selector-tag">button</span>&quot;&gt;Click Me&lt;/<span class="hljs-selector-tag">Button</span>&gt;<br><br><span class="hljs-selector-class">.my-custom-button</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: green;<br>  <span class="hljs-attribute">color</span>: white;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-<p>However, some Material UI components are composed of multiple nested elements. To target these specific parts, you need to use the global class names provided by Material UI. These class names follow a pattern like .MuiComponentName-elementName. </p>
-<p>CSS pseudo-classes like <code>:hover</code>, <code>:focus</code>, and <code>:disabled</code> have higher specificity. Material UI mimics this behavior by applying state classes with higher specificity. Therefore, to override these styles, you need to match or exceed this specificity in your CSS. For example,</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs CSS">&lt;MenuItem selected className=&quot;my-<span class="hljs-selector-tag">menu</span>-item&quot;&gt;Option <span class="hljs-number">1</span>&lt;/MenuItem&gt;<br><br><br><span class="hljs-selector-class">.my-menu-item</span> &#123;<br>  <span class="hljs-attribute">color</span>: black;<br>&#125;<br><br><span class="hljs-comment">/* Increase specificity for the selected state */</span><br><span class="hljs-selector-class">.my-menu-item</span><span class="hljs-selector-class">.Mui-selected</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="httpResponse-Object"><a href="#httpResponse-Object" class="headerlink" title="httpResponse Object"></a>httpResponse Object</h4><p>Represents the response sent back to the client.</p>
 <ul>
-<li><strong>When you add the selected prop to the MenuItem, Material UI automatically applies a special class called Mui-selected to the component.</strong> As a result, the <code>&lt;MenuItem selected className=&quot;my-menu-item&quot;&gt;Option 1&lt;/MenuItem&gt;</code> will have color blue instead of black.</li>
+<li><p><code>response.send(content)</code>: Sends a response to the client (automatically ends the response). e.g., <code>res.send(&#39;Hello, world!&#39;);</code>.</p>
+</li>
+<li><p><code>response.status(code)</code>: Sets the HTTP status code of the response. e.g., <code>res.status(404).send(&#39;Not Found&#39;);</code>.</p>
+</li>
+<li><p><code>response.set(field, value)</code>: Sets a custom HTTP response header.</p>
+</li>
+<li><p><code>response.end()</code>: Ends the response process.</p>
+</li>
+<li><p>channing: e.g., <code>res.status(200).send(&#39;OK&#39;);</code></p>
+</li>
 </ul>
-<h4 id="Using-the-sx-prop"><a href="#Using-the-sx-prop" class="headerlink" title="Using the sx prop"></a>Using the sx prop</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span>&gt;</span><br>    ...<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span>&gt;</span><br>    ...<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>Example Usage:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">request, response</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">let</span> id = request.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>;<br>  <span class="hljs-keyword">let</span> user = cs142models.<span class="hljs-title function_">userModel</span>(id);<br>  <span class="hljs-keyword">if</span> (user === <span class="hljs-literal">null</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;User with _id:&#x27;</span> + id + <span class="hljs-string">&#x27; not found.&#x27;</span>);<br>    response.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Not found&#x27;</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  response.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">send</span>(user);<br>  <span class="hljs-keyword">return</span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-<p>The above html becomes the following in the browser, which are modified by materialUI by injecting some new classes:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-container&quot;</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- Grid Item --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-item&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- Content --&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- Grid Item --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-item&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- Content --&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- More Grid Items --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span> <span class="hljs-attr">spacing</span>=<span class="hljs-string">&#123;3&#125;</span> <span class="hljs-attr">sx</span>=<span class="hljs-string">&#123;&#123;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">maxHeight:</span> &#x27;<span class="hljs-attr">80vh</span>&#x27;,</span><br><span class="hljs-tag">  <span class="hljs-attr">overflowY:</span> &#x27;<span class="hljs-attr">auto</span>&#x27;,</span><br><span class="hljs-tag">  &#x27;&amp; <span class="hljs-attr">.MuiGrid-root</span>&#x27;<span class="hljs-attr">:</span> &#123;</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingLeft:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingTop:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingBottom:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;</span><br><span class="hljs-tag">  &#125;,</span><br><span class="hljs-tag">&#125;&#125; &gt;</span><br></code></pre></td></tr></table></figure>
-
+<h3 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h3><p>Middleware are functions that can:</p>
+<ol>
+<li>Intercept HTTP requests.</li>
+<li>Perform operations on the request&#x2F;response objects.</li>
+<li>Either terminate the request-response cycle or pass control to the next middleware in the stack using next().</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">app.<span class="hljs-title function_">all</span>(<span class="hljs-string">&#x27;/specific-route&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Middleware for /specific-route&#x27;</span>);<br>  <span class="hljs-title function_">next</span>(); <span class="hljs-comment">// Pass control to the next handler or middleware</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>The <code>&amp;</code> represents the current component in the context of the sx prop. In this case, &amp; refers to the Grid container component.</li>
-<li><code>&#39;&amp; .MuiGrid-root&#39;</code> targets all elements with the class <code>.MuiGrid-root</code> that are descendants of the Grid container.</li>
-<li>As a result, the <code>&#39;&amp; .MuiGrid-root&#39;</code> applies the specified padding styles to all Grid items within the container.</li>
-<li><a target="_blank" rel="noopener" href="https://mui.com/material-ui/customization/how-to-customize/">Refer to this</a> for how to use this in more detail</li>
+<li><code>app.all()</code>:  Matches all HTTP methods for the route.</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">app.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Global Middleware&#x27;</span>);<br>  <span class="hljs-title function_">next</span>();<br>&#125;);<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>app.use()</code>: Registers middleware for all routes.</li>
+</ul>
+<p>e.g., <code>app.use(express.json());</code>, Use built-in middleware for parsing JSON.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:user_id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">user_id</span>); <span class="hljs-comment">// Logs the user_id</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
 
                 
               </div>
@@ -405,8 +420,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MaterialUI</div>
-      <div>https://thiefcat.github.io/2024/10/09/SWE/Material-UI/</div>
+      <div>Stanford CS142 笔记 - Express.js</div>
+      <div>https://thiefcat.github.io/2024/11/26/CS142/Express-js/</div>
     </div>
     <div class="license-meta">
       
@@ -418,7 +433,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 9, 2024</div>
+          <div>November 26, 2024</div>
         </div>
       
       
@@ -450,18 +465,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/30/CS142/Nodejs/" title="Stanford CS142 笔记 - Node.js">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Node.js</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/08/CS142/Server-Communication/" title="Stanford CS142 笔记 - Server Communication">
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Server Communication</span>
+                      <a href="/2024/10/30/CS142/Nodejs/" title="Stanford CS142 笔记 - Node.js">
+                        <span class="hidden-mobile">Stanford CS142 笔记 - Node.js</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

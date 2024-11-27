@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces some tips on how to use MaterialUI. For the MaterialUI Documentation, please refer to the official website.">
+    <meta name="description" content="This blog introduces Node.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MaterialUI">
-<meta property="og:url" content="https://thiefcat.github.io/2024/10/09/SWE/Material-UI/index.html">
+<meta property="og:title" content="Stanford CS142 笔记 - Node.js">
+<meta property="og:url" content="https://thiefcat.github.io/2024/10/30/CS142/Nodejs/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces some tips on how to use MaterialUI. For the MaterialUI Documentation, please refer to the official website.">
+<meta property="og:description" content="This blog introduces Node.js">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-10-10T06:21:13.000Z">
-<meta property="article:modified_time" content="2024-10-23T08:57:06.515Z">
+<meta property="article:published_time" content="2024-10-31T00:18:47.000Z">
+<meta property="article:modified_time" content="2024-11-27T04:12:42.180Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>MaterialUI - Songlin&#39;s Space</title>
+  <title>Stanford CS142 笔记 - Node.js - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">MaterialUI</span>
+            <span id="subtitle">Stanford CS142 笔记 - Node.js</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-09 23:21" pubdate>
-          October 9, 2024 pm
+        <time datetime="2024-10-30 17:18" pubdate>
+          October 30, 2024 pm
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          418 words
+          218 words
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          2 mins
+          1 mins
         
       </span>
     
@@ -310,56 +310,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MaterialUI</h1>
+            <h1 id="seo-header">Stanford CS142 笔记 - Node.js</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><h3 id="Grid"><a href="#Grid" class="headerlink" title="Grid"></a>Grid</h3><p><a target="_blank" rel="noopener" href="https://mui.com/material-ui/react-grid2/">Official Documentation</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span> <span class="hljs-attr">spacing</span>=<span class="hljs-string">&#123;2&#125;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">xs</span>=<span class="hljs-string">&#123;12&#125;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">TopBar</span> /&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-topbar-buffer&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">sm</span>=<span class="hljs-string">&#123;3&#125;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Paper</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-grid-item&quot;</span>&gt;</span><br>      ...<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Paper</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">sm</span>=<span class="hljs-string">&#123;9&#125;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Paper</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-grid-item&quot;</span>&gt;</span><br>      ...<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Paper</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside of a web browser.</p>
 <ul>
-<li>When my screen size is smaller than any specified screen size, components will take all 12 columns by default. In this case, when the screen size is xs, since no <code>xs=&#123;&#125;</code> is specified and smallest, the Grid item will default to taking up all 12 columns. So the two <code>paper</code> components will stack on one another.</li>
-<li>If a specific size (like md, lg, or xl) is not specified, the grid system will use the settings from the closest smaller breakpoint that is defined.</li>
+<li>Single-Threaded Event Loop: Node.js uses a single-threaded event loop. The Event Loop continuously checks the event queue to see if there are any events to be handled.</li>
+<li>Non-blocking I&#x2F;O: Node.js performs I&#x2F;O operations (like reading from a database or reading from a file) asynchronously. Instead of waiting for the operation to complete, Node.js registers a callback and moves on to handle the next event. This non-blocking behavior ensures that Node.js can handle many I&#x2F;O operations concurrently without getting bogged down by slow operations</li>
 </ul>
-<h2 id="theme"><a href="#theme" class="headerlink" title="theme"></a>theme</h2><p><a target="_blank" rel="noopener" href="https://mui.com/material-ui/customization/default-theme/">The default Theme Parameters</a></p>
-<h2 id="Miscellaneous"><a href="#Miscellaneous" class="headerlink" title="Miscellaneous"></a>Miscellaneous</h2><h3 id="Template-Literals"><a href="#Template-Literals" class="headerlink" title="Template Literals"></a>Template Literals</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">ListItemText</span> <span class="hljs-attr">primary</span>=<span class="hljs-string">&#123;</span>`$&#123;<span class="hljs-attr">user.first_name</span>&#125; $&#123;<span class="hljs-attr">user.last_name</span>&#125;`&#125; /&gt;</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>In JavaScript, strings can be created using single quotes (<code>&#39;</code>), double quotes (<code>&quot;</code>), or backticks (<code>`</code>). Backticks are used to create template literals, which is useful for formatting a string.</li>
-<li><code>$&#123;&#125;</code> allows you to interpolate JavaScript expressions or variables directly into the string, as shown in the example</li>
+<h2 id="Module-System"><a href="#Module-System" class="headerlink" title="Module System"></a>Module System</h2><ul>
+<li><code>require</code> is a function in Node.js used to load modules. We use <code>Express</code> and <code>Mongoose</code> for web development.<ul>
+<li>System modules: Built-in Node.js modules like fs, http, path, etc.</li>
+<li>File modules: Like <code>require(&quot;./myModule.js&quot;)</code></li>
+<li>Directory modules: Like <code>require(&quot;./myModule&quot;)</code>, look for <code>myModule/index.js</code></li>
 </ul>
-<h3 id="Component-Prop"><a href="#Component-Prop" class="headerlink" title="Component Prop"></a>Component Prop</h3><p>Example:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">ListItem</span> <span class="hljs-attr">component</span>=<span class="hljs-string">&#123;Link&#125;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&#123;</span>`/$&#123;<span class="hljs-attr">user._id</span>&#125;`&#125; <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;list-item&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ListItemText</span> <span class="hljs-attr">primary</span>=<span class="hljs-string">&#123;</span>`$&#123;<span class="hljs-attr">user.first_name</span>&#125; $&#123;<span class="hljs-attr">user.last_name</span>&#125;`&#125; /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ListItem</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>MUI components are built on top of standard HTML elements like div, button, a, etc.</li>
-<li>The component prop allows you to specify which element or component should be rendered in place of the default one. For example, if you have an MUI <code>&lt;ListItem /&gt;</code>, its default rendering might be a <code>li</code> tag. However, you can replace that li tag with something else, like a Link (from react-router-dom or any other component), by passing the component&#x3D;{Link} prop.</li>
-<li>In the example, I’m using the component&#x3D;{Link} prop to turn the ListItem into a Link component from react-router-dom. Since Link expects a <code>to=&#123;&#125;</code> prop (which defines the route path for navigation), I’m able to pass <code>to=&#123;/$&#123;user._id&#125;&#125;</code> as a prop to the ListItem, because the ListItem is now acting as a Link component.</li>
+</li>
+<li>In Node.js, every module (or file) has its own scope, module.exports allows us to make functions or variables available to other files.<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> notGlobal;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">func1</span>(<span class="hljs-params"></span>) &#123;&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">func2</span>(<span class="hljs-params"></span>) &#123;&#125;<br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<span class="hljs-attr">func1</span>: func1, <span class="hljs-attr">func2</span>: func2&#125;;<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="Overriding-Styles"><a href="#Overriding-Styles" class="headerlink" title="Overriding Styles"></a>Overriding Styles</h3><p>Every Material UI component accepts a className prop, which allows you to apply custom CSS classes to the component. For example,</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs CSS">&lt;<span class="hljs-selector-tag">Button</span> className=&quot;my-custom-<span class="hljs-selector-tag">button</span>&quot;&gt;Click Me&lt;/<span class="hljs-selector-tag">Button</span>&gt;<br><br><span class="hljs-selector-class">.my-custom-button</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: green;<br>  <span class="hljs-attribute">color</span>: white;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="Non-blocking"><a href="#Non-blocking" class="headerlink" title="Non-blocking"></a>Non-blocking</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">r1 = <span class="hljs-title function_">step1</span>();<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step1 done&#x27;</span>, r1);<br>r2 = <span class="hljs-title function_">step2</span>(r1);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step2 done&#x27;</span>, r2);<br>r3 = <span class="hljs-title function_">step3</span>(r2);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step3 done&#x27;</span>, r3);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;All Done!&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p>If <code>step()</code> function doesn’t block, then it’s ok.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">step1</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">r1</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step1 done&#x27;</span>, r1);<br>    <span class="hljs-title function_">step2</span>(r1, <span class="hljs-keyword">function</span> (<span class="hljs-params">r2</span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step2 done&#x27;</span>, r2);<br>        <span class="hljs-title function_">step3</span>(r2, <span class="hljs-keyword">function</span> (<span class="hljs-params">r3</span>) &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step3 done&#x27;</span>, r3);<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;All Done!&#x27;</span>);  <span class="hljs-comment">// Correct</span><br>        &#125;);<br>    &#125;);<br>&#125;);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;All Done!&#x27;</span>); <span class="hljs-comment">// Wrong!</span><br></code></pre></td></tr></table></figure>
 
+<p>If the function is blocking, use callbacks.</p>
+<h2 id="Listener-and-Emitter"><a href="#Listener-and-Emitter" class="headerlink" title="Listener and Emitter"></a>Listener and Emitter</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;myEvent&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">param1, param2</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;myEvent occurred with &#x27;</span> + param1 + <span class="hljs-string">&#x27; and &#x27;</span> + param2 + <span class="hljs-string">&#x27;!&#x27;</span>);<br>&#125;);<br>myEmitter.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;myEvent&#x27;</span>, <span class="hljs-string">&#x27;arg1&#x27;</span>, <span class="hljs-string">&#x27;arg2&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p>On emit call listeners are called synchronously and in the order the listeners were registered.</p>
+<p>Have multiple different events for different state or actions:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;conditionA&#x27;</span>, doConditionA);<br>myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;conditionB&#x27;</span>, doConditionB);<br>myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;conditionC&#x27;</span>, doConditionC);<br>myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;error&#x27;</span>, handleErrorCondition);<br></code></pre></td></tr></table></figure>
 
-<p>However, some Material UI components are composed of multiple nested elements. To target these specific parts, you need to use the global class names provided by Material UI. These class names follow a pattern like .MuiComponentName-elementName. </p>
-<p>CSS pseudo-classes like <code>:hover</code>, <code>:focus</code>, and <code>:disabled</code> have higher specificity. Material UI mimics this behavior by applying state classes with higher specificity. Therefore, to override these styles, you need to match or exceed this specificity in your CSS. For example,</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs CSS">&lt;MenuItem selected className=&quot;my-<span class="hljs-selector-tag">menu</span>-item&quot;&gt;Option <span class="hljs-number">1</span>&lt;/MenuItem&gt;<br><br><br><span class="hljs-selector-class">.my-menu-item</span> &#123;<br>  <span class="hljs-attribute">color</span>: black;<br>&#125;<br><br><span class="hljs-comment">/* Increase specificity for the selected state */</span><br><span class="hljs-selector-class">.my-menu-item</span><span class="hljs-selector-class">.Mui-selected</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
-<ul>
-<li><strong>When you add the selected prop to the MenuItem, Material UI automatically applies a special class called Mui-selected to the component.</strong> As a result, the <code>&lt;MenuItem selected className=&quot;my-menu-item&quot;&gt;Option 1&lt;/MenuItem&gt;</code> will have color blue instead of black.</li>
-</ul>
-<h4 id="Using-the-sx-prop"><a href="#Using-the-sx-prop" class="headerlink" title="Using the sx prop"></a>Using the sx prop</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span>&gt;</span><br>    ...<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span>&gt;</span><br>    ...<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p>The above html becomes the following in the browser, which are modified by materialUI by injecting some new classes:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-container&quot;</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- Grid Item --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-item&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- Content --&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- Grid Item --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-item&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- Content --&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- More Grid Items --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span> <span class="hljs-attr">spacing</span>=<span class="hljs-string">&#123;3&#125;</span> <span class="hljs-attr">sx</span>=<span class="hljs-string">&#123;&#123;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">maxHeight:</span> &#x27;<span class="hljs-attr">80vh</span>&#x27;,</span><br><span class="hljs-tag">  <span class="hljs-attr">overflowY:</span> &#x27;<span class="hljs-attr">auto</span>&#x27;,</span><br><span class="hljs-tag">  &#x27;&amp; <span class="hljs-attr">.MuiGrid-root</span>&#x27;<span class="hljs-attr">:</span> &#123;</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingLeft:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingTop:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,</span><br><span class="hljs-tag">    <span class="hljs-attr">paddingBottom:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;</span><br><span class="hljs-tag">  &#125;,</span><br><span class="hljs-tag">&#125;&#125; &gt;</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>The <code>&amp;</code> represents the current component in the context of the sx prop. In this case, &amp; refers to the Grid container component.</li>
-<li><code>&#39;&amp; .MuiGrid-root&#39;</code> targets all elements with the class <code>.MuiGrid-root</code> that are descendants of the Grid container.</li>
-<li>As a result, the <code>&#39;&amp; .MuiGrid-root&#39;</code> applies the specified padding styles to all Grid items within the container.</li>
-<li><a target="_blank" rel="noopener" href="https://mui.com/material-ui/customization/how-to-customize/">Refer to this</a> for how to use this in more detail</li>
-</ul>
 
                 
               </div>
@@ -405,8 +384,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MaterialUI</div>
-      <div>https://thiefcat.github.io/2024/10/09/SWE/Material-UI/</div>
+      <div>Stanford CS142 笔记 - Node.js</div>
+      <div>https://thiefcat.github.io/2024/10/30/CS142/Nodejs/</div>
     </div>
     <div class="license-meta">
       
@@ -418,7 +397,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 9, 2024</div>
+          <div>October 30, 2024</div>
         </div>
       
       
@@ -450,9 +429,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/30/CS142/Nodejs/" title="Stanford CS142 笔记 - Node.js">
+                      <a href="/2024/11/26/CS142/Express-js/" title="Stanford CS142 笔记 - Express.js">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Node.js</span>
+                        <span class="hidden-mobile">Stanford CS142 笔记 - Express.js</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -460,8 +439,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/08/CS142/Server-Communication/" title="Stanford CS142 笔记 - Server Communication">
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Server Communication</span>
+                      <a href="/2024/10/09/SWE/Material-UI/" title="MaterialUI">
+                        <span class="hidden-mobile">MaterialUI</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
