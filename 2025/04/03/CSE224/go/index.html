@@ -24,7 +24,7 @@
 <meta property="og:description" content="Go basis">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-03T22:21:08.000Z">
-<meta property="article:modified_time" content="2025-04-06T02:52:08.674Z">
+<meta property="article:modified_time" content="2025-04-13T21:52:51.406Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          585 words
+          698 words
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          3 mins
+          4 mins
         
       </span>
     
@@ -398,14 +398,37 @@
 <h2 id="Function-as-parameters"><a href="#Function-as-parameters" class="headerlink" title="Function as parameters"></a>Function as parameters</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">apply</span><span class="hljs-params">(fn <span class="hljs-keyword">func</span>(<span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span>, val <span class="hljs-type">int</span>) <span class="hljs-type">int</span> &#123;<br>	<span class="hljs-keyword">return</span> fn(val)<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="Read-and-Write-files"><a href="#Read-and-Write-files" class="headerlink" title="Read and Write files"></a>Read and Write files</h2><p>Open a file:</p>
+<h2 id="Named-Type"><a href="#Named-Type" class="headerlink" title="Named Type"></a>Named Type</h2><p>I can create a new named type MyInt that is based on int, but is treated as a distinct type by the compiler.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> MyInt <span class="hljs-type">int</span><br></code></pre></td></tr></table></figure>
+
+<p>Go doesn’t have traditional classes or inheritance, instead, it uses Custom types + attached methods. Example:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Celsius <span class="hljs-type">float64</span><br><br><span class="hljs-comment">// This defines a method on the Celsius type.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Celsius)</span></span> ToFahrenheit() <span class="hljs-type">float64</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-type">float64</span>(c)*<span class="hljs-number">9</span>/<span class="hljs-number">5</span> + <span class="hljs-number">32</span>  <span class="hljs-comment">// need type convertion</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    temp := Celsius(<span class="hljs-number">25</span>)<br>    fmt.Println(<span class="hljs-string">&quot;In Fahrenheit:&quot;</span>, temp.ToFahrenheit()) <span class="hljs-comment">// 77</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Another example: User behaves just like a class</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>    Age  <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(u User)</span></span> Greet() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, &quot;</span> + u.Name<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Read-and-Write-binary-files"><a href="#Read-and-Write-binary-files" class="headerlink" title="Read and Write binary files"></a>Read and Write binary files</h2><h3 id="Read-a-binary-file"><a href="#Read-a-binary-file" class="headerlink" title="Read a binary file"></a>Read a binary file</h3><p>Open a file:</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">file, err := os.Open(<span class="hljs-string">&quot;file.bin&quot;</span>)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br><span class="hljs-keyword">defer</span> file.Close()<br></code></pre></td></tr></table></figure>
 
 <p>Read specific number of bytes</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">buf := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">8</span>) <span class="hljs-comment">// read 8 bytes</span><br>_, err := file.Read(buf)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>Interpret binary data</p>
+<p>Read and convert</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">var</span> num <span class="hljs-type">int32</span><br>err = binary.Read(file, binary.LittleEndian, &amp;num)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br>fmt.Println(<span class="hljs-string">&quot;Read int32:&quot;</span>, num)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>file.Read(buf): Read to a slice of bytes</li>
+<li>binary.Read(): A high-level function from encoding&#x2F;binary, read and then convert</li>
+</ul>
+<h3 id="Write-a-binary-file"><a href="#Write-a-binary-file" class="headerlink" title="Write a binary file"></a>Write a binary file</h3><p>Create a binary file</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">file, err := os.Create(<span class="hljs-string">&quot;data.bin&quot;</span>)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br><span class="hljs-keyword">defer</span> file.Close()<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">var</span> number <span class="hljs-type">uint32</span> = <span class="hljs-number">123456</span><br>err = binary.Write(file, binary.LittleEndian, number)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">data := []<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;Hello, binary world!\n&quot;</span>)<br>n, err := file.Write(data)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
