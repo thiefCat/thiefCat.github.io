@@ -16,15 +16,15 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Go I&#x2F;O frequently used functions">
+    <meta name="description" content="Go I&#x2F;O frequently used functions and go tcp client and server demo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSE224 - Go I&#x2F;O">
 <meta property="og:url" content="https://thiefcat.github.io/2025/04/29/CSE224/go-io/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="Go I&#x2F;O frequently used functions">
+<meta property="og:description" content="Go I&#x2F;O frequently used functions and go tcp client and server demo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-29T21:28:12.000Z">
-<meta property="article:modified_time" content="2025-04-29T22:01:26.203Z">
+<meta property="article:modified_time" content="2025-04-29T22:11:35.990Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          178 words
+          385 words
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -350,9 +350,11 @@
 
 
 
+<h2 id="Client-and-Server"><a href="#Client-and-Server" class="headerlink" title="Client and Server"></a>Client and Server</h2><p>Server:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;net&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// Start listening on TCP port 9000</span><br>	listener, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;127.0.0.1:9000&quot;</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Error starting server:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	<span class="hljs-keyword">defer</span> listener.Close()<br><br>	fmt.Println(<span class="hljs-string">&quot;Server is listening on 127.0.0.1:9000&quot;</span>)<br><br>	<span class="hljs-keyword">for</span> &#123;<br>		conn, err := listener.Accept()<br>		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>			fmt.Println(<span class="hljs-string">&quot;Failed to accept connection:&quot;</span>, err)<br>			<span class="hljs-keyword">continue</span><br>		&#125;<br>		<span class="hljs-keyword">go</span> handleConnection(conn) <span class="hljs-comment">// Handle each connection concurrently</span><br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handleConnection</span><span class="hljs-params">(conn net.Conn)</span></span> &#123;<br>	<span class="hljs-keyword">defer</span> conn.Close()<br><br>	buffer := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">1024</span>) <span class="hljs-comment">// Create a buffer to hold incoming data</span><br>	n, err := conn.Read(buffer)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Failed to read data:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br><br>	message := <span class="hljs-type">string</span>(buffer[:n])<br>	fmt.Printf(<span class="hljs-string">&quot;Received message: %s\n&quot;</span>, message)<br><br>	<span class="hljs-comment">// Send a response back</span><br>	response := <span class="hljs-string">&quot;Hello Client! I got your message: &quot;</span> + message<br>	conn.Write([]<span class="hljs-type">byte</span>(response))<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
-
-
+<p>Client:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;net&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// Connect to the server</span><br>	conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;127.0.0.1:9000&quot;</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Error connecting to server:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	<span class="hljs-keyword">defer</span> conn.Close()<br><br>	<span class="hljs-comment">// Send a message</span><br>	message := <span class="hljs-string">&quot;Hello Server!&quot;</span><br>	_, err = conn.Write([]<span class="hljs-type">byte</span>(message))<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Failed to send message:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br><br>	<span class="hljs-comment">// Read the response</span><br>	buffer := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">1024</span>)<br>	n, err := conn.Read(buffer)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Failed to read response:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br><br>	response := <span class="hljs-type">string</span>(buffer[:n])<br>	fmt.Printf(<span class="hljs-string">&quot;Server replied: %s\n&quot;</span>, response)<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
