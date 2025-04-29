@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces Express.js">
+    <meta name="description" content="Go IO usage">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Stanford CS142 笔记 - Express.js">
-<meta property="og:url" content="https://thiefcat.github.io/2024/11/26/CS142/Express-js/index.html">
+<meta property="og:title" content="CSE224 - Go IO">
+<meta property="og:url" content="https://thiefcat.github.io/2025/04/29/CSE224/go-io/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces Express.js">
+<meta property="og:description" content="Go IO usage">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-11-27T04:11:57.000Z">
-<meta property="article:modified_time" content="2024-12-08T00:18:52.803Z">
+<meta property="article:published_time" content="2025-04-29T21:28:12.000Z">
+<meta property="article:modified_time" content="2025-04-29T21:59:48.185Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="Web Development">
+<meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Stanford CS142 笔记 - Express.js - Songlin&#39;s Space</title>
+  <title>CSE224 - Go IO - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Stanford CS142 笔记 - Express.js</span>
+            <span id="subtitle">CSE224 - Go IO</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-26 20:11" pubdate>
-          November 26, 2024 pm
+        <time datetime="2025-04-29 14:28" pubdate>
+          April 29, 2025 pm
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          278 words
+          178 words
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          2 mins
+          1 mins
         
       </span>
     
@@ -310,68 +310,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Stanford CS142 笔记 - Express.js</h1>
+            <h1 id="seo-header">CSE224 - Go IO</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-keyword">let</span> expressApp = <span class="hljs-title function_">express</span>(); <br></code></pre></td></tr></table></figure>
-
-<p>The instance <code>expressAPP</code> provides all the methods to:</p>
+                <h2 id="Read-and-Write-binary-files"><a href="#Read-and-Write-binary-files" class="headerlink" title="Read and Write binary files"></a>Read and Write binary files</h2><p>Go follows the Reader&#x2F;Writer interface model:</p>
 <ol>
-<li>Route HTTP requests (map different URLs to different logic)</li>
-<li>Render HTML</li>
-<li>Configure middleware (Middleware are functions that process requests before they reach routes)</li>
+<li>io.Reader:	Can read data (Read([]byte) (int, error))</li>
+<li>io.Writer:	Can write data (Write([]byte) (int, error))</li>
 </ol>
-<h3 id="Express-Routing"><a href="#Express-Routing" class="headerlink" title="Express Routing"></a>Express Routing</h3><p>Routing allows you to define actions for specific HTTP methods:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback);<br>expressApp.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback);<br>expressApp.<span class="hljs-title function_">put</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback);<br>expressApp.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback);<br>expressApp.<span class="hljs-title function_">all</span>(<span class="hljs-string">&#x27;/path&#x27;</span>, callback); <span class="hljs-comment">// Handles requests for all HTTP methods (e.g., GET, POST, etc.) on a specific path.</span><br><br>expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:user_id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`User ID is <span class="hljs-subst">$&#123;req.params.user_id&#125;</span>`</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p>Most I&#x2F;O types (files, TCP connections, buffers) implement these interfaces.</p>
+<h3 id="Read-a-binary-file"><a href="#Read-a-binary-file" class="headerlink" title="Read a binary file"></a>Read a binary file</h3><p>Open a file:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">file, err := os.Open(<span class="hljs-string">&quot;file.bin&quot;</span>)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br><span class="hljs-keyword">defer</span> file.Close()<br></code></pre></td></tr></table></figure>
 
-<p>The order of execution in Express routes is determined by the order in which they are defined in your code. Here’s the principle:</p>
+<p>Read specific number of bytes</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">buf := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">8</span>) <span class="hljs-comment">// read 8 bytes</span><br>_, err := file.Read(buf)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
-<li>When a request is received, Express evaluates routes from top to bottom in the order they are defined in the code.</li>
-<li>It stops at the first match it finds (this is called short-circuiting).</li>
+<li><code>n, err := file.Read(buf)</code>: Read to a slice of bytes, returns actual number of bytes read, may read less than you ask for, even though there’s more data available later. <strong>It blocks (waits) until at least some bytes are ready to be read.</strong></li>
+<li><code>n, err := io.ReadFull(reader, buf)</code>: Reads exactly len(buf) bytes, blocking until buffer is full or EOF.</li>
+<li><code>data, err := io.ReadAll(reader)</code>: Reads entire stream until EOF into memory (until I receive EOF).</li>
 </ul>
-<h4 id="httpRequest-Object"><a href="#httpRequest-Object" class="headerlink" title="httpRequest Object"></a>httpRequest Object</h4><p>It represents the HTTP request sent by the client.</p>
+<p>Read and convert</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">var</span> num <span class="hljs-type">int32</span><br>err := binary.Read(file, binary.LittleEndian, &amp;num)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br>fmt.Println(<span class="hljs-string">&quot;Read int32:&quot;</span>, num)<br></code></pre></td></tr></table></figure>
+
 <ul>
-<li><code>request.params</code>: Access route parameters <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:user_id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">user_id</span>); <span class="hljs-comment">// Logs the user_id</span><br>&#125;);<br></code></pre></td></tr></table></figure></li>
-<li><code>request.query</code>: Contains query string parameters from the URL</li>
+<li><code>err := binary.Read()</code>: A high-level function from encoding&#x2F;binary, read and then convert</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/search&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(req.<span class="hljs-property">query</span>); <span class="hljs-comment">// &#123; foo: &#x27;9&#x27; &#125; ?foo=9 becomes &#123;foo: &#x27;9&#x27;&#125;</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+<h3 id="Write-a-binary-file"><a href="#Write-a-binary-file" class="headerlink" title="Write a binary file"></a>Write a binary file</h3><p>Create a binary file</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">file, err := os.Create(<span class="hljs-string">&quot;data.bin&quot;</span>)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br><span class="hljs-keyword">defer</span> file.Close()<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">data := []<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;Hello, binary world!\n&quot;</span>)<br>n, err := file.Write(data)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
-<li><code>request.body</code>: Contains the body of POST or PUT requests</li>
+<li><code>n, err := writer.Write(data)</code>: Writes len(data) bytes, returns how many were actually written (should be all, or an error.</li>
 </ul>
-<h4 id="httpResponse-Object"><a href="#httpResponse-Object" class="headerlink" title="httpResponse Object"></a>httpResponse Object</h4><p>Represents the response sent back to the client.</p>
-<ul>
-<li><p><code>response.send(content)</code>: Sends a response to the client (automatically ends the response). e.g., <code>res.send(&#39;Hello, world!&#39;);</code>.</p>
-</li>
-<li><p><code>response.status(code)</code>: Sets the HTTP status code of the response. e.g., <code>res.status(404).send(&#39;Not Found&#39;);</code>.</p>
-</li>
-<li><p><code>response.set(field, value)</code>: Sets a custom HTTP response header.</p>
-</li>
-<li><p><code>response.end()</code>: Ends the response process.</p>
-</li>
-<li><p>channing: e.g., <code>res.status(200).send(&#39;OK&#39;);</code></p>
-</li>
-</ul>
-<p>Example Usage:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">request, response</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">let</span> id = request.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>;<br>  <span class="hljs-keyword">let</span> user = cs142models.<span class="hljs-title function_">userModel</span>(id);<br>  <span class="hljs-keyword">if</span> (user === <span class="hljs-literal">null</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;User with _id:&#x27;</span> + id + <span class="hljs-string">&#x27; not found.&#x27;</span>);<br>    response.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Not found&#x27;</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  response.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">send</span>(user);<br>  <span class="hljs-keyword">return</span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">var</span> number <span class="hljs-type">uint32</span> = <span class="hljs-number">123456</span><br>err = binary.Write(file, binary.LittleEndian, number)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-<h3 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h3><p>Middleware are functions that can:</p>
-<ol>
-<li>Intercept HTTP requests.</li>
-<li>Perform operations on the request&#x2F;response objects.</li>
-<li>Either terminate the request-response cycle or pass control to the next middleware in the stack using next().</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">app.<span class="hljs-title function_">all</span>(<span class="hljs-string">&#x27;/specific-route&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Middleware for /specific-route&#x27;</span>);<br>  <span class="hljs-title function_">next</span>(); <span class="hljs-comment">// Pass control to the next handler or middleware</span><br>&#125;);<br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>app.all()</code>:  Matches all HTTP methods for the route.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">app.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Global Middleware&#x27;</span>);<br>  <span class="hljs-title function_">next</span>();<br>&#125;);<br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>app.use()</code>: Registers middleware for all routes.</li>
-</ul>
-<p>e.g., <code>app.use(express.json());</code>, Use built-in middleware for parsing JSON.</p>
+
+
+
 
                 
               </div>
@@ -390,7 +370,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/CS142/" class="category-chain-item">CS142</a>
+  <a href="/categories/CSE224/" class="category-chain-item">CSE224</a>
   
   
 
@@ -405,7 +385,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
+        <a href="/tags/Go/" class="print-no-link">#Go</a>
       
     </div>
   
@@ -417,8 +397,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Stanford CS142 笔记 - Express.js</div>
-      <div>https://thiefcat.github.io/2024/11/26/CS142/Express-js/</div>
+      <div>CSE224 - Go IO</div>
+      <div>https://thiefcat.github.io/2025/04/29/CSE224/go-io/</div>
     </div>
     <div class="license-meta">
       
@@ -430,7 +410,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 26, 2024</div>
+          <div>April 29, 2025</div>
         </div>
       
       
@@ -462,18 +442,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/03/CSE224/go-basis/" title="CSE224 - Go Basis">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE224 - Go Basis</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/30/CS142/Nodejs/" title="Stanford CS142 笔记 - Node.js">
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Node.js</span>
+                      <a href="/2025/04/03/CSE224/go-basis/" title="CSE224 - Go Basis">
+                        <span class="hidden-mobile">CSE224 - Go Basis</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
