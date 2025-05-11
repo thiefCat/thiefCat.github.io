@@ -4,7 +4,7 @@
   
   
   <entry>
-    <title>CSE224 - Go Basis</title>
+    <title>CSE224 - Go Concurrent Programming</title>
     <link href="/2025/05/10/CSE224/go-concurrent/"/>
     <url>/2025/05/10/CSE224/go-concurrent/</url>
     
@@ -29,7 +29,7 @@
   
   
   <entry>
-    <title>CSE224 - Go I/O</title>
+    <title>CSE224 - RPC</title>
     <link href="/2025/05/08/CSE224/rpc/"/>
     <url>/2025/05/08/CSE224/rpc/</url>
     
