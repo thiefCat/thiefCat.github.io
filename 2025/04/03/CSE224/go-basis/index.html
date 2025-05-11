@@ -24,7 +24,7 @@
 <meta property="og:description" content="Go basis">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-03T22:21:08.000Z">
-<meta property="article:modified_time" content="2025-04-29T21:30:59.332Z">
+<meta property="article:modified_time" content="2025-05-11T05:06:24.358Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          583 words
+          625 words
         
       </span>
     
@@ -406,6 +406,11 @@
 
 <p>Another example: User behaves just like a class</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>    Age  <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(u User)</span></span> Greet() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, &quot;</span> + u.Name<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h2><p>An interface in Go is a set of method signatures. <strong>If a type has those methods, it automatically implements the interface</strong>.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Greeter <span class="hljs-keyword">interface</span> &#123;<br>    Greet() <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span>&#123;&#125;<br><br><span class="hljs-comment">// Person has a Greet() method, so it automatically satisfies the Greeter interface.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Person)</span></span> Greet() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello!&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sayHello</span><span class="hljs-params">(g Greeter)</span></span> &#123;<br>    fmt.Println(g.Greet())<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    p := Person&#123;&#125;<br>    sayHello(p) <span class="hljs-comment">// Hello!</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>

@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Go I&#x2F;O frequently used functions and go tcp client and server demo">
+    <meta name="description" content="Go basis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSE224 - Go I&#x2F;O">
-<meta property="og:url" content="https://thiefcat.github.io/2025/04/29/CSE224/go-io/index.html">
+<meta property="og:title" content="CSE224 - Go Basis">
+<meta property="og:url" content="https://thiefcat.github.io/2025/05/10/CSE224/go-concurrent/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="Go I&#x2F;O frequently used functions and go tcp client and server demo">
+<meta property="og:description" content="Go basis">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-04-29T21:28:12.000Z">
-<meta property="article:modified_time" content="2025-05-11T02:41:27.270Z">
+<meta property="article:published_time" content="2025-05-11T05:12:59.000Z">
+<meta property="article:modified_time" content="2025-05-11T05:25:26.957Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CSE224 - Go I/O - Songlin&#39;s Space</title>
+  <title>CSE224 - Go Basis - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">CSE224 - Go I/O</span>
+            <span id="subtitle">CSE224 - Go Basis</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-29 14:28" pubdate>
-          April 29, 2025 pm
+        <time datetime="2025-05-10 22:12" pubdate>
+          May 10, 2025 pm
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          475 words
+          81 words
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          3 mins
+          1 mins
         
       </span>
     
@@ -310,55 +310,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CSE224 - Go I/O</h1>
+            <h1 id="seo-header">CSE224 - Go Basis</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Read-and-Write-binary-files"><a href="#Read-and-Write-binary-files" class="headerlink" title="Read and Write binary files"></a>Read and Write binary files</h2><p>Go follows the Reader&#x2F;Writer interface model:</p>
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Go-Routines"><a href="#Go-Routines" class="headerlink" title="Go Routines"></a>Go Routines</h3><p>Traditionally, people used OS-level threads for concurrency, but threads are heavyweight. Go introduced <strong>goroutines</strong>, which are </p>
 <ol>
-<li>io.Reader:	Can read data (Read([]byte) (int, error))</li>
-<li>io.Writer:	Can write data (Write([]byte) (int, error))</li>
+<li>Very cheap in terms of memory</li>
+<li>Managed by the Go runtime, not the OS</li>
+<li>Can be created in large numbers</li>
 </ol>
-<p>Most I&#x2F;O types (files, TCP connections, buffers) implement these interfaces.</p>
-<h3 id="I-O-types"><a href="#I-O-types" class="headerlink" title="I&#x2F;O types"></a>I&#x2F;O types</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go">file, _ := os.Open(<span class="hljs-string">&quot;hello.txt&quot;</span>) <span class="hljs-comment">// *os.File, used when read/write to files.</span><br>conn, _ := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;example.com:80&quot;</span>)  <span class="hljs-comment">// net.Conn, </span><br>r := strings.NewReader(<span class="hljs-string">&quot;hello world&quot;</span>) <span class="hljs-comment">// *strings.Reader</span><br>r := bufio.NewReader(strings.NewReader(<span class="hljs-string">&quot;hello\nworld&quot;</span>)) <span class="hljs-comment">// bufio.Reader, wraps any io.Reader to add buffering and helper methods like ReadLine(), ReadString(&#x27;\n&#x27;), etc.</span><br></code></pre></td></tr></table></figure>
-<p>All above satisfies both io.Reader and io.Writer.</p>
-<h3 id="Read-a-binary-file"><a href="#Read-a-binary-file" class="headerlink" title="Read a binary file"></a>Read a binary file</h3><p>Open a file:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">file, err := os.Open(<span class="hljs-string">&quot;file.bin&quot;</span>)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br><span class="hljs-keyword">defer</span> file.Close()<br></code></pre></td></tr></table></figure>
+<p>Go uses an internal scheduler that maps many goroutines onto fewer OS threads using something called the M:N model (many goroutines on few threads). The scheduler runs in user space — no need to ask the operating system every time. As a result, go routines is like a user-level thread.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">go</span> sayHello() <span class="hljs-comment">// create a go routine</span><br></code></pre></td></tr></table></figure>
 
-<p>Read specific number of bytes</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">buf := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">8</span>) <span class="hljs-comment">// read 8 bytes</span><br>_, err := file.Read(buf)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h3><p>A channel is a way for goroutines to communicate and synchronize with each other. It’s like a pipe.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Go">ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">string</span>)<br><br><span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    ch &lt;- <span class="hljs-string">&quot;hello&quot;</span><br>&#125;()<br><br>msg := &lt;-ch<br>fmt.Println(msg) <span class="hljs-comment">// prints: hello</span><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li><code>n, err := file.Read(buf)</code>: Read to a slice of bytes, returns actual number of bytes read, may read less than you ask for, even though there’s more data available later. <strong>It blocks until at least some bytes are ready to be read.</strong></li>
-<li><code>n, err := io.ReadFull(reader, buf)</code>: Reads exactly len(buf) bytes, blocking until buffer is full or EOF.</li>
-<li><code>data, err := io.ReadAll(reader)</code>: Reads entire stream until EOF into memory (until I receive EOF).</li>
-<li><code>data, err := os.ReadFile(configFile)</code>: os.ReadFile is a convenience function that: Opens a file, Reads all of its contents into memory, Closes the file, Returns the file contents as a []byte.</li>
-</ul>
-<p>Read and convert</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">var</span> num <span class="hljs-type">int32</span><br>err := binary.Read(file, binary.LittleEndian, &amp;num)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br>fmt.Println(<span class="hljs-string">&quot;Read int32:&quot;</span>, num)<br></code></pre></td></tr></table></figure>
+<p>Channels can be synchronous or buffered:</p>
+<ol>
+<li>Synchronous: No buffer. The sender waits until a receiver is ready.</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Go">ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)<br><br><span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;Sending...&quot;</span>)<br>    ch &lt;- <span class="hljs-number">42</span>  <span class="hljs-comment">// block until some routine receive data</span><br>    fmt.Println(<span class="hljs-string">&quot;Sent&quot;</span>)<br>&#125;()<br><br>x := &lt;-ch  <span class="hljs-comment">// block until some data is available</span><br>fmt.Println(<span class="hljs-string">&quot;Received&quot;</span>, x)<br></code></pre></td></tr></table></figure>
 
-<ul>
-<li><code>err := binary.Read()</code>: A high-level function from encoding&#x2F;binary, read and then convert</li>
-</ul>
-<h3 id="Write-a-binary-file"><a href="#Write-a-binary-file" class="headerlink" title="Write a binary file"></a>Write a binary file</h3><p>Create a binary file</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">file, err := os.Create(<span class="hljs-string">&quot;data.bin&quot;</span>)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br><span class="hljs-keyword">defer</span> file.Close()<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>Buffered: Has space to hold values. Sender doesn’t wait until buffer is full.</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go">ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">2</span>)<br>ch &lt;- <span class="hljs-number">1</span><br>ch &lt;- <span class="hljs-number">2</span><br><span class="hljs-comment">// Can send twice before it blocks</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">data := []<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;Hello, binary world!\n&quot;</span>)<br>n, err := file.Write(data)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li><code>n, err := writer.Write(data)</code>: Writes len(data) bytes, returns how many were actually written (should be all, or an error.</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">var</span> number <span class="hljs-type">uint32</span> = <span class="hljs-number">123456</span><br>err = binary.Write(file, binary.LittleEndian, number)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatal(err)<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-<h3 id="Communicate-via-network"><a href="#Communicate-via-network" class="headerlink" title="Communicate via network"></a>Communicate via network</h3><p>When you call <code>conn.Write(data)</code> in Go (e.g., using a TCP connection), you’re not directly writing data onto the network wire. Instead, your data is copied into the OS’s send buffer. The OS then takes care of delivering that data over the network asynchronously.</p>
-<p>When you call <code>conn.Read(buffer)</code>, you’re trying to read data from the OS’s receive buffer. If no data is available yet, <code>Read()</code> will block (wait) until some data is available.</p>
-<h2 id="Client-and-Server"><a href="#Client-and-Server" class="headerlink" title="Client and Server"></a>Client and Server</h2><p>Server:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;net&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// Start listening on TCP port 9000</span><br>	listener, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;127.0.0.1:9000&quot;</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Error starting server:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	<span class="hljs-keyword">defer</span> listener.Close()<br><br>	fmt.Println(<span class="hljs-string">&quot;Server is listening on 127.0.0.1:9000&quot;</span>)<br><br>	<span class="hljs-keyword">for</span> &#123;<br>		conn, err := listener.Accept()<br>		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>			fmt.Println(<span class="hljs-string">&quot;Failed to accept connection:&quot;</span>, err)<br>			<span class="hljs-keyword">continue</span><br>		&#125;<br>		<span class="hljs-keyword">go</span> handleConnection(conn) <span class="hljs-comment">// Handle each connection concurrently</span><br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handleConnection</span><span class="hljs-params">(conn net.Conn)</span></span> &#123;<br>	<span class="hljs-keyword">defer</span> conn.Close()<br><br>	buffer := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">1024</span>) <span class="hljs-comment">// Create a buffer to hold incoming data</span><br>	n, err := conn.Read(buffer)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Failed to read data:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br><br>	message := <span class="hljs-type">string</span>(buffer[:n])<br>	fmt.Printf(<span class="hljs-string">&quot;Received message: %s\n&quot;</span>, message)<br><br>	<span class="hljs-comment">// Send a response back</span><br>	response := <span class="hljs-string">&quot;Hello Client! I got your message: &quot;</span> + message<br>	conn.Write([]<span class="hljs-type">byte</span>(response))<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<p>Client:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;net&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// Connect to the server</span><br>	conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;127.0.0.1:9000&quot;</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Error connecting to server:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	<span class="hljs-keyword">defer</span> conn.Close()<br><br>	<span class="hljs-comment">// Send a message</span><br>	message := <span class="hljs-string">&quot;Hello Server!&quot;</span><br>	_, err = conn.Write([]<span class="hljs-type">byte</span>(message))<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Failed to send message:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br><br>	<span class="hljs-comment">// Read the response</span><br>	buffer := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">1024</span>)<br>	n, err := conn.Read(buffer)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;Failed to read response:&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br><br>	response := <span class="hljs-type">string</span>(buffer[:n])<br>	fmt.Printf(<span class="hljs-string">&quot;Server replied: %s\n&quot;</span>, response)<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -403,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSE224 - Go I/O</div>
-      <div>https://thiefcat.github.io/2025/04/29/CSE224/go-io/</div>
+      <div>CSE224 - Go Basis</div>
+      <div>https://thiefcat.github.io/2025/05/10/CSE224/go-concurrent/</div>
     </div>
     <div class="license-meta">
       
@@ -416,7 +395,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 29, 2025</div>
+          <div>May 10, 2025</div>
         </div>
       
       
@@ -448,18 +427,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/08/CSE224/rpc/" title="CSE224 - Go I/O">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE224 - Go I/O</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/03/CSE224/go-basis/" title="CSE224 - Go Basis">
-                        <span class="hidden-mobile">CSE224 - Go Basis</span>
+                      <a href="/2025/05/08/CSE224/rpc/" title="CSE224 - Go I/O">
+                        <span class="hidden-mobile">CSE224 - Go I/O</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
