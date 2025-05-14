@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces RPC using Go">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-09T04:31:42.000Z">
-<meta property="article:modified_time" content="2025-05-11T17:47:04.961Z">
+<meta property="article:modified_time" content="2025-05-12T22:05:17.554Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta property="article:tag" content="RPC">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          303 words
+          318 words
         
       </span>
     
@@ -371,7 +371,7 @@
 </ol>
 <h3 id="Implement-the-gRPC-Server-in-Go"><a href="#Implement-the-gRPC-Server-in-Go" class="headerlink" title="Implement the gRPC Server in Go:"></a>Implement the gRPC Server in Go:</h3><p>After defining a service, we need to implement rpc functions.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-comment">// struct server implements the RPC methods from your .proto file: Replicate and Stop</span><br><span class="hljs-keyword">type</span> server <span class="hljs-keyword">struct</span> &#123;<br>    pb.UnimplementedRKVSServiceServer <span class="hljs-comment">// This is part of the Go code auto-generated from your .proto file.</span><br>    state  <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">string</span><br>    peers  []<span class="hljs-type">string</span><br>    stopCh <span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125;<br>&#125;<br><br><span class="hljs-comment">// Implementing the Replicate RPC</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *server)</span></span> Replicate(ctx context.Context, req *pb.ReplicateRequest) (*pb.ReplicateResponse, <span class="hljs-type">error</span>) &#123;<br>    s.state[req.Key] = req.Value<br>    <span class="hljs-keyword">return</span> &amp;pb.ReplicateResponse&#123;&#125;, <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-comment">// Implementing the Stop RPC</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *server)</span></span> Stop(ctx context.Context, req *pb.StopRequest) (*pb.StopResponse, <span class="hljs-type">error</span>) &#123;<br>    s.stopCh &lt;- <span class="hljs-keyword">struct</span>&#123;&#125;&#123;&#125;<br>    <span class="hljs-keyword">return</span> &amp;pb.StopResponse&#123;&#125;, <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
+<p><code>pb.UnimplementedRKVSServiceServer</code>: It contains default (empty) implementations of all the methods declared in your .proto file. Since your server struct must implement all methods defined in the .proto file’s service section to satisfy the RKVSServiceServer interface. But often, you only want to implement some of them. So when you include <code>pb.UnimplementedRKVSServiceServer</code>, your struct now inherits those defaults, and you only need to override the ones you care about.</p>
 <h3 id="Start-the-gRPC-Server"><a href="#Start-the-gRPC-Server" class="headerlink" title="Start the gRPC Server"></a>Start the gRPC Server</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Go">grpcServer := grpc.NewServer()<br>pb.RegisterRKVSServiceServer(grpcServer, s) <span class="hljs-comment">// s is an object that implements all the methods of RKVSServiceServer</span><br><br>lis, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, addr)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatalf(<span class="hljs-string">&quot;Failed to listen: %v&quot;</span>, err)<br>&#125;<br>log.Printf(<span class="hljs-string">&quot;Listening on %s&quot;</span>, addr)<br>grpcServer.Serve(lis) <span class="hljs-comment">// Starts the main server loop</span><br></code></pre></td></tr></table></figure>
 
 
