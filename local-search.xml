@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>CSE224 - HTTP server</title>
+    <link href="/2025/05/21/CSE224/http-server/"/>
+    <url>/2025/05/21/CSE224/http-server/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Required-library-packages"><a href="#Required-library-packages" class="headerlink" title="Required library packages"></a>Required library packages</h2><h3 id="Http-package"><a href="#Http-package" class="headerlink" title="Http package"></a>Http package</h3><p><code>net/http</code>: A standard library package in Go to create and handle web-based communication using the HTTP protocol.</p><ul><li><code>http.HandleFunc(path, handler)</code>: When someone visits &#x2F;, run the homeHandler function. e.g., <code>http.HandleFunc(&quot;/&quot;, homeHandler)</code></li><li><code>http.ListenAndServe(addr, nil)</code>: Starts the server and listens on a specific address&#x2F;port. e.g., <code>http.ListenAndServe(&quot;:8080&quot;, nil)</code>, Listen for HTTP requests on port 8080.</li><li><code>func(w http.ResponseWriter, r *http.Request)</code>: This is what handler functions look like.</li></ul><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">greetHandler</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;<br>    name := r.URL.Query().Get(<span class="hljs-string">&quot;name&quot;</span>) <span class="hljs-comment">// Reads a query parameter from the URL</span><br>    <span class="hljs-keyword">if</span> name == <span class="hljs-string">&quot;&quot;</span> &#123;<br>        name = <span class="hljs-string">&quot;Guest&quot;</span><br>    &#125;<br>    fmt.Fprintf(w, <span class="hljs-string">&quot;Hello, %s!&quot;</span>, name)<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    http.HandleFunc(<span class="hljs-string">&quot;/&quot;</span>, greetoHandler)<br>    http.ListenAndServe(<span class="hljs-string">&quot;:8080&quot;</span>, <span class="hljs-literal">nil</span>)<br>&#125;<br></code></pre></td></tr></table></figure><p>Then visit <code>http://localhost:8080/?name=Alice</code>, and will output: Hello, Alice!</p><ul><li><code>r.URL.Query().Get(&quot;id&quot;)</code>: Reads a query parameter from the URL, like <code>/student?id=Alice</code></li><li><code>r.ParseForm()</code>: Used for reading form data submitted via POST.</li><li><code>name := r.FormValue(&quot;student_name&quot;) </code>: Access form values, gives you the first value for that key.</li><li><code>r.Form[&quot;key&quot;]</code>: gives you all values as a slice ([]string)</li><li><code>http.Redirect(...)</code>: Redirects the browser to another URL after a POST request.</li></ul><h3 id="html-template-package"><a href="#html-template-package" class="headerlink" title="html&#x2F;template package"></a>html&#x2F;template package</h3><p><code>html/template</code> is a Go standard library package that helps you create HTML pages with dynamic content.</p><ol><li><p>Define HTML Template</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-comment">&lt;!-- gradeinfo.html --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Student Name: &#123;&#123;.Name&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Grade: &#123;&#123;.Grade&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br></code></pre></td></tr></table></figure></li><li><p>Define a go struct</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> GradeInfo <span class="hljs-keyword">struct</span> &#123;<br>Name  <span class="hljs-type">string</span><br>Grade <span class="hljs-type">string</span><br>&#125;<br></code></pre></td></tr></table></figure></li><li><p>Fill the template</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go">tmpl := template.Must(template.ParseFiles(<span class="hljs-string">&quot;gradeinfo.html&quot;</span>))<br><br>student := GradeInfo&#123;Name: <span class="hljs-string">&quot;Alice&quot;</span>, Grade: <span class="hljs-string">&quot;A+&quot;</span>&#125;<br>tmpl.Execute(w, student)<br></code></pre></td></tr></table></figure></li></ol><p><code>tmpl.Execute(w, students)</code> use template for <code>index.html</code>, fill data from student, dynamically generate a HTML page, and finally write the page to w.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CSE224</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CSE224 - Go Concurrent Programming</title>
     <link href="/2025/05/10/CSE224/go-concurrent/"/>
     <url>/2025/05/10/CSE224/go-concurrent/</url>

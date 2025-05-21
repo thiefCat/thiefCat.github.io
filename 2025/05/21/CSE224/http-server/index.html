@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces go routine and channels">
+    <meta name="description" content="This blog introduces building a HTTP server in Go">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSE224 - Go Concurrent Programming">
-<meta property="og:url" content="https://thiefcat.github.io/2025/05/10/CSE224/go-concurrent/index.html">
+<meta property="og:title" content="CSE224 - HTTP server">
+<meta property="og:url" content="https://thiefcat.github.io/2025/05/21/CSE224/http-server/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces go routine and channels">
+<meta property="og:description" content="This blog introduces building a HTTP server in Go">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-05-11T05:12:59.000Z">
-<meta property="article:modified_time" content="2025-05-13T20:57:53.213Z">
+<meta property="article:published_time" content="2025-05-21T20:59:12.000Z">
+<meta property="article:modified_time" content="2025-05-21T22:32:21.437Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CSE224 - Go Concurrent Programming - Songlin&#39;s Space</title>
+  <title>CSE224 - HTTP server - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">CSE224 - Go Concurrent Programming</span>
+            <span id="subtitle">CSE224 - HTTP server</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-05-10 22:12" pubdate>
-          May 10, 2025 pm
+        <time datetime="2025-05-21 13:59" pubdate>
+          May 21, 2025 pm
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          81 words
+          199 words
         
       </span>
     
@@ -310,33 +310,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CSE224 - Go Concurrent Programming</h1>
+            <h1 id="seo-header">CSE224 - HTTP server</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Go-Routines"><a href="#Go-Routines" class="headerlink" title="Go Routines"></a>Go Routines</h3><p>Traditionally, people used OS-level threads for concurrency, but threads are heavyweight. Go introduced <strong>goroutines</strong>, which are </p>
+                <h2 id="Required-library-packages"><a href="#Required-library-packages" class="headerlink" title="Required library packages"></a>Required library packages</h2><h3 id="Http-package"><a href="#Http-package" class="headerlink" title="Http package"></a>Http package</h3><p><code>net/http</code>: A standard library package in Go to create and handle web-based communication using the HTTP protocol.</p>
+<ul>
+<li><code>http.HandleFunc(path, handler)</code>: When someone visits &#x2F;, run the homeHandler function. e.g., <code>http.HandleFunc(&quot;/&quot;, homeHandler)</code></li>
+<li><code>http.ListenAndServe(addr, nil)</code>: Starts the server and listens on a specific address&#x2F;port. e.g., <code>http.ListenAndServe(&quot;:8080&quot;, nil)</code>, Listen for HTTP requests on port 8080.</li>
+<li><code>func(w http.ResponseWriter, r *http.Request)</code>: This is what handler functions look like.</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">greetHandler</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;<br>    name := r.URL.Query().Get(<span class="hljs-string">&quot;name&quot;</span>) <span class="hljs-comment">// Reads a query parameter from the URL</span><br>    <span class="hljs-keyword">if</span> name == <span class="hljs-string">&quot;&quot;</span> &#123;<br>        name = <span class="hljs-string">&quot;Guest&quot;</span><br>    &#125;<br>    fmt.Fprintf(w, <span class="hljs-string">&quot;Hello, %s!&quot;</span>, name)<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    http.HandleFunc(<span class="hljs-string">&quot;/&quot;</span>, greetoHandler)<br>    http.ListenAndServe(<span class="hljs-string">&quot;:8080&quot;</span>, <span class="hljs-literal">nil</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Then visit <code>http://localhost:8080/?name=Alice</code>, and will output: Hello, Alice!</p>
+<ul>
+<li><code>r.URL.Query().Get(&quot;id&quot;)</code>: Reads a query parameter from the URL, like <code>/student?id=Alice</code></li>
+<li><code>r.ParseForm()</code>: Used for reading form data submitted via POST.</li>
+<li><code>name := r.FormValue(&quot;student_name&quot;) </code>: Access form values, gives you the first value for that key.</li>
+<li><code>r.Form[&quot;key&quot;]</code>: gives you all values as a slice ([]string)</li>
+<li><code>http.Redirect(...)</code>: Redirects the browser to another URL after a POST request.</li>
+</ul>
+<h3 id="html-template-package"><a href="#html-template-package" class="headerlink" title="html&#x2F;template package"></a>html&#x2F;template package</h3><p><code>html/template</code> is a Go standard library package that helps you create HTML pages with dynamic content.</p>
 <ol>
-<li>Very cheap in terms of memory</li>
-<li>Managed by the Go runtime, not the OS</li>
-<li>Can be created in large numbers</li>
+<li><p>Define HTML Template</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-comment">&lt;!-- gradeinfo.html --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Student Name: &#123;&#123;.Name&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Grade: &#123;&#123;.Grade&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>Define a go struct</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> GradeInfo <span class="hljs-keyword">struct</span> &#123;<br>	Name  <span class="hljs-type">string</span><br>	Grade <span class="hljs-type">string</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>Fill the template</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go">tmpl := template.Must(template.ParseFiles(<span class="hljs-string">&quot;gradeinfo.html&quot;</span>))<br><br>student := GradeInfo&#123;Name: <span class="hljs-string">&quot;Alice&quot;</span>, Grade: <span class="hljs-string">&quot;A+&quot;</span>&#125;<br>tmpl.Execute(w, student)<br></code></pre></td></tr></table></figure></li>
 </ol>
-<p>Go uses an internal scheduler that maps many goroutines onto fewer OS threads using something called the M:N model (many goroutines on few threads). The scheduler runs in user space — no need to ask the operating system every time. As a result, go routines is like a user-level thread.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">go</span> sayHello() <span class="hljs-comment">// create a go routine</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h3><p>A channel is a way for goroutines to communicate and synchronize with each other. It’s like a pipe.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Go">ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">string</span>)<br><br><span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    ch &lt;- <span class="hljs-string">&quot;hello&quot;</span><br>&#125;()<br><br>msg := &lt;-ch<br>fmt.Println(msg) <span class="hljs-comment">// prints: hello</span><br></code></pre></td></tr></table></figure>
-
-<p>Channels can be synchronous or buffered:</p>
-<ol>
-<li>Synchronous: No buffer. The sender waits until a receiver is ready.</li>
-</ol>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Go">ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)<br><br><span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;Sending...&quot;</span>)<br>    ch &lt;- <span class="hljs-number">42</span>  <span class="hljs-comment">// block until some routine receive data</span><br>    fmt.Println(<span class="hljs-string">&quot;Sent&quot;</span>)<br>&#125;()<br><br>x := &lt;-ch  <span class="hljs-comment">// block until some data is available</span><br>fmt.Println(<span class="hljs-string">&quot;Received&quot;</span>, x)<br></code></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>Buffered: Has space to hold values. Sender doesn’t wait until buffer is full.</li>
-</ol>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go">ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">2</span>)<br>ch &lt;- <span class="hljs-number">1</span><br>ch &lt;- <span class="hljs-number">2</span><br><span class="hljs-comment">// Can send twice before it blocks</span><br></code></pre></td></tr></table></figure>
+<p><code>tmpl.Execute(w, students)</code> use template for <code>index.html</code>, fill data from student, dynamically generate a HTML page, and finally write the page to w.</p>
 
                 
               </div>
@@ -382,8 +387,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSE224 - Go Concurrent Programming</div>
-      <div>https://thiefcat.github.io/2025/05/10/CSE224/go-concurrent/</div>
+      <div>CSE224 - HTTP server</div>
+      <div>https://thiefcat.github.io/2025/05/21/CSE224/http-server/</div>
     </div>
     <div class="license-meta">
       
@@ -395,7 +400,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 10, 2025</div>
+          <div>May 21, 2025</div>
         </div>
       
       
@@ -427,18 +432,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/21/CSE224/http-server/" title="CSE224 - HTTP server">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE224 - HTTP server</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/08/CSE224/rpc/" title="CSE224 - RPC">
-                        <span class="hidden-mobile">CSE224 - RPC</span>
+                      <a href="/2025/05/10/CSE224/go-concurrent/" title="CSE224 - Go Concurrent Programming">
+                        <span class="hidden-mobile">CSE224 - Go Concurrent Programming</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
