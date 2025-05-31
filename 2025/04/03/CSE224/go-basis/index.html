@@ -24,7 +24,7 @@
 <meta property="og:description" content="Go basis">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-03T22:21:08.000Z">
-<meta property="article:modified_time" content="2025-05-11T05:06:24.358Z">
+<meta property="article:modified_time" content="2025-05-31T01:11:57.194Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          625 words
+          572 words
         
       </span>
     
@@ -341,7 +341,7 @@
 <li>A module usually have many packages.</li>
 <li>Each folder must have one package.</li>
 <li>Can import between packages.</li>
-<li>Functions can freely call each other as long as they’re defined in the same package (even if they are in different files).</li>
+<li><strong>Functions can freely call each other as long as they’re defined in the same package (even if they are in different files)</strong>.</li>
 <li>In a Go project, the entry point is always the main package, specifically the main() function inside it. When I run <code>go build</code>, Go will look for <code>package main</code> and <code>func main()</code>, and then compiles all dependencies recursively together into a single executable.</li>
 <li>A module can have multiple main packages, each in a different subdirectory. Each main.go here is its own entry point, and Go builds them into separate executables.</li>
 </ol>
@@ -353,7 +353,17 @@
 <li>Basic types:	int, float64, bool, string</li>
 <li>Arrays:	[3]int, [5]byte</li>
 <li>Structs:	type Point struct {x, y int}</li>
-<li>Custom: types	type MyInt int</li>
+<li>Custom types: type MyInt int</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Point <span class="hljs-keyword">struct</span> &#123;<br>    X, Y <span class="hljs-type">int</span><br>&#125;<br><br>p1 := Point&#123;X: <span class="hljs-number">1</span>, Y: <span class="hljs-number">2</span>&#125;<br>p2 := p1 <span class="hljs-comment">// Copy of p1</span><br>p2.X = <span class="hljs-number">100</span><br><br>fmt.Println(p1.X) <span class="hljs-comment">// 1 — unchanged</span><br>fmt.Println(p2.X) <span class="hljs-comment">// 100 — only p2 changed</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Pointer-Type"><a href="#Pointer-Type" class="headerlink" title="Pointer Type"></a>Pointer Type</h2><p>The following are pointer types:</p>
+<ol>
+<li>slice<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go">a := []<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;<br>b := a<br>b[<span class="hljs-number">0</span>] = <span class="hljs-number">99</span><br>fmt.Println(a[<span class="hljs-number">0</span>]) <span class="hljs-comment">// 99</span><br></code></pre></td></tr></table></figure></li>
+<li>map</li>
+<li>channel</li>
+<li>function</li>
+<li>interface</li>
 </ol>
 <h2 id="Basic-Syntax"><a href="#Basic-Syntax" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">var</span> x <span class="hljs-type">int</span> = <span class="hljs-number">42</span><br>z := <span class="hljs-number">3.14</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">add</span><span class="hljs-params">(a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> a + b<br>&#125;<br><br><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>    Age  <span class="hljs-type">int</span><br>&#125;<br>p := Person&#123;Name: <span class="hljs-string">&quot;Alice&quot;</span>, Age: <span class="hljs-number">30</span>&#125;<br>fmt.Println(p.Name)<br></code></pre></td></tr></table></figure>
 
@@ -396,21 +406,6 @@
 
 
 <h2 id="Function-as-parameters"><a href="#Function-as-parameters" class="headerlink" title="Function as parameters"></a>Function as parameters</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">apply</span><span class="hljs-params">(fn <span class="hljs-keyword">func</span>(<span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span>, val <span class="hljs-type">int</span>) <span class="hljs-type">int</span> &#123;<br>	<span class="hljs-keyword">return</span> fn(val)<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-<h2 id="Named-Type"><a href="#Named-Type" class="headerlink" title="Named Type"></a>Named Type</h2><p>I can create a new named type MyInt that is based on int, but is treated as a distinct type by the compiler.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> MyInt <span class="hljs-type">int</span><br></code></pre></td></tr></table></figure>
-
-<p>Go doesn’t have traditional classes or inheritance, instead, it uses Custom types + attached methods. Example:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Celsius <span class="hljs-type">float64</span><br><br><span class="hljs-comment">// This defines a method on the Celsius type.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Celsius)</span></span> ToFahrenheit() <span class="hljs-type">float64</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-type">float64</span>(c)*<span class="hljs-number">9</span>/<span class="hljs-number">5</span> + <span class="hljs-number">32</span>  <span class="hljs-comment">// need type convertion</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    temp := Celsius(<span class="hljs-number">25</span>)<br>    fmt.Println(<span class="hljs-string">&quot;In Fahrenheit:&quot;</span>, temp.ToFahrenheit()) <span class="hljs-comment">// 77</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>Another example: User behaves just like a class</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>    Age  <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(u User)</span></span> Greet() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, &quot;</span> + u.Name<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-<h2 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h2><p>An interface in Go is a set of method signatures. <strong>If a type has those methods, it automatically implements the interface</strong>.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Greeter <span class="hljs-keyword">interface</span> &#123;<br>    Greet() <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span>&#123;&#125;<br><br><span class="hljs-comment">// Person has a Greet() method, so it automatically satisfies the Greeter interface.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Person)</span></span> Greet() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello!&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sayHello</span><span class="hljs-params">(g Greeter)</span></span> &#123;<br>    fmt.Println(g.Greet())<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    p := Person&#123;&#125;<br>    sayHello(p) <span class="hljs-comment">// Hello!</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
 
                 
               </div>

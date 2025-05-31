@@ -16,22 +16,22 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces building a HTTP server in Go">
+    <meta name="description" content="This blog introduces go&#39;s approach to OOP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSE224 - HTTP server">
-<meta property="og:url" content="https://thiefcat.github.io/2025/05/21/CSE224/http-server/index.html">
+<meta property="og:title" content="CSE224 - Go OOP">
+<meta property="og:url" content="https://thiefcat.github.io/2025/05/30/CSE224/go-oop/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces building a HTTP server in Go">
+<meta property="og:description" content="This blog introduces go&#39;s approach to OOP">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-05-21T20:59:12.000Z">
-<meta property="article:modified_time" content="2025-05-21T22:32:21.437Z">
+<meta property="article:published_time" content="2025-05-31T00:02:45.000Z">
+<meta property="article:modified_time" content="2025-05-31T04:24:16.913Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CSE224 - HTTP server - Songlin&#39;s Space</title>
+  <title>CSE224 - Go OOP - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">CSE224 - HTTP server</span>
+            <span id="subtitle">CSE224 - Go OOP</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-05-21 13:59" pubdate>
-          May 21, 2025 pm
+        <time datetime="2025-05-30 17:02" pubdate>
+          May 30, 2025 pm
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          199 words
+          256 words
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -310,38 +310,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CSE224 - HTTP server</h1>
+            <h1 id="seo-header">CSE224 - Go OOP</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Required-library-packages"><a href="#Required-library-packages" class="headerlink" title="Required library packages"></a>Required library packages</h2><h3 id="Http-package"><a href="#Http-package" class="headerlink" title="Http package"></a>Http package</h3><p><code>net/http</code>: A standard library package in Go to create and handle web-based communication using the HTTP protocol.</p>
-<ul>
-<li><code>http.HandleFunc(path, handler)</code>: When someone visits &#x2F;, run the homeHandler function. e.g., <code>http.HandleFunc(&quot;/&quot;, homeHandler)</code></li>
-<li><code>http.ListenAndServe(addr, nil)</code>: Starts the server and listens on a specific address&#x2F;port. e.g., <code>http.ListenAndServe(&quot;:8080&quot;, nil)</code>, Listen for HTTP requests on port 8080.</li>
-<li><code>func(w http.ResponseWriter, r *http.Request)</code>: This is what handler functions look like.</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">greetHandler</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;<br>    name := r.URL.Query().Get(<span class="hljs-string">&quot;name&quot;</span>) <span class="hljs-comment">// Reads a query parameter from the URL</span><br>    <span class="hljs-keyword">if</span> name == <span class="hljs-string">&quot;&quot;</span> &#123;<br>        name = <span class="hljs-string">&quot;Guest&quot;</span><br>    &#125;<br>    fmt.Fprintf(w, <span class="hljs-string">&quot;Hello, %s!&quot;</span>, name)<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    http.HandleFunc(<span class="hljs-string">&quot;/&quot;</span>, greetoHandler)<br>    http.ListenAndServe(<span class="hljs-string">&quot;:8080&quot;</span>, <span class="hljs-literal">nil</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>Then visit <code>http://localhost:8080/?name=Alice</code>, and will output: Hello, Alice!</p>
-<ul>
-<li><code>r.URL.Query().Get(&quot;id&quot;)</code>: Reads a query parameter from the URL, like <code>/student?id=Alice</code></li>
-<li><code>r.ParseForm()</code>: Used for reading form data submitted via POST.</li>
-<li><code>name := r.FormValue(&quot;student_name&quot;) </code>: Access form values, gives you the first value for that key.</li>
-<li><code>r.Form[&quot;key&quot;]</code>: gives you all values as a slice ([]string)</li>
-<li><code>http.Redirect(...)</code>: Redirects the browser to another URL after a POST request.</li>
-</ul>
-<h3 id="html-template-package"><a href="#html-template-package" class="headerlink" title="html&#x2F;template package"></a>html&#x2F;template package</h3><p><code>html/template</code> is a Go standard library package that helps you create HTML pages with dynamic content.</p>
-<ol>
-<li><p>Define HTML Template</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs HTML"><span class="hljs-comment">&lt;!-- gradeinfo.html --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Student Name: &#123;&#123;.Name&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Grade: &#123;&#123;.Grade&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>Define a go struct</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> GradeInfo <span class="hljs-keyword">struct</span> &#123;<br>	Name  <span class="hljs-type">string</span><br>	Grade <span class="hljs-type">string</span><br>&#125;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>Fill the template</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go">tmpl := template.Must(template.ParseFiles(<span class="hljs-string">&quot;gradeinfo.html&quot;</span>))<br><br>student := GradeInfo&#123;Name: <span class="hljs-string">&quot;Alice&quot;</span>, Grade: <span class="hljs-string">&quot;A+&quot;</span>&#125;<br>tmpl.Execute(w, student)<br></code></pre></td></tr></table></figure></li>
-</ol>
-<p><code>tmpl.Execute(w, students)</code> use template for <code>index.html</code>, fill data from student, dynamically generate a HTML page, and finally write the page to w.</p>
+                <h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><h3 id="Named-Type"><a href="#Named-Type" class="headerlink" title="Named Type"></a>Named Type</h3><p>I can create a new named type MyInt that is based on int, but is treated as a distinct type by the compiler.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> MyInt <span class="hljs-type">int</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="struct-methods"><a href="#struct-methods" class="headerlink" title="struct + methods"></a>struct + methods</h3><p>Go doesn’t have traditional classes, instead, it uses Custom types + attached methods. As a result, structs in go can hold both data and associated methods. Example:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Celsius <span class="hljs-type">float64</span><br><br><span class="hljs-comment">// This defines a method on the Celsius type.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Celsius)</span></span> ToFahrenheit() <span class="hljs-type">float64</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-type">float64</span>(c)*<span class="hljs-number">9</span>/<span class="hljs-number">5</span> + <span class="hljs-number">32</span>  <span class="hljs-comment">// need type convertion</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    temp := Celsius(<span class="hljs-number">25</span>)<br>    fmt.Println(<span class="hljs-string">&quot;In Fahrenheit:&quot;</span>, temp.ToFahrenheit()) <span class="hljs-comment">// 77</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Another example: User behaves just like a class</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>    Age  <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-comment">// This function is like a method defined in a class</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(u User)</span></span> Greet() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, &quot;</span> + u.Name<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Constructors"><a href="#Constructors" class="headerlink" title="Constructors"></a>Constructors</h3><p>Go does not have built-in constructors. We define a function by ourself as a constructor:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewUser</span><span class="hljs-params">(name <span class="hljs-type">string</span>, age <span class="hljs-type">int</span>)</span></span> User &#123;<br>    <span class="hljs-keyword">return</span> User&#123;Name: name, Age: age&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Encapsulation"><a href="#Encapsulation" class="headerlink" title="Encapsulation"></a>Encapsulation</h3><p>Go doesn’t use public or private keywords like Java or C++. Instead, it uses capitalization to control visibility.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Account <span class="hljs-keyword">struct</span> &#123;<br>    Owner   <span class="hljs-type">string</span>  <span class="hljs-comment">// Exported, other packages can read/write it.</span><br>    balance <span class="hljs-type">float64</span> <span class="hljs-comment">// Unexported, only code inside this package can access it.</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Composition"><a href="#Composition" class="headerlink" title="Composition"></a>Composition</h2><p>Composition over Inheritance: Go doesn’t have classes or inheritance, but it has composition using embedding.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Animal <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(a Animal)</span></span> Speak() &#123;<br>    fmt.Println(a.Name, <span class="hljs-string">&quot;makes a sound&quot;</span>)<br>&#125;<br><br><span class="hljs-keyword">type</span> Dog <span class="hljs-keyword">struct</span> &#123;<br>    Animal <span class="hljs-comment">// embedded</span><br>    Breed <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-comment">// Now Dog inherits the Speak() method from Animal.</span><br>d := Dog&#123;Animal: Animal&#123;Name: <span class="hljs-string">&quot;Buddy&quot;</span>&#125;, Breed: <span class="hljs-string">&quot;Labrador&quot;</span>&#125;<br>d.Speak() <span class="hljs-comment">// Buddy makes a sound</span><br></code></pre></td></tr></table></figure>
+<p>By composition, I can resue methods.</p>
+<h3 id="Override"><a href="#Override" class="headerlink" title="Override"></a>Override</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-comment">// Define a method with the same name on the outer struct, and it will shadow the embedded (override)</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(d Dog)</span></span> Speak() &#123;<br>    fmt.Println(d.Name, <span class="hljs-string">&quot;barks!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="Interface-Polymorphism-and-Abstraction"><a href="#Interface-Polymorphism-and-Abstraction" class="headerlink" title="Interface (Polymorphism and Abstraction)"></a>Interface (Polymorphism and Abstraction)</h2><p>An interface in Go is a set of method signatures. <strong>If a type has those methods, it automatically implements the interface</strong>.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Greeter <span class="hljs-keyword">interface</span> &#123;<br>    Greet() <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span>&#123;&#125;<br><br><span class="hljs-comment">// Person has a Greet() method, so it automatically satisfies the Greeter interface.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Person)</span></span> Greet() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello!&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sayHello</span><span class="hljs-params">(g Greeter)</span></span> &#123;<br>    <span class="hljs-comment">// any type that has Greet() can be passed as a parameter (Polymorphism)</span><br>    fmt.Println(g.Greet())<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    p := Person&#123;&#125;<br>    sayHello(p) <span class="hljs-comment">// Hello!</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>If the method is defined on a pointer receiver, only the pointer type implements the interface.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Go"><span class="hljs-keyword">type</span> Greeter <span class="hljs-keyword">interface</span> &#123;<br>    Greet()<br>&#125;<br><br><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-comment">// This means only *Person (pointer) has the method Greet()</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *Person)</span></span> Greet() &#123;<br>    fmt.Println(<span class="hljs-string">&quot;Hello, my name is&quot;</span>, p.Name)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> g Greeter<br><br>    p := Person&#123;Name: <span class="hljs-string">&quot;Alice&quot;</span>&#125;<br><br>    <span class="hljs-comment">// g = p         // ❌ error (p is a Person (value))</span><br>    g = &amp;p           <span class="hljs-comment">// ✅ &amp;p is a *Person</span><br>    g.Greet()<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>In this example, <code>Person</code> doesn’t implement the interface, but <code>*Person</code> does, so assigning a <code>Person</code> to a <code>Greeter</code> causes an error. (<code>g = &amp;p</code> works)</p>
 
                 
               </div>
@@ -387,8 +391,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSE224 - HTTP server</div>
-      <div>https://thiefcat.github.io/2025/05/21/CSE224/http-server/</div>
+      <div>CSE224 - Go OOP</div>
+      <div>https://thiefcat.github.io/2025/05/30/CSE224/go-oop/</div>
     </div>
     <div class="license-meta">
       
@@ -400,7 +404,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 21, 2025</div>
+          <div>May 30, 2025</div>
         </div>
       
       
@@ -432,18 +436,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/30/CSE224/go-oop/" title="CSE224 - Go OOP">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE224 - Go OOP</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/10/CSE224/go-concurrent/" title="CSE224 - Go Concurrent Programming">
-                        <span class="hidden-mobile">CSE224 - Go Concurrent Programming</span>
+                      <a href="/2025/05/21/CSE224/http-server/" title="CSE224 - HTTP server">
+                        <span class="hidden-mobile">CSE224 - HTTP server</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
