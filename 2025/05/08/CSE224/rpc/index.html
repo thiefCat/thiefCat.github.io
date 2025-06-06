@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces RPC using Go">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-09T04:31:42.000Z">
-<meta property="article:modified_time" content="2025-05-12T22:05:17.554Z">
+<meta property="article:modified_time" content="2025-06-06T08:31:57.418Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Go">
 <meta property="article:tag" content="RPC">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          318 words
+          316 words
         
       </span>
     
@@ -324,7 +324,7 @@
 <li>Have different data alignment requirements.</li>
 <li>Represent floating point numbers differently.</li>
 </ol>
-<h3 id="Interface-Description-Language-IDL"><a href="#Interface-Description-Language-IDL" class="headerlink" title="Interface Description Language (IDL)"></a>Interface Description Language (IDL)</h3><p>Mechanism to pass procedure parameters and return values in a machine- and language-independent way. </p>
+<h3 id="Interface-Description-Language-IDL"><a href="#Interface-Description-Language-IDL" class="headerlink" title="Interface Description Language (IDL)"></a>Interface Description Language (IDL)</h3><p>Mechanism to pass procedure parameters and return values in a machine and language independent way. </p>
 <h4 id="Protobuf"><a href="#Protobuf" class="headerlink" title="Protobuf"></a>Protobuf</h4><p>Protocol Buffers (protobuf) is a language-neutral format for defining structured data by gPRC.</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">syntax</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;proto3&quot;</span><span class="hljs-comment">;</span><br><br>message NumberEntry &#123;<br>    int64 ts <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>    int32 number <span class="hljs-operator">=</span> <span class="hljs-number">2</span><span class="hljs-comment">;</span><br>&#125;<br><br>service NumberService &#123;<br>    rpc SendNumber(NumberEntry) returns (Ack)<span class="hljs-comment">;</span><br>&#125;<br><br>message Ack &#123;<br>    string status <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -375,7 +375,7 @@
 <h3 id="Start-the-gRPC-Server"><a href="#Start-the-gRPC-Server" class="headerlink" title="Start the gRPC Server"></a>Start the gRPC Server</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Go">grpcServer := grpc.NewServer()<br>pb.RegisterRKVSServiceServer(grpcServer, s) <span class="hljs-comment">// s is an object that implements all the methods of RKVSServiceServer</span><br><br>lis, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, addr)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>    log.Fatalf(<span class="hljs-string">&quot;Failed to listen: %v&quot;</span>, err)<br>&#125;<br>log.Printf(<span class="hljs-string">&quot;Listening on %s&quot;</span>, addr)<br>grpcServer.Serve(lis) <span class="hljs-comment">// Starts the main server loop</span><br></code></pre></td></tr></table></figure>
 
 
-<h3 id="Make-gRPC-Requests-as-a-Client"><a href="#Make-gRPC-Requests-as-a-Client" class="headerlink" title="Make gRPC Requests as a Client"></a>Make gRPC Requests as a Client</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">conn, err := grpc.Dial(peerAddr, grpc.WithTransportCredentials(insecure.NewCredentials())) <span class="hljs-comment">// create a connection to server</span><br><span class="hljs-keyword">defer</span> conn.Close()<br>client := pb.NewRKVSServiceClient(conn) <span class="hljs-comment">// create a client stub</span><br><br>_, err = client.Replicate(context.Background(), &amp;pb.ReplicateRequest&#123;Key: <span class="hljs-string">&quot;foo&quot;</span>, Value: <span class="hljs-string">&quot;bar&quot;</span>&#125;)<br></code></pre></td></tr></table></figure>
+<h3 id="Make-gRPC-Requests-as-a-Client"><a href="#Make-gRPC-Requests-as-a-Client" class="headerlink" title="Make gRPC Requests as a Client"></a>Make gRPC Requests as a Client</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Go">conn, err := grpc.NewClient(peerAddr, grpc.WithTransportCredentials(insecure.NewCredentials())) <span class="hljs-comment">// create a connection to server</span><br><span class="hljs-keyword">defer</span> conn.Close()<br>client := pb.NewRKVSServiceClient(conn) <span class="hljs-comment">// create a client stub</span><br><br>_, err = client.Replicate(context.Background(), &amp;pb.ReplicateRequest&#123;Key: <span class="hljs-string">&quot;foo&quot;</span>, Value: <span class="hljs-string">&quot;bar&quot;</span>&#125;)<br></code></pre></td></tr></table></figure>
                 
               </div>
             
