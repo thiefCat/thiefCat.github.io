@@ -16,23 +16,21 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces Spring Framework, and how it works.">
+    <meta name="description" content="背景UTF-8什么是序列化&#x2F;反序列化？序列化&#x2F;反序列化方法JSONJSON原理（记得修改reflection里的超链接）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="后台开发基础知识 - Spring原理">
-<meta property="og:url" content="https://thiefcat.github.io/2025/07/03/SWE-basic/spring-how/index.html">
+<meta property="og:title" content="serialization-deserialization">
+<meta property="og:url" content="https://thiefcat.github.io/2025/07/03/SWE-basic/serialization-deserialization/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces Spring Framework, and how it works.">
+<meta property="og:description" content="背景UTF-8什么是序列化&#x2F;反序列化？序列化&#x2F;反序列化方法JSONJSON原理（记得修改reflection里的超链接）">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-02T16:51:26.000Z">
-<meta property="article:modified_time" content="2025-07-03T03:26:29.268Z">
+<meta property="article:published_time" content="2025-07-03T02:46:20.000Z">
+<meta property="article:modified_time" content="2025-07-03T03:22:33.703Z">
 <meta property="article:author" content="小贼猫">
-<meta property="article:tag" content="Backend Development">
-<meta property="article:tag" content="Spring Boot">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>后台开发基础知识 - Spring原理 - Songlin&#39;s Space</title>
+  <title>serialization-deserialization - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">后台开发基础知识 - Spring原理</span>
+            <span id="subtitle">serialization-deserialization</span>
           
         </div>
 
@@ -243,7 +241,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-07-03 00:51" pubdate>
+        <time datetime="2025-07-03 10:46" pubdate>
           July 3, 2025 am
         </time>
       </span>
@@ -255,7 +253,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          94 words
+          38 words
         
       </span>
     
@@ -311,14 +309,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">后台开发基础知识 - Spring原理</h1>
+            <h1 id="seo-header">serialization-deserialization</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>反射是 Java 提供的一种机制，可以在程序运行时（不是写代码时），动态地获取类的信息（比如类的名字、方法、变量、构造函数等），甚至动态地调用对象的方法或访问它的属性。</p>
-<p>添加反射超链接</p>
-<h2 id="Spring原理"><a href="#Spring原理" class="headerlink" title="Spring原理"></a>Spring原理</h2><h3 id="IOC原理"><a href="#IOC原理" class="headerlink" title="IOC原理"></a>IOC原理</h3><h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><h3 id="AOP原理"><a href="#AOP原理" class="headerlink" title="AOP原理"></a>AOP原理</h3><h3 id="解决循环依赖"><a href="#解决循环依赖" class="headerlink" title="解决循环依赖"></a>解决循环依赖</h3>
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><h2 id="什么是序列化-反序列化？"><a href="#什么是序列化-反序列化？" class="headerlink" title="什么是序列化&#x2F;反序列化？"></a>什么是序列化&#x2F;反序列化？</h2><h2 id="序列化-反序列化方法"><a href="#序列化-反序列化方法" class="headerlink" title="序列化&#x2F;反序列化方法"></a>序列化&#x2F;反序列化方法</h2><h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><h4 id="JSON原理"><a href="#JSON原理" class="headerlink" title="JSON原理"></a>JSON原理</h4><p>（记得修改reflection里的超链接）</p>
+
                 
               </div>
             
@@ -326,36 +323,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="category-chain-item">后台开发基础知识</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Backend-Development/" class="print-no-link">#Backend Development</a>
-      
-        <a href="/tags/Spring-Boot/" class="print-no-link">#Spring Boot</a>
-      
-    </div>
   
 </div>
 
@@ -365,8 +332,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>后台开发基础知识 - Spring原理</div>
-      <div>https://thiefcat.github.io/2025/07/03/SWE-basic/spring-how/</div>
+      <div>serialization-deserialization</div>
+      <div>https://thiefcat.github.io/2025/07/03/SWE-basic/serialization-deserialization/</div>
     </div>
     <div class="license-meta">
       
@@ -410,9 +377,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/07/03/JAVA/java-oop/" title="JAVA学习 - JAVA Object Oriented Programming">
+                      <a href="/2025/07/04/JAVA/java-jvm/" title="JAVA学习 - JVM">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JAVA学习 - JAVA Object Oriented Programming</span>
+                        <span class="hidden-mobile">JAVA学习 - JVM</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -420,8 +387,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/07/02/SWE-basic/spring-basic/" title="后台开发基础知识 - Spring简单介绍">
-                        <span class="hidden-mobile">后台开发基础知识 - Spring简单介绍</span>
+                      <a href="/2025/07/03/JAVA/reflection/" title="JAVA学习 - 反射">
+                        <span class="hidden-mobile">JAVA学习 - 反射</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

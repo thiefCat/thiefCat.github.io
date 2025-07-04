@@ -16,23 +16,23 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces Spring Framework, and how it works.">
+    <meta name="description" content="This blog introduces JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="后台开发基础知识 - Spring原理">
-<meta property="og:url" content="https://thiefcat.github.io/2025/07/03/SWE-basic/spring-how/index.html">
+<meta property="og:title" content="JAVA学习 - JVM">
+<meta property="og:url" content="https://thiefcat.github.io/2025/07/04/JAVA/java-jvm/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces Spring Framework, and how it works.">
+<meta property="og:description" content="This blog introduces JVM">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-02T16:51:26.000Z">
-<meta property="article:modified_time" content="2025-07-03T03:26:29.268Z">
+<meta property="article:published_time" content="2025-07-04T14:36:05.000Z">
+<meta property="article:modified_time" content="2025-07-04T16:40:28.764Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Backend Development">
-<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>后台开发基础知识 - Spring原理 - Songlin&#39;s Space</title>
+  <title>JAVA学习 - JVM - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">后台开发基础知识 - Spring原理</span>
+            <span id="subtitle">JAVA学习 - JVM</span>
           
         </div>
 
@@ -243,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-07-03 00:51" pubdate>
-          July 3, 2025 am
+        <time datetime="2025-07-04 22:36" pubdate>
+          July 4, 2025 pm
         </time>
       </span>
     
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          94 words
+          803 words
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          1 mins
+          4 mins
         
       </span>
     
@@ -311,14 +311,50 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">后台开发基础知识 - Spring原理</h1>
+            <h1 id="seo-header">JAVA学习 - JVM</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>反射是 Java 提供的一种机制，可以在程序运行时（不是写代码时），动态地获取类的信息（比如类的名字、方法、变量、构造函数等），甚至动态地调用对象的方法或访问它的属性。</p>
-<p>添加反射超链接</p>
-<h2 id="Spring原理"><a href="#Spring原理" class="headerlink" title="Spring原理"></a>Spring原理</h2><h3 id="IOC原理"><a href="#IOC原理" class="headerlink" title="IOC原理"></a>IOC原理</h3><h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><h3 id="AOP原理"><a href="#AOP原理" class="headerlink" title="AOP原理"></a>AOP原理</h3><h3 id="解决循环依赖"><a href="#解决循环依赖" class="headerlink" title="解决循环依赖"></a>解决循环依赖</h3>
+                <h2 id="什么是JVM"><a href="#什么是JVM" class="headerlink" title="什么是JVM"></a>什么是JVM</h2><p>Java的理念是：Write Once, Run Anywhere。Java编译器把 Java 程序编译成“字节码”（.class 文件），字节码可以在所有平台运行，这是JAVA特性之一。字节码是 JVM 能理解的“中间语言”，JVM可以把字节码翻译成你的电脑能理解的机器指令。因此只需要在不同的机器上安装适配不同架构的JVM，就可以实现 Write Once, Run Anywhere。</p>
+<h3 id="JVM的功能"><a href="#JVM的功能" class="headerlink" title="JVM的功能"></a>JVM的功能</h3><ul>
+<li>跨平台运行</li>
+<li>内存管理：JAVA帮助开发者垃圾回收，分配内存</li>
+<li>性能优化：即时编译器（Just-In-Time ，JIT ），将热点代码（频繁执行的代码段）编译成本地机器码，以提高程序的执行性能</li>
+<li>安全性：异常处理，类加载时字节码验证，沙箱环境等</li>
+</ul>
+<h2 id="JVM的运行时数据区域"><a href="#JVM的运行时数据区域" class="headerlink" title="JVM的运行时数据区域"></a>JVM的运行时数据区域</h2><p>以JDK 1.7为例，</p>
+<ul>
+<li>线程私有的：<ul>
+<li>程序计数器：当前线程执行的字节码位置</li>
+<li>Java 虚拟机栈：每个线程的JAVA方法的“方法调用栈”，包含栈帧</li>
+<li>本地方法栈：给调用 C、C++ 等非 Java 方法（native 方法）用的栈</li>
+</ul>
+</li>
+<li>线程共享的<ul>
+<li>堆：用来存储所有 Java 对象实例，由垃圾回收器（GC）统一管理</li>
+<li>方法区：用来存储类的元数据（类的信息、常量、静态变量、方法字节码等）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>类加载器是指<strong>把类的字节码（通常是 .class 文件）加载到 JVM 的内存中</strong>，并生成相应的 Class 对象的工具。具体来说，类加载器把字节码（.class 文件）加载到 JVM 的方法区（Method Area）（Java 8 之后是 元空间（Metaspace）），然后在堆中创建一个 Class 对象来存储类的信息，方便反射操作。</p>
+<p>类并不是一开始就全部加载。类加载器可以按需加载（lazy loading）：当你第一次使用某个类时，它才去加载它。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>    <span class="hljs-keyword">static</span> List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Person 类被初始化&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-type">int</span> <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sayHello</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>根据以上的例子，类加载器执行过程：</p>
+<ol>
+<li>加载：类加载器通过类的名字 Person 找到 Person.class 文件，将 .class 文件的字节码加载到 JVM，并在堆中生成一个代表这个类的 java.lang.Class 对象作为数据访问的入口</li>
+<li>验证：检查字节码是否合法</li>
+<li>准备：为静态变量（<code>List&lt;String&gt; list</code>）分配内存，并赋初始值 null（此时静态变量只是占位，还没初始化）</li>
+<li>解析：将符号引用替换为直接引用，比如将<code>System.out.println</code>方法名解析为真正的内存地址</li>
+<li>初始化：执行静态代码块，给静态变量赋值（这里的list变量本身在方法区，指向的HashMap对象实例在堆里创建）</li>
+</ol>
+<h3 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Class</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Class</span><span class="hljs-params">()</span> &#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>比如，当JVM加载String类时，会执行<code>Class cls = new Class(String);</code>在堆中创建Class对象。这个对象包含类名、包名、父类、实现的接口、所有方法、字段等对应class的所有信息。</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">Java 堆：</span><br><span class="hljs-attribute">┌────────────────────────────┐</span><br><span class="hljs-attribute">│ Class&lt;Person&gt; clazz        │</span><br><span class="hljs-attribute">│ ── name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Person&quot;          │</span><br><span class="hljs-attribute">│ ── loader</span><span class="hljs-punctuation">:</span> <span class="hljs-string">AppClassLoader  │</span><br><span class="hljs-attribute">│ ── klass_pointer →────────────┐</span><br><span class="hljs-attribute">└────────────────────────────┘  │</span><br><span class="hljs-attribute">                                |</span><br><span class="hljs-attribute">方法区（Metaspace）：              ▼</span><br><span class="hljs-attribute">┌────────────────────────────┐</span><br><span class="hljs-attribute">│ Class Metadata (Klass*)    │</span><br><span class="hljs-attribute">│ ── className</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Person&quot;     │</span><br><span class="hljs-attribute">│ ── superClass</span><span class="hljs-punctuation">:</span> <span class="hljs-string">java.lang.Object</span><br><span class="hljs-attribute">│ ── interfaces</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...         │</span><br><span class="hljs-attribute">│ ── methods[]</span><span class="hljs-punctuation">:</span> <span class="hljs-string">sayHello()   │</span><br><span class="hljs-attribute">│ ── fields[]</span><span class="hljs-punctuation">:</span> <span class="hljs-string">name          │</span><br><span class="hljs-attribute">│ ── constantPool</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...       │</span><br><span class="hljs-attribute">│ ── annotations</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...        │</span><br>└────────────────────────────┘<br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
@@ -336,7 +372,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="category-chain-item">后台开发基础知识</a>
+  <a href="/categories/JAVA%E5%AD%A6%E4%B9%A0/" class="category-chain-item">JAVA学习</a>
   
   
 
@@ -353,7 +389,7 @@
       
         <a href="/tags/Backend-Development/" class="print-no-link">#Backend Development</a>
       
-        <a href="/tags/Spring-Boot/" class="print-no-link">#Spring Boot</a>
+        <a href="/tags/JAVA/" class="print-no-link">#JAVA</a>
       
     </div>
   
@@ -365,8 +401,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>后台开发基础知识 - Spring原理</div>
-      <div>https://thiefcat.github.io/2025/07/03/SWE-basic/spring-how/</div>
+      <div>JAVA学习 - JVM</div>
+      <div>https://thiefcat.github.io/2025/07/04/JAVA/java-jvm/</div>
     </div>
     <div class="license-meta">
       
@@ -378,7 +414,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 3, 2025</div>
+          <div>July 4, 2025</div>
         </div>
       
       
@@ -410,18 +446,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/07/03/JAVA/java-oop/" title="JAVA学习 - JAVA Object Oriented Programming">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JAVA学习 - JAVA Object Oriented Programming</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/07/02/SWE-basic/spring-basic/" title="后台开发基础知识 - Spring简单介绍">
-                        <span class="hidden-mobile">后台开发基础知识 - Spring简单介绍</span>
+                      <a href="/2025/07/03/SWE-basic/serialization-deserialization/" title="serialization-deserialization">
+                        <span class="hidden-mobile">serialization-deserialization</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
