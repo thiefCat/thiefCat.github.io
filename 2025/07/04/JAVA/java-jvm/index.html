@@ -24,7 +24,7 @@
 <meta property="og:description" content="This blog introduces JVM">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-04T14:36:05.000Z">
-<meta property="article:modified_time" content="2025-07-04T16:40:28.764Z">
+<meta property="article:modified_time" content="2025-07-04T17:12:39.856Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Backend Development">
 <meta property="article:tag" content="JAVA">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          803 words
+          899 words
         
       </span>
     
@@ -338,7 +338,7 @@
 </li>
 </ul>
 <h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>类加载器是指<strong>把类的字节码（通常是 .class 文件）加载到 JVM 的内存中</strong>，并生成相应的 Class 对象的工具。具体来说，类加载器把字节码（.class 文件）加载到 JVM 的方法区（Method Area）（Java 8 之后是 元空间（Metaspace）），然后在堆中创建一个 Class 对象来存储类的信息，方便反射操作。</p>
-<p>类并不是一开始就全部加载。类加载器可以按需加载（lazy loading）：当你第一次使用某个类时，它才去加载它。</p>
+<p>类并不是一开始就全部加载。类加载器可以按需加载：当你第一次使用某个类时，它才去加载它。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>    <span class="hljs-keyword">static</span> List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Person 类被初始化&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-type">int</span> <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sayHello</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>根据以上的例子，类加载器执行过程：</p>
@@ -351,9 +351,22 @@
 </ol>
 <h3 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Class</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Class</span><span class="hljs-params">()</span> &#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>比如，当JVM加载String类时，会执行<code>Class cls = new Class(String);</code>在堆中创建Class对象。这个对象包含类名、包名、父类、实现的接口、所有方法、字段等对应class的所有信息。</p>
+<p>比如，当JVM加载String类时，会执行<code>Class cls = new Class(String);</code>在堆中创建Class对象。这个对象包含类名、包名、父类、实现的接口、所有方法、字段等对应class的所有信息。内存分布：</p>
 <figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">Java 堆：</span><br><span class="hljs-attribute">┌────────────────────────────┐</span><br><span class="hljs-attribute">│ Class&lt;Person&gt; clazz        │</span><br><span class="hljs-attribute">│ ── name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Person&quot;          │</span><br><span class="hljs-attribute">│ ── loader</span><span class="hljs-punctuation">:</span> <span class="hljs-string">AppClassLoader  │</span><br><span class="hljs-attribute">│ ── klass_pointer →────────────┐</span><br><span class="hljs-attribute">└────────────────────────────┘  │</span><br><span class="hljs-attribute">                                |</span><br><span class="hljs-attribute">方法区（Metaspace）：              ▼</span><br><span class="hljs-attribute">┌────────────────────────────┐</span><br><span class="hljs-attribute">│ Class Metadata (Klass*)    │</span><br><span class="hljs-attribute">│ ── className</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Person&quot;     │</span><br><span class="hljs-attribute">│ ── superClass</span><span class="hljs-punctuation">:</span> <span class="hljs-string">java.lang.Object</span><br><span class="hljs-attribute">│ ── interfaces</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...         │</span><br><span class="hljs-attribute">│ ── methods[]</span><span class="hljs-punctuation">:</span> <span class="hljs-string">sayHello()   │</span><br><span class="hljs-attribute">│ ── fields[]</span><span class="hljs-punctuation">:</span> <span class="hljs-string">name          │</span><br><span class="hljs-attribute">│ ── constantPool</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...       │</span><br><span class="hljs-attribute">│ ── annotations</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...        │</span><br>└────────────────────────────┘<br></code></pre></td></tr></table></figure>
 
+<h2 id="JAVA对象在内存中的结构"><a href="#JAVA对象在内存中的结构" class="headerlink" title="JAVA对象在内存中的结构"></a>JAVA对象在内存中的结构</h2><ol>
+<li>对象头<br>包含：</li>
+</ol>
+<ul>
+<li>标记字段（Mark Word）：指向哈希码（HashCode）、GC 分代年龄、锁状态标志、线程持有的锁、偏向线程 ID等。</li>
+<li>类型指针（Klass pointer）：指向类的元数据，是一个在方法区的C++结构，与上文Class对象的klass_pointer指向的结构一样。</li>
+</ul>
+<ol start="2">
+<li><p>实例数据</p>
+</li>
+<li><p>对齐填充</p>
+</li>
+</ol>
 
                 
               </div>
@@ -445,6 +458,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/07/05/JAVA/reflection/" title="JAVA学习 - 反射">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JAVA学习 - 反射</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
