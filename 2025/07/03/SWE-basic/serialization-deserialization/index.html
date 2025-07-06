@@ -16,15 +16,15 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景UTF-8什么是序列化&#x2F;反序列化？序列化&#x2F;反序列化方法JSONJSON原理（记得修改reflection里的超链接）">
+    <meta name="description" content="背景UTF-8Unicode Transformation Format – 8-bit，用于在计算机中表示世界上所有的文字字符。 最早的编码是用ASCII，用一个字节（8位）表示字符，但它最多只能表示 128 个字符，不能表示世界上所有语言和符号。UTF-8 使用 1到4个字节 来编码一个字符，向后兼容 ASCII（前128个字符完全一样）。它是目前最广泛使用的字符编码，尤其是在网络、网页、编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="serialization-deserialization">
 <meta property="og:url" content="https://thiefcat.github.io/2025/07/03/SWE-basic/serialization-deserialization/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="背景UTF-8什么是序列化&#x2F;反序列化？序列化&#x2F;反序列化方法JSONJSON原理（记得修改reflection里的超链接）">
+<meta property="og:description" content="背景UTF-8Unicode Transformation Format – 8-bit，用于在计算机中表示世界上所有的文字字符。 最早的编码是用ASCII，用一个字节（8位）表示字符，但它最多只能表示 128 个字符，不能表示世界上所有语言和符号。UTF-8 使用 1到4个字节 来编码一个字符，向后兼容 ASCII（前128个字符完全一样）。它是目前最广泛使用的字符编码，尤其是在网络、网页、编程">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-03T02:46:20.000Z">
-<meta property="article:modified_time" content="2025-07-03T03:22:33.703Z">
+<meta property="article:modified_time" content="2025-07-06T09:44:42.210Z">
 <meta property="article:author" content="小贼猫">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -253,7 +253,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          38 words
+          285 words
         
       </span>
     
@@ -264,7 +264,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -314,7 +314,11 @@
             
               <div class="markdown-body">
                 
-                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><h2 id="什么是序列化-反序列化？"><a href="#什么是序列化-反序列化？" class="headerlink" title="什么是序列化&#x2F;反序列化？"></a>什么是序列化&#x2F;反序列化？</h2><h2 id="序列化-反序列化方法"><a href="#序列化-反序列化方法" class="headerlink" title="序列化&#x2F;反序列化方法"></a>序列化&#x2F;反序列化方法</h2><h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><h4 id="JSON原理"><a href="#JSON原理" class="headerlink" title="JSON原理"></a>JSON原理</h4><p>（记得修改reflection里的超链接）</p>
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>Unicode Transformation Format – 8-bit，用于在计算机中表示世界上所有的文字字符。</p>
+<p>最早的编码是用ASCII，用一个字节（8位）表示字符，但它最多只能表示 128 个字符，不能表示世界上所有语言和符号。UTF-8 使用 1到4个字节 来编码一个字符，向后兼容 ASCII（前128个字符完全一样）。它是目前最广泛使用的字符编码，尤其是在网络、网页、编程语言中。</p>
+<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>序列化就是把一个在内存中的数据对象（如变量、对象、数据结构）转换成一个可以存储或传输的格式的过程。在程序运行中，对象位于内存，如果想要把对象保存到硬盘、发送到网络、或写入文件，你必须把它转换成一种通用格式，比如 JSON、XML、或二进制流，这就是序列化。</p>
+<p>反序列化是把序列化后的数据重新变成程序能使用的对象的过程。</p>
+<h2 id="序列化-反序列化方法"><a href="#序列化-反序列化方法" class="headerlink" title="序列化&#x2F;反序列化方法"></a>序列化&#x2F;反序列化方法</h2><h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><h4 id="JSON原理"><a href="#JSON原理" class="headerlink" title="JSON原理"></a>JSON原理</h4><p>（记得修改reflection里的超链接）</p>
 
                 
               </div>
