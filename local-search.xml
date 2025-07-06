@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>JAVA学习 - Serialization/Deserialization</title>
+    <link href="/2025/07/06/SWE-basic/serialization-deserialization/"/>
+    <url>/2025/07/06/SWE-basic/serialization-deserialization/</url>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>Unicode Transformation Format – 8-bit，用于在计算机中表示世界上所有的文字字符。</p><p>最早的编码是用ASCII，用一个字节（8位）表示字符，但它最多只能表示 128 个字符，不能表示世界上所有语言和符号。UTF-8 使用 1到4个字节 来编码一个字符，向后兼容 ASCII（前128个字符完全一样）。它是目前最广泛使用的字符编码，尤其是在网络、网页、编程语言中。</p><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>序列化就是把一个在内存中的数据对象（如变量、对象、数据结构）转换成一个可以存储或传输的格式的过程。<strong>在程序运行中，对象位于内存，如果想要把对象保存到硬盘、发送到网络、或写入文件，你必须把它转换成一种通用格式，比如 JSON、XML、或二进制流，这就是序列化</strong>。</p><p>反序列化是把序列化后的数据重新变成程序能使用的对象的过程。</p><h2 id="序列化-反序列化方法"><a href="#序列化-反序列化方法" class="headerlink" title="序列化&#x2F;反序列化方法"></a>序列化&#x2F;反序列化方法</h2><h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><p>JSON (JavaScript Object Notation)，是一个纯文本格式的数据容器。几乎所有的 Web API 都使用 JSON 作为数据交换标准，许多应用也用 <code>.json</code> 文件保存设置</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">&#123;<br>  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Alice&quot;</span>,<br>  <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>,<br>  <span class="hljs-string">&quot;is_student&quot;</span>: <span class="hljs-literal">false</span>,<br>  <span class="hljs-string">&quot;skills&quot;</span>: [<span class="hljs-string">&quot;Python&quot;</span>, <span class="hljs-string">&quot;Java&quot;</span>, <span class="hljs-string">&quot;C++&quot;</span>]<br>&#125;<br></code></pre></td></tr></table></figure><h4 id="JSON原理"><a href="#JSON原理" class="headerlink" title="JSON原理"></a>JSON原理</h4><p>JAVA语言中可以使用Jackson库来做序列化&#x2F;反序列化。JSON 使用 UTF-8来编码，底层存储时，JSON 实际是一个 UTF-8 字节流。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;<br><br><span class="hljs-type">Person</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>();<br>p.name = <span class="hljs-string">&quot;Alice&quot;</span>;<br>p.age = <span class="hljs-number">25</span>;<br><br><span class="hljs-comment">// 创建 ObjectMapper（JSON 处理器）</span><br><span class="hljs-type">ObjectMapper</span> <span class="hljs-variable">mapper</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectMapper</span>();<br><br><span class="hljs-comment">// 序列化</span><br><span class="hljs-type">String</span> <span class="hljs-variable">jsonStr</span> <span class="hljs-operator">=</span> mapper.writeValueAsString(p);<br>System.out.println(jsonStr); <span class="hljs-comment">// 输出：&#123;&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:25&#125;</span><br><br><span class="hljs-comment">// 反序列化</span><br><span class="hljs-type">String</span> <span class="hljs-variable">jsonStr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&#123;\&quot;name\&quot;:\&quot;Alice\&quot;,\&quot;age\&quot;:25&#125;&quot;</span>;<br><span class="hljs-type">Person</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> mapper.readValue(jsonStr, Person.class);<br></code></pre></td></tr></table></figure><p>序列化时，Jackson 会使用 Java 的反射机制，找到这个类的所有字段和值，然后 Jackson 根据字段类型判断要怎么转换为 JSON 语法，最后构建 JSON 字符串。</p><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><p>XML（eXtensible Markup Language） 是一种可扩展的标记语言，用于存储和传输数据。</p><p>XML示例：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-comment">&lt;!-- 用子标签表示信息 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">person</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Alice<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">age</span>&gt;</span>25<span class="hljs-tag">&lt;/<span class="hljs-name">age</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">skills</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">skill</span>&gt;</span>Java<span class="hljs-tag">&lt;/<span class="hljs-name">skill</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">skill</span>&gt;</span>Python<span class="hljs-tag">&lt;/<span class="hljs-name">skill</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">skills</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">person</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 也可以用属性表示信息 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">person</span> <span class="hljs-attr">age</span>=<span class="hljs-string">&quot;25&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Alice&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">city</span>&gt;</span>Beijing<span class="hljs-tag">&lt;/<span class="hljs-name">city</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">person</span>&gt;</span><br></code></pre></td></tr></table></figure><h3 id="Protobuf"><a href="#Protobuf" class="headerlink" title="Protobuf"></a>Protobuf</h3><p>Protocol Buffers（Protobuf） 是由 Google 开发的一种高效、结构化、跨语言的数据序列化协议。它把数据结构转换成紧凑的二进制格式，用于在网络中传输或存储。<a href="https://thiefcat.github.io/2025/05/08/CSE224/rpc/#Protobuf">Protobuf 详细介绍</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>JAVA学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Backend Development</tag>
+      
+      <tag>JAVA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JAVA学习 - 反射</title>
     <link href="/2025/07/05/JAVA/reflection/"/>
     <url>/2025/07/05/JAVA/reflection/</url>
@@ -56,19 +83,6 @@
       <tag>JVM</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>serialization-deserialization</title>
-    <link href="/2025/07/03/SWE-basic/serialization-deserialization/"/>
-    <url>/2025/07/03/SWE-basic/serialization-deserialization/</url>
-    
-    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>Unicode Transformation Format – 8-bit，用于在计算机中表示世界上所有的文字字符。</p><p>最早的编码是用ASCII，用一个字节（8位）表示字符，但它最多只能表示 128 个字符，不能表示世界上所有语言和符号。UTF-8 使用 1到4个字节 来编码一个字符，向后兼容 ASCII（前128个字符完全一样）。它是目前最广泛使用的字符编码，尤其是在网络、网页、编程语言中。</p><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>序列化就是把一个在内存中的数据对象（如变量、对象、数据结构）转换成一个可以存储或传输的格式的过程。在程序运行中，对象位于内存，如果想要把对象保存到硬盘、发送到网络、或写入文件，你必须把它转换成一种通用格式，比如 JSON、XML、或二进制流，这就是序列化。</p><p>反序列化是把序列化后的数据重新变成程序能使用的对象的过程。</p><h2 id="序列化-反序列化方法"><a href="#序列化-反序列化方法" class="headerlink" title="序列化&#x2F;反序列化方法"></a>序列化&#x2F;反序列化方法</h2><h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><h4 id="JSON原理"><a href="#JSON原理" class="headerlink" title="JSON原理"></a>JSON原理</h4><p>（记得修改reflection里的超链接）</p>]]></content>
-    
-    
     
   </entry>
   
