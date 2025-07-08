@@ -16,24 +16,23 @@
   <meta name="author" content="小贼猫">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces JVM">
+    <meta name="description" content="This blog introduces Java Exceptions">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习 - JVM">
-<meta property="og:url" content="https://thiefcat.github.io/2025/07/04/JAVA/java-jvm/index.html">
+<meta property="og:title" content="Java学习 - Java">
+<meta property="og:url" content="https://thiefcat.github.io/2025/07/07/JAVA/exception/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
-<meta property="og:description" content="This blog introduces JVM">
+<meta property="og:description" content="This blog introduces Java Exceptions">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-04T14:36:05.000Z">
-<meta property="article:modified_time" content="2025-07-06T16:47:02.660Z">
+<meta property="article:published_time" content="2025-07-06T16:46:12.000Z">
+<meta property="article:modified_time" content="2025-07-06T17:14:26.043Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Backend Development">
-<meta property="article:tag" content="JVM">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Java学习 - JVM - Songlin&#39;s Space</title>
+  <title>Java学习 - Java - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -228,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Java学习 - JVM</span>
+            <span id="subtitle">Java学习 - Java</span>
           
         </div>
 
@@ -244,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-07-04 22:36" pubdate>
-          July 4, 2025 pm
+        <time datetime="2025-07-07 00:46" pubdate>
+          July 7, 2025 am
         </time>
       </span>
     
@@ -256,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          899 words
+          594 words
         
       </span>
     
@@ -267,7 +266,7 @@
         
         
         
-          4 mins
+          3 mins
         
       </span>
     
@@ -312,62 +311,57 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Java学习 - JVM</h1>
+            <h1 id="seo-header">Java学习 - Java</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="什么是JVM"><a href="#什么是JVM" class="headerlink" title="什么是JVM"></a>什么是JVM</h2><p>Java的理念是：Write Once, Run Anywhere。Java编译器把 Java 程序编译成“字节码”（.class 文件），字节码可以在所有平台运行，这是JAVA特性之一。字节码是 JVM 能理解的“中间语言”，JVM可以把字节码翻译成你的电脑能理解的机器指令。因此只需要在不同的机器上安装适配不同架构的JVM，就可以实现 Write Once, Run Anywhere。</p>
-<h3 id="JVM的功能"><a href="#JVM的功能" class="headerlink" title="JVM的功能"></a>JVM的功能</h3><ul>
-<li>跨平台运行</li>
-<li>内存管理：JAVA帮助开发者垃圾回收，分配内存</li>
-<li>性能优化：即时编译器（Just-In-Time ，JIT ），将热点代码（频繁执行的代码段）编译成本地机器码，以提高程序的执行性能</li>
-<li>安全性：异常处理，类加载时字节码验证，沙箱环境等</li>
-</ul>
-<h2 id="JVM的运行时数据区域"><a href="#JVM的运行时数据区域" class="headerlink" title="JVM的运行时数据区域"></a>JVM的运行时数据区域</h2><p>以JDK 1.7为例，</p>
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Java中，所有异常的公共祖先都是 Throwable，Throwable下有两个子类：Error and Exception。</p>
 <ul>
-<li>线程私有的：<ul>
-<li>程序计数器：当前线程执行的字节码位置</li>
-<li>Java 虚拟机栈：每个线程的JAVA方法的“方法调用栈”，包含栈帧</li>
-<li>本地方法栈：给调用 C、C++ 等非 Java 方法（native 方法）用的栈</li>
-</ul>
-</li>
-<li>线程共享的<ul>
-<li>堆：用来存储所有 Java 对象实例，由垃圾回收器（GC）统一管理</li>
-<li>方法区：用来存储类的元数据（类的信息、常量、静态变量、方法字节码等）。</li>
+<li>Error：表示严重的错误，程序无法处理，比如OutOfMemoryError，StackOverflowError</li>
+<li>Exception：程序本身可以处理的异常，通过Catch捕获。<ul>
+<li>Checked Exception：编译时，如果受检查异常没有被 catch 或者 throws 关键字处理的话，就没办法通过编译。包括Exception及其子类，除了RuntimeException。</li>
+<li>Unchecked Exception：编译时不要求捕捉。包括Error及其子类以及RuntimeException及其子类。比如IndexOutOfBoundsException等</li>
 </ul>
 </li>
 </ul>
-<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>类加载器是指<strong>把类的字节码（通常是 .class 文件）加载到 JVM 的内存中</strong>，并生成相应的 Class 对象的工具。具体来说，类加载器把字节码（.class 文件）加载到 JVM 的方法区（Method Area）（Java 8 之后是 元空间（Metaspace）），然后在堆中创建一个 Class 对象来存储类的信息，方便反射操作。</p>
-<p>类并不是一开始就全部加载。类加载器可以按需加载：当你第一次使用某个类时，它才去加载它。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>    <span class="hljs-keyword">static</span> List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Person 类被初始化&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-type">int</span> <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sayHello</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行代码时，我们<strong>想要程序出错时不崩溃</strong>，而是告知错误发生在哪里，这样才能保证程序稳定的提供服务，因此需要异常机制。如果没有异常，则需要多个if-else语句来预测每一个可能出错的操作。</p>
+<h2 id="Exception的工作机制"><a href="#Exception的工作机制" class="headerlink" title="Exception的工作机制"></a>Exception的工作机制</h2><ul>
+<li><p>抛出异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setAge</span><span class="hljs-params">(<span class="hljs-type">int</span> age)</span> &#123;<br>    <span class="hljs-keyword">if</span> (age &lt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;年龄不能为负数！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>捕获异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span> / <span class="hljs-number">0</span>;<br>&#125; <span class="hljs-keyword">catch</span> (ArithmeticException e) &#123;<br>    System.out.println(<span class="hljs-string">&quot;除数不能为 0&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>声明异常<br>一个方法内部如果可能出异常，但不想处理，就可以用 throws 声明它可能抛出异常，让调用者来处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">readFile</span><span class="hljs-params">(String filename)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-comment">// 文件读写操作，可能抛出 IOException</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>自定义异常</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyException</span><span class="hljs-params">(String message)</span> &#123;<br>        <span class="hljs-built_in">super</span>(message);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 使用自定义的异常：</span><br><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyException</span>(<span class="hljs-string">&quot;这是一个自定义异常&quot;</span>);<br></code></pre></td></tr></table></figure>
 
-<p>根据以上的例子，类加载器执行过程：</p>
+
+<p>当异常被抛出时，Java 运行时系统会在当前方法中查找有没有对应的 catch。如果没有，方法就退出，异常被抛给上一级调用者。一直这样“向上传递”，直到找到匹配的 catch。如果一直没有人处理异常，最终程序崩溃。</p>
+<p>调用一个带有<code>throws</code>的函数有两种处理方式：</p>
 <ol>
-<li>加载：类加载器通过类的名字 Person 找到 Person.class 文件，将 .class 文件的字节码加载到 JVM，并在堆中生成一个代表这个类的 java.lang.Class 对象作为数据访问的入口</li>
-<li>验证：检查字节码是否合法</li>
-<li>准备：为静态变量（<code>List&lt;String&gt; list</code>）分配内存，并赋初始值 null（此时静态变量只是占位，还没初始化）</li>
-<li>解析：将符号引用替换为直接引用，比如将<code>System.out.println</code>方法名解析为真正的内存地址</li>
-<li>初始化：执行静态代码块，给静态变量赋值（这里的list变量本身在方法区，指向的HashMap对象实例在堆里创建）</li>
+<li>使用try-catch捕获异常</li>
+<li>继续使用throws抛出异常，传递给更上一层</li>
 </ol>
-<h3 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Class</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Class</span><span class="hljs-params">()</span> &#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>比如，当JVM加载String类时，会执行<code>Class cls = new Class(String);</code>在堆中创建Class对象。这个对象包含类名、包名、父类、实现的接口、所有方法、字段等对应class的所有信息。内存分布：</p>
-<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">Java 堆：</span><br><span class="hljs-attribute">┌────────────────────────────┐</span><br><span class="hljs-attribute">│ Class&lt;Person&gt; clazz        │</span><br><span class="hljs-attribute">│ ── name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Person&quot;          │</span><br><span class="hljs-attribute">│ ── loader</span><span class="hljs-punctuation">:</span> <span class="hljs-string">AppClassLoader  │</span><br><span class="hljs-attribute">│ ── klass_pointer →────────────┐</span><br><span class="hljs-attribute">└────────────────────────────┘  │</span><br><span class="hljs-attribute">                                |</span><br><span class="hljs-attribute">方法区（Metaspace）：              ▼</span><br><span class="hljs-attribute">┌────────────────────────────┐</span><br><span class="hljs-attribute">│ Class Metadata (Klass*)    │</span><br><span class="hljs-attribute">│ ── className</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Person&quot;     │</span><br><span class="hljs-attribute">│ ── superClass</span><span class="hljs-punctuation">:</span> <span class="hljs-string">java.lang.Object</span><br><span class="hljs-attribute">│ ── interfaces</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...         │</span><br><span class="hljs-attribute">│ ── methods[]</span><span class="hljs-punctuation">:</span> <span class="hljs-string">sayHello()   │</span><br><span class="hljs-attribute">│ ── fields[]</span><span class="hljs-punctuation">:</span> <span class="hljs-string">name          │</span><br><span class="hljs-attribute">│ ── constantPool</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...       │</span><br><span class="hljs-attribute">│ ── annotations</span><span class="hljs-punctuation">:</span> <span class="hljs-string">...        │</span><br>└────────────────────────────┘<br></code></pre></td></tr></table></figure>
-
-<h2 id="JAVA对象在内存中的结构"><a href="#JAVA对象在内存中的结构" class="headerlink" title="JAVA对象在内存中的结构"></a>JAVA对象在内存中的结构</h2><ol>
-<li>对象头<br>包含：</li>
-</ol>
-<ul>
-<li>标记字段（Mark Word）：指向哈希码（HashCode）、GC 分代年龄、锁状态标志、线程持有的锁、偏向线程 ID等。</li>
-<li>类型指针（Klass pointer）：指向类的元数据，是一个在方法区的C++结构，与上文Class对象的klass_pointer指向的结构一样。</li>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
+<li><p>使用多个catch语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      doSomething()<br>    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>        System.out.println(e);<br>    &#125; <span class="hljs-keyword">catch</span> (NumberFormatException e) &#123;<br>        System.out.println(e);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>JVM在捕获到异常后，会从上到下匹配catch语句，直到找到匹配的语句。</p>
+</li>
+<li><p>try-catch-finally</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      doSomething()<br>    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>        System.out.println(e);<br>    &#125; <span class="hljs-keyword">catch</span> (NumberFormatException e) &#123;<br>        System.out.println(e);<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;END&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>finally语句，无论是有无异常出现，都会执行，而且是最后执行。</p>
+</li>
 </ul>
-<ol start="2">
-<li><p>实例数据</p>
-</li>
-<li><p>对齐填充</p>
-</li>
-</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JAVA">```<br><br><br>```JAVA<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -403,8 +397,6 @@
       
         <a href="/tags/Backend-Development/" class="print-no-link">#Backend Development</a>
       
-        <a href="/tags/JVM/" class="print-no-link">#JVM</a>
-      
         <a href="/tags/Java/" class="print-no-link">#Java</a>
       
     </div>
@@ -417,8 +409,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Java学习 - JVM</div>
-      <div>https://thiefcat.github.io/2025/07/04/JAVA/java-jvm/</div>
+      <div>Java学习 - Java</div>
+      <div>https://thiefcat.github.io/2025/07/07/JAVA/exception/</div>
     </div>
     <div class="license-meta">
       
@@ -430,7 +422,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 4, 2025</div>
+          <div>July 7, 2025</div>
         </div>
       
       
@@ -462,18 +454,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/07/05/JAVA/reflection/" title="Java学习 - 反射">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java学习 - 反射</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/07/02/SWE-basic/spring-basic/" title="开发基础知识 - Spring基本介绍">
-                        <span class="hidden-mobile">开发基础知识 - Spring基本介绍</span>
+                      <a href="/2025/07/06/JAVA/java-oop/" title="Java学习 - Java Object Oriented Programming">
+                        <span class="hidden-mobile">Java学习 - Java Object Oriented Programming</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
