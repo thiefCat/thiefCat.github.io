@@ -18,13 +18,13 @@
   
     <meta name="description" content="This blog introduces how to compile, run, and package a Java project">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习 - Java 编译，打包，运行">
+<meta property="og:title" content="Java基础 - Java 编译，打包，运行">
 <meta property="og:url" content="https://thiefcat.github.io/2025/07/09/JAVA/java-cli/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Space">
 <meta property="og:description" content="This blog introduces how to compile, run, and package a Java project">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-08T16:53:44.000Z">
-<meta property="article:modified_time" content="2025-07-20T14:45:40.055Z">
+<meta property="article:modified_time" content="2025-07-27T15:05:32.945Z">
 <meta property="article:author" content="小贼猫">
 <meta property="article:tag" content="Backend Development">
 <meta property="article:tag" content="Java">
@@ -32,7 +32,7 @@
   
   
   
-  <title>Java学习 - Java 编译，打包，运行 - Songlin&#39;s Space</title>
+  <title>Java基础 - Java 编译，打包，运行 - Songlin&#39;s Space</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Java学习 - Java 编译，打包，运行</span>
+            <span id="subtitle">Java基础 - Java 编译，打包，运行</span>
           
         </div>
 
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          580 words
+          660 words
         
       </span>
     
@@ -311,21 +311,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Java学习 - Java 编译，打包，运行</h1>
+            <h1 id="seo-header">Java基础 - Java 编译，打包，运行</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Java编译与运行"><a href="#Java编译与运行" class="headerlink" title="Java编译与运行"></a>Java编译与运行</h2><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>Java编译基本语法：<code>javac [选项] 文件名.java</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">进阶语法</span><br>javac -d 目标目录 文件名.java<br><span class="hljs-meta prompt_"># </span><span class="language-bash">编译时，如果 MyProgram.java 依赖了 mylib.jar 中的类，就去那个路径找</span><br>javac -cp ./lib/mylib.jar MyProgram.java <br></code></pre></td></tr></table></figure>
-<p>以上命令会在指定的位置生成<code>.class</code>文件。</p>
+                <h2 id="Java-Package"><a href="#Java-Package" class="headerlink" title="Java Package"></a>Java Package</h2><p>package 是 Java 的命名空间机制，用于将类（class）、接口（interface）组织在一起，形成模块化、层次化的结构。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">project/<br>└── src/<br>    └── <span class="hljs-keyword">com</span>/<br>        └── companyName/<br>            └── app/<br>                └── models/<br>                    └── Person.java<br></code></pre></td></tr></table></figure>
+<p>这里的Person.java文件位于包 <code>package com.companyName.app.models;</code>.</p>
+<h3 id="导入其他包的类"><a href="#导入其他包的类" class="headerlink" title="导入其他包的类"></a>导入其他包的类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> com.companyName.app.models.Person;<br><span class="hljs-keyword">import</span> com.companyName.app.models.*;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Java编译与运行"><a href="#Java编译与运行" class="headerlink" title="Java编译与运行"></a>Java编译与运行</h2><p>以如下文件结构为例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">project-folder/<br>├── lib/<br>│   └── gson-<span class="hljs-number">2.10</span>.<span class="hljs-number">1</span><span class="hljs-selector-class">.jar</span><br>├── <span class="hljs-attribute">src</span>/<br>│   ├── <span class="hljs-selector-tag">Main</span><span class="hljs-selector-class">.java</span>  --&gt; package <span class="hljs-attribute">src</span><br>│   └── models/<br>│       └── Person<span class="hljs-selector-class">.java</span>  --&gt; package <span class="hljs-attribute">src</span><span class="hljs-selector-class">.models</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>Java编译基本语法：<code>javac [选项] 文件名.java</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">javac -cp &quot;lib/gson-2.10.1.jar&quot; -d out src/models/Person.java src/Main.java<br></code></pre></td></tr></table></figure>
+<ul>
+<li>-cp 是 classpath 的缩写，用来告诉编译器 在哪找外部的类和库。</li>
+<li>-d 指定输出目录</li>
+</ul>
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>Java运行基本语法：<code>java [选项] 类名</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">运行时指定classpath</span><br>java -cp &quot;.:lib/a.jar:lib/b.jar:lib/c.jar&quot; MyProgram # 不加 .class 后缀<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">运行时指定classpath</span><br>java -cp &quot;out:lib/gson-2.10.1.jar&quot; src.Main<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><code>.</code>：表示当前目录</li>
 <li><code>:</code>：Linux&#x2F;macOS 上的路径分隔符</li>
-<li><code>./lib/x.jar</code>：依赖的jar包的路径</li>
 </ul>
 <h2 id="jar文件"><a href="#jar文件" class="headerlink" title=".jar文件"></a>.jar文件</h2><h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><p>在 Java 开发中，你写了很多 <code>.java 文件</code>，编译之后变成 <code>.class</code> 文件。但是如果想要</p>
 <ol>
@@ -336,40 +347,34 @@
 <p>其实 .jar 就是一个 压缩包（类似 .zip），里面的结构通常像这样：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">myapp<span class="hljs-selector-class">.jar</span><br>├── META-INF/<br>│   └── MANIFEST<span class="hljs-selector-class">.MF</span>   ← 描述文件，记录入口点（程序从哪里开始）<br>├── com/<br>│   └── example/<br>│       └── MyClass<span class="hljs-selector-class">.class</span><br>├── config<span class="hljs-selector-class">.properties</span><br>├── image.png<br></code></pre></td></tr></table></figure>
 
-<h3 id="Create-jar-File"><a href="#Create-jar-File" class="headerlink" title="Create .jar File"></a>Create .jar File</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">javac MyApp.java<br>jar cvfe myapp.jar MyApp MyApp.class<br></code></pre></td></tr></table></figure>
+<p>以如下文件结构为例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">project-folder/<br>├── lib/<br>│   └── gson-<span class="hljs-number">2.10</span>.<span class="hljs-number">1</span><span class="hljs-selector-class">.jar</span><br>├── <span class="hljs-attribute">src</span>/<br>│   ├── <span class="hljs-selector-tag">Main</span><span class="hljs-selector-class">.java</span>  --&gt; package <span class="hljs-attribute">src</span><br>│   └── models/<br>│       └── Person<span class="hljs-selector-class">.java</span>  --&gt; package <span class="hljs-attribute">src</span><span class="hljs-selector-class">.models</span><br></code></pre></td></tr></table></figure>
 
-<p>或者用Maven：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mvn package <br></code></pre></td></tr></table></figure>
-<p>它会自动根据你的代码和配置，生成一个 .jar 文件放在 target&#x2F; 目录下。</p>
-<h3 id="Execute-jar-File"><a href="#Execute-jar-File" class="headerlink" title="Execute .jar File"></a>Execute .jar File</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">java </span>-<span class="hljs-keyword">jar </span>myapp.<span class="hljs-keyword">jar</span><br></code></pre></td></tr></table></figure>
+<h3 id="创建，运行jar文件"><a href="#创建，运行jar文件" class="headerlink" title="创建，运行jar文件"></a>创建，运行jar文件</h3><ol>
+<li>供别人使用的类（普通的jar）<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">jar cf mylib.jar -C out/ .<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>c：create，表示创建一个新的 JAR 文件</li>
+<li>f：file，表示后面跟的是 JAR 文件名</li>
+<li><code>mylib.jar</code>：要创建的目标 JAR 文件名</li>
+<li><code>-C out/ .</code>：表示进入 out&#x2F; 目录，并将其中的所有内容（.）打包进 JAR</li>
+</ul>
+<ol start="2">
+<li>可执行 JAR（别人可以运行你的程序）<br>创建 MANIFEST.MF 文件:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs MF">Manifest-Version: 1.0<br>Main-Class: src.Main<br></code></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">jar cfm yourlib.jar MANIFEST.MF -C out/ .<br><span class="hljs-meta prompt_"># </span><span class="language-bash">执行jar文件（自动查找 Main-Class 并执行 main() 方法）</span><br>java -cp &quot;mylib.jar:lib/gson-2.10.1.jar&quot; src.Main <br></code></pre></td></tr></table></figure>
 
+<ol start="3">
+<li>Maven打包</li>
+</ol>
+<p>可以把我的 jar 和所有依赖 合并成一个大 jar 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mvn clean package<br></code></pre></td></tr></table></figure>
+<p>Maven 会自动下载所需的依赖，并将所有文件打包成一个 JAR 文件，通常会生成一个类似 target&#x2F;yourlib-1.0.0.jar 的文件。</p>
 <h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><ul>
 <li>打包项目成一个文件</li>
 <li>作为功能组件被其他 Java 程序引用使用（像 Spring、MyBatis、Lombok 都是以 .jar 的形式分发的）</li>
 <li><code>.jar</code> 文件可以直接部署到服务器上运行</li>
 </ul>
-<h2 id="项目打包与运行"><a href="#项目打包与运行" class="headerlink" title="项目打包与运行"></a>项目打包与运行</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">MyProject/<br>├── lib/<br>│   ├── gson-<span class="hljs-number">2.10</span><span class="hljs-selector-class">.jar</span><br>│   └── commons-lang3-<span class="hljs-number">3.12</span>.<span class="hljs-number">0</span><span class="hljs-selector-class">.jar</span><br>├── <span class="hljs-attribute">src</span>/<br>│   ├── Main<span class="hljs-selector-class">.java</span><br>│   └── utils/<br>│       └── MyUtils.java<br></code></pre></td></tr></table></figure>
-
-<ol>
-<li><p>编译项目：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">javac -cp &quot;lib/*&quot; -d out src/utils/MyUtils.java src/Main.java<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>打包项目：<br>manifest.txt:</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs txt">Main-Class: Main<br>Class-Path: lib/gson-2.10.jar lib/commons-lang3-3.12.0.jar<br></code></pre></td></tr></table></figure></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">jar cfm MyProject.jar manifest.txt -C out .<br></code></pre></td></tr></table></figure>
-
-<p>生成的MyProject.jar结构示例：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stata">MyProject.jar<br>├── <span class="hljs-keyword">META</span>-<span class="hljs-keyword">INF</span>/<br>│   └── MANIFEST.MF<br>├── Main.<span class="hljs-keyword">class</span><br>└── utils/<br>    └── MyUtils.<span class="hljs-keyword">class</span><br></code></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>运行项目：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -cp MyProject.jar:lib/* Main<br></code></pre></td></tr></table></figure></li>
-</ol>
-<p>可以把我的 jar 和所有依赖 合并成一个大 jar 文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mvn clean package<br></code></pre></td></tr></table></figure>
-<p>Maven 会自动下载所需的依赖，并将所有文件打包成一个包含所有依赖的 JAR 文件，通常会生成一个类似 target&#x2F;MyProject-1.0-SNAPSHOT-shaded.jar 的文件。</p>
-<p>运行 fat JAR</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar target/MyProject-1.0-SNAPSHOT-shaded.jar<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -388,7 +393,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java%E5%AD%A6%E4%B9%A0/" class="category-chain-item">Java学习</a>
+  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java基础</a>
   
   
 
@@ -417,7 +422,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Java学习 - Java 编译，打包，运行</div>
+      <div>Java基础 - Java 编译，打包，运行</div>
       <div>https://thiefcat.github.io/2025/07/09/JAVA/java-cli/</div>
     </div>
     <div class="license-meta">
@@ -462,9 +467,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/07/10/JAVA/annotation/" title="Java学习 - Annotation">
+                      <a href="/2025/07/10/JAVA/annotation/" title="Java基础 - Annotation">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java学习 - Annotation</span>
+                        <span class="hidden-mobile">Java基础 - Annotation</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -472,8 +477,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/07/07/JAVA/exception/" title="Java学习 - Java异常">
-                        <span class="hidden-mobile">Java学习 - Java异常</span>
+                      <a href="/2025/07/07/JAVA/lava-exception/" title="Java基础 - Java异常">
+                        <span class="hidden-mobile">Java基础 - Java异常</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
