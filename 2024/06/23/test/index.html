@@ -18,21 +18,25 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="PostCreate a new post$ hexo new &quot;Name&quot; $ hexo new post &quot;topic&quot; --path &quot;folder&#x2F;topic&quot;  Include image in a postMove the image to the folder created automatically by Hexo, a">
+    <meta name="description" content="test">
 <meta property="og:type" content="article">
 <meta property="og:title" content="My first Blog">
-<meta property="og:url" content="http://example.com/2025/10/22/test/index.html">
+<meta property="og:url" content="http://example.com/2024/06/23/test/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="PostCreate a new post$ hexo new &quot;Name&quot; $ hexo new post &quot;topic&quot; --path &quot;folder&#x2F;topic&quot;  Include image in a postMove the image to the folder created automatically by Hexo, a">
+<meta property="og:description" content="test">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-22T22:01:18.000Z">
-<meta property="article:modified_time" content="2025-10-23T22:01:44.073Z">
-<meta property="article:author" content="John Doe">
+<meta property="og:image" content="http://example.com/2024/06/23/test/sample.jpeg">
+<meta property="og:image" content="http://example.com/2024/06/23/test/sample.jpeg">
+<meta property="og:image" content="http://example.com/2024/06/23/test/sample.jpeg">
+<meta property="article:published_time" content="2024-06-24T01:42:00.000Z">
+<meta property="article:modified_time" content="2025-10-23T22:22:00.472Z">
+<meta property="article:author" content="Songlin Zhao">
 <meta property="article:tag" content="test">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/06/23/test/sample.jpeg">
   
   
   
@@ -226,8 +230,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-22 15:01" pubdate>
-          October 22, 2025 pm
+        <time datetime="2024-06-23 18:42" pubdate>
+          June 23, 2024 6:42 PM
         </time>
       </span>
     
@@ -238,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          114 words
+          103 words
         
       </span>
     
@@ -295,22 +299,24 @@
 $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span class="hljs-string">&quot;folder/topic&quot;</span></code></pre></div>
 
 <h3 id="Include-image-in-a-post"><a href="#Include-image-in-a-post" class="headerlink" title="Include image in a post"></a>Include image in a post</h3><p>Move the image to the folder created automatically by Hexo, and then use the relative path to refer to the image.</p>
-<p>Format the image using inline CSS:</p>
-<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align: center;&quot;</span>&gt;</span>
-  &#123;% asset_img sample.jpeg %&#125;
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div>
+<p>Using hexo syntax, but unable to resize the image:</p>
+<div class="code-wrapper"><pre><code class="hljs Markdown">&#123;% asset<span class="hljs-emphasis">_img sample.jpeg &#x27;This is my picture&#x27; %&#125;</span></code></pre></div>
 
-<div style="text-align: center;">
-  
-</div>
+<img src="/2024/06/23/test/sample.jpeg" srcset="/img/loading.gif" lazyload class="" title="This is my picture">
+
 
 <p>Or directly use an <code>&lt;img&gt;</code> tag:</p>
 <div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;sample.jpeg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 300px; height: auto;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Sample Image&quot;</span>&gt;</span></code></pre></div>
+<img src="sample.jpeg" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Sample Image">
 
 <p>With centered alignment:</p>
 <div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align: center;&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;sample.jpeg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 300px; height: auto;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Sample Image&quot;</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div>
+<div style="text-align: center;">
+  <img src="sample.jpeg" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Sample Image">
+</div>
+
 
 <hr>
 <h2 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h2><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo g</code></pre></div>
@@ -321,8 +327,6 @@ $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span 
 
 <h3 id="Generate-and-Deploy"><a href="#Generate-and-Deploy" class="headerlink" title="Generate and Deploy"></a>Generate and Deploy</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo g -d</code></pre></div>
 
-<h3 id="Insert-new-image"><a href="#Insert-new-image" class="headerlink" title="Insert new image"></a>Insert new image</h3><p>Insert the image into <code>/source/img</code> directory, then generate static files again.</p>
-<hr>
 <h2 id="Create-a-new-page"><a href="#Create-a-new-page" class="headerlink" title="Create a new page"></a>Create a new page</h2><div class="code-wrapper"><pre><code class="hljs bash">$ hexo new page <span class="hljs-string">&quot;name&quot;</span></code></pre></div>
 
 <h3 id="Creating-a-new-navigation-bar"><a href="#Creating-a-new-navigation-bar" class="headerlink" title="Creating a new navigation bar"></a>Creating a new navigation bar</h3><ol>
@@ -376,19 +380,19 @@ $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span 
   <div class="license-box my-3">
     <div class="license-title">
       <div>My first Blog</div>
-      <div>http://example.com/2025/10/22/test/</div>
+      <div>http://example.com/2024/06/23/test/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>John Doe</div>
+          <div>Songlin Zhao</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 22, 2025</div>
+          <div>June 23, 2024</div>
         </div>
       
       
@@ -420,7 +424,7 @@ $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span 
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/23/CS_Basis/Shell/" title="Shell">
+                      <a href="/2024/06/24/CS_Basis/Shell/" title="Shell">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Shell</span>
                         <span class="visible-mobile">Previous</span>
