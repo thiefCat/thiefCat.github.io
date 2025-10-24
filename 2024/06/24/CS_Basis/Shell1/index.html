@@ -21,26 +21,22 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="test">
+    <meta name="description" content="This blog post introduces what is shell, and its basic syntax">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My first Blog">
-<meta property="og:url" content="http://example.com/2024/06/23/test/index.html">
+<meta property="og:title" content="Shell - Basic Syntax">
+<meta property="og:url" content="http://example.com/2024/06/24/CS_Basis/Shell1/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="test">
+<meta property="og:description" content="This blog post introduces what is shell, and its basic syntax">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2024/06/23/test/sample.jpeg">
-<meta property="og:image" content="http://example.com/2024/06/23/test/sample.jpeg">
-<meta property="og:image" content="http://example.com/2024/06/23/test/sample.jpeg">
-<meta property="article:published_time" content="2024-06-24T01:42:00.000Z">
-<meta property="article:modified_time" content="2025-10-23T22:22:00.472Z">
+<meta property="article:published_time" content="2024-06-24T18:59:00.000Z">
+<meta property="article:modified_time" content="2025-10-24T09:19:17.624Z">
 <meta property="article:author" content="Songlin Zhao">
-<meta property="article:tag" content="test">
+<meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2024/06/23/test/sample.jpeg">
   
   
   
-  <title>My first Blog - Songlin&#39;s Blog</title>
+  <title>Shell - Basic Syntax - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">My first Blog</span>
+            <span id="subtitle">Shell - Basic Syntax</span>
           
         </div>
 
@@ -218,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-23 18:42" pubdate>
-          June 23, 2024 6:42 PM
+        <time datetime="2024-06-24 11:59" pubdate>
+          June 24, 2024 11:59 AM
         </time>
       </span>
     
@@ -230,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          103 words
+          248 words
         
       </span>
     
@@ -278,50 +274,139 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">My first Blog</h1>
+            <h1 id="seo-header">Shell - Basic Syntax</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;Name&quot;</span>
-$ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span class="hljs-string">&quot;folder/topic&quot;</span></code></pre></div>
+                <h3 id="What-is-the-shell"><a href="#What-is-the-shell" class="headerlink" title="What is the shell?"></a>What is the shell?</h3><p><strong>A shell is a program that takes your commands, interprets them, and tells the operating system what to do.</strong> It is a command-line interface (CLI). The shell in macOS before Catalina is bash (Bourne Again Shell) and currently it’s Zsh (Z Shell). The shell allows users to execute commands, run programs, and manage system resources. While the GUI defines many use cases for interacting with the OS, to take full advantage of system tools, we must use the shell.</p>
+<h3 id="Basic-shell-commands"><a href="#Basic-shell-commands" class="headerlink" title="Basic shell commands"></a>Basic shell commands</h3><div class="code-wrapper"><pre><code class="hljs shell">. # current directory
+.. # parent directory
+ls
+mkdir
+cd # change directory
+pwd # print working directory
+echo &quot;text&quot; # prints the specified text to the terminal
+cat # displays the contents of the specified file
+touch example.txt # creates a file
+grep &quot;Hello&quot; example.txt # searches for the string “Hello” in a file named example.txt and returns the line containing it
+export #</code></pre></div>
 
-<h3 id="Include-image-in-a-post"><a href="#Include-image-in-a-post" class="headerlink" title="Include image in a post"></a>Include image in a post</h3><p>Move the image to the folder created automatically by Hexo, and then use the relative path to refer to the image.</p>
-<p>Using hexo syntax, but unable to resize the image:</p>
-<div class="code-wrapper"><pre><code class="hljs Markdown">&#123;% asset<span class="hljs-emphasis">_img sample.jpeg &#x27;This is my picture&#x27; %&#125;</span></code></pre></div>
+<h3 id="Basic-Syntax"><a href="#Basic-Syntax" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h3><p>Every shell script starts with a shebang line:</p>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span></code></pre></div>
+<p>This tells the system to run the script with Bash.</p>
+<ul>
+<li>Define variables</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">name=&quot;Alice&quot; # no space around &quot;=&quot;
+echo $name
+echo &quot;Hello, $&#123;name&#125;!&quot;</code></pre></div>
+<p>In this example, <code>name</code> is variable name, <code>$name</code> represents getting the value of the variable.</p>
+<ul>
+<li>Command substitution</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">date</span></span>
+Fri Oct 24 01:19:10 PDT 2025
+today=$(date) # $(date) runs the date command first, and replace it with its output
+echo &quot;Today is $today&quot;</code></pre></div>
+<p><code>$()</code> means running a command and store its output.</p>
+<ul>
+<li>If statements</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">if [ $age -gt 18 ]; then
+    echo &quot;Adult&quot;
+else
+    echo &quot;Minor&quot;
+fi</code></pre></div>
+<p>Common operators: <code>-eq, -ne, -gt, -ge, -lt, -le</code>.</p>
+<ul>
+<li>For loop</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">for var in item1 item2 item3; do
+  echo &quot;$var&quot;
+done</code></pre></div>
 
-<img src="/2024/06/23/test/sample.jpeg" srcset="/img/loading.gif" lazyload class="" title="This is my picture">
+<div class="code-wrapper"><pre><code class="hljs shell">for f in *.txt; do # get all *.txt in the current directory
+  echo &quot;file: $f&quot;
+done</code></pre></div>
 
 
-<p>Or directly use an <code>&lt;img&gt;</code> tag:</p>
-<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;sample.jpeg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 300px; height: auto;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Sample Image&quot;</span>&gt;</span></code></pre></div>
-<img src="sample.jpeg" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Sample Image">
+<ul>
+<li>While loop</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">count=1
+while [ $count -le 5 ]; do
+  echo &quot;Count $count&quot;
+  ((count++))
+done</code></pre></div>
 
-<p>With centered alignment:</p>
-<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align: center;&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;sample.jpeg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 300px; height: auto;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Sample Image&quot;</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div>
-<div style="text-align: center;">
-  <img src="sample.jpeg" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Sample Image">
-</div>
+<ul>
+<li>Arithmetic<br><code>(( ))</code> is used for arithmetic evaluation (like addition, subtraction, comparisons, and increments) in Bash.</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">((a = 5 + 3))
+echo $a   # 8
+((a++))
+((c += 5))
+((d *= 2))</code></pre></div>
 
+<div class="code-wrapper"><pre><code class="hljs shell">a=5
+b=3
+if ((a &gt; b)); then
+  echo &quot;a is greater&quot;
+fi
 
-<hr>
-<h2 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h2><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo g</code></pre></div>
+for ((i=1; i&lt;=5; i++)); do
+  echo &quot;Number $i&quot;
+done</code></pre></div>
 
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo s</code></pre></div>
+<ul>
+<li>Functions</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">greet() &#123;
+    echo &quot;Hello, $1&quot;
+&#125;
 
-<h3 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo d</code></pre></div>
+greet &quot;Alice&quot;</code></pre></div>
+<p><code>$1</code> refers to the first argument passed to the function.</p>
+<ul>
+<li>Exit Status<br>Every command in Linux returns an exit status. 0 means success, and non-zero means failure. <code>$?</code> is a special variable that stores the exit code of the most recent command.</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">ls /etc
+echo $?   # 0 = success
 
-<h3 id="Generate-and-Deploy"><a href="#Generate-and-Deploy" class="headerlink" title="Generate and Deploy"></a>Generate and Deploy</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo g -d</code></pre></div>
+ls /no/such/file
+echo $?   # non-zero = error</code></pre></div>
 
-<h2 id="Create-a-new-page"><a href="#Create-a-new-page" class="headerlink" title="Create a new page"></a>Create a new page</h2><div class="code-wrapper"><pre><code class="hljs bash">$ hexo new page <span class="hljs-string">&quot;name&quot;</span></code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs shell">if ls /no/such/file; then # if the ls command succeed, then print &quot;Command succeeded&quot;
+  echo &quot;Command succeeded&quot;
+else
+  echo &quot;Command failed&quot;
+fi</code></pre></div>
 
-<h3 id="Creating-a-new-navigation-bar"><a href="#Creating-a-new-navigation-bar" class="headerlink" title="Creating a new navigation bar"></a>Creating a new navigation bar</h3><ol>
-<li>Create a new <code>.ejs</code> file in <code>/themes/fluid/layout/</code></li>
-<li>Add page attributes in <code>_config.fluid.yml</code>, and include a new menu item inside <code>navbar.menu</code></li>
-<li>Modify <code>/themes/fluid/languages/en.yml</code> to add titles and subtitles</li>
-</ol>
+<h3 id="Tests"><a href="#Tests" class="headerlink" title="Tests"></a>Tests</h3><p>Tests are used in conditional statements.</p>
+<ul>
+<li><code>-f file</code>, File exists and is a regular file</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">if [ -f &quot;config.txt&quot; ]; then
+  echo &quot;Config file found&quot;
+else
+  echo &quot;No config file&quot;
+fi</code></pre></div>
+<ul>
+<li><code>-d file</code>, file is a directory</li>
+<li><code>-z &quot;$str&quot;</code>, string is empty</li>
+<li><code>-n &quot;$str&quot;</code>, string is not empty</li>
+<li><code>&quot;$a&quot; != &quot;$b&quot;</code>, strings are not equal</li>
+</ul>
+<h3 id="Special-Parameters"><a href="#Special-Parameters" class="headerlink" title="Special Parameters"></a>Special Parameters</h3><ul>
+<li><code>$0</code>, name of the current script</li>
+<li><code>$1</code>, first parameter</li>
+<li><code>$#</code>, number of parameters</li>
+<li><code>$$</code>, current script’s process ID</li>
+<li><code>$?</code>, exit status of the last command</li>
+<li><code>$SHELL</code>, current shell path</li>
+<li><code>$PATH</code>, directories to search for executables</li>
+</ul>
 
                 
               </div>
@@ -340,7 +425,7 @@ $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span 
     
       <span class="category-chain">
         
-  <a href="/categories/test/" class="category-chain-item">test</a>
+  <a href="/categories/Computer-Basis/" class="category-chain-item">Computer Basis</a>
   
   
 
@@ -355,7 +440,7 @@ $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span 
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/test/" class="print-no-link">#test</a>
+        <a href="/tags/shell/" class="print-no-link">#shell</a>
       
     </div>
   
@@ -367,8 +452,8 @@ $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span 
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>My first Blog</div>
-      <div>http://example.com/2024/06/23/test/</div>
+      <div>Shell - Basic Syntax</div>
+      <div>http://example.com/2024/06/24/CS_Basis/Shell1/</div>
     </div>
     <div class="license-meta">
       
@@ -380,7 +465,7 @@ $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span 
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 23, 2024</div>
+          <div>June 24, 2024</div>
         </div>
       
       
@@ -412,15 +497,21 @@ $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span 
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/24/CS_Basis/Shell1/" title="Shell - Basic Syntax">
+                      <a href="/2024/06/24/CS_Basis/Shell2/" title="Shell - How Shell Works">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Shell - Basic Syntax</span>
+                        <span class="hidden-mobile">Shell - How Shell Works</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/06/23/test/" title="My first Blog">
+                        <span class="hidden-mobile">My first Blog</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
