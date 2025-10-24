@@ -21,22 +21,22 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog post introduces how the shell works, its basic commands, how it executes programs, and some advanced functions">
+    <meta name="description" content="excerpt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell - How Shell Works">
-<meta property="og:url" content="http://example.com/2024/06/24/CS_Basis/Shell2/index.html">
+<meta property="og:title" content="CSE276A - ROS2">
+<meta property="og:url" content="http://example.com/2025/10/24/CSE276A/CSE276A-ROS2/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="This blog post introduces how the shell works, its basic commands, how it executes programs, and some advanced functions">
+<meta property="og:description" content="excerpt">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-25T01:14:00.000Z">
-<meta property="article:modified_time" content="2025-10-24T09:40:00.681Z">
+<meta property="article:published_time" content="2025-10-24T20:42:04.000Z">
+<meta property="article:modified_time" content="2025-10-24T21:43:47.633Z">
 <meta property="article:author" content="Songlin Zhao">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="ROS2">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Shell - How Shell Works - Songlin&#39;s Blog</title>
+  <title>CSE276A - ROS2 - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Shell - How Shell Works</span>
+            <span id="subtitle">CSE276A - ROS2</span>
           
         </div>
 
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 18:14" pubdate>
-          June 24, 2024 6:14 PM
+        <time datetime="2025-10-24 13:42" pubdate>
+          October 24, 2025 1:42 PM
         </time>
       </span>
     
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          214 words
+          404 words
         
       </span>
     
@@ -274,92 +274,153 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Shell - How Shell Works</h1>
+            <h1 id="seo-header">CSE276A - ROS2</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="Configuration-file"><a href="#Configuration-file" class="headerlink" title="Configuration file"></a>Configuration file</h3><ul>
-<li><code>~/.zshrc</code>: The primary config file for zsh</li>
-<li><code>~/.bashrc</code>: The primary config file for bash (on linux systems)<br>The shell automatically reads (it “sources”) this file every time you open a new terminal. The source command is a built-in shell command that executes a script in the current shell session. For example, if the script exports a variable (e.g., export MY_VAR&#x3D;”hello”), that variable becomes part of your current shell’s environment.</li>
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>ROS 2 (Robot Operating System 2) is a framework that runs on an existing OS. In a robot, there are separate programs that read camera data, controlling wheels, planning paths .etc. ROS 2 provides a standard way for all these independent programs to discover each other and exchange information.</p>
+<h3 id="Nodes"><a href="#Nodes" class="headerlink" title="Nodes"></a>Nodes</h3><p>A node is a single program responsible for one specific task.</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy <span class="hljs-comment"># ROS Client Library for Python</span>
+<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">SensorNode</span>(<span class="hljs-title class_ inherited__">Node</span>):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-comment"># Initialize the node with the name &#x27;sensor_node&#x27;</span>
+        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;sensor_node&#x27;</span>)
+        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;LIDAR sensor node has started.&#x27;</span>)</code></pre></div>
+
+<h3 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h3><p>Topics are channels where nodes can send (publish) or receive (subscribe) data. This communication is asynchronous. E.g., the <code>sensor_node</code> needs to continuously broadcast sensor data to anyone who cares. </p>
+<ul>
+<li><p>Publisher</p>
+<ul>
+<li><code>self.publisher_ = self.create_publisher(String, &#39;chatter&#39;, 10)</code>: <code>String</code> specifies the message type, <code>&#39;chatter&#39;</code> is topic name, <code>10</code> is the the depth of the message queue. </li>
+<li><code>self.timer = self.create_timer()</code>: register a timer event, the event is scheduled by <code>rclpy.init()</code>.</li>
+<li><code>rclpy.init()</code>: Initializes the rclpy library, first step, mandatory.</li>
+<li><code>rclpy.spin(node)</code>: ROS2 nodes are event-driven, this function will keep the node running and constantly listen for events. The program will stay at this line until <code>Ctrl+C</code> is entered.</li>
+<li><code>node.destroy_node()</code>: Gracefully cleans up the node’s internal resources.</li>
+<li><code>rclpy.shutdown()</code>: Shuts down the rclpy Library.</li>
 </ul>
-<h3 id="How-the-shell-executes-programs"><a href="#How-the-shell-executes-programs" class="headerlink" title="How the shell executes programs"></a>How the shell executes programs</h3><p>When a command is entered in the shell, it follows these steps to execute:</p>
-<ol>
-<li><strong>Parsing:</strong> The shell reads the command line input and breaks it into components. <strong>The first word is the command (program), and the following words are arguments.</strong></li>
-<li><strong>Command Lookup:</strong> The shell searches for the command in the directories listed in the PATH environment variable.<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span></code></pre></div></li>
-<li><strong>Forking:</strong> The shell creates a new process (child process) to execute the command.</li>
-<li><strong>Return:</strong> After the child process finishes, control returns to the user.</li>
-</ol>
-<h3 id="Executing-programs"><a href="#Executing-programs" class="headerlink" title="Executing programs"></a>Executing programs</h3><div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span>
-/Users/.../bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</code></pre></div>
+  <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
+<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
+<span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
 
-<p>The <code>echo $PATH</code> command executes the program <code>echo</code>. The shell searches for it in the directories defined in <code>$PATH</code>. To find where the <code>echo</code> program resides:</p>
-<div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">which</span> <span class="hljs-built_in">echo</span>
-<span class="hljs-built_in">echo</span>: shell built-in <span class="hljs-built_in">command</span></code></pre></div>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Talker</span>(<span class="hljs-title class_ inherited__">Node</span>):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;talker&#x27;</span>)
+        <span class="hljs-variable language_">self</span>.publisher_ = <span class="hljs-variable language_">self</span>.create_publisher(String, <span class="hljs-string">&#x27;chatter&#x27;</span>, <span class="hljs-number">10</span>)
+        timer_period = <span class="hljs-number">0.5</span>
+        <span class="hljs-variable language_">self</span>.timer = <span class="hljs-variable language_">self</span>.create_timer(timer_period, <span class="hljs-variable language_">self</span>.timer_callback) <span class="hljs-comment"># timer_callback is called every 0.5 seconds</span>
+        <span class="hljs-variable language_">self</span>.count = <span class="hljs-number">0</span>
 
-<p>Other examples:</p>
-<div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">which</span> <span class="hljs-built_in">ls</span>
-/bin/ls
-% <span class="hljs-built_in">which</span> <span class="hljs-built_in">mkdir</span>
-/bin/mkdir
-% <span class="hljs-built_in">which</span> npm
-/Users/.../bin/npm
-% <span class="hljs-built_in">which</span> python
-/opt/anaconda3/bin/python</code></pre></div>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">timer_callback</span>(<span class="hljs-params">self</span>):
+        msg = String()
+        msg.data = <span class="hljs-string">f&#x27;Hello ROS2: <span class="hljs-subst">&#123;self.count&#125;</span>&#x27;</span>
+        <span class="hljs-variable language_">self</span>.publisher_.publish(msg)
+        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Publishing: &quot;<span class="hljs-subst">&#123;msg.data&#125;</span>&quot;&#x27;</span>)
+        <span class="hljs-variable language_">self</span>.count += <span class="hljs-number">1</span>
 
-<p>Check where is my python:</p>
-<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">There are two python3 installed on my commputer</span>
-<span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">which</span> -a python3</span>
-/opt/miniconda3/bin/python3
-/usr/bin/python3
-<span class="hljs-meta prompt_"></span>
-<span class="hljs-meta prompt_"># </span><span class="language-bash">But this <span class="hljs-built_in">command</span> only <span class="hljs-built_in">return</span> one</span>
-<span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">which</span> python3</span>
-/opt/miniconda3/bin/python3</code></pre></div>
-<p><strong>When you have multiple versions of the same command, The shell executes the first one it finds, searching the directories in your <code>$PATH</code> from left to right.</strong></p>
-<h3 id="Types-of-Commands"><a href="#Types-of-Commands" class="headerlink" title="Types of Commands"></a>Types of Commands</h3><ul>
-<li><p>Built-in commands<br>A built-in command is a command that is part of the shell program itself. Examples: <code>cd, echo, exit, export, alias, pwd</code>.</p>
-  <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">type</span> <span class="hljs-built_in">pwd</span></span>     
-pwd is a shell builtin</code></pre></div>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
+    rclpy.init(args=args)
+    node = Talker() <span class="hljs-comment"># Creates an instance of the Talker node class</span>
+    rclpy.spin(node) 
+    node.destroy_node()
+    rclpy.shutdown()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()</code></pre></div>
 </li>
-<li><p>External Commands<br>An external command is a separate program that exists as a file on your system. Examples: <code>ls, grep, git, python, node</code>.</p>
-  <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">type</span> <span class="hljs-built_in">ls</span></span>
-ls is /bin/ls</code></pre></div></li>
-</ul>
-<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><h3 id="Redirection"><a href="#Redirection" class="headerlink" title="Redirection"></a>Redirection</h3><p>In the shell, each program has an input stream and an output stream — by default, the keyboard and terminal. We can redirect input or output using <code>&lt; file</code> or <code>&gt; file</code>.</p>
-<div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World&quot;</span> &gt; output.txt</code></pre></div>
+<li><p>Subscriber</p>
+  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
+<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
+<span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
 
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Listener</span>(<span class="hljs-title class_ inherited__">Node</span>):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;listener&#x27;</span>)
+        <span class="hljs-variable language_">self</span>.subscription = <span class="hljs-variable language_">self</span>.create_subscription(
+            String,          <span class="hljs-comment"># message type</span>
+            <span class="hljs-string">&#x27;chatter&#x27;</span>,       <span class="hljs-comment"># topic name</span>
+            <span class="hljs-variable language_">self</span>.listener_callback,  <span class="hljs-comment"># callback function</span>
+            <span class="hljs-number">10</span>               <span class="hljs-comment"># queue size</span>
+        )
+        <span class="hljs-variable language_">self</span>.subscription
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">listener_callback</span>(<span class="hljs-params">self, msg</span>):
+        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;I heard: &quot;<span class="hljs-subst">&#123;msg.data&#125;</span>&quot;&#x27;</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
+    rclpy.init(args=args)
+    node = Listener()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()</code></pre></div></li>
+</ul>
+<h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><p>Services are used for two-way communication. This communication is synchronous.</p>
 <ul>
-<li><code>echo &quot;Hello, World&quot;</code>: prints text to the terminal.</li>
-<li><code>&gt;</code>: redirects output to the file specified on its right.</li>
+<li><p>Service Server</p>
+  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
+<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
+<span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddTwoIntsServer</span>(<span class="hljs-title class_ inherited__">Node</span>):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;add_two_ints_server&#x27;</span>)
+        <span class="hljs-comment"># create a service</span>
+        <span class="hljs-variable language_">self</span>.srv = <span class="hljs-variable language_">self</span>.create_service(AddTwoInts, <span class="hljs-string">&#x27;add_two_ints&#x27;</span>, <span class="hljs-variable language_">self</span>.add_two_ints_callback)
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_two_ints_callback</span>(<span class="hljs-params">self, request, response</span>):
+        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Received request: a=<span class="hljs-subst">&#123;request.a&#125;</span>, b=<span class="hljs-subst">&#123;request.b&#125;</span>&#x27;</span>)
+        response.<span class="hljs-built_in">sum</span> = request.a + request.b
+        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Returning response: sum=<span class="hljs-subst">&#123;response.<span class="hljs-built_in">sum</span>&#125;</span>&#x27;</span>)
+        <span class="hljs-keyword">return</span> response
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
+    rclpy.init(args=args)
+    node = AddTwoIntsServer()
+    rclpy.spin(node)  <span class="hljs-comment"># spin to waiting for requests</span>
+    node.destroy_node()
+    rclpy.shutdown()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()</code></pre></div></li>
+<li><p>Client</p>
+</li>
 </ul>
-<p>Result: the text “Hello, World” is written to <code>output.txt</code>. <code>&gt;</code> overwrites a file, while <code>&gt;&gt;</code> appends to it.</p>
-<h3 id="Pipes"><a href="#Pipes" class="headerlink" title="Pipes"></a>Pipes</h3><p>Pipes (<code>|</code>) pass the output of one command as input to another.</p>
-<div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span>
--rw-r--r--  1 user  staff  13 Jun 24 16:18 output.txt</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
+<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
+<span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
 
-<p>Explanation:</p>
-<ul>
-<li><code>ls -l</code>: lists files in long format.</li>
-<li><code>|</code>: passes output to the next command.</li>
-<li><code>grep &quot;.txt&quot;</code>: filters for <code>.txt</code> files.</li>
-</ul>
-<p>Combining redirection and pipes:</p>
-<div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span> &gt; txt_files_list.txt
-% <span class="hljs-built_in">cat</span> txt_files_list.txt
--rw-r--r--  1 user  staff  13 Jun 24 16:18 output.txt
--rw-r--r--  1 user  staff   0 Jun 24 16:34 txt_files_list.txt</code></pre></div>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddTwoIntsClient</span>(<span class="hljs-title class_ inherited__">Node</span>):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;add_two_ints_client&#x27;</span>)
+        <span class="hljs-variable language_">self</span>.client = <span class="hljs-variable language_">self</span>.create_client(AddTwoInts, <span class="hljs-string">&#x27;add_two_ints&#x27;</span>)
 
-<hr>
-<h2 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h2><h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><div class="code-wrapper"><pre><code class="hljs bash">bash-3.2$ <span class="hljs-built_in">alias</span> gs=<span class="hljs-string">&quot;git status&quot;</span>
-bash-3.2$ gs
-On branch main
-nothing to commit, working tree clean
-bash-3.2$ git status
-On branch main
-nothing to commit, working tree clean</code></pre></div>
+        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.client.wait_for_service(timeout_sec=<span class="hljs-number">1.0</span>):
+            <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;Service not available, waiting...&#x27;</span>)
 
-<p>To make an alias persistent, include it in configuration files like <code>.bashrc</code> or <code>.zshrc</code>.</p>
+        <span class="hljs-variable language_">self</span>.request = AddTwoInts.Request()
+        <span class="hljs-variable language_">self</span>.request.a = <span class="hljs-number">5</span>
+        <span class="hljs-variable language_">self</span>.request.b = <span class="hljs-number">7</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send_request</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-variable language_">self</span>.future = <span class="hljs-variable language_">self</span>.client.call_async(<span class="hljs-variable language_">self</span>.request)
+        rclpy.spin_until_future_complete(<span class="hljs-variable language_">self</span>, <span class="hljs-variable language_">self</span>.future) <span class="hljs-comment"># wait for response</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.future.result()
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
+    rclpy.init(args=args)
+    node = AddTwoIntsClient()
+    response = node.send_request()
+    node.get_logger().info(<span class="hljs-string">f&#x27;Result of addition: <span class="hljs-subst">&#123;response.<span class="hljs-built_in">sum</span>&#125;</span>&#x27;</span>)
+    node.destroy_node()
+    rclpy.shutdown()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()</code></pre></div>
 
                 
               </div>
@@ -378,7 +439,7 @@ nothing to commit, working tree clean</code></pre></div>
     
       <span class="category-chain">
         
-  <a href="/categories/Computer-Basis/" class="category-chain-item">Computer Basis</a>
+  <a href="/categories/CSE276A/" class="category-chain-item">CSE276A</a>
   
   
 
@@ -393,7 +454,7 @@ nothing to commit, working tree clean</code></pre></div>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/shell/" class="print-no-link">#shell</a>
+        <a href="/tags/ROS2/" class="print-no-link">#ROS2</a>
       
     </div>
   
@@ -405,8 +466,8 @@ nothing to commit, working tree clean</code></pre></div>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Shell - How Shell Works</div>
-      <div>http://example.com/2024/06/24/CS_Basis/Shell2/</div>
+      <div>CSE276A - ROS2</div>
+      <div>http://example.com/2025/10/24/CSE276A/CSE276A-ROS2/</div>
     </div>
     <div class="license-meta">
       
@@ -418,7 +479,7 @@ nothing to commit, working tree clean</code></pre></div>
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 24, 2024</div>
+          <div>October 24, 2025</div>
         </div>
       
       
@@ -450,18 +511,12 @@ nothing to commit, working tree clean</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/24/CSE276A/CSE276A-ROS2/" title="CSE276A - ROS2">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE276A - ROS2</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/24/CS_Basis/Shell1/" title="Shell - Basic Syntax">
-                        <span class="hidden-mobile">Shell - Basic Syntax</span>
+                      <a href="/2024/06/24/CS_Basis/Shell2/" title="Shell - How Shell Works">
+                        <span class="hidden-mobile">Shell - How Shell Works</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
