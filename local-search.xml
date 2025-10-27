@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>CSE276A - ROS2 Commands</title>
+    <link href="/2025/10/26/CSE276A/CSE276A-ROS2-Commands/"/>
+    <url>/2025/10/26/CSE276A/CSE276A-ROS2-Commands/</url>
+    
+    <content type="html"><![CDATA[<h3 id="Set-Up"><a href="#Set-Up" class="headerlink" title="Set Up"></a>Set Up</h3><ul><li><p><code>ros2 pkg create &lt;package_name&gt; --build-type &lt;type&gt; --dependencies &lt;deps&gt;</code>: Automatically generates the entire file and directory structure for a new, empty ROS 2 package.</p></li><li><p><code>ros2 pkg list</code>: Shows all packages that the ROS 2 environment can currently find.</p></li><li><p><code>ros2 pkg executables &lt;package_name&gt;</code>: Lists all the nodes that a specific package provides.</p></li><li><p><code>ros2 pkg dependencies &lt;package_name&gt;</code>: </p></li><li><p><code>colcon build</code>: Run this command from the workspace, it will find all the ROS 2 packages in the src directory, compile them in the correct order based on their dependencies, and place the resulting files in the install and build directories. After build, we need to source using <code>source install/setup.bash</code>.</p></li></ul><h3 id="Launch-Node"><a href="#Launch-Node" class="headerlink" title="Launch Node"></a>Launch Node</h3><ul><li><p><code>ros2 run &lt;package_name&gt; &lt;executable_name&gt;</code>: Launch a single node from a specific package.</p></li><li><p><code>ros2 launch &lt;package_name&gt; &lt;launch_file_name&gt;</code>: This launch file describes all the nodes that should be started, any parameters they should be set with, and how they might be connected. Running the launch file enable us to launch a complex application.</p></li></ul><h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><ul><li><code>ros2 node list</code>: Shows all nodes currently active in the system.</li><li><code>ros2 node info &lt;node_name&gt;</code>: Lists all the publishers, subscribers, services, and actions associated with that specific node.</li></ul><h3 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h3><ul><li><code>ros2 topic list</code>: Shows all topics currently active in the system.</li><li><code>ros2 topic echo &lt;topic_name&gt;</code>: Prints the data being published on a topic to the terminal in real-time.</li><li><code>ros2 topic pub &lt;topic_name&gt; &lt;message_type&gt; &#39;&lt;data&gt;&#39;</code>: Publishes a single message to a topic from the command line. Used for debugging.</li><li><code>ros2 topic hz &lt;topic_name&gt;</code>: Reports the average frequency in hertz at which messages are being published on a topic.</li></ul><h3 id="service"><a href="#service" class="headerlink" title="service"></a>service</h3><ul><li><code>ros2 service list</code>: Shows all services currently active in the system.</li><li><code>ros2 service type &lt;service_name&gt;</code>: Shows the data type (interface) of the service.</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>CSE276A</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ROS2</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CSE276A - ROS2</title>
     <link href="/2025/10/24/CSE276A/CSE276A-ROS2/"/>
     <url>/2025/10/24/CSE276A/CSE276A-ROS2/</url>
