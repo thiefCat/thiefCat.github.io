@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          404 words
+          400 words
         
       </span>
     
@@ -279,8 +279,14 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>ROS 2 (Robot Operating System 2) is a framework that runs on an existing OS. In a robot, there are separate programs that read camera data, controlling wheels, planning paths .etc. ROS 2 provides a standard way for all these independent programs to discover each other and exchange information.</p>
-<h3 id="Nodes"><a href="#Nodes" class="headerlink" title="Nodes"></a>Nodes</h3><p>A node is a single program responsible for one specific task.</p>
+                <h2 id="introduction">Introduction</h2>
+<p>ROS 2 (Robot Operating System 2) is a framework that runs on an
+existing OS. In a robot, there are separate programs that read camera
+data, controlling wheels, planning paths .etc. ROS 2 provides a standard
+way for all these independent programs to discover each other and
+exchange information.</p>
+<h3 id="nodes">Nodes</h3>
+<p>A node is a single program responsible for one specific task.</p>
 <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy <span class="hljs-comment"># ROS Client Library for Python</span>
 <span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
 
@@ -289,19 +295,31 @@
         <span class="hljs-comment"># Initialize the node with the name &#x27;sensor_node&#x27;</span>
         <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;sensor_node&#x27;</span>)
         <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;LIDAR sensor node has started.&#x27;</span>)</code></pre></div>
-
-<h3 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h3><p>Topics are channels where nodes can send (publish) or receive (subscribe) data. This communication is asynchronous. E.g., the <code>sensor_node</code> needs to continuously broadcast sensor data to anyone who cares. </p>
+<h3 id="topics">Topics</h3>
+<p>Topics are channels where nodes can send (publish) or receive
+(subscribe) data. This communication is asynchronous. E.g., the
+<code>sensor_node</code> needs to continuously broadcast sensor data to
+anyone who cares.</p>
 <ul>
 <li><p>Publisher</p>
 <ul>
-<li><code>self.publisher_ = self.create_publisher(String, &#39;chatter&#39;, 10)</code>: <code>String</code> specifies the message type, <code>&#39;chatter&#39;</code> is topic name, <code>10</code> is the the depth of the message queue. </li>
-<li><code>self.timer = self.create_timer()</code>: register a timer event, the event is scheduled by <code>rclpy.init()</code>.</li>
-<li><code>rclpy.init()</code>: Initializes the rclpy library, first step, mandatory.</li>
-<li><code>rclpy.spin(node)</code>: ROS2 nodes are event-driven, this function will keep the node running and constantly listen for events. The program will stay at this line until <code>Ctrl+C</code> is entered.</li>
-<li><code>node.destroy_node()</code>: Gracefully cleans up the node’s internal resources.</li>
+<li><code>self.publisher_ = self.create_publisher(String, 'chatter', 10)</code>:
+<code>String</code> specifies the message type, <code>'chatter'</code>
+is topic name, <code>10</code> is the the depth of the message
+queue.</li>
+<li><code>self.timer = self.create_timer()</code>: register a timer
+event, the event is scheduled by <code>rclpy.init()</code>.</li>
+<li><code>rclpy.init()</code>: Initializes the rclpy library, first
+step, mandatory.</li>
+<li><code>rclpy.spin(node)</code>: ROS2 nodes are event-driven, this
+function will keep the node running and constantly listen for events.
+The program will stay at this line until <code>Ctrl+C</code> is
+entered.</li>
+<li><code>node.destroy_node()</code>: Gracefully cleans up the node’s
+internal resources.</li>
 <li><code>rclpy.shutdown()</code>: Shuts down the rclpy Library.</li>
 </ul>
-  <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
+<p><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
 <span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
 <span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
 
@@ -328,10 +346,8 @@
     rclpy.shutdown()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-</li>
-<li><p>Subscriber</p>
-  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
+    main()</code></pre></div></p></li>
+<li><p>Subscriber <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
 <span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
 <span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
 
@@ -357,12 +373,14 @@
     rclpy.shutdown()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div></li>
+    main()</code></pre></div></p></li>
 </ul>
-<h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><p>Services are used for two-way communication. This communication is synchronous.</p>
+<h3 id="services">Services</h3>
+<p>Services are used for two-way communication. This communication is
+synchronous.</p>
 <ul>
 <li><p>Service Server</p>
-  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
+<p><div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
 <span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
 <span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
 
@@ -386,9 +404,8 @@
     rclpy.shutdown()
 
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div></li>
-<li><p>Client</p>
-</li>
+    main()</code></pre></div></p></li>
+<li><p>Client</p></li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
 <span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node

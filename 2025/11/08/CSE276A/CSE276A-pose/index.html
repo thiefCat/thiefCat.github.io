@@ -21,22 +21,22 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog post introduces what is shell, and its basic syntax">
+    <meta name="description" content="This blog introduces how to represent a robot&#39;s pose.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell - Basic Syntax">
-<meta property="og:url" content="http://example.com/2024/06/24/CS_Basis/Shell1/index.html">
+<meta property="og:title" content="CSE276A - Euler and Quaternion">
+<meta property="og:url" content="http://example.com/2025/11/08/CSE276A/CSE276A-pose/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="This blog post introduces what is shell, and its basic syntax">
+<meta property="og:description" content="This blog introduces how to represent a robot&#39;s pose.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-24T18:59:00.000Z">
-<meta property="article:modified_time" content="2025-10-24T09:19:17.624Z">
+<meta property="article:published_time" content="2025-11-08T21:51:18.000Z">
+<meta property="article:modified_time" content="2025-11-08T23:51:28.814Z">
 <meta property="article:author" content="Songlin Zhao">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="ROS2">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Shell - Basic Syntax - Songlin&#39;s Blog</title>
+  <title>CSE276A - Euler and Quaternion - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Shell - Basic Syntax</span>
+            <span id="subtitle">CSE276A - Euler and Quaternion</span>
           
         </div>
 
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 11:59" pubdate>
-          June 24, 2024 11:59 AM
+        <time datetime="2025-11-08 13:51" pubdate>
+          November 8, 2025 1:51 PM
         </time>
       </span>
     
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          240 words
+          126 words
         
       </span>
     
@@ -274,123 +274,70 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Shell - Basic Syntax</h1>
+            <h1 id="seo-header">CSE276A - Euler and Quaternion</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="what-is-the-shell">What is the shell?</h3>
-<p><strong>A shell is a program that takes your commands, interprets
-them, and tells the operating system what to do.</strong> It is a
-command-line interface (CLI). The shell in macOS before Catalina is bash
-(Bourne Again Shell) and currently it’s Zsh (Z Shell). The shell allows
-users to execute commands, run programs, and manage system resources.
-While the GUI defines many use cases for interacting with the OS, to
-take full advantage of system tools, we must use the shell.</p>
-<h3 id="basic-shell-commands">Basic shell commands</h3>
-<div class="code-wrapper"><pre><code class="hljs shell">. # current directory
-.. # parent directory
-ls
-mkdir
-cd # change directory
-pwd # print working directory
-echo &quot;text&quot; # prints the specified text to the terminal
-cat # displays the contents of the specified file
-touch example.txt # creates a file
-grep &quot;Hello&quot; example.txt # searches for the string “Hello” in a file named example.txt and returns the line containing it
-export #</code></pre></div>
-<h3 id="basic-syntax">Basic Syntax</h3>
-<p>Every shell script starts with a shebang line: <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span></code></pre></div> This
-tells the system to run the script with Bash.</p>
-<ul>
-<li><p>Define variables <div class="code-wrapper"><pre><code class="hljs shell">name=&quot;Alice&quot; # no space around &quot;=&quot;
-echo $name
-echo &quot;Hello, $&#123;name&#125;!&quot;</code></pre></div> In this example, <code>name</code>
-is variable name, <code>$name</code> represents getting the value of the
-variable.</p></li>
-<li><p>Command substitution <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">date</span></span>
-Fri Oct 24 01:19:10 PDT 2025
-today=$(date) # $(date) runs the date command first, and replace it with its output
-echo &quot;Today is $today&quot;</code></pre></div> <code>$()</code> means running
-a command and store its output.</p></li>
-<li><p>If statements <div class="code-wrapper"><pre><code class="hljs shell">if [ $age -gt 18 ]; then
-    echo &quot;Adult&quot;
-else
-    echo &quot;Minor&quot;
-fi</code></pre></div> Common operators:
-<code>-eq, -ne, -gt, -ge, -lt, -le</code>.</p></li>
-<li><p>For loop <div class="code-wrapper"><pre><code class="hljs shell">for var in item1 item2 item3; do
-  echo &quot;$var&quot;
-done</code></pre></div></p></li>
-</ul>
-<div class="code-wrapper"><pre><code class="hljs shell">for f in *.txt; do # get all *.txt in the current directory
-  echo &quot;file: $f&quot;
-done</code></pre></div>
-<ul>
-<li><p>While loop <div class="code-wrapper"><pre><code class="hljs shell">count=1
-while [ $count -le 5 ]; do
-  echo &quot;Count $count&quot;
-  ((count++))
-done</code></pre></div></p></li>
-<li><p>Arithmetic <code>(( ))</code> is used for arithmetic evaluation
-(like addition, subtraction, comparisons, and increments) in
-Bash.</p></li>
-</ul>
-<div class="code-wrapper"><pre><code class="hljs shell">((a = 5 + 3))
-echo $a   # 8
-((a++))
-((c += 5))
-((d *= 2))</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs shell">a=5
-b=3
-if ((a &gt; b)); then
-  echo &quot;a is greater&quot;
-fi
-
-for ((i=1; i&lt;=5; i++)); do
-  echo &quot;Number $i&quot;
-done</code></pre></div>
-<ul>
-<li><p>Functions <div class="code-wrapper"><pre><code class="hljs shell">greet() &#123;
-    echo &quot;Hello, $1&quot;
-&#125;
-
-greet &quot;Alice&quot;</code></pre></div> <code>$1</code> refers to the first
-argument passed to the function.</p></li>
-<li><p>Exit Status Every command in Linux returns an exit status. 0
-means success, and non-zero means failure. <code>$?</code> is a special
-variable that stores the exit code of the most recent command.</p></li>
-</ul>
-<div class="code-wrapper"><pre><code class="hljs shell">ls /etc
-echo $?   # 0 = success
-
-ls /no/such/file
-echo $?   # non-zero = error</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs shell">if ls /no/such/file; then # if the ls command succeed, then print &quot;Command succeeded&quot;
-  echo &quot;Command succeeded&quot;
-else
-  echo &quot;Command failed&quot;
-fi</code></pre></div>
-<h3 id="tests">Tests</h3>
-<p>Tests are used in conditional statements. - <code>-f file</code>,
-File exists and is a regular file <div class="code-wrapper"><pre><code class="hljs shell">if [ -f &quot;config.txt&quot; ]; then
-  echo &quot;Config file found&quot;
-else
-  echo &quot;No config file&quot;
-fi</code></pre></div> - <code>-d file</code>,
-file is a directory - <code>-z "$str"</code>, string is empty -
-<code>-n "$str"</code>, string is not empty - <code>"$a" != "$b"</code>,
-strings are not equal</p>
-<h3 id="special-parameters">Special Parameters</h3>
-<ul>
-<li><code>$0</code>, name of the current script</li>
-<li><code>$1</code>, first parameter</li>
-<li><code>$#</code>, number of parameters</li>
-<li><code>$$</code>, current script’s process ID</li>
-<li><code>$?</code>, exit status of the last command</li>
-<li><code>$SHELL</code>, current shell path</li>
-<li><code>$PATH</code>, directories to search for executables</li>
-</ul>
+                <p>If we have constructed two coordinates (e.g., robot base link frame
+and camera frame), how to describe the transformation between the two
+coordinates?</p>
+<h3 id="transformation">Transformation</h3>
+<p>The offset of the child frame’s origin (camera) from the parent
+frame’s origin (robot).</p>
+<h3 id="rotation">Rotation</h3>
+<p>A useful online rotation representation converter: <a
+target="_blank" rel="noopener" href="https://www.andre-gaschler.com/rotationconverter/">rotation
+converter</a>.</p>
+<h4 id="euler-angles">Euler Angles</h4>
+<p>Any 3D orientation can be achieved by performing three sequential
+rotations around a set of defined axes. The order matters for Euler
+angles. The most common convention in robotics is Yaw (Z-axis), Pitch
+(Y-axis), and Roll (X-axis). As a result, a 3-dimensional euler vector
+cannot describe an orientation unless we specify the rotation order.</p>
+<h4 id="rotation-matrix">Rotation Matrix</h4>
+<p>A 3x3 matrix where the columns are the child frame’s (camera’s) X, Y,
+and Z axes, as described in the parent frame’s (robot’s) coordinates.
+<span class="math display">$$
+R = \begin{bmatrix}
+| &amp; | &amp; | \\
+\vec{X}_C &amp; \vec{Y}_C &amp; \vec{Z}_C \\
+| &amp; | &amp; |
+\end{bmatrix}
+$$</span></p>
+<h4 id="quaternion">Quaternion</h4>
+<p>Instead of 3 separate rotations, a quaternion represents orientation
+as a single rotation around one specific axis in 3D space. The
+quaternion representation is 4 dimensional.</p>
+<h3 id="transformation-1">Transformation</h3>
+<p>After obtaining transformation and rotation, this 4x4 transformation
+matrix <span class="math inline"><em>H</em></span> is constructed by
+plugging in the 3x3 rotation matrix <span
+class="math inline"><em>R</em></span> and the 3x1 translation vector
+<span class="math inline"><em>T</em></span>.</p>
+<p><span class="math display">$$
+H =
+\begin{bmatrix}
+&amp; &amp; &amp; \\
+&amp; R &amp; &amp; \vec{T} \\
+&amp; (3 \times 3) &amp; &amp; (3 \times 1) \\
+&amp; &amp; &amp; \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+$$</span></p>
+<p>This matrix <span class="math inline"><em>H</em></span> can transform
+any point <span
+class="math inline"><em>P</em><sub><em>C</em></sub></span> defined in
+the camera_frame coordinates directly into its corresponding point <span
+class="math inline"><em>P</em><sub><em>B</em></sub></span> in the
+base_link frame coordinates with a single matrix multiplication:</p>
+<p><span class="math display">$$
+\begin{bmatrix} P_{B,x} \\ P_{B,y} \\ P_{B,z} \\ 1 \end{bmatrix}
+=
+H
+\cdot
+\begin{bmatrix} P_{C,x} \\ P_{C,y} \\ P_{C,z} \\ 1 \end{bmatrix}
+$$</span></p>
 
                 
               </div>
@@ -409,7 +356,7 @@ strings are not equal</p>
     
       <span class="category-chain">
         
-  <a href="/categories/Computer-Basis/" class="category-chain-item">Computer Basis</a>
+  <a href="/categories/CSE276A/" class="category-chain-item">CSE276A</a>
   
   
 
@@ -424,7 +371,7 @@ strings are not equal</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/shell/" class="print-no-link">#shell</a>
+        <a href="/tags/ROS2/" class="print-no-link">#ROS2</a>
       
     </div>
   
@@ -436,8 +383,8 @@ strings are not equal</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Shell - Basic Syntax</div>
-      <div>http://example.com/2024/06/24/CS_Basis/Shell1/</div>
+      <div>CSE276A - Euler and Quaternion</div>
+      <div>http://example.com/2025/11/08/CSE276A/CSE276A-pose/</div>
     </div>
     <div class="license-meta">
       
@@ -449,7 +396,7 @@ strings are not equal</p>
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 24, 2024</div>
+          <div>November 8, 2025</div>
         </div>
       
       
@@ -481,18 +428,12 @@ strings are not equal</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/24/CS_Basis/Shell2/" title="Shell - How Shell Works">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Shell - How Shell Works</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/23/test/" title="My first Blog">
-                        <span class="hidden-mobile">My first Blog</span>
+                      <a href="/2025/10/26/CSE276A/CSE276A-ROS2-Commands/" title="CSE276A - ROS2 Commands">
+                        <span class="hidden-mobile">CSE276A - ROS2 Commands</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -580,6 +521,12 @@ strings are not equal</p>
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -783,6 +730,49 @@ strings are not equal</p>
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 

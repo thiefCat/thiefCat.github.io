@@ -283,44 +283,46 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;Name&quot;</span>
+                <h2 id="post">Post</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;Name&quot;</span>
 $ hexo new post <span class="hljs-string">&quot;topic&quot;</span> --path <span class="hljs-string">&quot;folder/topic&quot;</span></code></pre></div>
-
-<h3 id="Include-image-in-a-post"><a href="#Include-image-in-a-post" class="headerlink" title="Include image in a post"></a>Include image in a post</h3><p>Move the image to the folder created automatically by Hexo, and then use the relative path to refer to the image.</p>
-<p>Using hexo syntax, but unable to resize the image:</p>
-<div class="code-wrapper"><pre><code class="hljs Markdown">&#123;% asset<span class="hljs-emphasis">_img sample.jpeg &#x27;This is my picture&#x27; %&#125;</span></code></pre></div>
-
+<h3 id="include-image-in-a-post">Include image in a post</h3>
+<p>Move the image to the folder created automatically by Hexo, and then
+use the relative path to refer to the image.</p>
+<p>Using hexo syntax, but unable to resize the image: <div class="code-wrapper"><pre><code class="hljs Markdown">&#123;% asset<span class="hljs-emphasis">_img sample.jpeg &#x27;This is my picture&#x27; %&#125;</span></code></pre></div></p>
 <img src="/2024/06/23/test/sample.jpeg" srcset="/img/loading.gif" lazyload class="" title="This is my picture">
-
-
 <p>Or directly use an <code>&lt;img&gt;</code> tag:</p>
 <div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;sample.jpeg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 300px; height: auto;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Sample Image&quot;</span>&gt;</span></code></pre></div>
-<img src="sample.jpeg" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Sample Image">
-
+<p><img src="sample.jpeg" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Sample Image"></p>
 <p>With centered alignment:</p>
 <div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align: center;&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;sample.jpeg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 300px; height: auto;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Sample Image&quot;</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div>
 <div style="text-align: center;">
-  <img src="sample.jpeg" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Sample Image">
+<p><img src="sample.jpeg" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Sample Image"></p>
 </div>
-
-
-<hr>
-<h2 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h2><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo g</code></pre></div>
-
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo s</code></pre></div>
-
-<h3 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo d</code></pre></div>
-
-<h3 id="Generate-and-Deploy"><a href="#Generate-and-Deploy" class="headerlink" title="Generate and Deploy"></a>Generate and Deploy</h3><div class="code-wrapper"><pre><code class="hljs bash">$ hexo g -d</code></pre></div>
-
-<h2 id="Create-a-new-page"><a href="#Create-a-new-page" class="headerlink" title="Create a new page"></a>Create a new page</h2><div class="code-wrapper"><pre><code class="hljs bash">$ hexo new page <span class="hljs-string">&quot;name&quot;</span></code></pre></div>
-
-<h3 id="Creating-a-new-navigation-bar"><a href="#Creating-a-new-navigation-bar" class="headerlink" title="Creating a new navigation bar"></a>Creating a new navigation bar</h3><ol>
-<li>Create a new <code>.ejs</code> file in <code>/themes/fluid/layout/</code></li>
-<li>Add page attributes in <code>_config.fluid.yml</code>, and include a new menu item inside <code>navbar.menu</code></li>
-<li>Modify <code>/themes/fluid/languages/en.yml</code> to add titles and subtitles</li>
+<hr />
+<h2 id="blog">Blog</h2>
+<h3 id="generate-static-files">Generate static files</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo g</code></pre></div>
+<h3 id="run-server">Run server</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo s</code></pre></div>
+<h3 id="deploy">Deploy</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo d</code></pre></div>
+<h3 id="generate-and-deploy">Generate and Deploy</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo g -d</code></pre></div>
+<h2 id="create-a-new-page">Create a new page</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">$ hexo new page <span class="hljs-string">&quot;name&quot;</span></code></pre></div>
+<h3 id="creating-a-new-navigation-bar">Creating a new navigation
+bar</h3>
+<ol type="1">
+<li>Create a new <code>.ejs</code> file in
+<code>/themes/fluid/layout/</code></li>
+<li>Add page attributes in <code>_config.fluid.yml</code>, and include a
+new menu item inside <code>navbar.menu</code></li>
+<li>Modify <code>/themes/fluid/languages/en.yml</code> to add titles and
+subtitles</li>
 </ol>
 
                 
