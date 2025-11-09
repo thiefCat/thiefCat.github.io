@@ -100,7 +100,11 @@
 
 
   
-<meta name="generator" content="Hexo 8.0.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
 
 
 <body>
@@ -226,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          240 words
+          248 words
         
       </span>
     
@@ -279,15 +283,9 @@
             
               <div class="markdown-body">
                 
-                <h3 id="what-is-the-shell">What is the shell?</h3>
-<p><strong>A shell is a program that takes your commands, interprets
-them, and tells the operating system what to do.</strong> It is a
-command-line interface (CLI). The shell in macOS before Catalina is bash
-(Bourne Again Shell) and currently it’s Zsh (Z Shell). The shell allows
-users to execute commands, run programs, and manage system resources.
-While the GUI defines many use cases for interacting with the OS, to
-take full advantage of system tools, we must use the shell.</p>
-<h3 id="basic-shell-commands">Basic shell commands</h3>
+                <h3 id="What-is-the-shell">What is the shell?</h3>
+<p><strong>A shell is a program that takes your commands, interprets them, and tells the operating system what to do.</strong> It is a command-line interface (CLI). The shell in macOS before Catalina is bash (Bourne Again Shell) and currently it’s Zsh (Z Shell). The shell allows users to execute commands, run programs, and manage system resources. While the GUI defines many use cases for interacting with the OS, to take full advantage of system tools, we must use the shell.</p>
+<h3 id="Basic-shell-commands">Basic shell commands</h3>
 <div class="code-wrapper"><pre><code class="hljs shell">. # current directory
 .. # parent directory
 ls
@@ -299,42 +297,54 @@ cat # displays the contents of the specified file
 touch example.txt # creates a file
 grep &quot;Hello&quot; example.txt # searches for the string “Hello” in a file named example.txt and returns the line containing it
 export #</code></pre></div>
-<h3 id="basic-syntax">Basic Syntax</h3>
-<p>Every shell script starts with a shebang line: <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span></code></pre></div> This
-tells the system to run the script with Bash.</p>
+<h3 id="Basic-Syntax">Basic Syntax</h3>
+<p>Every shell script starts with a shebang line:</p>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span></code></pre></div>
+<p>This tells the system to run the script with Bash.</p>
 <ul>
-<li><p>Define variables <div class="code-wrapper"><pre><code class="hljs shell">name=&quot;Alice&quot; # no space around &quot;=&quot;
+<li>Define variables</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">name=&quot;Alice&quot; # no space around &quot;=&quot;
 echo $name
-echo &quot;Hello, $&#123;name&#125;!&quot;</code></pre></div> In this example, <code>name</code>
-is variable name, <code>$name</code> represents getting the value of the
-variable.</p></li>
-<li><p>Command substitution <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">date</span></span>
+echo &quot;Hello, $&#123;name&#125;!&quot;</code></pre></div>
+<p>In this example, <code>name</code> is variable name, <code>$name</code> represents getting the value of the variable.</p>
+<ul>
+<li>Command substitution</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">date</span></span>
 Fri Oct 24 01:19:10 PDT 2025
 today=$(date) # $(date) runs the date command first, and replace it with its output
-echo &quot;Today is $today&quot;</code></pre></div> <code>$()</code> means running
-a command and store its output.</p></li>
-<li><p>If statements <div class="code-wrapper"><pre><code class="hljs shell">if [ $age -gt 18 ]; then
+echo &quot;Today is $today&quot;</code></pre></div>
+<p><code>$()</code> means running a command and store its output.</p>
+<ul>
+<li>If statements</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">if [ $age -gt 18 ]; then
     echo &quot;Adult&quot;
 else
     echo &quot;Minor&quot;
-fi</code></pre></div> Common operators:
-<code>-eq, -ne, -gt, -ge, -lt, -le</code>.</p></li>
-<li><p>For loop <div class="code-wrapper"><pre><code class="hljs shell">for var in item1 item2 item3; do
-  echo &quot;$var&quot;
-done</code></pre></div></p></li>
+fi</code></pre></div>
+<p>Common operators: <code>-eq, -ne, -gt, -ge, -lt, -le</code>.</p>
+<ul>
+<li>For loop</li>
 </ul>
+<div class="code-wrapper"><pre><code class="hljs shell">for var in item1 item2 item3; do
+  echo &quot;$var&quot;
+done</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs shell">for f in *.txt; do # get all *.txt in the current directory
   echo &quot;file: $f&quot;
 done</code></pre></div>
 <ul>
-<li><p>While loop <div class="code-wrapper"><pre><code class="hljs shell">count=1
+<li>While loop</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">count=1
 while [ $count -le 5 ]; do
   echo &quot;Count $count&quot;
   ((count++))
-done</code></pre></div></p></li>
-<li><p>Arithmetic <code>(( ))</code> is used for arithmetic evaluation
-(like addition, subtraction, comparisons, and increments) in
-Bash.</p></li>
+done</code></pre></div>
+<ul>
+<li>Arithmetic<br>
+<code>(( ))</code> is used for arithmetic evaluation (like addition, subtraction, comparisons, and increments) in Bash.</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs shell">((a = 5 + 3))
 echo $a   # 8
@@ -351,15 +361,17 @@ for ((i=1; i&lt;=5; i++)); do
   echo &quot;Number $i&quot;
 done</code></pre></div>
 <ul>
-<li><p>Functions <div class="code-wrapper"><pre><code class="hljs shell">greet() &#123;
+<li>Functions</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">greet() &#123;
     echo &quot;Hello, $1&quot;
 &#125;
 
-greet &quot;Alice&quot;</code></pre></div> <code>$1</code> refers to the first
-argument passed to the function.</p></li>
-<li><p>Exit Status Every command in Linux returns an exit status. 0
-means success, and non-zero means failure. <code>$?</code> is a special
-variable that stores the exit code of the most recent command.</p></li>
+greet &quot;Alice&quot;</code></pre></div>
+<p><code>$1</code> refers to the first argument passed to the function.</p>
+<ul>
+<li>Exit Status<br>
+Every command in Linux returns an exit status. 0 means success, and non-zero means failure. <code>$?</code> is a special variable that stores the exit code of the most recent command.</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs shell">ls /etc
 echo $?   # 0 = success
@@ -371,17 +383,23 @@ echo $?   # non-zero = error</code></pre></div>
 else
   echo &quot;Command failed&quot;
 fi</code></pre></div>
-<h3 id="tests">Tests</h3>
-<p>Tests are used in conditional statements. - <code>-f file</code>,
-File exists and is a regular file <div class="code-wrapper"><pre><code class="hljs shell">if [ -f &quot;config.txt&quot; ]; then
+<h3 id="Tests">Tests</h3>
+<p>Tests are used in conditional statements.</p>
+<ul>
+<li><code>-f file</code>, File exists and is a regular file</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs shell">if [ -f &quot;config.txt&quot; ]; then
   echo &quot;Config file found&quot;
 else
   echo &quot;No config file&quot;
-fi</code></pre></div> - <code>-d file</code>,
-file is a directory - <code>-z "$str"</code>, string is empty -
-<code>-n "$str"</code>, string is not empty - <code>"$a" != "$b"</code>,
-strings are not equal</p>
-<h3 id="special-parameters">Special Parameters</h3>
+fi</code></pre></div>
+<ul>
+<li><code>-d file</code>, file is a directory</li>
+<li><code>-z &quot;$str&quot;</code>, string is empty</li>
+<li><code>-n &quot;$str&quot;</code>, string is not empty</li>
+<li><code>&quot;$a&quot; != &quot;$b&quot;</code>, strings are not equal</li>
+</ul>
+<h3 id="Special-Parameters">Special Parameters</h3>
 <ul>
 <li><code>$0</code>, name of the current script</li>
 <li><code>$1</code>, first parameter</li>

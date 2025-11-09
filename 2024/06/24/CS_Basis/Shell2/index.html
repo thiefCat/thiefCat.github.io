@@ -100,7 +100,11 @@
 
 
   
-<meta name="generator" content="Hexo 8.0.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
 
 
 <body>
@@ -226,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          209 words
+          213 words
         
       </span>
     
@@ -279,39 +283,25 @@
             
               <div class="markdown-body">
                 
-                <h3 id="configuration-file">Configuration file</h3>
+                <h3 id="Configuration-file">Configuration file</h3>
 <ul>
 <li><code>~/.zshrc</code>: The primary config file for zsh</li>
-<li><code>~/.bashrc</code>: The primary config file for bash (on linux
-systems) The shell automatically reads (it “sources”) this file every
-time you open a new terminal. The source command is a built-in shell
-command that executes a script in the current shell session. For
-example, if the script exports a variable (e.g., export MY_VAR=“hello”),
-that variable becomes part of your current shell’s environment.</li>
+<li><code>~/.bashrc</code>: The primary config file for bash (on linux systems)<br>
+The shell automatically reads (it “sources”) this file every time you open a new terminal. The source command is a built-in shell command that executes a script in the current shell session. For example, if the script exports a variable (e.g., export MY_VAR=“hello”), that variable becomes part of your current shell’s environment.</li>
 </ul>
-<h3 id="how-the-shell-executes-programs">How the shell executes
-programs</h3>
-<p>When a command is entered in the shell, it follows these steps to
-execute:</p>
-<ol type="1">
-<li><strong>Parsing:</strong> The shell reads the command line input and
-breaks it into components. <strong>The first word is the command
-(program), and the following words are arguments.</strong></li>
-<li><strong>Command Lookup:</strong> The shell searches for the command
-in the directories listed in the PATH environment variable.
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span></code></pre></div></li>
-<li><strong>Forking:</strong> The shell creates a new process (child
-process) to execute the command.</li>
-<li><strong>Return:</strong> After the child process finishes, control
-returns to the user.</li>
+<h3 id="How-the-shell-executes-programs">How the shell executes programs</h3>
+<p>When a command is entered in the shell, it follows these steps to execute:</p>
+<ol>
+<li><strong>Parsing:</strong> The shell reads the command line input and breaks it into components. <strong>The first word is the command (program), and the following words are arguments.</strong></li>
+<li><strong>Command Lookup:</strong> The shell searches for the command in the directories listed in the PATH environment variable.<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span></code></pre></div>
+</li>
+<li><strong>Forking:</strong> The shell creates a new process (child process) to execute the command.</li>
+<li><strong>Return:</strong> After the child process finishes, control returns to the user.</li>
 </ol>
-<h3 id="executing-programs">Executing programs</h3>
+<h3 id="Executing-programs">Executing programs</h3>
 <div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span>
 /Users/.../bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</code></pre></div>
-<p>The <code>echo $PATH</code> command executes the program
-<code>echo</code>. The shell searches for it in the directories defined
-in <code>$PATH</code>. To find where the <code>echo</code> program
-resides:</p>
+<p>The <code>echo $PATH</code> command executes the program <code>echo</code>. The shell searches for it in the directories defined in <code>$PATH</code>. To find where the <code>echo</code> program resides:</p>
 <div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">which</span> <span class="hljs-built_in">echo</span>
 <span class="hljs-built_in">echo</span>: shell built-in <span class="hljs-built_in">command</span></code></pre></div>
 <p>Other examples:</p>
@@ -323,59 +313,58 @@ resides:</p>
 /Users/.../bin/npm
 % <span class="hljs-built_in">which</span> python
 /opt/anaconda3/bin/python</code></pre></div>
-<p>Check where is my python: <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">There are two python3 installed on my commputer</span>
+<p>Check where is my python:</p>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">There are two python3 installed on my commputer</span>
 <span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">which</span> -a python3</span>
 /opt/miniconda3/bin/python3
 /usr/bin/python3
 <span class="hljs-meta prompt_"></span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">But this <span class="hljs-built_in">command</span> only <span class="hljs-built_in">return</span> one</span>
 <span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">which</span> python3</span>
-/opt/miniconda3/bin/python3</code></pre></div> <strong>When you have
-multiple versions of the same command, The shell executes the first one
-it finds, searching the directories in your <code>$PATH</code> from left
-to right.</strong></p>
-<h3 id="types-of-commands">Types of Commands</h3>
+/opt/miniconda3/bin/python3</code></pre></div>
+<p><strong>When you have multiple versions of the same command, The shell executes the first one it finds, searching the directories in your <code>$PATH</code> from left to right.</strong></p>
+<h3 id="Types-of-Commands">Types of Commands</h3>
 <ul>
-<li><p>Built-in commands A built-in command is a command that is part of
-the shell program itself. Examples:
-<code>cd, echo, exit, export, alias, pwd</code>. <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">type</span> <span class="hljs-built_in">pwd</span></span>     
-pwd is a shell builtin</code></pre></div></p></li>
-<li><p>External Commands An external command is a separate program that
-exists as a file on your system. Examples:
-<code>ls, grep, git, python, node</code>.</p>
-<p><div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">type</span> <span class="hljs-built_in">ls</span></span>
-ls is /bin/ls</code></pre></div></p></li>
+<li>
+<p>Built-in commands<br>
+A built-in command is a command that is part of the shell program itself. Examples: <code>cd, echo, exit, export, alias, pwd</code>.</p>
+  <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">type</span> <span class="hljs-built_in">pwd</span></span>     
+pwd is a shell builtin</code></pre></div>
+</li>
+<li>
+<p>External Commands<br>
+An external command is a separate program that exists as a file on your system. Examples: <code>ls, grep, git, python, node</code>.</p>
+  <div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">type</span> <span class="hljs-built_in">ls</span></span>
+ls is /bin/ls</code></pre></div>
+</li>
 </ul>
-<h2 id="advanced">Advanced</h2>
-<h3 id="redirection">Redirection</h3>
-<p>In the shell, each program has an input stream and an output stream —
-by default, the keyboard and terminal. We can redirect input or output
-using <code>&lt; file</code> or <code>&gt; file</code>.</p>
+<h2 id="Advanced">Advanced</h2>
+<h3 id="Redirection">Redirection</h3>
+<p>In the shell, each program has an input stream and an output stream — by default, the keyboard and terminal. We can redirect input or output using <code>&lt; file</code> or <code>&gt; file</code>.</p>
 <div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World&quot;</span> &gt; output.txt</code></pre></div>
 <ul>
-<li><code>echo "Hello, World"</code>: prints text to the terminal.</li>
-<li><code>&gt;</code>: redirects output to the file specified on its
-right.</li>
+<li><code>echo &quot;Hello, World&quot;</code>: prints text to the terminal.</li>
+<li><code>&gt;</code>: redirects output to the file specified on its right.</li>
 </ul>
-<p>Result: the text “Hello, World” is written to
-<code>output.txt</code>. <code>&gt;</code> overwrites a file, while
-<code>&gt;&gt;</code> appends to it.</p>
-<h3 id="pipes">Pipes</h3>
-<p>Pipes (<code>|</code>) pass the output of one command as input to
-another.</p>
+<p>Result: the text “Hello, World” is written to <code>output.txt</code>. <code>&gt;</code> overwrites a file, while <code>&gt;&gt;</code> appends to it.</p>
+<h3 id="Pipes">Pipes</h3>
+<p>Pipes (<code>|</code>) pass the output of one command as input to another.</p>
 <div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span>
 -rw-r--r--  1 user  staff  13 Jun 24 16:18 output.txt</code></pre></div>
-<p>Explanation: - <code>ls -l</code>: lists files in long format. -
-<code>|</code>: passes output to the next command. -
-<code>grep ".txt"</code>: filters for <code>.txt</code> files.</p>
+<p>Explanation:</p>
+<ul>
+<li><code>ls -l</code>: lists files in long format.</li>
+<li><code>|</code>: passes output to the next command.</li>
+<li><code>grep &quot;.txt&quot;</code>: filters for <code>.txt</code> files.</li>
+</ul>
 <p>Combining redirection and pipes:</p>
 <div class="code-wrapper"><pre><code class="hljs bash">% <span class="hljs-built_in">ls</span> -l | grep <span class="hljs-string">&quot;.txt&quot;</span> &gt; txt_files_list.txt
 % <span class="hljs-built_in">cat</span> txt_files_list.txt
 -rw-r--r--  1 user  staff  13 Jun 24 16:18 output.txt
 -rw-r--r--  1 user  staff   0 Jun 24 16:34 txt_files_list.txt</code></pre></div>
-<hr />
-<h2 id="useful">Useful</h2>
-<h3 id="alias">Alias</h3>
+<hr>
+<h2 id="Useful">Useful</h2>
+<h3 id="Alias">Alias</h3>
 <div class="code-wrapper"><pre><code class="hljs bash">bash-3.2$ <span class="hljs-built_in">alias</span> gs=<span class="hljs-string">&quot;git status&quot;</span>
 bash-3.2$ gs
 On branch main
@@ -383,8 +372,7 @@ nothing to commit, working tree clean
 bash-3.2$ git status
 On branch main
 nothing to commit, working tree clean</code></pre></div>
-<p>To make an alias persistent, include it in configuration files like
-<code>.bashrc</code> or <code>.zshrc</code>.</p>
+<p>To make an alias persistent, include it in configuration files like <code>.bashrc</code> or <code>.zshrc</code>.</p>
 
                 
               </div>
