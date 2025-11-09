@@ -21,22 +21,22 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces how to represent a robot&#39;s pose.">
+    <meta name="description" content="This blog introduces the robot&#39;s coordinate system">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSE276A - Euler and Quaternion">
-<meta property="og:url" content="http://example.com/2025/11/08/CSE276A/CSE276A-pose/index.html">
+<meta property="og:title" content="CSE276A - ROS2 TF">
+<meta property="og:url" content="http://example.com/2025/11/08/CSE276A/CSE276A-tf/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="This blog introduces how to represent a robot&#39;s pose.">
+<meta property="og:description" content="This blog introduces the robot&#39;s coordinate system">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-11-08T21:51:18.000Z">
-<meta property="article:modified_time" content="2025-11-09T00:30:41.957Z">
+<meta property="article:published_time" content="2025-11-09T00:02:02.000Z">
+<meta property="article:modified_time" content="2025-11-09T01:39:28.060Z">
 <meta property="article:author" content="Songlin Zhao">
 <meta property="article:tag" content="ROS2">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CSE276A - Euler and Quaternion - Songlin&#39;s Blog</title>
+  <title>CSE276A - ROS2 TF - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">CSE276A - Euler and Quaternion</span>
+            <span id="subtitle">CSE276A - ROS2 TF</span>
           
         </div>
 
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-11-08 13:51" pubdate>
-          November 8, 2025 1:51 PM
+        <time datetime="2025-11-08 16:02" pubdate>
+          November 8, 2025 4:02 PM
         </time>
       </span>
     
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          117 words
+          481 words
         
       </span>
     
@@ -274,69 +274,168 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CSE276A - Euler and Quaternion</h1>
+            <h1 id="seo-header">CSE276A - ROS2 TF</h1>
             
             
               <div class="markdown-body">
                 
-                <p>If we have constructed two coordinates (e.g., robot base link frame
-and camera frame), how to describe the transformation between the two
-coordinates?</p>
-<h3 id="transformation">Transformation</h3>
-<p>The offset of the child frame’s origin (camera) from the parent
-frame’s origin (robot).</p>
-<h3 id="rotation">Rotation</h3>
-<p>A useful online rotation representation converter: <a
-target="_blank" rel="noopener" href="https://www.andre-gaschler.com/rotationconverter/">rotation
-converter</a>.</p>
-<h4 id="euler-angles">Euler Angles</h4>
-<p>Any 3D orientation can be achieved by performing three sequential
-rotations around a set of defined axes. The order matters for Euler
-angles. As a result, a 3-dimensional euler vector cannot describe an
-orientation unless we specify the rotation order.</p>
-<h4 id="rotation-matrix">Rotation Matrix</h4>
-<p>A 3x3 matrix where the columns are the child frame’s (camera’s) X, Y,
-and Z axes, as described in the parent frame’s (robot’s) coordinates.
-<span class="math display">$$
-R = \begin{bmatrix}
-| &amp; | &amp; | \\
-\vec{X}_C &amp; \vec{Y}_C &amp; \vec{Z}_C \\
-| &amp; | &amp; |
-\end{bmatrix}
-$$</span></p>
-<h4 id="quaternion">Quaternion</h4>
-<p>Instead of 3 separate rotations, a quaternion represents orientation
-as a single rotation around one specific axis in 3D space. The
-quaternion representation is 4 dimensional.</p>
-<h3 id="transformation-1">Transformation</h3>
-<p>After obtaining transformation and rotation, this 4x4 transformation
-matrix <span class="math inline"><em>H</em></span> is constructed by
-plugging in the 3x3 rotation matrix <span
-class="math inline"><em>R</em></span> and the 3x1 translation vector
-<span class="math inline"><em>T</em></span>.</p>
-<p><span class="math display">$$
-H =
-\begin{bmatrix}
-&amp; &amp; &amp; \\
-&amp; R &amp; &amp; \vec{T} \\
-&amp; (3 \times 3) &amp; &amp; (3 \times 1) \\
-&amp; &amp; &amp; \\
-0 &amp; 0 &amp; 0 &amp; 1
-\end{bmatrix}
-$$</span></p>
-<p>This matrix <span class="math inline"><em>H</em></span> can transform
-any point <span
-class="math inline"><em>P</em><sub><em>C</em></sub></span> defined in
-the camera_frame coordinates directly into its corresponding point <span
-class="math inline"><em>P</em><sub><em>B</em></sub></span> in the
-base_link frame coordinates with a single matrix multiplication:</p>
-<p><span class="math display">$$
-\begin{bmatrix} P_{B,x} \\ P_{B,y} \\ P_{B,z} \\ 1 \end{bmatrix}
-=
-H
-\cdot
-\begin{bmatrix} P_{C,x} \\ P_{C,y} \\ P_{C,z} \\ 1 \end{bmatrix}
-$$</span></p>
+                <h3 id="introduction">Introduction</h3>
+<p>There are many coordinate systems in the environment (e.g., robot
+frame, world frame, camera frame, arm frame, landmark frame). If we can
+get the transformation from camera to a landmark, then where is the
+landmark relative to the robot? The ROS2 tf system can help us do the
+transformation.</p>
+<h3 id="tf2">tf2</h3>
+<p>tf2 stores all frames in a tree structure. - Each frame has only one
+parent frame. - A parent frame can have many children frames.</p>
+<p>This tree structure ensures there is always a single path between any
+two frames. If a frame is not connected to the main tree, tf2 cannot
+transform to it.</p>
+<h4 id="static-transform-broadcaster">Static Transform Broadcaster</h4>
+<p>This node publishes an unchanging transform. This is perfect for
+fixed relationships. This node publish transforms to
+<code>/tf_static</code> topic.</p>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
+<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
+<span class="hljs-keyword">from</span> geometry_msgs.msg <span class="hljs-keyword">import</span> TransformStamped
+<span class="hljs-keyword">from</span> tf2_ros.static_transform_broadcaster <span class="hljs-keyword">import</span> StaticTransformBroadcaster
+<span class="hljs-keyword">import</span> tf_transformations
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">StaticFramePublisher</span>(<span class="hljs-title class_ inherited__">Node</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    This node publishes a static transform between &#x27;base_link&#x27; and &#x27;camera_link&#x27;.</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;static_transform_broadcaster_node&#x27;</span>)
+
+        <span class="hljs-comment"># 1. Initialize the StaticTransformBroadcaster</span>
+        <span class="hljs-variable language_">self</span>.tf_static_broadcaster = StaticTransformBroadcaster(<span class="hljs-variable language_">self</span>)
+
+        <span class="hljs-comment"># 2. Create the TransformStamped message</span>
+        static_transform = TransformStamped()
+        static_transform.header.stamp = <span class="hljs-variable language_">self</span>.get_clock().now().to_msg()
+        static_transform.header.frame_id = <span class="hljs-string">&#x27;base_link&#x27;</span>  <span class="hljs-comment"># Parent frame</span>
+        static_transform.child_frame_id = <span class="hljs-string">&#x27;camera_link&#x27;</span> <span class="hljs-comment"># Child frame</span>
+
+        <span class="hljs-comment"># 3. Set the translation</span>
+        static_transform.transform.translation.x = <span class="hljs-number">0.5</span>
+        static_transform.transform.translation.y = <span class="hljs-number">0.0</span>
+        static_transform.transform.translation.z = <span class="hljs-number">0.2</span>
+
+        <span class="hljs-comment"># 4. Set the rotation</span>
+        q = tf_transformations.quaternion_from_euler(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) <span class="hljs-comment"># default order: (roll, pitch, yaw)</span>
+        static_transform.transform.rotation.x = q[<span class="hljs-number">0</span>]
+        static_transform.transform.rotation.y = q[<span class="hljs-number">1</span>]
+        static_transform.transform.rotation.z = q[<span class="hljs-number">2</span>]
+        static_transform.transform.rotation.w = q[<span class="hljs-number">3</span>]
+
+        <span class="hljs-comment"># 5. Publish the transform</span>
+        <span class="hljs-variable language_">self</span>.tf_static_broadcaster.sendTransform(static_transform)
+        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;Published static transform: base_link -&gt; camera_link&#x27;</span>)</code></pre></div>
+<h4 id="dynamic-transform-broadcaster">Dynamic Transform
+Broadcaster</h4>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
+<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
+<span class="hljs-keyword">from</span> geometry_msgs.msg <span class="hljs-keyword">import</span> TransformStamped
+<span class="hljs-keyword">from</span> tf2_ros <span class="hljs-keyword">import</span> TransformBroadcaster
+<span class="hljs-keyword">import</span> tf_transformations
+<span class="hljs-keyword">import</span> math
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">DynamicFrameBroadcaster</span>(<span class="hljs-title class_ inherited__">Node</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    This node publishes a dynamic transform from &#x27;odom&#x27; to &#x27;base_link&#x27;.</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;dynamic_transform_broadcaster_node&#x27;</span>)
+
+        <span class="hljs-comment"># 1. Initialize the TransformBroadcaster</span>
+        <span class="hljs-variable language_">self</span>.tf_broadcaster = TransformBroadcaster(<span class="hljs-variable language_">self</span>)
+
+        <span class="hljs-comment"># 2. Create a timer to call the publish_callback function</span>
+        <span class="hljs-variable language_">self</span>.timer = <span class="hljs-variable language_">self</span>.create_timer(<span class="hljs-number">0.1</span>, <span class="hljs-variable language_">self</span>.publish_callback) <span class="hljs-comment"># 10 Hz</span>
+        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;Publishing dynamic transform: odom -&gt; base_link&#x27;</span>)
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">publish_callback</span>(<span class="hljs-params">self</span>):
+        current_time = <span class="hljs-variable language_">self</span>.get_clock().now()
+        
+        seconds, _ = <span class="hljs-variable language_">self</span>.get_clock().now().seconds_nanoseconds()
+        
+        t = TransformStamped()
+
+        t.header.stamp = current_time.to_msg()
+        t.header.frame_id = <span class="hljs-string">&#x27;odom&#x27;</span>
+        t.child_frame_id = <span class="hljs-string">&#x27;base_link&#x27;</span>
+
+        t.transform.translation.x = math.sin(seconds)
+        t.transform.translation.y = math.cos(seconds)
+        t.transform.translation.z = <span class="hljs-number">0.0</span>
+
+        q = tf_transformations.quaternion_from_euler(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, -seconds) <span class="hljs-comment"># (roll, pitch, yaw)</span>
+        t.transform.rotation.x = q[<span class="hljs-number">0</span>]
+        t.transform.rotation.y = q[<span class="hljs-number">1</span>]
+        t.transform.rotation.z = q[<span class="hljs-number">2</span>]
+        t.transform.rotation.w = q[<span class="hljs-number">3</span>]
+
+        <span class="hljs-variable language_">self</span>.tf_broadcaster.sendTransform(t)</code></pre></div>
+<h4 id="transform-listener">Transform Listener</h4>
+<p>This node listens to the <code>/tf</code> and <code>/tf_static</code>
+topics (via the buffer) and can look up any transform in the tree. - The
+<code>tf2::Buffer</code> is is the “brain” of the operation. When you
+ask for odom -&gt; camera_link, it looks at its data and figures out the
+path, then performs all the mathematical calculations to get the final
+transform. - The <code>TransformListener</code> automatically subscribe
+to the <code>/tf</code> and <code>/tf_static</code> topics and feed all
+the incoming transform messages directly into the
+<code>tf2::Buffer</code>.</p>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
+<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
+<span class="hljs-keyword">from</span> rclpy.duration <span class="hljs-keyword">import</span> Duration
+<span class="hljs-keyword">from</span> tf2_ros <span class="hljs-keyword">import</span> TransformException
+<span class="hljs-keyword">from</span> tf2_ros.buffer <span class="hljs-keyword">import</span> Buffer
+<span class="hljs-keyword">from</span> tf2_ros.transform_listener <span class="hljs-keyword">import</span> TransformListener
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">FrameListener</span>(<span class="hljs-title class_ inherited__">Node</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    This node listens to the TF tree and looks up the transform</span>
+<span class="hljs-string">    from &#x27;odom&#x27; (target) to &#x27;camera_link&#x27; (source).</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;tf_listener_node&#x27;</span>)
+
+        <span class="hljs-variable language_">self</span>.target_frame = <span class="hljs-string">&#x27;odom&#x27;</span>
+        <span class="hljs-variable language_">self</span>.source_frame = <span class="hljs-string">&#x27;camera_link&#x27;</span>
+
+        <span class="hljs-comment"># The Buffer stores incoming transforms</span>
+        <span class="hljs-variable language_">self</span>.tf_buffer = Buffer()
+        <span class="hljs-comment"># The Listener subscribes to /tf and /tf_static and fills the buffer</span>
+        <span class="hljs-variable language_">self</span>.tf_listener = TransformListener(<span class="hljs-variable language_">self</span>.tf_buffer, <span class="hljs-variable language_">self</span>)
+
+        <span class="hljs-variable language_">self</span>.timer = <span class="hljs-variable language_">self</span>.create_timer(<span class="hljs-number">1.0</span>, <span class="hljs-variable language_">self</span>.lookup_callback) <span class="hljs-comment"># 1 Hz</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">lookup_callback</span>(<span class="hljs-params">self</span>):
+        target = <span class="hljs-variable language_">self</span>.target_frame
+        source = <span class="hljs-variable language_">self</span>.source_frame
+
+        <span class="hljs-keyword">try</span>:
+            <span class="hljs-comment"># Look up the transform</span>
+            trans = <span class="hljs-variable language_">self</span>.tf_buffer.lookup_transform(
+                target,
+                source,
+                rclpy.time.Time(), <span class="hljs-comment"># this parameter means finding the newest transform in the buffer</span>
+                timeout=Duration(seconds=<span class="hljs-number">0.5</span>)) <span class="hljs-comment"># Wait up to 0.5s for the transform, if time exceeds, throw exception</span>
+
+            <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;  Translation: [x: <span class="hljs-subst">&#123;trans.transform.translation.x:<span class="hljs-number">.2</span>f&#125;</span>, &#x27;</span> +
+                                  <span class="hljs-string">f&#x27;y: <span class="hljs-subst">&#123;trans.transform.translation.y:<span class="hljs-number">.2</span>f&#125;</span>, &#x27;</span> +
+                                  <span class="hljs-string">f&#x27;z: <span class="hljs-subst">&#123;trans.transform.translation.z:<span class="hljs-number">.2</span>f&#125;</span>]&#x27;</span>)
+            <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;  Rotation: [x: <span class="hljs-subst">&#123;trans.transform.rotation.x:<span class="hljs-number">.2</span>f&#125;</span>, &#x27;</span> +
+                                  <span class="hljs-string">f&#x27;y: <span class="hljs-subst">&#123;trans.transform.rotation.y:<span class="hljs-number">.2</span>f&#125;</span>, &#x27;</span> +
+                                  <span class="hljs-string">f&#x27;z: <span class="hljs-subst">&#123;trans.transform.rotation.z:<span class="hljs-number">.2</span>f&#125;</span>, &#x27;</span> +
+                                  <span class="hljs-string">f&#x27;w: <span class="hljs-subst">&#123;trans.transform.rotation.w:<span class="hljs-number">.2</span>f&#125;</span>]&#x27;</span>)
+
+        <span class="hljs-keyword">except</span> TransformException <span class="hljs-keyword">as</span> ex:
+            <span class="hljs-comment"># Handle exceptions (e.g., transform not available)</span>
+            <span class="hljs-variable language_">self</span>.get_logger().warn(
+                <span class="hljs-string">f&#x27;Could not get transform from <span class="hljs-subst">&#123;source&#125;</span> to <span class="hljs-subst">&#123;target&#125;</span>: <span class="hljs-subst">&#123;ex&#125;</span>&#x27;</span>)</code></pre></div>
 
                 
               </div>
@@ -382,8 +481,8 @@ $$</span></p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSE276A - Euler and Quaternion</div>
-      <div>http://example.com/2025/11/08/CSE276A/CSE276A-pose/</div>
+      <div>CSE276A - ROS2 TF</div>
+      <div>http://example.com/2025/11/08/CSE276A/CSE276A-tf/</div>
     </div>
     <div class="license-meta">
       
@@ -427,18 +526,12 @@ $$</span></p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/11/08/CSE276A/CSE276A-tf/" title="CSE276A - ROS2 TF">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE276A - ROS2 TF</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/26/CSE276A/CSE276A-ROS2-Commands/" title="CSE276A - ROS2 Commands">
-                        <span class="hidden-mobile">CSE276A - ROS2 Commands</span>
+                      <a href="/2025/11/08/CSE276A/CSE276A-pose/" title="CSE276A - Euler and Quaternion">
+                        <span class="hidden-mobile">CSE276A - Euler and Quaternion</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -526,12 +619,6 @@ $$</span></p>
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -735,49 +822,6 @@ $$</span></p>
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
