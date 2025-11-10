@@ -29,7 +29,7 @@
 <meta property="og:description" content="This blog introduces how to represent a robot&#39;s pose.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-08T21:51:18.000Z">
-<meta property="article:modified_time" content="2025-11-09T06:53:50.904Z">
+<meta property="article:modified_time" content="2025-11-10T01:16:29.090Z">
 <meta property="article:author" content="Songlin Zhao">
 <meta property="article:tag" content="ROS2">
 <meta name="twitter:card" content="summary_large_image">
@@ -291,7 +291,7 @@
 <h4 id="Euler-Angles">Euler Angles</h4>
 <p>Any 3D orientation can be achieved by performing three sequential rotations around a set of defined axes. The order matters for Euler angles. As a result, a 3-dimensional euler vector cannot describe an orientation unless we specify the rotation order.</p>
 <h4 id="Rotation-Matrix">Rotation Matrix</h4>
-<p>A 3x3 matrix where the columns are the child frame’s (camera’s) X, Y, and Z axes, as described in the parent frame’s (robot’s) coordinates.</p>
+<p><strong>A 3x3 matrix where the columns are the child frame’s (camera’s) X, Y, and Z axes, as described in the parent frame’s (robot’s) coordinates.</strong></p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mo>=</mo><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi mathvariant="normal">∣</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mi mathvariant="normal">∣</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mi mathvariant="normal">∣</mi></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mover accent="true"><mi>X</mi><mo>⃗</mo></mover><mi>C</mi></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mover accent="true"><mi>Y</mi><mo>⃗</mo></mover><mi>C</mi></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mover accent="true"><mi>Z</mi><mo>⃗</mo></mover><mi>C</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi mathvariant="normal">∣</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mi mathvariant="normal">∣</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mi mathvariant="normal">∣</mi></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">R = \begin{bmatrix}
 | &amp; | &amp; | \\
 \vec{X}_C &amp; \vec{Y}_C &amp; \vec{Z}_C \\
