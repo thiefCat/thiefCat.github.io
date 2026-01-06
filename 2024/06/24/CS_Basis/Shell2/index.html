@@ -29,7 +29,7 @@
 <meta property="og:description" content="This blog post introduces how the shell works, its basic commands, how it executes programs, and some advanced functions">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-25T01:14:00.000Z">
-<meta property="article:modified_time" content="2025-10-24T09:40:00.681Z">
+<meta property="article:modified_time" content="2025-12-30T00:39:06.855Z">
 <meta property="article:author" content="Songlin Zhao">
 <meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          213 words
+          241 words
         
       </span>
     
@@ -293,9 +293,9 @@ The shell automatically reads (it “sources”) this file every time you open a
 <p>When a command is entered in the shell, it follows these steps to execute:</p>
 <ol>
 <li><strong>Parsing:</strong> The shell reads the command line input and breaks it into components. <strong>The first word is the command (program), and the following words are arguments.</strong></li>
-<li><strong>Command Lookup:</strong> The shell searches for the command in the directories listed in the PATH environment variable.<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span></code></pre></div>
+<li><strong>Command Lookup:</strong> The shell searches for the command in the directories listed in the <code>$PATH</code> environment variable.<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span></code></pre></div>
 </li>
-<li><strong>Forking:</strong> The shell creates a new process (child process) to execute the command.</li>
+<li><strong>Forking:</strong> The shell <strong>creates a new process</strong> (child process) to execute the command.</li>
 <li><strong>Return:</strong> After the child process finishes, control returns to the user.</li>
 </ol>
 <h3 id="Executing-programs">Executing programs</h3>
@@ -323,6 +323,16 @@ The shell automatically reads (it “sources”) this file every time you open a
 <span class="hljs-meta prompt_">% </span><span class="language-bash"><span class="hljs-built_in">which</span> python3</span>
 /opt/miniconda3/bin/python3</code></pre></div>
 <p><strong>When you have multiple versions of the same command, The shell executes the first one it finds, searching the directories in your <code>$PATH</code> from left to right.</strong></p>
+<h3 id="Export">Export</h3>
+<p>In Linux, every time you run a command or a script, the system creates a process. The child process won’t see the variables defined in parent process unless declared using <code>export</code>.</p>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">--worker.sh--</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span>
+echo &quot;Starting worker in $APP_MODE mode on port $DB_PORT...&quot;</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span>
+export APP_MODE=&quot;production&quot;
+export DB_PORT=5432
+./worker.sh</code></pre></div>
+<p>Without <code>export</code>, the process running <code>./worker.sh</code> won’t see the two variables.</p>
 <h3 id="Types-of-Commands">Types of Commands</h3>
 <ul>
 <li>
@@ -473,8 +483,8 @@ nothing to commit, working tree clean</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/24/CS_Basis/Shell1/" title="Shell - Basic Syntax">
-                        <span class="hidden-mobile">Shell - Basic Syntax</span>
+                      <a href="/2024/06/24/MIT_Weblab/html-css-basis/" title="MIT Weblab笔记 - HTML &amp; CSS Basis">
+                        <span class="hidden-mobile">MIT Weblab笔记 - HTML &amp; CSS Basis</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

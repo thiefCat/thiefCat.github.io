@@ -1,0 +1,952 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/classic.JPG">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Songlin Zhao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="This blog introduces basic syntax of HTML and CSS, and some useful formatting techniques when formatting a web page.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT Weblab笔记 - HTML &amp; CSS Basis">
+<meta property="og:url" content="http://example.com/2024/06/24/MIT_Weblab/html-css-basis/index.html">
+<meta property="og:site_name" content="Songlin&#39;s Blog">
+<meta property="og:description" content="This blog introduces basic syntax of HTML and CSS, and some useful formatting techniques when formatting a web page.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/06/24/MIT_Weblab/html-css-basis/box.png">
+<meta property="og:image" content="http://example.com/2024/06/24/MIT_Weblab/html-css-basis/inspect.png">
+<meta property="og:image" content="http://example.com/2024/06/24/MIT_Weblab/html-css-basis/flex.png">
+<meta property="og:image" content="http://example.com/2024/06/24/MIT_Weblab/html-css-basis/flex1.png">
+<meta property="article:published_time" content="2024-06-25T00:03:00.000Z">
+<meta property="article:modified_time" content="2026-01-06T08:11:54.722Z">
+<meta property="article:author" content="Songlin Zhao">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="Web Development">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/06/24/MIT_Weblab/html-css-basis/box.png">
+  
+  
+  
+  <title>MIT Weblab笔记 - HTML &amp; CSS Basis - Songlin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","app_key":"ehUPYSOnPh9yYAYEkMuT4PEH","server_url":"https://gran9wcx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Songlin Zhao</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">MIT Weblab笔记 - HTML & CSS Basis</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-24 17:03" pubdate>
+          June 24, 2024 5:03 PM
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          689 words
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">MIT Weblab笔记 - HTML &amp; CSS Basis</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Introduction">Introduction</h2>
+<p>HTML provides the structure of the web pages, while CSS is used to control the layout of these pages.</p>
+<h2 id="HTML">HTML</h2>
+<h3 id="Structure">Structure</h3>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    # appears at the browser tabs
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Web Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    # link to the css file for styling
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;styles.css&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, World!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Welcome to my first web page.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre></div>
+<ul>
+<li><code>&lt;head&gt;</code> contains meta-information about the document, such as its title, link to CSS files</li>
+<li><code>&lt;body&gt;</code> contains the content that will be displayed on the web page.</li>
+</ul>
+<h3 id="Syntax">Syntax</h3>
+<h4 id="Headings">Headings</h4>
+<p><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>.</p>
+<h4 id="Paragraphs">Paragraphs</h4>
+<p><code>&lt;p&gt;</code>, start on new line.</p>
+<h4 id="Divisions">Divisions</h4>
+<p><code>&lt;div&gt;</code>, represents a block-level portion of a document such as a few paragraphs, or an image with its caption. Starts on new line.</p>
+<h4 id="Sections">Sections</h4>
+<p><code>&lt;section&gt;</code>, is used to group meaningful components, like introduction, about, ,etc. Starts on new line.</p>
+<h4 id="Spans">Spans</h4>
+<p><code>&lt;span&gt;</code> represents an <strong>inline</strong> portion of a document, for example words within a sentence.</p>
+<h4 id="Lists">Lists</h4>
+<p>Unordered Lists</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+</code></pre></div>
+<p>Ordered Lists</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ol</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
+</code></pre></div>
+<h4 id="Links">Links</h4>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;http://xxx&quot;</span>&gt;</span> content <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre></div>
+<h4 id="Images">Images</h4>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;image.png&quot;</span> /&gt;</span>
+</code></pre></div>
+<h3 id="Relative-Path">Relative Path</h3>
+<p>A relative path points to a location that is relative to the current file’s location.</p>
+<ul>
+<li>Current Directory (<code>./</code>). It refers to the folder that contains the current file you’re working on. e.g. <code>&lt;img src=&quot;./image.jpg&quot;&gt;</code>, image.jpg is in the same directory as the HTML file or the script calling it.</li>
+<li>Parent Directory (<code>../</code>)</li>
+</ul>
+<h2 id="CSS">CSS</h2>
+<h3 id="Types">Types</h3>
+<ul>
+<li>Inline CSS<br>
+Using the style attribute:</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs css">&lt;<span class="hljs-selector-tag">h1</span> style=&quot;<span class="hljs-attribute">color</span>: red;&quot;&gt;This is <span class="hljs-selector-tag">a</span> heading&lt;/<span class="hljs-selector-tag">h1</span>&gt;
+</code></pre></div>
+<ul>
+<li>Internal CSS<br>
+Define within a <code>&lt;style&gt;</code> tag inside the HTML document’s <code>&lt;head&gt;</code> section:</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs css">&lt;head&gt;
+  &lt;style&gt;
+    <span class="hljs-selector-tag">p</span> &#123;
+      <span class="hljs-attribute">color</span>: green;
+      <span class="hljs-attribute">font-family</span>: Arial, sans-serif;
+    &#125;
+  &lt;/style&gt;
+&lt;/head&gt;
+</code></pre></div>
+<ul>
+<li>External CSS<br>
+Define in a separate file:</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs css">&lt;head&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles<span class="hljs-selector-class">.css</span>&quot;&gt;
+&lt;/head&gt;
+</code></pre></div>
+<h3 id="Syntax-2">Syntax</h3>
+<p>Import fonts from <code>https://fonts.google.com/</code>.</p>
+<div class="code-wrapper"><pre><code class="hljs css"><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;[https://fonts.googleapis.com/css?family=Open+Sans:300,600](https://fonts.googleapis.com/css?family=Open+Sans:300,600)&quot;</span>);
+</code></pre></div>
+<h4 id="Global-Definition">Global Definition</h4>
+<p>Root variables, defining CSS custom properties (variables) for colors that can be reused throughout the stylesheet. Other parts of the css file can use it by <code>var(--grey)</code>.</p>
+<div class="code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-pseudo">:root</span> &#123;
+  <span class="hljs-attr">--primary</span>: <span class="hljs-number">#396dff</span>;
+  <span class="hljs-attr">--grey</span>: <span class="hljs-number">#f7f7f7</span>;
+  <span class="hljs-attr">--white</span>: <span class="hljs-number">#fff</span>;
+
+  <span class="hljs-attr">--xs</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attr">--s</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attr">--m</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attr">--l</span>: <span class="hljs-number">24px</span>;
+&#125;
+</code></pre></div>
+<h4 id="Element">Element</h4>
+<p>The style defined here automatically applies to the entire body of the document (inside <code>&lt;body&gt;</code> and <code>&lt;/body&gt;</code>).</p>
+<div class="code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">body</span> &#123;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&quot;Open Sans&quot;</span>, sans-serif;
+&#125;
+</code></pre></div>
+<h4 id="Class">Class</h4>
+<p>Style for class. <code>&lt;div class=&quot;navTitle&quot;&gt;</code>. <strong>An element can have multiple classes. Can use the same class on multiple elements.</strong></p>
+<div class="code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.navTitle</span> &#123;
+  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--primary);
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">font-weight</span>: normal;
+&#125;
+</code></pre></div>
+<h4 id="ID">ID</h4>
+<p>Style for ID. <code>&lt;div id=&quot;unique&quot;&gt;</code>. An element can only have one ID. ID must be unique in any give HTML document.</p>
+<div class="code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-id">#unique</span> &#123;
+  <span class="hljs-attribute">color</span>:red;
+  <span class="hljs-attribute">font-family</span>: Arial;
+&#125;
+</code></pre></div>
+<h3 id="Style-Rules">Style Rules</h3>
+<p>Priority:</p>
+<ol>
+<li>Inline Style</li>
+<li>ID Attributes (<code>#unique {}</code>)</li>
+<li>Classes (<code>.container {}</code>)</li>
+<li>Elements (<code>div {}</code>)</li>
+</ol>
+<h2 id="Formatting-Techniques">Formatting Techniques</h2>
+<h3 id="The-Box-Model">The Box Model</h3>
+<ul>
+<li>Margin: the space outside the element’s border.</li>
+<li>Border: border surrounds the padding of the element.</li>
+<li>Padding: the space between the element’s border and its content. It creates space inside the parent element, around the content area.</li>
+</ul>
+<div style="text-align: center;">
+<img src="box.png" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Box Model">
+</div>
+<p>Margin and padding are transparent. Width and height are dimensions of the element.</p>
+<div class="code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.xxClass</span> &#123;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0px</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid black;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+&#125;
+</code></pre></div>
+<p><strong>To inspect an element’s box model and other detailed attributes:</strong></p>
+<p><strong>1. Open the browser</strong><br>
+<strong>2. Inspect</strong><br>
+<strong>3. Command + Shift + C</strong><br>
+<strong>4. Click on the element to inspect</strong></p>
+<div style="text-align: center;">
+<img src="inspect.png" srcset="/img/loading.gif" lazyload style="width: 80%; height: auto;" alt="Inspect Element">
+</div>
+<h3 id="Margin-Ordering">Margin Ordering</h3>
+<p>Margin orders in the sequence of top, right, bottom, left</p>
+<ol>
+<li>margin: 10px;: All sides 10px</li>
+<li>margin: 10px 20px;: top and bottom 10px, left and right 20px</li>
+<li>margin: 10px 20px 30px;: top 10px, right 20px, bottom 30px, left 20px</li>
+<li>margin: 10px 20px 30px 40px;: top 10px, right 20px, bottom 30px, left 40px</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">See this demo</a></p>
+<h3 id="Positioning">Positioning</h3>
+<p>In HTML, elements are typically laid out according to the normal document flow. This means they appear in the order they are defined in the HTML. If we want to explicitly set an element’s position, we can use the top, bottom, left, and right properties. However, these properties will not work unless the position property is set first.</p>
+<p><a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css_positioning.asp">See this demo</a></p>
+<ul>
+<li>static: Default, position in document flow</li>
+<li>relative: Position relative to default position via top, right, bottom, left properties</li>
+<li>fixed: Position relative to the viewport, which means it always stays in the same place even if the page is scrolled</li>
+<li>absolute: Position relative to the nearest positioned ancestor</li>
+</ul>
+<h3 id="Flex">Flex</h3>
+<p>Flex is a flexible box. It can control direction, sizing, distribution. All direct children of a flexible container becomes flexible items. <a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css3_flexbox_items.asp">See this flex demo</a>.</p>
+<div style="text-align: center;">
+<img src="flex.png" srcset="/img/loading.gif" lazyload style="width: 50%; height: auto;" alt="Flex Example">
+</div>
+<p>An example flex container defined in CSS:</p>
+<div class="code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.flex-container</span> &#123;
+  <span class="hljs-attribute">display</span>: flex;  # this attribute makes this class <span class="hljs-selector-tag">a</span> <span class="hljs-attribute">flex</span> <span class="hljs-attribute">container</span>
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f1f1f1</span>;
+&#125;
+</code></pre></div>
+<h4 id="Order">Order</h4>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;flex-container&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;order: 3&quot;</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;order: 2&quot;</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;order: 4&quot;</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;order: 1&quot;</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre></div>
+<h4 id="Sizing">Sizing</h4>
+<p>Make the third flex item grow 2 times faster than the other flex items:</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;flex-container&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;flex-grow: 1&quot;</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;flex-grow: 1&quot;</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;flex-grow: 2&quot;</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre></div>
+<p>Set the initial length of the third flex item to 200 pixels:</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;flex-container&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;flex-basis: 200px&quot;</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre></div>
+<p>An example of horizontal direction: The two sections are now in a row and evenly distributed in the flex container.</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;u-flex&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;subContainer u-textCenter&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>About Me<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+      I am more of a turtle person but I&#x27;m just trying to fit in and get a catbook.
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;subContainer u-textCenter&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>My Favorite Type of Cat<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+      I actually prefer turtles.
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.u-flex</span> &#123;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-comment">/* justify-content: space-between; */</span>
+&#125;
+<span class="hljs-selector-class">.subContainer</span> &#123;
+  <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;
+  <span class="hljs-attribute">flex-basis</span>: <span class="hljs-number">0</span>;
+&#125;
+</code></pre></div>
+<div style="text-align: center;">
+    <img src="flex1.png" srcset="/img/loading.gif" lazyload style="width: 300px; height: auto;" alt="Flex Result">
+</div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
+      
+        <a href="/tags/CSS/" class="print-no-link">#CSS</a>
+      
+        <a href="/tags/HTML/" class="print-no-link">#HTML</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MIT Weblab笔记 - HTML &amp; CSS Basis</div>
+      <div>http://example.com/2024/06/24/MIT_Weblab/html-css-basis/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Songlin Zhao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 24, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/06/24/CS_Basis/Shell2/" title="Shell - How Shell Works">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Shell - How Shell Works</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/06/24/CS_Basis/Shell1/" title="Shell - Basic Syntax">
+                        <span class="hidden-mobile">Shell - Basic Syntax</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","appKey":"ehUPYSOnPh9yYAYEkMuT4PEH","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>小贼猫</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        Views: 
+        <span id="leancloud-site-pv"></span>
+        
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        Visitors: 
+        <span id="leancloud-site-uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
