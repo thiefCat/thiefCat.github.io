@@ -1,0 +1,942 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/classic.JPG">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Songlin Zhao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="This blog introduces basic syntax of JavaScript and event handling">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT Weblab笔记 - JavaScript Basis">
+<meta property="og:url" content="http://example.com/2024/06/27/MIT_Weblab/javascript/index.html">
+<meta property="og:site_name" content="Songlin&#39;s Blog">
+<meta property="og:description" content="This blog introduces basic syntax of JavaScript and event handling">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-28T01:23:00.000Z">
+<meta property="article:modified_time" content="2026-01-07T03:36:16.712Z">
+<meta property="article:author" content="Songlin Zhao">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Web Development">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>MIT Weblab笔记 - JavaScript Basis - Songlin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","app_key":"ehUPYSOnPh9yYAYEkMuT4PEH","server_url":"https://gran9wcx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Songlin Zhao</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/projects/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>projects</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">MIT Weblab笔记 - JavaScript Basis</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-27 18:23" pubdate>
+          June 27, 2024 6:23 PM
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          575 words
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">MIT Weblab笔记 - JavaScript Basis</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Introduction">Introduction</h2>
+<ul>
+<li>Adding a Javascript file to HTML: <code>&lt;script src=&quot;snake.js&quot;&gt;&lt;/script&gt;</code> inside <code>&lt;head&gt;</code> section.</li>
+<li>Any code that is not inside a function will run as soon as the script is loaded.</li>
+<li>Any functions that are called in the global code will be executed <strong>in the order they appear</strong>.</li>
+<li>When both files are included in the HTML with <code>&lt;script&gt;</code> tags, they share the same global scope. This allows functions and variables defined in one file to be accessible in the other.</li>
+</ul>
+<h3 id="Run-Javascript">Run Javascript</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">node code.js
+</code></pre></div>
+<h3 id="Triggering-Javascript">Triggering Javascript</h3>
+<h4 id="Inline-Event-Handlers">Inline Event Handlers</h4>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;buttonClicked()&quot;</span>&gt;</span>Click Me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">buttonClicked</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Button clicked!&quot;</span>);
+&#125;
+</code></pre></div>
+<p>or</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;alert(&#x27;Button clicked!&#x27;)&quot;</span>&gt;</span>Click Me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre></div>
+<p>The onclick attribute in the <code>&lt;button&gt;</code> tag specifies JavaScript code to run when the button is clicked.</p>
+<h4 id="Event-Listeners">Event Listeners</h4>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myButton&quot;</span>&gt;</span>Click Me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript">  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;myButton&quot;</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">    <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Button clicked!&quot;</span>);</span>
+<span class="language-javascript">  &#125;);</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre></div>
+<ul>
+<li><code>document.getElementById('myButton')</code>: Selects the HTML element with the id myButton and returns a reference to the button element.</li>
+<li><code>.addEventListener</code>: Attaches an event handler to the selected element.</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;keydown&quot;</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(event.<span class="hljs-property">key</span>);
+&#125;);
+</code></pre></div>
+<ul>
+<li><code>window</code>: The global window object represents the window containing the DOM document.</li>
+</ul>
+<h4 id="Page-Load">Page Load</h4>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span>
+<span class="language-javascript">  <span class="hljs-variable language_">window</span>.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;</span>
+<span class="language-javascript">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Page loaded!&quot;</span>);</span>
+<span class="language-javascript">  &#125;;</span>
+<span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre></div>
+<ul>
+<li>The code inside <code>window.onload</code> runs when the entire page has finished loading.</li>
+</ul>
+<h4 id="Timers">Timers</h4>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;
+  <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;This alert appears after 3 seconds&quot;</span>);
+&#125;, <span class="hljs-number">3000</span>);
+
+<span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;This message appears every 2 seconds&quot;</span>);
+&#125;, <span class="hljs-number">2000</span>);
+</code></pre></div>
+<h2 id="Syntax">Syntax</h2>
+<h3 id="Data-Types">Data Types</h3>
+<p>Primitive Types:</p>
+<ul>
+<li>boolean (true, false)</li>
+<li>number (12, 1.3, -45.6, 0)</li>
+<li>string (“Hello”)</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h3 id="Variables">Variables</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;John Doe&quot;</span>;
+<span class="hljs-keyword">let</span> age = <span class="hljs-number">30</span>;
+<span class="hljs-keyword">const</span> isStudent = <span class="hljs-literal">true</span>;
+</code></pre></div>
+<ul>
+<li>var: Declares a variable that can be globally or functionally scoped.</li>
+<li>let: Declares a block-scoped variable, which means it is limited to the <code>{}</code> to which it is defined.</li>
+<li>const: Declares a block-scoped variable that cannot be reassigned.</li>
+</ul>
+<h3 id="Operaters">Operaters</h3>
+<ul>
+<li><code>===</code>: Compares two values for equality without performing type conversion.</li>
+<li><code>==</code>: Forcing the arguments to be of the same type before comparing them.</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">5</span> == <span class="hljs-string">&quot;5&quot;</span>; <span class="hljs-comment">// true</span>
+<span class="hljs-number">5</span> === <span class="hljs-string">&quot;5&quot;</span>; <span class="hljs-comment">// false</span>
+<span class="hljs-string">&quot;hello&quot;</span> === <span class="hljs-string">&quot;hello&quot;</span>; <span class="hljs-comment">// true</span>
+</code></pre></div>
+<p><code>===</code> can only compare primitive types! For objects, <code>===</code> compares references to them.</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> arr1 = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">let</span> arr2 = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+arr1 === arr2; <span class="hljs-comment">// false</span>
+</code></pre></div>
+<h3 id="Arrays">Arrays</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> colors = [<span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>]; <span class="hljs-comment">// initialize</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(colors[<span class="hljs-number">1</span>]); <span class="hljs-comment">// &quot;green&quot;</span>
+colors[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;white&quot;</span>;
+colors.<span class="hljs-title function_">pop</span>(); <span class="hljs-comment">// remove the last</span>
+colors.<span class="hljs-title function_">push</span>(<span class="hljs-string">&quot;black&quot;</span>); <span class="hljs-comment">// add to the back</span>
+colors.<span class="hljs-title function_">unshift</span>(<span class="hljs-string">&quot;purple&quot;</span>); <span class="hljs-comment">// add to the front</span>
+</code></pre></div>
+<h3 id="Conditional-Statements">Conditional Statements</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> time = <span class="hljs-number">20</span>;
+
+<span class="hljs-keyword">if</span> (time &lt; <span class="hljs-number">12</span>) &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Good morning!&quot;</span>);
+&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (time &lt; <span class="hljs-number">18</span>) &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Good afternoon!&quot;</span>);
+&#125; <span class="hljs-keyword">else</span> &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Good evening!&quot;</span>);
+&#125;
+</code></pre></div>
+<h3 id="Loops">Loops</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Number: &quot;</span> + i);
+&#125;
+</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">5</span>) &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Number: &quot;</span> + i);
+  i++;
+&#125;
+</code></pre></div>
+<h3 id="Objects">Objects</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// Objects is key-value pairs inside a &#123;&#125;</span>
+<span class="hljs-keyword">let</span> person = &#123;
+  <span class="hljs-attr">firstName</span>: <span class="hljs-string">&quot;Songlin&quot;</span>,
+  <span class="hljs-attr">lastName</span>: <span class="hljs-string">&quot;Zhao&quot;</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>,
+&#125;;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">age</span>); <span class="hljs-comment">// 30</span>
+
+<span class="hljs-comment">// object destructing: obtain multiple properties at once</span>
+<span class="hljs-keyword">const</span> &#123; firstName, lastName &#125; = person;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(firstName); <span class="hljs-comment">// &quot;Songlin&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(lastName); <span class="hljs-comment">// &quot;Zhao&quot;</span>
+</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// Array of objects</span>
+<span class="hljs-keyword">const</span> snakeBody = [
+  &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">11</span> &#125;,
+  &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">12</span> &#125;,
+  &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">13</span> &#125;,
+];
+</code></pre></div>
+<h4 id="Copying-two-objects">Copying two objects</h4>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">let</span> copyArr = [...arr];
+
+<span class="hljs-keyword">let</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Eric&quot;</span> &#125;;
+<span class="hljs-keyword">let</span> copyObj = &#123; ...obj &#125;;
+</code></pre></div>
+<h3 id="Functions">Functions</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">addOne</span> = (<span class="hljs-params">num</span>) =&gt; &#123;
+  <span class="hljs-keyword">const</span> result = num + <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">return</span> result;
+&#125;;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">addOne</span>(<span class="hljs-number">4</span>)); <span class="hljs-comment">// Output: 5</span>
+</code></pre></div>
+<ul>
+<li>Function is unmodifiable, so use <strong>const functionName</strong></li>
+<li>(parameters) =&gt; {function contents}</li>
+</ul>
+<h3 id="Class">Class</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;
+  <span class="hljs-comment">// Constructor method to initialize the object</span>
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name, age</span>) &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age;
+  &#125;
+
+  <span class="hljs-title function_">displayDetails</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Name: <span class="hljs-subst">$&#123;<span class="hljs-variable language_">this</span>.name&#125;</span>, Age: <span class="hljs-subst">$&#123;<span class="hljs-variable language_">this</span>.age&#125;</span>`</span>);
+  &#125;
+
+  <span class="hljs-comment">// Static method</span>
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello!&#x27;</span>);
+  &#125;
+&#125;
+
+<span class="hljs-keyword">const</span> person1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&#x27;Alice&#x27;</span>, <span class="hljs-number">30</span>);
+
+person1.<span class="hljs-title function_">displayDetails</span>(); <span class="hljs-comment">// Output: Name: Alice, Age: 30</span>
+
+<span class="hljs-title class_">Person</span>.<span class="hljs-title function_">greet</span>(); <span class="hljs-comment">// Output: Hello!</span>
+</code></pre></div>
+<h2 id="Advanced">Advanced</h2>
+<h3 id="Callback-Functions">Callback Functions</h3>
+<p>Pass functions as parameters: Convert array of Celsius to Fahrenheit.</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">modifyArray</span> = (<span class="hljs-params">arr, func</span>) =&gt; &#123;
+  <span class="hljs-keyword">const</span> newArr = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.<span class="hljs-property">length</span>; i++) &#123;
+    newArr.<span class="hljs-title function_">push</span>(<span class="hljs-title function_">func</span>(arr[i]));
+  &#125;
+  <span class="hljs-keyword">return</span> newArr;
+&#125;;
+
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">T2F</span> = (<span class="hljs-params">tempC</span>) =&gt; &#123;
+  <span class="hljs-keyword">return</span> (tempC * <span class="hljs-number">9</span>) / <span class="hljs-number">5</span> + <span class="hljs-number">32</span>;
+&#125;;
+
+<span class="hljs-keyword">const</span> tempsC = [<span class="hljs-number">0</span>, <span class="hljs-number">25</span>, <span class="hljs-number">100</span>];
+<span class="hljs-keyword">const</span> tempsF1 = <span class="hljs-title function_">modifyArray</span>(tempsC, <span class="hljs-variable constant_">T2F</span>);
+<span class="hljs-keyword">const</span> tempsF2 = <span class="hljs-title function_">modifyArray</span>(tempsC, <span class="hljs-function">(<span class="hljs-params">tempC</span>) =&gt;</span> (tempC * <span class="hljs-number">9</span>) / <span class="hljs-number">5</span> + <span class="hljs-number">32</span>); <span class="hljs-comment">// directly put the function in the parameter</span>
+</code></pre></div>
+<ul>
+<li>When using <code>{}</code>, the return value should be specified by the <code>return</code> keyword.</li>
+</ul>
+<h3 id="map">map()</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myArray = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+<span class="hljs-keyword">const</span> newArray = myArray.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">num</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> num * <span class="hljs-number">3</span>;
+&#125;); <span class="hljs-comment">// newArray = [3,6,9,12,15]</span>
+<span class="hljs-keyword">const</span> newArray = myArray.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">num</span>) =&gt;</span> num * <span class="hljs-number">3</span>); <span class="hljs-comment">// equivalent</span>
+</code></pre></div>
+<ul>
+<li>map() creates a new array.</li>
+<li>map() applies the callback function to every element of the array.</li>
+</ul>
+<h3 id="filter">filter()</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> values = [-<span class="hljs-number">1</span>, -<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+<span class="hljs-keyword">const</span> filteredArray = values.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x &gt; <span class="hljs-number">0</span>); <span class="hljs-comment">// filteredArray = [3,4,5]</span>
+</code></pre></div>
+<ul>
+<li>filter() creates a new array.</li>
+<li>filter() selects the element which passes the “test”.</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
+      
+        <a href="/tags/JavaScript/" class="print-no-link">#JavaScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MIT Weblab笔记 - JavaScript Basis</div>
+      <div>http://example.com/2024/06/27/MIT_Weblab/javascript/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Songlin Zhao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 27, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/10/24/CSE276A/CSE276A-ROS2/" title="CSE276A - ROS2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CSE276A - ROS2</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/06/24/CS_Basis/Shell2/" title="Shell - How Shell Works">
+                        <span class="hidden-mobile">Shell - How Shell Works</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","appKey":"ehUPYSOnPh9yYAYEkMuT4PEH","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>小贼猫</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        Views: 
+        <span id="leancloud-site-pv"></span>
+        
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        Visitors: 
+        <span id="leancloud-site-uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
