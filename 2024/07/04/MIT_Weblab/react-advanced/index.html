@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/classic.JPG">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Songlin Zhao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="This blog introduces React Lifecycles, hooks, router, Rendering a list, Controling what to be rendered, and Handling Input.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT Weblab笔记 - React Advanced">
+<meta property="og:url" content="http://example.com/2024/07/04/MIT_Weblab/react-advanced/index.html">
+<meta property="og:site_name" content="Songlin&#39;s Blog">
+<meta property="og:description" content="This blog introduces React Lifecycles, hooks, router, Rendering a list, Controling what to be rendered, and Handling Input.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-05T03:30:00.000Z">
+<meta property="article:modified_time" content="2026-01-10T08:36:15.179Z">
+<meta property="article:author" content="Songlin Zhao">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Web Development">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>MIT Weblab笔记 - React Advanced - Songlin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","app_key":"ehUPYSOnPh9yYAYEkMuT4PEH","server_url":"https://gran9wcx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Songlin Zhao</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/projects/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>projects</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">MIT Weblab笔记 - React Advanced</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-04 20:30" pubdate>
+          July 4, 2024 8:30 PM
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          742 words
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">MIT Weblab笔记 - React Advanced</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="React-Lifecycle">React Lifecycle</h2>
+<ol>
+<li><strong>Trigger</strong>: First time component is called or State Change</li>
+<li><strong>Render</strong>: React runs the Javascript code in component and calls subcomponents</li>
+<li><strong>Commit</strong>: React puts returned JSX into HTML DOM to be served to viewer</li>
+<li><strong>Unmounting</strong>: React Removes the component from DOM</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">Steak</span> = (<span class="hljs-params"></span>) =&gt; &#123;
+  <span class="hljs-keyword">const</span> [doneness, setDoneness] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+
+  <span class="hljs-comment">// Everything below are called again during re-render</span>
+  <span class="hljs-keyword">const</span> &#123; name, imgSrc &#125; = steakLookup[doneness];
+  <span class="hljs-keyword">const</span> sentence = <span class="hljs-string">`Here is your <span class="hljs-subst">$&#123;name&#125;</span> steak!`</span>;
+
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">sendToKitchen</span> = (<span class="hljs-params"></span>) =&gt; &#123;
+    <span class="hljs-title function_">setDoneness</span>(doneness + <span class="hljs-number">1</span>);
+  &#125;;
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+<span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>&#123;sentence&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span>
+<span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#123;imgSrc&#125;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">maxWidth:</span> &quot;<span class="hljs-attr">500px</span>&quot; &#125;&#125; /&gt;</span></span>
+<span class="language-xml">      &#123;doneness &lt; 4 &amp;&amp; (</span>
+<span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">fontSize:</span> &quot;<span class="hljs-attr">24px</span>&quot; &#125;&#125; <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;sendToKitchen&#125;</span>&gt;</span></span>
+<span class="language-xml">          Send Back To Kitchen</span>
+<span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+<span class="language-xml">      )&#125;</span>
+<span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+&#125;;
+</code></pre></div>
+<p>When a state is updated, the javascript code in component is executed again, except the state definition lines (Non-state variables don’t persist!)</p>
+<h2 id="React-Hooks">React Hooks</h2>
+<h3 id="useEffect">useEffect()</h3>
+<h4 id="Syntax">Syntax</h4>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">useEffect</span>(
+  <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-comment">/*</span>
+<span class="hljs-comment">    Do something here,</span>
+<span class="hljs-comment">    e.g. interacting with an external service</span>
+<span class="hljs-comment">    */</span>
+    <span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/api/stories&quot;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">storyObjs</span>) =&gt;</span> &#123;
+      <span class="hljs-title function_">setStories</span>(storyObjs);
+    &#125;);
+    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;&#125;;
+  &#125;,[<span class="hljs-comment">/* dependencies */</span>]
+);
+</code></pre></div>
+<ul>
+<li>Setting state (defined by <code>useState()</code> hook) is async</li>
+<li><code>useEffect()</code> is used to run function every time a variable in dependency array changes</li>
+<li>Commonly used to load external data into state</li>
+<li>The return is a callback function that runs when the component dismounts, like cleanup function</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">myFunction</span> = (<span class="hljs-params"></span>) =&gt; &#123;
+  <span class="hljs-comment">// Do something</span>
+&#125;;
+
+<span class="hljs-title function_">useEffect</span>(myFunction, [var1, var2]); <span class="hljs-comment">// Calls myFunction every time var1 or var2 changes</span>
+<span class="hljs-title function_">useEffect</span>(myFunction, []); <span class="hljs-comment">// Calls myFunction only once when the component is rendered for the first time (on mount)</span>
+<span class="hljs-title function_">useEffect</span>(myFunction); <span class="hljs-comment">// Calls myFunction at every render (first component call + every time any state changes)</span>
+</code></pre></div>
+<h2 id="Router-Reach-Router">Router (Reach Router)</h2>
+<p>Routers select a child to render based on the child’s path. The children are just other components that could be rendered on their own outside of a Router. We usually define the <code>&lt;Router&gt;</code> part in the <code>&lt;App&gt;</code> component.</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
+<span class="hljs-keyword">import</span> &#123; render &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-dom&quot;</span>
+<span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Router</span>, <span class="hljs-title class_">Link</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@reach/router&quot;</span>
+
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">Home</span> = (<span class="hljs-params"></span>) =&gt; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">Dash</span> = (<span class="hljs-params"></span>) =&gt; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Dash<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">Team</span> = (<span class="hljs-params"></span>) =&gt; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Team<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+
+<span class="hljs-title function_">render</span>(
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span></span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Home</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span> /&gt;</span>  // root</span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Dash</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;dashboard&quot;</span> /&gt;</span> // append &quot;dashboard&quot; to the end of the current url</span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Team</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/team&quot;</span> /&gt;</span> // root + &quot;/team&quot;</span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">NotFound</span> <span class="hljs-attr">default</span> /&gt;</span> // display the NotFound component if the URL is undefined</span>
+<span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span></span>
+)
+</code></pre></div>
+<ul>
+<li>The path <code>/</code> represents the homepage or the main entry point of the application.</li>
+<li>This path starts with a <code>/</code> indicates it is an absolute path from the root of the application.</li>
+</ul>
+<h2 id="Link">Link</h2>
+<p>We can add links to nav bars.</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> <span class="hljs-title function_">Home</span> = (<span class="hljs-params"></span>) =&gt; (
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></span>
+<span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span></span>
+<span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;dashboard&quot;</span>&gt;</span>Dashboard<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span></span>
+<span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></span>
+<span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+)
+
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">Dash</span> = (<span class="hljs-params"></span>) =&gt; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Dash<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+
+<span class="hljs-title function_">render</span>(
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span></span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Home</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span> /&gt;</span> // root path</span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Dash</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;dashboard&quot;</span> /&gt;</span> // relative path</span>
+<span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span></span>
+)
+</code></pre></div>
+<h2 id="Control-Flow">Control Flow</h2>
+<p>How to dynamically render different JSX based on conditions? For example, I want a component looks different depending on the state value.</p>
+<p>In JSX, we cannot directly use control flow statements like <code>if</code>, <code>for</code>, or <code>while</code> within the curly braces (<code>{}</code>). This is because these JavaScript control flow statements do not return a value. They are considered statements rather than expressions in JavaScript. The following ways can help us control what the component renders (What is inside JSX):</p>
+<h3 id="Assign-JSX-fragements-to-JavaScript-variables">Assign JSX fragements to JavaScript variables</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">outOfBandJSX</span>(<span class="hljs-params">option</span>) &#123;
+  <span class="hljs-keyword">var</span> optionJSX;
+  <span class="hljs-keyword">if</span> (option) &#123;
+    optionJSX = <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Option was True<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    optionJSX  = <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Option was False<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  &#125;
+  <span class="hljs-keyword">var</span> listItems = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+    listItems[i] = <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;i&#125;</span>&gt;</span>List Item &#123;i&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>;
+  &#125;
+  <span class="hljs-keyword">var</span> retVal =
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+<span class="language-xml">      &#123;optionJSX&#125;</span>
+<span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span>
+<span class="language-xml">        &#123;listItems&#125;</span>
+<span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
+<span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+
+  <span class="hljs-keyword">return</span> retVal;
+&#125;
+</code></pre></div>
+<ul>
+<li>The function combines the conditional JSX fragment and the list of items into a single return value. The retVal variable is a JSX fragment that includes both the conditionally rendered optionJSX and the dynamically generated listItems. This JSX is returned by the function and can be rendered in the component.</li>
+<li>Then we can include <code>{this.outOfBandJSX(true)}</code> or <code>{this.outOfBandJSX(false)}</code> in the JSX to effectively control what we want.</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> greeting; 
+<span class="hljs-keyword">const</span> en = <span class="hljs-string">&quot;Hello&quot;</span>; 
+<span class="hljs-keyword">const</span> sp = <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Hola<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span></span>; 
+<span class="hljs-keyword">let</span> &#123;useSpanish&#125; = <span class="hljs-variable language_">this</span>.<span class="hljs-property">prop</span>; 
+<span class="hljs-keyword">if</span> (useSpanish) &#123;greeting = sp&#125; <span class="hljs-keyword">else</span> &#123;greeting = en&#125;; 
+
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;greeting&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</code></pre></div>
+<h3 id="Embedding-the-operations-inside-of-curly-braces">Embedding the operations inside of curly braces</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">return</span> (
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>
+<span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;loading ? &quot;Loading...&quot; : &quot;Actual page content&quot;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+<span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+);
+</code></pre></div>
+<ul>
+<li>Although arbitrary JavaScript can appear inside braces, it must return a string or JSX expression to work. The <code>?:</code> operator always return a value.</li>
+<li>If loading is true, it displays the text “Loading…”.</li>
+<li>If loading is false, it displays “Actual page content”.</li>
+</ul>
+<h3 id="Short-circuit-boolean-operations">Short-circuit boolean operations</h3>
+<div class="code-wrapper"><pre><code class="hljs jsx">&lt;div&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>A paragraph will appear between this paragraph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+  &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">inputValue</span> &amp;&amp; (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This text will appear when this.state.inputValue is truthy.</span>
+<span class="language-xml">        this.state.inputValue === &#123;this.state.inputValue&#125;</span>
+<span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+    )
+  &#125;
+  &lt;p&gt;... and <span class="hljs-variable language_">this</span> one when some characters are typed into the input box below.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre></div>
+<ul>
+<li>If <code>this.state.inputValue</code> is true, the right-hand-side of <code>&amp;&amp;</code> will be executed, a new <code>&lt;p&gt;</code> element will be rendered. Else, nothing will be rendered.</li>
+</ul>
+<h2 id="Rendering-an-Array-of-Data">Rendering an Array of Data</h2>
+<h3 id="Key">Key</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript">storiesList = stories.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">storyObj</span>) =&gt;</span> (
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span></span></span>
+<span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;</span>`<span class="hljs-attr">Card_</span>$&#123;<span class="hljs-attr">storyObj._id</span>&#125;`&#125;</span></span>
+<span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">_id</span>=<span class="hljs-string">&#123;storyObj._id&#125;</span></span></span>
+<span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">creator_name</span>=<span class="hljs-string">&#123;storyObj.creator_name&#125;</span></span></span>
+<span class="hljs-tag"><span class="language-xml">    <span class="hljs-attr">content</span>=<span class="hljs-string">&#123;storyObj.content&#125;</span></span></span>
+<span class="hljs-tag"><span class="language-xml">  /&gt;</span></span>
+));
+</code></pre></div>
+<ul>
+<li>the “key” prop is a special attribute you need to include when creating lists of elements. Keys help React identify which items have changed, are added, or are removed, improving efficiency of rendering</li>
+<li>In this case, the key is a unique string that combines the word “Card_” with the unique identifier <code>_id</code> from the storyObj</li>
+</ul>
+<p>Return an array of html elements</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = [
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;My favorite food is doritos&quot;</span> &#125;,
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I like nachos because they look like doritos&quot;</span> &#125;,
+];
+
+<span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+&#125;);
+</code></pre></div>
+<p>Return an array of components</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> data = [
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;My favorite food is doritos&quot;</span> &#125;,
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I like nachos because they look like doritos&quot;</span> &#125;,
+];
+
+<span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ItemComponent</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">ItemComponent</span>&gt;</span></span>);
+</code></pre></div>
+<ul>
+<li>Reasons for Using <code>key</code> in React Lists: This allows React to determine which elements have changed, added, or removed and to update only the necessary parts of the DOM. Without keys, React would need to re-render the entire list, which can be inefficient.</li>
+</ul>
+<h2 id="Input-using-DOM-like-handlers">Input using DOM-like handlers</h2>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) &#123;
+    <span class="hljs-variable language_">super</span>(props);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = &#123;
+      <span class="hljs-attr">inputValue</span>: <span class="hljs-string">&#x27;&#x27;</span>
+    &#125;;
+  &#125;
+
+  handleChange = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> &#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123; <span class="hljs-attr">inputValue</span>: event.<span class="hljs-property">target</span>.<span class="hljs-property">value</span> &#125;);
+  &#125;
+
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#123;this.state.inputValue&#125;</span> <span class="hljs-attr">onChange</span>=<span class="hljs-string">&#123;this.handleChange&#125;</span> /&gt;</span></span>
+    );
+  &#125;
+&#125;
+</code></pre></div>
+<ul>
+<li><code>type=&quot;text&quot;</code>: This specifies that the input field is for text input.</li>
+<li><code>value={this.state.inputValue}</code>: This binds the value of the input field to the <code>inputValue</code> property in the component’s state.</li>
+<li>The <code>onChange</code> event is triggered every time the user types something in the input field.</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
+      
+        <a href="/tags/React/" class="print-no-link">#React</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MIT Weblab笔记 - React Advanced</div>
+      <div>http://example.com/2024/07/04/MIT_Weblab/react-advanced/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Songlin Zhao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 4, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/05/MIT_Weblab/apis-promises/" title="MIT Weblab笔记 - APIs and Promises Introduction">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MIT Weblab笔记 - APIs and Promises Introduction</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/03/MIT_Weblab/react/" title="MIT Weblab笔记 - React Introduction">
+                        <span class="hidden-mobile">MIT Weblab笔记 - React Introduction</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","appKey":"ehUPYSOnPh9yYAYEkMuT4PEH","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>小贼猫</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        Views: 
+        <span id="leancloud-site-pv"></span>
+        
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        Visitors: 
+        <span id="leancloud-site-uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

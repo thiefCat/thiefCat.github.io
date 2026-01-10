@@ -1,0 +1,911 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/classic.JPG">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Songlin Zhao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="This blog introduces how to set up accounts and log in for a web application.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT Weblab笔记 - Authentication">
+<meta property="og:url" content="http://example.com/2024/07/18/MIT_Weblab/account/index.html">
+<meta property="og:site_name" content="Songlin&#39;s Blog">
+<meta property="og:description" content="This blog introduces how to set up accounts and log in for a web application.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/07/18/MIT_Weblab/account/workflow.png">
+<meta property="og:image" content="http://example.com/2024/07/18/MIT_Weblab/account/response.png">
+<meta property="article:published_time" content="2024-07-19T03:20:00.000Z">
+<meta property="article:modified_time" content="2026-01-10T08:50:57.057Z">
+<meta property="article:author" content="Songlin Zhao">
+<meta property="article:tag" content="JWT">
+<meta property="article:tag" content="Web Development">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/07/18/MIT_Weblab/account/workflow.png">
+  
+  
+  
+  <title>MIT Weblab笔记 - Authentication - Songlin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","app_key":"ehUPYSOnPh9yYAYEkMuT4PEH","server_url":"https://gran9wcx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Songlin Zhao</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/projects/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>projects</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">MIT Weblab笔记 - Authentication</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-18 20:20" pubdate>
+          July 18, 2024 8:20 PM
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          431 words
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">MIT Weblab笔记 - Authentication</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Introduction">Introduction</h2>
+<p>Setting up account and authentication involves achieving two goals:</p>
+<ul>
+<li>Initial login</li>
+<li>Staying login when making requests or refreshing pages</li>
+</ul>
+<h3 id="Initial-Login">Initial Login</h3>
+<p>User send username and password to the server, however, it’s not safe to directly pass them as JSON. Using Google Authentication can help us manage the account.</p>
+<h3 id="Session">Session</h3>
+<ul>
+<li>When a user logs in, the server creates a session and assigns a unique session ID to the user.</li>
+<li>The session ID is stored on the client-side in a cookie, while the actual session data corresponding to the session ID is stored on the server</li>
+<li>On each subsequent request, the server uses the session ID from the cookie to retrieve the session data and identify the user.</li>
+</ul>
+<h3 id="JWT-Json-Web-Token">JWT (Json Web Token)</h3>
+<p>JWTs do not require server-side storage of session data.</p>
+<ul>
+<li>When a user logs in, the server generates a JWT containing the user’s information and sends it to the client.</li>
+<li>Browser puts JWT in local storage. The client includes the JWT for subsequent requests.</li>
+<li>The server verifies the token’s signature to authenticate the user.</li>
+</ul>
+<h2 id="How-to-Manage-Login">How to Manage Login?</h2>
+<div style="text-align: center;">
+  <img src="workflow.png" srcset="/img/loading.gif" lazyload style="width: 500px; height: auto;" alt="Login Workflow">
+</div>
+<h3 id="Login-Frontend">Login (Frontend)</h3>
+<p>At Frontend:</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">GoogleLogin</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-google-login&quot;</span>;
+
+<span class="hljs-comment">// This identifies your web application to Google&#x27;s authentication service</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">GOOGLE_CLIENT_ID</span> = <span class="hljs-string">&quot;your-google-client-id&quot;</span>;
+
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">GoogleLogin</span></span></span>
+<span class="hljs-tag"><span class="language-xml">  <span class="hljs-attr">clientId</span>=<span class="hljs-string">&#123;GOOGLE_CLIENT_ID&#125;</span></span></span>
+<span class="hljs-tag"><span class="language-xml">  <span class="hljs-attr">buttonText</span>=<span class="hljs-string">&quot;Login&quot;</span></span></span>
+<span class="hljs-tag"><span class="language-xml">  <span class="hljs-attr">onSuccess</span>=<span class="hljs-string">&#123;handleLogin&#125;</span></span></span>
+<span class="hljs-tag"><span class="language-xml">  <span class="hljs-attr">onFailure</span>=<span class="hljs-string">&#123;(err)</span> =&gt;</span> console.log(err)&#125;</span>
+<span class="language-xml">  className=&quot;NavBar-link NavBar-login&quot;</span>
+<span class="language-xml">/&gt;</span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">handleLogin</span> = (<span class="hljs-params">res</span>) =&gt; &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
+  <span class="hljs-title function_">setLoggedIn</span>(<span class="hljs-literal">true</span>);
+  <span class="hljs-keyword">const</span> userToken = res.<span class="hljs-property">tokenObj</span>.<span class="hljs-property">id_token</span>;
+  <span class="hljs-title function_">post</span>(<span class="hljs-string">&quot;/api/login&quot;</span>, &#123; <span class="hljs-attr">token</span>: userToken &#125;).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(user);
+  &#125;);
+&#125;;
+</code></pre></div>
+<ul>
+<li>When user clicks the login button, it triggers google login process. (GoogleLogin component from the react-google-login package).</li>
+<li><code>onSuccess={handleLogin}</code>: Triggers handleLogin function when loggin in successgully, passing response from google as the parameter.</li>
+</ul>
+<div style="text-align: center;">
+<img src="response.png" srcset="/img/loading.gif" lazyload style="width: 600px; height: auto;" alt="Google Response Object">
+</div>
+<ul>
+<li>Inside <code>handleLogin</code>, It extracts the id_token from the response by <code>userToken = res.tokenObj.id_token</code> and sends it to the server via a POST request to the <code>/api/login</code> endpoint.</li>
+</ul>
+<h3 id="Login-Backend">Login (Backend)</h3>
+<p>Define user schema for MongoDB:</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// User.js</span>
+<span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;mongoose&quot;</span>);
+
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">UserSchema</span> = <span class="hljs-keyword">new</span> mongoose.<span class="hljs-title class_">Schema</span>(&#123;
+  <span class="hljs-attr">name</span>: <span class="hljs-title class_">String</span>,
+  <span class="hljs-attr">googleid</span>: <span class="hljs-title class_">String</span>,
+&#125;);
+
+<span class="hljs-comment">// compile model from schema</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-title class_">UserSchema</span>);
+</code></pre></div>
+<p>The frontend passes the userToken to backend through post request.<br>
+Handling <code>/api/login</code> Post request by calling <code>login</code> function in the following:</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; <span class="hljs-title class_">OAuth2Client</span> &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;google-auth-library&quot;</span>);
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">User</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;./models/user&quot;</span>); <span class="hljs-comment">// Import User model</span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">CLIENT_ID</span> = <span class="hljs-string">&quot;your-google-client-id&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">OAuth2Client</span>(<span class="hljs-variable constant_">CLIENT_ID</span>);
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">req, res</span>) &#123;
+  <span class="hljs-title function_">verify</span>(req.<span class="hljs-property">body</span>.<span class="hljs-property">token</span>)
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> <span class="hljs-title function_">getOrCreateUser</span>(user))
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Logged in as <span class="hljs-subst">$&#123;user.name&#125;</span>`</span>);
+
+      <span class="hljs-comment">// persist user in the session</span>
+      req.<span class="hljs-property">session</span>.<span class="hljs-property">user</span> = user;
+      res.<span class="hljs-title function_">send</span>(user);
+    &#125;)
+    .<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Failed to log in: <span class="hljs-subst">$&#123;err&#125;</span>`</span>);
+      res.<span class="hljs-title function_">status</span>(<span class="hljs-number">401</span>).<span class="hljs-title function_">send</span>(&#123; err &#125;);
+    &#125;);
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">verify</span>(<span class="hljs-params">token</span>) &#123;
+  <span class="hljs-keyword">return</span> client
+    .<span class="hljs-title function_">verifyIdToken</span>(&#123;
+      <span class="hljs-attr">idToken</span>: token,
+      <span class="hljs-attr">audience</span>: <span class="hljs-variable constant_">CLIENT_ID</span>,
+    &#125;)
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">ticket</span>) =&gt;</span> ticket.<span class="hljs-title function_">getPayload</span>());
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getOrCreateUser</span>(<span class="hljs-params">user</span>) &#123;
+  <span class="hljs-comment">// the &quot;sub&quot; field means &quot;subject&quot;, which is a unique identifier for each user</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-title class_">User</span>.<span class="hljs-title function_">findOne</span>(&#123; <span class="hljs-attr">googleid</span>: user.<span class="hljs-property">sub</span> &#125;).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">existingUser</span>) =&gt;</span> &#123;
+    <span class="hljs-keyword">if</span> (existingUser) <span class="hljs-keyword">return</span> existingUser;
+
+    <span class="hljs-keyword">const</span> newUser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(&#123;
+      <span class="hljs-attr">name</span>: user.<span class="hljs-property">name</span>,
+      <span class="hljs-attr">googleid</span>: user.<span class="hljs-property">sub</span>,
+    &#125;);
+
+    <span class="hljs-keyword">return</span> newUser.<span class="hljs-title function_">save</span>();
+  &#125;);
+&#125;
+</code></pre></div>
+<ul>
+<li>The <code>login</code> function calls the <code>verify</code> function to validate the token with Google.</li>
+<li>The <code>login</code> function then calls <code>getOrCreateUser</code>. This function checks if the user already exists in the database using the googleid. If the user exists, it returns the existing user; if not, it creates a new user in the database.</li>
+<li>Then, the login function stores the user information in the session by <code>req.session.user = user</code>.</li>
+<li>sends the user data back to the client.</li>
+</ul>
+<h3 id="req-session-and-authenticating-following-requests">req.session and authenticating following requests</h3>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// In server.js</span>
+<span class="hljs-keyword">const</span> session = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;express-session&quot;</span>);
+
+app.<span class="hljs-title function_">use</span>(
+  <span class="hljs-title function_">session</span>(&#123;
+    <span class="hljs-attr">secret</span>: <span class="hljs-string">&quot;session-secret&quot;</span>,
+    <span class="hljs-attr">resave</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">saveUninitialized</span>: <span class="hljs-literal">false</span>,
+  &#125;)
+);
+
+<span class="hljs-keyword">const</span> auth = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./auth&#x27;</span>);
+app.<span class="hljs-title function_">use</span>(auth.<span class="hljs-property">populateCurrentUser</span>);
+
+<span class="hljs-comment">// In auth.js</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">populateCurrentUser</span>(<span class="hljs-params">req, res, next</span>) &#123;
+  req.<span class="hljs-property">user</span> = req.<span class="hljs-property">session</span>.<span class="hljs-property">user</span>;
+  <span class="hljs-title function_">next</span>();
+&#125;
+</code></pre></div>
+<ul>
+<li>
+<p><code>app.use(session({...}))</code>:</p>
+</li>
+<li>
+<p>This middleware sets up and manages sessions in an Express application.</p>
+</li>
+<li>
+<p>It uses a server-side storage mechanism to store session data.</p>
+</li>
+<li>
+<p>It creates a session ID, which is stored in a cookie on the client side.</p>
+</li>
+<li>
+<p>Previously, we do <code>req.session.user = user</code>, the following happens:</p>
+</li>
+<li>
+<p>The <code>express-session</code> middleware stores the user object in the session data associated with the current session on server side.</p>
+</li>
+<li>
+<p>The session middleware ensures that a cookie containing the <code>session ID</code> is sent to the client’s browser.</p>
+</li>
+<li>
+<p>For every subsequent request, the browser automatically includes the session ID cookie in the request headers. <strong>The session middleware parses the session ID from the client’s cookie, retrieves the session data, and attaches it to req.session</strong>. As a result, req.session is automatically filled by the <code>user</code> document that we previously stored in session.</p>
+</li>
+<li>
+<p><code>populateCurrentUser</code> middleware: The populateCurrentUser middleware sets req.user to the user data from req.session.user for each following request.</p>
+</li>
+</ul>
+<h3 id="Stay-Logged-In-At-Frontend">Stay Logged In At Frontend</h3>
+<p>Now, since the session ID is in my browser’s cookie, everytime I make a request, <strong>as long as the cookies exist, my <code>req.user</code> will be set as the user that I previously logged in</strong>.<br>
+To let frontend know that I am currently logged in, we can send a get request to backend, then backend checks <code>req.user</code> and sends back.</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// At Frontend:</span>
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/api/whoami&quot;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">if</span> (user.<span class="hljs-property">_id</span>) &#123;
+        <span class="hljs-title function_">setLoggedIn</span>(<span class="hljs-literal">true</span>);
+      &#125;
+    &#125;)
+&#125;, []);
+
+<span class="hljs-comment">// At Backend:</span>
+router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/whoami&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">if</span> (req.<span class="hljs-property">user</span>) &#123;
+    res.<span class="hljs-title function_">send</span>(req.<span class="hljs-property">user</span>);
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    res.<span class="hljs-title function_">send</span>(&#123;&#125;);
+  &#125;
+&#125;);
+</code></pre></div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/MIT-Weblab/" class="category-chain-item">MIT Weblab</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
+      
+        <a href="/tags/JWT/" class="print-no-link">#JWT</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MIT Weblab笔记 - Authentication</div>
+      <div>http://example.com/2024/07/18/MIT_Weblab/account/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Songlin Zhao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 18, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/21/MIT_Weblab/socket/" title="MIT Weblab笔记 - Sockets">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MIT Weblab笔记 - Sockets</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/15/MIT_Weblab/dp/" title="Dynamic Programming">
+                        <span class="hidden-mobile">Dynamic Programming</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","appKey":"ehUPYSOnPh9yYAYEkMuT4PEH","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>小贼猫</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        Views: 
+        <span id="leancloud-site-pv"></span>
+        
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        Visitors: 
+        <span id="leancloud-site-uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
