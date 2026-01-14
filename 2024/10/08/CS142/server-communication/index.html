@@ -21,22 +21,22 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces basis of ROS2, including nodes, topics, messages, services.">
+    <meta name="description" content="This blog introduces how the frontend communicates with backend">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSE276A - ROS2">
-<meta property="og:url" content="http://example.com/2025/10/24/CSE276A/CSE276A-ROS2/index.html">
+<meta property="og:title" content="Stanford CS142 笔记 - Server Communication">
+<meta property="og:url" content="http://example.com/2024/10/08/CS142/server-communication/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="This blog introduces basis of ROS2, including nodes, topics, messages, services.">
+<meta property="og:description" content="This blog introduces how the frontend communicates with backend">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-24T20:42:04.000Z">
-<meta property="article:modified_time" content="2025-10-24T23:49:25.519Z">
+<meta property="article:published_time" content="2024-10-09T02:40:00.000Z">
+<meta property="article:modified_time" content="2026-01-14T04:12:17.297Z">
 <meta property="article:author" content="Songlin Zhao">
-<meta property="article:tag" content="ROS2">
+<meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CSE276A - ROS2 - Songlin&#39;s Blog</title>
+  <title>Stanford CS142 笔记 - Server Communication - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -231,7 +231,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">CSE276A - ROS2</span>
+            <span id="subtitle">Stanford CS142 笔记 - Server Communication</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-24 13:42" pubdate>
-          October 24, 2025 1:42 PM
+        <time datetime="2024-10-08 19:40" pubdate>
+          October 8, 2024 7:40 PM
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          400 words
+          221 words
         
       </span>
     
@@ -302,162 +302,94 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CSE276A - ROS2</h1>
+            <h1 id="seo-header">Stanford CS142 笔记 - Server Communication</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="Introduction">Introduction</h2>
-<p>ROS 2 (Robot Operating System 2) is a framework that runs on an existing OS. In a robot, there are separate programs that read camera data, controlling wheels, planning paths .etc. ROS 2 provides a standard way for all these independent programs to discover each other and exchange information.</p>
-<h3 id="Nodes">Nodes</h3>
-<p>A node is a single program responsible for one specific task.</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy <span class="hljs-comment"># ROS Client Library for Python</span>
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">SensorNode</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-comment"># Initialize the node with the name &#x27;sensor_node&#x27;</span>
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;sensor_node&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;LIDAR sensor node has started.&#x27;</span>)</code></pre></div>
-<h3 id="Topics">Topics</h3>
-<p>Topics are channels where nodes can send (publish) or receive (subscribe) data. This communication is asynchronous. E.g., the <code>sensor_node</code> needs to continuously broadcast sensor data to anyone who cares.</p>
+<p>In software engineering, server comminicates with browser. Controller fetches the model for the View. There are a lot of tools that enable this functionality.</p>
+<h3 id="AJAX">AJAX</h3>
+<p>AJAX stands for Asynchronous JavaScript and XML. It is a set of web development techniques that allows a web page to communicate with a server asynchronously, meaning that the web page can update parts of itself (such as data in a table or form) without needing to reload the entire page. AJAX uses JavaScript to make HTTP requests to a server, fetch data, and then update parts of the web page.</p>
+<h3 id="XMLHttpRequest">XMLHttpRequest</h3>
+<p>One of the early methods for enabling browser-server communication was the XMLHttpRequest (XHR) object. It allows browsers to send asynchronous HTTP requests without refreshing the entire page.</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr;
+xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onreadystatechange</span> = xhrHandler; <span class="hljs-comment">// Event handler for state change</span>
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;GET&quot;</span>, url); <span class="hljs-comment">// Open a connection (GET request in this case)</span>
+xhr.<span class="hljs-title function_">send</span>(); <span class="hljs-comment">// Send the request</span>
+</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">xhrHandler</span>(<span class="hljs-params">event</span>) &#123;
+    <span class="hljs-comment">// this === xhr (the XMLHttpRequest object)</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">readyState</span> != <span class="hljs-number">4</span>) &#123;
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">status</span> != <span class="hljs-number">200</span>) &#123;
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-keyword">let</span> text = <span class="hljs-variable language_">this</span>.<span class="hljs-property">responseText</span>;
+    <span class="hljs-comment">// You can now use &#x27;text&#x27; as needed (e.g., display it, process it, etc.)</span>
+&#125;
+</code></pre></div>
 <ul>
 <li>
-<p>Publisher</p>
+<p>Create an XMLHttpRequest object, open a connection to the server (GET/POST/other methods), and send the request.</p>
+</li>
+<li>
+<p><strong>The onreadystatechange event handler is called every time the readyState of the XMLHttpRequest object changes</strong>. The <strong>readyState</strong> property of the XMLHttpRequest object represents the current state of the request:</p>
+</li>
+<li>
+<p>0: UNSENT – The request has not been initialized yet.</p>
+</li>
+<li>
+<p>1: OPENED – The request has been opened but not sent yet.</p>
+</li>
+<li>
+<p>2: HEADERS_RECEIVED – The request has been sent, and headers have been received.</p>
+</li>
+<li>
+<p>3: LOADING – The request is in progress, and some response data has been received (but not fully).</p>
+</li>
+<li>
+<p>4: DONE – The request is complete, and the full response is available.</p>
+</li>
+<li>
+<p>In this example, the handler only cares about the final state (i.e., readyState == 4) when the request has been completed:</p>
+</li>
+<li>
+<p><code>this.readyState != 4</code>: This condition checks whether the request has completed or not. If the state is not 4 (DONE), it returns early and doesn’t proceed.</p>
+</li>
+<li>
+<p><code>this.status != 200</code>: Once the request is complete, this condition checks whether the HTTP status code is 200 (OK). If the status is not 200, it returns early, meaning it only proceeds if the request was successful.</p>
+</li>
+<li>
+<p><code>this.responseText</code>: After confirming the request has completed successfully, it retrieves the response text (the raw data returned from the server) and stores it in text. You can then use this text as needed.</p>
+</li>
+<li>
+<p>Nowadays, <code>fetch()</code> api is more widely used. The response is usually JSON object nowadays.</p>
+</li>
+</ul>
+<h3 id="REST-API">REST API</h3>
+<p>REST API (Representational State Transfer Application Programming Interface) is a set of rules that allows systems to communicate with each other over the internet using HTTP methods.</p>
 <ul>
-<li><code>self.publisher_ = self.create_publisher(String, 'chatter', 10)</code>: <code>String</code> specifies the message type, <code>'chatter'</code> is topic name, <code>10</code> is the the depth of the message queue.</li>
-<li><code>self.timer = self.create_timer()</code>: register a timer event, the event is scheduled by <code>rclpy.init()</code>.</li>
-<li><code>rclpy.init()</code>: Initializes the rclpy library, first step, mandatory.</li>
-<li><code>rclpy.spin(node)</code>: ROS2 nodes are event-driven, this function will keep the node running and constantly listen for events. The program will stay at this line until <code>Ctrl+C</code> is entered.</li>
-<li><code>node.destroy_node()</code>: Gracefully cleans up the node’s internal resources.</li>
-<li><code>rclpy.shutdown()</code>: Shuts down the rclpy Library.</li>
+<li>Resource: A resource in REST is any data or object that can be accessed and manipulated via the API, such as user profiles, blog posts, comments, products, etc.</li>
+<li>URI: Uniform Resource Identifier, typically a URL, e.g., <code>/books</code> might represent the collection of books.</li>
+<li>HTTP methods: GET, POST, DELETE, PUT.</li>
+<li>e.g., <code>GET /photo/78237489</code>, <code>POST /photo/</code>.</li>
+<li>Clients (web apps, mobile apps) send HTTP requests to specific endpoints, and the server responds with data (often in JSON format)</li>
+<li>REST APIs are platform-independent and can be accessed by any client that can send HTTP requests (e.g., web browsers, mobile apps, or servers). With a REST API, the frontend and backend can be developed independently.</li>
+<li>RESTful APIs are stateless, meaning that the server does not store any information about the client between requests.</li>
 </ul>
-  <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Talker</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;talker&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.publisher_ = <span class="hljs-variable language_">self</span>.create_publisher(String, <span class="hljs-string">&#x27;chatter&#x27;</span>, <span class="hljs-number">10</span>)
-        timer_period = <span class="hljs-number">0.5</span>
-        <span class="hljs-variable language_">self</span>.timer = <span class="hljs-variable language_">self</span>.create_timer(timer_period, <span class="hljs-variable language_">self</span>.timer_callback) <span class="hljs-comment"># timer_callback is called every 0.5 seconds</span>
-        <span class="hljs-variable language_">self</span>.count = <span class="hljs-number">0</span>
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">timer_callback</span>(<span class="hljs-params">self</span>):
-        msg = String()
-        msg.data = <span class="hljs-string">f&#x27;Hello ROS2: <span class="hljs-subst">&#123;self.count&#125;</span>&#x27;</span>
-        <span class="hljs-variable language_">self</span>.publisher_.publish(msg)
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Publishing: &quot;<span class="hljs-subst">&#123;msg.data&#125;</span>&quot;&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.count += <span class="hljs-number">1</span>
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = Talker() <span class="hljs-comment"># Creates an instance of the Talker node class</span>
-    rclpy.spin(node) 
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-</li>
-<li>
-<p>Subscriber</p>
-  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Listener</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;listener&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.subscription = <span class="hljs-variable language_">self</span>.create_subscription(
-            String,          <span class="hljs-comment"># message type</span>
-            <span class="hljs-string">&#x27;chatter&#x27;</span>,       <span class="hljs-comment"># topic name</span>
-            <span class="hljs-variable language_">self</span>.listener_callback,  <span class="hljs-comment"># callback function</span>
-            <span class="hljs-number">10</span>               <span class="hljs-comment"># queue size</span>
-        )
-        <span class="hljs-variable language_">self</span>.subscription
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">listener_callback</span>(<span class="hljs-params">self, msg</span>):
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;I heard: &quot;<span class="hljs-subst">&#123;msg.data&#125;</span>&quot;&#x27;</span>)
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = Listener()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-</li>
-</ul>
-<h3 id="Services">Services</h3>
-<p>Services are used for two-way communication. This communication is synchronous.</p>
-<ul>
-<li>
-<p>Service Server</p>
-  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddTwoIntsServer</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;add_two_ints_server&#x27;</span>)
-        <span class="hljs-comment"># create a service</span>
-        <span class="hljs-variable language_">self</span>.srv = <span class="hljs-variable language_">self</span>.create_service(AddTwoInts, <span class="hljs-string">&#x27;add_two_ints&#x27;</span>, <span class="hljs-variable language_">self</span>.add_two_ints_callback)
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_two_ints_callback</span>(<span class="hljs-params">self, request, response</span>):
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Received request: a=<span class="hljs-subst">&#123;request.a&#125;</span>, b=<span class="hljs-subst">&#123;request.b&#125;</span>&#x27;</span>)
-        response.<span class="hljs-built_in">sum</span> = request.a + request.b
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Returning response: sum=<span class="hljs-subst">&#123;response.<span class="hljs-built_in">sum</span>&#125;</span>&#x27;</span>)
-        <span class="hljs-keyword">return</span> response
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = AddTwoIntsServer()
-    rclpy.spin(node)  <span class="hljs-comment"># spin to waiting for requests</span>
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-</li>
-<li>
-<p>Client</p>
-</li>
-</ul>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddTwoIntsClient</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;add_two_ints_client&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.client = <span class="hljs-variable language_">self</span>.create_client(AddTwoInts, <span class="hljs-string">&#x27;add_two_ints&#x27;</span>)
-
-        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.client.wait_for_service(timeout_sec=<span class="hljs-number">1.0</span>):
-            <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;Service not available, waiting...&#x27;</span>)
-
-        <span class="hljs-variable language_">self</span>.request = AddTwoInts.Request()
-        <span class="hljs-variable language_">self</span>.request.a = <span class="hljs-number">5</span>
-        <span class="hljs-variable language_">self</span>.request.b = <span class="hljs-number">7</span>
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send_request</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-variable language_">self</span>.future = <span class="hljs-variable language_">self</span>.client.call_async(<span class="hljs-variable language_">self</span>.request)
-        rclpy.spin_until_future_complete(<span class="hljs-variable language_">self</span>, <span class="hljs-variable language_">self</span>.future) <span class="hljs-comment"># wait for response</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.future.result()
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = AddTwoIntsClient()
-    response = node.send_request()
-    node.get_logger().info(<span class="hljs-string">f&#x27;Result of addition: <span class="hljs-subst">&#123;response.<span class="hljs-built_in">sum</span>&#125;</span>&#x27;</span>)
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
+<p>In conclusion, RESt API provides Standardization (otherwise, we need to customize how browser interacts with the server), Decoupling of frontend and backend, and Scalability.</p>
+<h3 id="Axios">Axios</h3>
+<p>Axios is a JavaScript library that simplifies making HTTP requests. Axios is also promise-based and is widely used for communicating with RESTful APIs. It is a wrapper around XMLHttpRequest but provides a cleaner, more intuitive API, automatic JSON parsing, and better error handling. Axios can be used for making AJAX requests, just like fetch() or XMLHttpRequest. Here is an example usage:</p>
+<div class="code-wrapper"><pre><code class="hljs javascript">axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/user/123&#x27;</span>)
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">data</span>)) <span class="hljs-comment">// Process the JSON response</span>
+  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error));
+</code></pre></div>
+<h2 id="Promises">Promises</h2>
+<p>For how to use promises, please refer to <a target="_blank" rel="noopener" href="https://thiefcat.github.io/2024/07/14/MIT-Weblab/Async-Control/">MIT Weblab笔记 - Asynchronous Control</a>.</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Document on promises</a></p>
 
                 
               </div>
@@ -476,7 +408,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/CSE276A/" class="category-chain-item">CSE276A</a>
+  <a href="/categories/CS142/" class="category-chain-item">CS142</a>
   
   
 
@@ -491,7 +423,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/ROS2/" class="print-no-link">#ROS2</a>
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
       
     </div>
   
@@ -503,8 +435,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSE276A - ROS2</div>
-      <div>http://example.com/2025/10/24/CSE276A/CSE276A-ROS2/</div>
+      <div>Stanford CS142 笔记 - Server Communication</div>
+      <div>http://example.com/2024/10/08/CS142/server-communication/</div>
     </div>
     <div class="license-meta">
       
@@ -516,7 +448,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 24, 2025</div>
+          <div>October 8, 2024</div>
         </div>
       
       
@@ -548,9 +480,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/26/CSE276A/CSE276A-ROS2-Commands/" title="CSE276A - ROS2 Commands">
+                      <a href="/2024/10/09/CS142/material-ui/" title="MaterialUI">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE276A - ROS2 Commands</span>
+                        <span class="hidden-mobile">MaterialUI</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -558,8 +490,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/26/CS142/expressjs/" title="Stanford CS142 笔记 - Express.js">
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Express.js</span>
+                      <a href="/2024/08/13/CS142/spa/" title="Stanford CS142 笔记 - Single Page Application">
+                        <span class="hidden-mobile">Stanford CS142 笔记 - Single Page Application</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

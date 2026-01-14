@@ -21,22 +21,22 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces basis of ROS2, including nodes, topics, messages, services.">
+    <meta name="description" content="This blog introduces some tips on how to use MaterialUI. For the MaterialUI Documentation, please refer to the official website.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSE276A - ROS2">
-<meta property="og:url" content="http://example.com/2025/10/24/CSE276A/CSE276A-ROS2/index.html">
+<meta property="og:title" content="MaterialUI">
+<meta property="og:url" content="http://example.com/2024/10/09/CS142/material-ui/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="This blog introduces basis of ROS2, including nodes, topics, messages, services.">
+<meta property="og:description" content="This blog introduces some tips on how to use MaterialUI. For the MaterialUI Documentation, please refer to the official website.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-24T20:42:04.000Z">
-<meta property="article:modified_time" content="2025-10-24T23:49:25.519Z">
+<meta property="article:published_time" content="2024-10-10T06:21:00.000Z">
+<meta property="article:modified_time" content="2026-01-14T04:13:47.085Z">
 <meta property="article:author" content="Songlin Zhao">
-<meta property="article:tag" content="ROS2">
+<meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CSE276A - ROS2 - Songlin&#39;s Blog</title>
+  <title>MaterialUI - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -231,7 +231,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">CSE276A - ROS2</span>
+            <span id="subtitle">MaterialUI</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-24 13:42" pubdate>
-          October 24, 2025 1:42 PM
+        <time datetime="2024-10-09 23:21" pubdate>
+          October 9, 2024 11:21 PM
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          400 words
+          381 words
         
       </span>
     
@@ -302,162 +302,117 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CSE276A - ROS2</h1>
+            <h1 id="seo-header">MaterialUI</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Introduction">Introduction</h2>
-<p>ROS 2 (Robot Operating System 2) is a framework that runs on an existing OS. In a robot, there are separate programs that read camera data, controlling wheels, planning paths .etc. ROS 2 provides a standard way for all these independent programs to discover each other and exchange information.</p>
-<h3 id="Nodes">Nodes</h3>
-<p>A node is a single program responsible for one specific task.</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy <span class="hljs-comment"># ROS Client Library for Python</span>
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">SensorNode</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-comment"># Initialize the node with the name &#x27;sensor_node&#x27;</span>
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;sensor_node&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;LIDAR sensor node has started.&#x27;</span>)</code></pre></div>
-<h3 id="Topics">Topics</h3>
-<p>Topics are channels where nodes can send (publish) or receive (subscribe) data. This communication is asynchronous. E.g., the <code>sensor_node</code> needs to continuously broadcast sensor data to anyone who cares.</p>
+                <h2 id="Layout">Layout</h2>
+<h3 id="Grid">Grid</h3>
+<p><a target="_blank" rel="noopener" href="https://mui.com/material-ui/react-grid2/">Official Documentation</a></p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span> <span class="hljs-attr">spacing</span>=<span class="hljs-string">&#123;2&#125;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">xs</span>=<span class="hljs-string">&#123;12&#125;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">TopBar</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-topbar-buffer&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">sm</span>=<span class="hljs-string">&#123;3&#125;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Paper</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-grid-item&quot;</span>&gt;</span>
+      ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Paper</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span> <span class="hljs-attr">sm</span>=<span class="hljs-string">&#123;9&#125;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Paper</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;cs142-main-grid-item&quot;</span>&gt;</span>
+      ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Paper</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span>
+</code></pre></div>
 <ul>
-<li>
-<p>Publisher</p>
+<li>When my screen size is smaller than any specified screen size, components will take all 12 columns by default. In this case, when the screen size is xs, since no <code>xs={}</code> is specified and smallest, the Grid item will default to taking up all 12 columns. So the two <code>paper</code> components will stack on one another.</li>
+<li>If a specific size (like md, lg, or xl) is not specified, the grid system will use the settings from the closest smaller breakpoint that is defined.</li>
+</ul>
+<h2 id="theme">theme</h2>
+<p><a target="_blank" rel="noopener" href="https://mui.com/material-ui/customization/default-theme/">The default Theme Parameters</a></p>
+<h2 id="Miscellaneous">Miscellaneous</h2>
+<h3 id="Template-Literals">Template Literals</h3>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ListItemText</span> <span class="hljs-attr">primary</span>=<span class="hljs-string">&#123;</span>` $&#123;<span class="hljs-attr">user.first_name</span>&#125; $&#123;<span class="hljs-attr">user.last_name</span>&#125; `&#125; /&gt;</span>
+</code></pre></div>
 <ul>
-<li><code>self.publisher_ = self.create_publisher(String, 'chatter', 10)</code>: <code>String</code> specifies the message type, <code>'chatter'</code> is topic name, <code>10</code> is the the depth of the message queue.</li>
-<li><code>self.timer = self.create_timer()</code>: register a timer event, the event is scheduled by <code>rclpy.init()</code>.</li>
-<li><code>rclpy.init()</code>: Initializes the rclpy library, first step, mandatory.</li>
-<li><code>rclpy.spin(node)</code>: ROS2 nodes are event-driven, this function will keep the node running and constantly listen for events. The program will stay at this line until <code>Ctrl+C</code> is entered.</li>
-<li><code>node.destroy_node()</code>: Gracefully cleans up the node’s internal resources.</li>
-<li><code>rclpy.shutdown()</code>: Shuts down the rclpy Library.</li>
+<li>In JavaScript, strings can be created using single quotes (<code>'</code>), double quotes (<code>&quot;</code>), or backticks (<code>   </code> `). Backticks are used to create template literals, which is useful for formatting a string.</li>
+<li><code>${}</code> allows you to interpolate JavaScript expressions or variables directly into the string, as shown in the example</li>
 </ul>
-  <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Talker</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;talker&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.publisher_ = <span class="hljs-variable language_">self</span>.create_publisher(String, <span class="hljs-string">&#x27;chatter&#x27;</span>, <span class="hljs-number">10</span>)
-        timer_period = <span class="hljs-number">0.5</span>
-        <span class="hljs-variable language_">self</span>.timer = <span class="hljs-variable language_">self</span>.create_timer(timer_period, <span class="hljs-variable language_">self</span>.timer_callback) <span class="hljs-comment"># timer_callback is called every 0.5 seconds</span>
-        <span class="hljs-variable language_">self</span>.count = <span class="hljs-number">0</span>
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">timer_callback</span>(<span class="hljs-params">self</span>):
-        msg = String()
-        msg.data = <span class="hljs-string">f&#x27;Hello ROS2: <span class="hljs-subst">&#123;self.count&#125;</span>&#x27;</span>
-        <span class="hljs-variable language_">self</span>.publisher_.publish(msg)
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Publishing: &quot;<span class="hljs-subst">&#123;msg.data&#125;</span>&quot;&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.count += <span class="hljs-number">1</span>
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = Talker() <span class="hljs-comment"># Creates an instance of the Talker node class</span>
-    rclpy.spin(node) 
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-</li>
-<li>
-<p>Subscriber</p>
-  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Listener</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;listener&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.subscription = <span class="hljs-variable language_">self</span>.create_subscription(
-            String,          <span class="hljs-comment"># message type</span>
-            <span class="hljs-string">&#x27;chatter&#x27;</span>,       <span class="hljs-comment"># topic name</span>
-            <span class="hljs-variable language_">self</span>.listener_callback,  <span class="hljs-comment"># callback function</span>
-            <span class="hljs-number">10</span>               <span class="hljs-comment"># queue size</span>
-        )
-        <span class="hljs-variable language_">self</span>.subscription
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">listener_callback</span>(<span class="hljs-params">self, msg</span>):
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;I heard: &quot;<span class="hljs-subst">&#123;msg.data&#125;</span>&quot;&#x27;</span>)
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = Listener()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-</li>
-</ul>
-<h3 id="Services">Services</h3>
-<p>Services are used for two-way communication. This communication is synchronous.</p>
+<h3 id="Component-Prop">Component Prop</h3>
+<p>Example:</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ListItem</span> <span class="hljs-attr">component</span>=<span class="hljs-string">&#123;Link&#125;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&#123;</span>`/$&#123;<span class="hljs-attr">user._id</span>&#125;`&#125; <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;list-item&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ListItemText</span> <span class="hljs-attr">primary</span>=<span class="hljs-string">&#123;</span>` $&#123;<span class="hljs-attr">user.first_name</span>&#125; $&#123;<span class="hljs-attr">user.last_name</span>&#125; `&#125; /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ListItem</span>&gt;</span>
+</code></pre></div>
 <ul>
-<li>
-<p>Service Server</p>
-  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddTwoIntsServer</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;add_two_ints_server&#x27;</span>)
-        <span class="hljs-comment"># create a service</span>
-        <span class="hljs-variable language_">self</span>.srv = <span class="hljs-variable language_">self</span>.create_service(AddTwoInts, <span class="hljs-string">&#x27;add_two_ints&#x27;</span>, <span class="hljs-variable language_">self</span>.add_two_ints_callback)
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_two_ints_callback</span>(<span class="hljs-params">self, request, response</span>):
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Received request: a=<span class="hljs-subst">&#123;request.a&#125;</span>, b=<span class="hljs-subst">&#123;request.b&#125;</span>&#x27;</span>)
-        response.<span class="hljs-built_in">sum</span> = request.a + request.b
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Returning response: sum=<span class="hljs-subst">&#123;response.<span class="hljs-built_in">sum</span>&#125;</span>&#x27;</span>)
-        <span class="hljs-keyword">return</span> response
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = AddTwoIntsServer()
-    rclpy.spin(node)  <span class="hljs-comment"># spin to waiting for requests</span>
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-</li>
-<li>
-<p>Client</p>
-</li>
+<li>MUI components are built on top of standard HTML elements like div, button, a, etc.</li>
+<li>The component prop allows you to specify which element or component should be rendered in place of the default one. For example, if you have an MUI <code>&lt;ListItem /&gt;</code>, its default rendering might be a <code>li</code> tag. However, you can replace that li tag with something else, like a Link (from react-router-dom or any other component), by passing the component={Link} prop.</li>
+<li>In the example, I’m using the component={Link} prop to turn the ListItem into a Link component from react-router-dom. Since Link expects a <code>to={}</code> prop (which defines the route path for navigation), I’m able to pass <code>to={/${user._id}}</code> as a prop to the ListItem, because the ListItem is now acting as a Link component.</li>
 </ul>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
+<h3 id="Overriding-Styles">Overriding Styles</h3>
+<p>Every Material UI component accepts a className prop, which allows you to apply custom CSS classes to the component. For example,</p>
+<div class="code-wrapper"><pre><code class="hljs css">&lt;<span class="hljs-selector-tag">Button</span> className=&quot;my-custom-<span class="hljs-selector-tag">button</span>&quot;&gt;Click Me&lt;/<span class="hljs-selector-tag">Button</span>&gt;
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddTwoIntsClient</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;add_two_ints_client&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.client = <span class="hljs-variable language_">self</span>.create_client(AddTwoInts, <span class="hljs-string">&#x27;add_two_ints&#x27;</span>)
+<span class="hljs-selector-class">.my-custom-button</span> &#123;
+  <span class="hljs-attribute">background-color</span>: green;
+  <span class="hljs-attribute">color</span>: white;
+&#125;
+</code></pre></div>
+<p>However, some Material UI components are composed of multiple nested elements. To target these specific parts, you need to use the global class names provided by Material UI. These class names follow a pattern like .MuiComponentName-elementName.</p>
+<p>CSS pseudo-classes like <code>:hover</code>, <code>:focus</code>, and <code>:disabled</code> have higher specificity. Material UI mimics this behavior by applying state classes with higher specificity. Therefore, to override these styles, you need to match or exceed this specificity in your CSS. For example,</p>
+<div class="code-wrapper"><pre><code class="hljs css">&lt;MenuItem selected className=&quot;my-<span class="hljs-selector-tag">menu</span>-item&quot;&gt;<span class="hljs-selector-tag">Option</span> <span class="hljs-number">1</span>&lt;/MenuItem&gt;
 
-        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.client.wait_for_service(timeout_sec=<span class="hljs-number">1.0</span>):
-            <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;Service not available, waiting...&#x27;</span>)
 
-        <span class="hljs-variable language_">self</span>.request = AddTwoInts.Request()
-        <span class="hljs-variable language_">self</span>.request.a = <span class="hljs-number">5</span>
-        <span class="hljs-variable language_">self</span>.request.b = <span class="hljs-number">7</span>
+<span class="hljs-selector-class">.my-menu-item</span> &#123;
+  <span class="hljs-attribute">color</span>: black;
+&#125;
 
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send_request</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-variable language_">self</span>.future = <span class="hljs-variable language_">self</span>.client.call_async(<span class="hljs-variable language_">self</span>.request)
-        rclpy.spin_until_future_complete(<span class="hljs-variable language_">self</span>, <span class="hljs-variable language_">self</span>.future) <span class="hljs-comment"># wait for response</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.future.result()
+<span class="hljs-comment">/* Increase specificity for the selected state */</span>
+<span class="hljs-selector-class">.my-menu-item</span><span class="hljs-selector-class">.Mui-selected</span> &#123;
+  <span class="hljs-attribute">color</span>: blue;
+&#125;
+</code></pre></div>
+<ul>
+<li><strong>When you add the selected prop to the MenuItem, Material UI automatically applies a special class called Mui-selected to the component.</strong> As a result, the <code>&lt;MenuItem selected className=&quot;my-menu-item&quot;&gt;Option 1&lt;/MenuItem&gt;</code> will have color blue instead of black.</li>
+</ul>
+<h4 id="Using-the-sx-prop">Using the sx prop</h4>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span>&gt;</span>
+    ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span>
 
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = AddTwoIntsClient()
-    response = node.send_request()
-    node.get_logger().info(<span class="hljs-string">f&#x27;Result of addition: <span class="hljs-subst">&#123;response.<span class="hljs-built_in">sum</span>&#125;</span>&#x27;</span>)
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">item</span>&gt;</span>
+    ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Grid</span>&gt;</span>
+</code></pre></div>
+<p>The above html becomes the following in the browser, which are modified by materialUI by injecting some new classes:</p>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-container&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-item&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;MuiGrid-root MuiGrid-item&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">Grid</span> <span class="hljs-attr">container</span> <span class="hljs-attr">spacing</span>=<span class="hljs-string">&#123;3&#125;</span> <span class="hljs-attr">sx</span>=<span class="hljs-string">&#123;&#123;</span></span>
+<span class="hljs-tag">  <span class="hljs-attr">maxHeight:</span> &#x27;<span class="hljs-attr">80vh</span>&#x27;,</span>
+<span class="hljs-tag">  <span class="hljs-attr">overflowY:</span> &#x27;<span class="hljs-attr">auto</span>&#x27;,</span>
+<span class="hljs-tag">  &#x27;&amp; <span class="hljs-attr">.MuiGrid-root</span>&#x27;<span class="hljs-attr">:</span> &#123;</span>
+<span class="hljs-tag">    <span class="hljs-attr">paddingLeft:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,</span>
+<span class="hljs-tag">    <span class="hljs-attr">paddingTop:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;,</span>
+<span class="hljs-tag">    <span class="hljs-attr">paddingBottom:</span> &#x27;<span class="hljs-attr">10px</span>&#x27;</span>
+<span class="hljs-tag">  &#125;,</span>
+<span class="hljs-tag">&#125;&#125; &gt;</span>
+</code></pre></div>
+<ul>
+<li>The <code>&amp;</code> represents the current component in the context of the sx prop. In this case, &amp; refers to the Grid container component.</li>
+<li><code>'&amp; .MuiGrid-root'</code> targets all elements with the class <code>.MuiGrid-root</code> that are descendants of the Grid container.</li>
+<li>As a result, the <code>'&amp; .MuiGrid-root'</code> applies the specified padding styles to all Grid items within the container.</li>
+<li><a target="_blank" rel="noopener" href="https://mui.com/material-ui/customization/how-to-customize/">Refer to this</a> for how to use this in more detail</li>
+</ul>
 
                 
               </div>
@@ -476,7 +431,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/CSE276A/" class="category-chain-item">CSE276A</a>
+  <a href="/categories/CS142/" class="category-chain-item">CS142</a>
   
   
 
@@ -491,7 +446,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/ROS2/" class="print-no-link">#ROS2</a>
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
       
     </div>
   
@@ -503,8 +458,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSE276A - ROS2</div>
-      <div>http://example.com/2025/10/24/CSE276A/CSE276A-ROS2/</div>
+      <div>MaterialUI</div>
+      <div>http://example.com/2024/10/09/CS142/material-ui/</div>
     </div>
     <div class="license-meta">
       
@@ -516,7 +471,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 24, 2025</div>
+          <div>October 9, 2024</div>
         </div>
       
       
@@ -548,9 +503,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/26/CSE276A/CSE276A-ROS2-Commands/" title="CSE276A - ROS2 Commands">
+                      <a href="/2024/10/30/CS142/nodejs/" title="Stanford CS142 笔记 - Node.js">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE276A - ROS2 Commands</span>
+                        <span class="hidden-mobile">Stanford CS142 笔记 - Node.js</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -558,8 +513,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/26/CS142/expressjs/" title="Stanford CS142 笔记 - Express.js">
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Express.js</span>
+                      <a href="/2024/10/08/CS142/server-communication/" title="Stanford CS142 笔记 - Server Communication">
+                        <span class="hidden-mobile">Stanford CS142 笔记 - Server Communication</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

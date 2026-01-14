@@ -21,22 +21,22 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces basis of ROS2, including nodes, topics, messages, services.">
+    <meta name="description" content="This blog introduces Node.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSE276A - ROS2">
-<meta property="og:url" content="http://example.com/2025/10/24/CSE276A/CSE276A-ROS2/index.html">
+<meta property="og:title" content="Stanford CS142 笔记 - Node.js">
+<meta property="og:url" content="http://example.com/2024/10/30/CS142/nodejs/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="This blog introduces basis of ROS2, including nodes, topics, messages, services.">
+<meta property="og:description" content="This blog introduces Node.js">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-24T20:42:04.000Z">
-<meta property="article:modified_time" content="2025-10-24T23:49:25.519Z">
+<meta property="article:published_time" content="2024-10-31T00:18:00.000Z">
+<meta property="article:modified_time" content="2026-01-14T04:14:55.686Z">
 <meta property="article:author" content="Songlin Zhao">
-<meta property="article:tag" content="ROS2">
+<meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CSE276A - ROS2 - Songlin&#39;s Blog</title>
+  <title>Stanford CS142 笔记 - Node.js - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -231,7 +231,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">CSE276A - ROS2</span>
+            <span id="subtitle">Stanford CS142 笔记 - Node.js</span>
           
         </div>
 
@@ -242,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-10-24 13:42" pubdate>
-          October 24, 2025 1:42 PM
+        <time datetime="2024-10-30 17:18" pubdate>
+          October 30, 2024 5:18 PM
         </time>
       </span>
     
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          400 words
+          215 words
         
       </span>
     
@@ -302,163 +302,72 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CSE276A - ROS2</h1>
+            <h1 id="seo-header">Stanford CS142 笔记 - Node.js</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="Introduction">Introduction</h2>
-<p>ROS 2 (Robot Operating System 2) is a framework that runs on an existing OS. In a robot, there are separate programs that read camera data, controlling wheels, planning paths .etc. ROS 2 provides a standard way for all these independent programs to discover each other and exchange information.</p>
-<h3 id="Nodes">Nodes</h3>
-<p>A node is a single program responsible for one specific task.</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy <span class="hljs-comment"># ROS Client Library for Python</span>
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">SensorNode</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-comment"># Initialize the node with the name &#x27;sensor_node&#x27;</span>
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;sensor_node&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;LIDAR sensor node has started.&#x27;</span>)</code></pre></div>
-<h3 id="Topics">Topics</h3>
-<p>Topics are channels where nodes can send (publish) or receive (subscribe) data. This communication is asynchronous. E.g., the <code>sensor_node</code> needs to continuously broadcast sensor data to anyone who cares.</p>
+<p>Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside of a web browser.</p>
+<ul>
+<li>Single-Threaded Event Loop: Node.js uses a single-threaded event loop. The Event Loop continuously checks the event queue to see if there are any events to be handled.</li>
+<li>Non-blocking I/O: Node.js performs I/O operations (like reading from a database or reading from a file) asynchronously. Instead of waiting for the operation to complete, Node.js registers a callback and moves on to handle the next event. This non-blocking behavior ensures that Node.js can handle many I/O operations concurrently without getting bogged down by slow operations</li>
+</ul>
+<h2 id="Module-System">Module System</h2>
 <ul>
 <li>
-<p>Publisher</p>
+<p><code>require</code> is a function in Node.js used to load modules. We use <code>Express</code> and <code>Mongoose</code> for web development.</p>
 <ul>
-<li><code>self.publisher_ = self.create_publisher(String, 'chatter', 10)</code>: <code>String</code> specifies the message type, <code>'chatter'</code> is topic name, <code>10</code> is the the depth of the message queue.</li>
-<li><code>self.timer = self.create_timer()</code>: register a timer event, the event is scheduled by <code>rclpy.init()</code>.</li>
-<li><code>rclpy.init()</code>: Initializes the rclpy library, first step, mandatory.</li>
-<li><code>rclpy.spin(node)</code>: ROS2 nodes are event-driven, this function will keep the node running and constantly listen for events. The program will stay at this line until <code>Ctrl+C</code> is entered.</li>
-<li><code>node.destroy_node()</code>: Gracefully cleans up the node’s internal resources.</li>
-<li><code>rclpy.shutdown()</code>: Shuts down the rclpy Library.</li>
+<li>System modules: Built-in Node.js modules like fs, http, path, etc.</li>
+<li>File modules: Like <code>require(&quot;./myModule.js&quot;)</code></li>
+<li>Directory modules: Like <code>require(&quot;./myModule&quot;)</code>, look for <code>myModule/index.js</code></li>
 </ul>
-  <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Talker</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;talker&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.publisher_ = <span class="hljs-variable language_">self</span>.create_publisher(String, <span class="hljs-string">&#x27;chatter&#x27;</span>, <span class="hljs-number">10</span>)
-        timer_period = <span class="hljs-number">0.5</span>
-        <span class="hljs-variable language_">self</span>.timer = <span class="hljs-variable language_">self</span>.create_timer(timer_period, <span class="hljs-variable language_">self</span>.timer_callback) <span class="hljs-comment"># timer_callback is called every 0.5 seconds</span>
-        <span class="hljs-variable language_">self</span>.count = <span class="hljs-number">0</span>
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">timer_callback</span>(<span class="hljs-params">self</span>):
-        msg = String()
-        msg.data = <span class="hljs-string">f&#x27;Hello ROS2: <span class="hljs-subst">&#123;self.count&#125;</span>&#x27;</span>
-        <span class="hljs-variable language_">self</span>.publisher_.publish(msg)
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Publishing: &quot;<span class="hljs-subst">&#123;msg.data&#125;</span>&quot;&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.count += <span class="hljs-number">1</span>
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = Talker() <span class="hljs-comment"># Creates an instance of the Talker node class</span>
-    rclpy.spin(node) 
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
 </li>
 <li>
-<p>Subscriber</p>
-  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> String
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Listener</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;listener&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.subscription = <span class="hljs-variable language_">self</span>.create_subscription(
-            String,          <span class="hljs-comment"># message type</span>
-            <span class="hljs-string">&#x27;chatter&#x27;</span>,       <span class="hljs-comment"># topic name</span>
-            <span class="hljs-variable language_">self</span>.listener_callback,  <span class="hljs-comment"># callback function</span>
-            <span class="hljs-number">10</span>               <span class="hljs-comment"># queue size</span>
-        )
-        <span class="hljs-variable language_">self</span>.subscription
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">listener_callback</span>(<span class="hljs-params">self, msg</span>):
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;I heard: &quot;<span class="hljs-subst">&#123;msg.data&#125;</span>&quot;&#x27;</span>)
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = Listener()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
+<p>In Node.js, every module (or file) has its own scope, module.exports allows us to make functions or variables available to other files.</p>
 </li>
 </ul>
-<h3 id="Services">Services</h3>
-<p>Services are used for two-way communication. This communication is synchronous.</p>
-<ul>
-<li>
-<p>Service Server</p>
-  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddTwoIntsServer</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;add_two_ints_server&#x27;</span>)
-        <span class="hljs-comment"># create a service</span>
-        <span class="hljs-variable language_">self</span>.srv = <span class="hljs-variable language_">self</span>.create_service(AddTwoInts, <span class="hljs-string">&#x27;add_two_ints&#x27;</span>, <span class="hljs-variable language_">self</span>.add_two_ints_callback)
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_two_ints_callback</span>(<span class="hljs-params">self, request, response</span>):
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Received request: a=<span class="hljs-subst">&#123;request.a&#125;</span>, b=<span class="hljs-subst">&#123;request.b&#125;</span>&#x27;</span>)
-        response.<span class="hljs-built_in">sum</span> = request.a + request.b
-        <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">f&#x27;Returning response: sum=<span class="hljs-subst">&#123;response.<span class="hljs-built_in">sum</span>&#125;</span>&#x27;</span>)
-        <span class="hljs-keyword">return</span> response
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = AddTwoIntsServer()
-    rclpy.spin(node)  <span class="hljs-comment"># spin to waiting for requests</span>
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-</li>
-<li>
-<p>Client</p>
-</li>
-</ul>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> rclpy
-<span class="hljs-keyword">from</span> rclpy.node <span class="hljs-keyword">import</span> Node
-<span class="hljs-keyword">from</span> example_interfaces.srv <span class="hljs-keyword">import</span> AddTwoInts
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddTwoIntsClient</span>(<span class="hljs-title class_ inherited__">Node</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-string">&#x27;add_two_ints_client&#x27;</span>)
-        <span class="hljs-variable language_">self</span>.client = <span class="hljs-variable language_">self</span>.create_client(AddTwoInts, <span class="hljs-string">&#x27;add_two_ints&#x27;</span>)
-
-        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.client.wait_for_service(timeout_sec=<span class="hljs-number">1.0</span>):
-            <span class="hljs-variable language_">self</span>.get_logger().info(<span class="hljs-string">&#x27;Service not available, waiting...&#x27;</span>)
-
-        <span class="hljs-variable language_">self</span>.request = AddTwoInts.Request()
-        <span class="hljs-variable language_">self</span>.request.a = <span class="hljs-number">5</span>
-        <span class="hljs-variable language_">self</span>.request.b = <span class="hljs-number">7</span>
-
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send_request</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-variable language_">self</span>.future = <span class="hljs-variable language_">self</span>.client.call_async(<span class="hljs-variable language_">self</span>.request)
-        rclpy.spin_until_future_complete(<span class="hljs-variable language_">self</span>, <span class="hljs-variable language_">self</span>.future) <span class="hljs-comment"># wait for response</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.future.result()
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">args=<span class="hljs-literal">None</span></span>):
-    rclpy.init(args=args)
-    node = AddTwoIntsClient()
-    response = node.send_request()
-    node.get_logger().info(<span class="hljs-string">f&#x27;Result of addition: <span class="hljs-subst">&#123;response.<span class="hljs-built_in">sum</span>&#125;</span>&#x27;</span>)
-    node.destroy_node()
-    rclpy.shutdown()
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
-    main()</code></pre></div>
-
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> notGlobal;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">func1</span>(<span class="hljs-params"></span>) &#123;&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">func2</span>(<span class="hljs-params"></span>) &#123;&#125;
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<span class="hljs-attr">func1</span>: func1, <span class="hljs-attr">func2</span>: func2&#125;;
+</code></pre></div>
+<h2 id="Non-blocking">Non-blocking</h2>
+<div class="code-wrapper"><pre><code class="hljs javascript">r1 = <span class="hljs-title function_">step1</span>();
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step1 done&#x27;</span>, r1);
+r2 = <span class="hljs-title function_">step2</span>(r1);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step2 done&#x27;</span>, r2);
+r3 = <span class="hljs-title function_">step3</span>(r2);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step3 done&#x27;</span>, r3);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;All Done!&#x27;</span>);
+</code></pre></div>
+<p>If <code>step()</code> function doesn’t block, then it’s ok.</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">step1</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">r1</span>) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step1 done&#x27;</span>, r1);
+    <span class="hljs-title function_">step2</span>(r1, <span class="hljs-keyword">function</span> (<span class="hljs-params">r2</span>) &#123;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step2 done&#x27;</span>, r2);
+        <span class="hljs-title function_">step3</span>(r2, <span class="hljs-keyword">function</span> (<span class="hljs-params">r3</span>) &#123;
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;step3 done&#x27;</span>, r3);
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;All Done!&#x27;</span>);  <span class="hljs-comment">// Correct</span>
+        &#125;);
+    &#125;);
+&#125;);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;All Done!&#x27;</span>); <span class="hljs-comment">// Wrong!</span>
+</code></pre></div>
+<p>If the function is blocking, use callbacks.</p>
+<h2 id="Listener-and-Emitter">Listener and Emitter</h2>
+<div class="code-wrapper"><pre><code class="hljs javascript">myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;myEvent&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">param1, param2</span>) &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;myEvent occurred with &#x27;</span> + param1 + <span class="hljs-string">&#x27; and &#x27;</span> + param2 + <span class="hljs-string">&#x27;!&#x27;</span>);
+&#125;);
+myEmitter.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;myEvent&#x27;</span>, <span class="hljs-string">&#x27;arg1&#x27;</span>, <span class="hljs-string">&#x27;arg2&#x27;</span>);
+</code></pre></div>
+<p>On emit call listeners are called synchronously and in the order the listeners were registered.</p>
+<p>Have multiple different events for different state or actions:</p>
+<div class="code-wrapper"><pre><code class="hljs javascript">myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;conditionA&#x27;</span>, doConditionA);
+myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;conditionB&#x27;</span>, doConditionB);
+myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;conditionC&#x27;</span>, doConditionC);
+myEmitter.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;error&#x27;</span>, handleErrorCondition);
+</code></pre></div>
                 
               </div>
             
@@ -476,7 +385,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/CSE276A/" class="category-chain-item">CSE276A</a>
+  <a href="/categories/CS142/" class="category-chain-item">CS142</a>
   
   
 
@@ -491,7 +400,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/ROS2/" class="print-no-link">#ROS2</a>
+        <a href="/tags/Web-Development/" class="print-no-link">#Web Development</a>
       
     </div>
   
@@ -503,8 +412,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSE276A - ROS2</div>
-      <div>http://example.com/2025/10/24/CSE276A/CSE276A-ROS2/</div>
+      <div>Stanford CS142 笔记 - Node.js</div>
+      <div>http://example.com/2024/10/30/CS142/nodejs/</div>
     </div>
     <div class="license-meta">
       
@@ -516,7 +425,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 24, 2025</div>
+          <div>October 30, 2024</div>
         </div>
       
       
@@ -548,9 +457,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/26/CSE276A/CSE276A-ROS2-Commands/" title="CSE276A - ROS2 Commands">
+                      <a href="/2024/11/26/CS142/expressjs/" title="Stanford CS142 笔记 - Express.js">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE276A - ROS2 Commands</span>
+                        <span class="hidden-mobile">Stanford CS142 笔记 - Express.js</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -558,8 +467,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/26/CS142/expressjs/" title="Stanford CS142 笔记 - Express.js">
-                        <span class="hidden-mobile">Stanford CS142 笔记 - Express.js</span>
+                      <a href="/2024/10/09/CS142/material-ui/" title="MaterialUI">
+                        <span class="hidden-mobile">MaterialUI</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
