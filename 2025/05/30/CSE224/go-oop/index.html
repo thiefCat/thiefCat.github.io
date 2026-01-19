@@ -21,23 +21,22 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog explains leetcode 28 (Find the Index of the First Occurrence in a String)">
+    <meta name="description" content="This blog introduces go&#39;s approach to OOP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dynamic Programming">
-<meta property="og:url" content="http://example.com/2024/07/15/MIT_Weblab/dp/index.html">
+<meta property="og:title" content="CSE224 - Go OOP">
+<meta property="og:url" content="http://example.com/2025/05/30/CSE224/go-oop/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="This blog explains leetcode 28 (Find the Index of the First Occurrence in a String)">
+<meta property="og:description" content="This blog introduces go&#39;s approach to OOP">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-16T03:03:00.000Z">
-<meta property="article:modified_time" content="2026-01-10T08:47:20.763Z">
+<meta property="article:published_time" content="2025-05-31T00:02:00.000Z">
+<meta property="article:modified_time" content="2026-01-19T21:52:25.406Z">
 <meta property="article:author" content="Songlin Zhao">
-<meta property="article:tag" content="Dynamic Programming">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Dynamic Programming - Songlin&#39;s Blog</title>
+  <title>CSE224 - Go OOP - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -232,7 +231,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Dynamic Programming</span>
+            <span id="subtitle">CSE224 - Go OOP</span>
           
         </div>
 
@@ -243,8 +242,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-15 20:03" pubdate>
-          July 15, 2024 8:03 PM
+        <time datetime="2025-05-30 17:02" pubdate>
+          May 30, 2025 5:02 PM
         </time>
       </span>
     
@@ -255,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          604 words
+          256 words
         
       </span>
     
@@ -303,171 +302,127 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Dynamic Programming</h1>
+            <h1 id="seo-header">CSE224 - Go OOP</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="DP-and-Backtracking">DP and Backtracking</h2>
-<p>Many DP problems can be also solved by backtracking algorithm.</p>
-<h3 id="LC-416">LC 416</h3>
-<p>Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.</p>
-<ul>
-<li>Solution using backtracking (recursion):</li>
-</ul>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canPartition</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;
-        <span class="hljs-type">boolean</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> backtrack(nums, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
-        <span class="hljs-keyword">return</span> result;
-    &#125;
+                <h2 id="Class">Class</h2>
+<h3 id="Named-Type">Named Type</h3>
+<p>I can create a new named type MyInt that is based on int, but is treated as a distinct type by the compiler.</p>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">type</span> MyInt <span class="hljs-type">int</span>
+</code></pre></div>
+<h3 id="struct-methods">struct + methods</h3>
+<p>Go doesn’t have traditional classes, instead, it uses Custom types + attached methods. As a result, structs in go can hold both data and associated methods. Example:</p>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Celsius <span class="hljs-type">float64</span>
 
-    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">backtrack</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> index, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> &#123;
-        <span class="hljs-keyword">if</span> (index == nums.length &amp;&amp; left == right) &#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (index == nums.length) &#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-        &#125;
-        <span class="hljs-type">boolean</span> <span class="hljs-variable">includeLeft</span> <span class="hljs-operator">=</span> backtrack(nums, index+<span class="hljs-number">1</span>, left+nums[index], right);
-        <span class="hljs-type">boolean</span> <span class="hljs-variable">includeRight</span> <span class="hljs-operator">=</span> backtrack(nums, index+<span class="hljs-number">1</span>, left, right+nums[index]);
-        <span class="hljs-keyword">return</span> includeLeft || includeRight;
-    &#125;
+<span class="hljs-comment">// This defines a method on the Celsius type.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Celsius)</span></span> ToFahrenheit() <span class="hljs-type">float64</span> &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-type">float64</span>(c)*<span class="hljs-number">9</span>/<span class="hljs-number">5</span> + <span class="hljs-number">32</span>  <span class="hljs-comment">// need type convertion</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+    temp := Celsius(<span class="hljs-number">25</span>)
+    fmt.Println(<span class="hljs-string">&quot;In Fahrenheit:&quot;</span>, temp.ToFahrenheit()) <span class="hljs-comment">// 77</span>
 &#125;
 </code></pre></div>
-<ul>
-<li>Idea: Our goal is to partition the array into two subsets, naming them “left” and “right” respectively. For each number in the array, it is either in the “left” subset or “right” subset. We explore all possibilities using recursion.</li>
-<li>Complexity: <code>O(2^n)</code>. Thinking about a tree, each node is a backtrack function. The tree is of depth <code>n</code>, each node takes <code>O(1)</code> time.</li>
-<li>Solution using dynamic programming:</li>
-</ul>
-<p>Transform the solution to knapsack problem: achieve <code>sum/2</code> using elements in an array.</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canPartition</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;
-        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;
-            sum += num;
-        &#125;
-        <span class="hljs-keyword">if</span> (sum % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">target</span> <span class="hljs-operator">=</span> sum / <span class="hljs-number">2</span>;
-        <span class="hljs-type">boolean</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[target+<span class="hljs-number">1</span>];
-        dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;
-        <span class="hljs-keyword">if</span> (nums[<span class="hljs-number">0</span>] &lt; target) &#123;
-            dp[nums[<span class="hljs-number">0</span>]] = <span class="hljs-literal">true</span>;
-        &#125;
+<p>Another example: User behaves just like a class</p>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;
+    Name <span class="hljs-type">string</span>
+    Age  <span class="hljs-type">int</span>
+&#125;
 
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; nums.length; i++) &#123;
-            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> target; j &gt;= nums[i]; j--) &#123;
-                dp[j] = dp[j] || dp[j-nums[i]];
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> dp[target];
-    &#125;
+<span class="hljs-comment">// This function is like a method defined in a class</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(u User)</span></span> Greet() <span class="hljs-type">string</span> &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, &quot;</span> + u.Name
 &#125;
 </code></pre></div>
-<ul>
-<li><code>dp[i][j]</code> is boolean, representing whether summation j can be achieved using indexes 0, 1, …, i.</li>
-<li>If <code>nums[i]</code> is used to achieve the summation j, then <code>dp[i-1][j-nums[i]]</code> must be true. If <code>nums[i]</code> is not used to achieve the summation, then <code>dp[i-1][j]</code> must be true.</li>
-<li>Complexity: <code>O(nW)</code>, where n is array size, W is array summation.</li>
-</ul>
-<h2 id="Optimize-Space-Complexity">Optimize Space Complexity</h2>
-<h3 id="Knapsack-Problem">Knapsack Problem</h3>
-<p>Given bag space N, what is the most valuable way to put items in the bag? One Item can be used only once.</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 2D array</span>
-<span class="hljs-comment">// DP[i][j]: most valuable combination of items for space j using items 0-i.</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> M, <span class="hljs-type">int</span> N, <span class="hljs-type">int</span>[] spaces, <span class="hljs-type">int</span>[] values)</span> &#123;
-    <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[M+<span class="hljs-number">1</span>][N+<span class="hljs-number">1</span>];
-
-    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> spaces[<span class="hljs-number">0</span>]; j &lt;= N; j++) &#123;
-        dp[<span class="hljs-number">0</span>][j] = values[<span class="hljs-number">0</span>];
-    &#125;
-
-    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= M; i++) &#123;
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= N; j++) &#123;
-            <span class="hljs-keyword">if</span> (j &gt;= spaces[i-<span class="hljs-number">1</span>]) &#123;
-                dp[i][j] = Math.max(dp[i-<span class="hljs-number">1</span>][j], dp[i-<span class="hljs-number">1</span>][j-spaces[i-<span class="hljs-number">1</span>]] + values[i-<span class="hljs-number">1</span>]);
-            &#125; <span class="hljs-keyword">else</span> &#123;
-                dp[i][j] = dp[i-<span class="hljs-number">1</span>][j];
-            &#125;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">return</span> dp[M][N];
+<h3 id="Constructors">Constructors</h3>
+<p>Go does not have built-in constructors. We define a function by ourself as a constructor:</p>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewUser</span><span class="hljs-params">(name <span class="hljs-type">string</span>, age <span class="hljs-type">int</span>)</span></span> User &#123;
+    <span class="hljs-keyword">return</span> User&#123;Name: name, Age: age&#125;
 &#125;
 </code></pre></div>
-<p>Use 1D array to solve this:</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> M, <span class="hljs-type">int</span> N, <span class="hljs-type">int</span>[] spaces, <span class="hljs-type">int</span>[] values)</span> &#123;
-    <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[N+<span class="hljs-number">1</span>];
-        
-    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> spaces[<span class="hljs-number">0</span>]; i &lt; N+<span class="hljs-number">1</span>; i++) &#123;
-        dp[i] = values[<span class="hljs-number">0</span>];
-    &#125;
-    
-    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; M; i++) &#123;
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> N; j &gt;= <span class="hljs-number">1</span>; j--) &#123; <span class="hljs-comment">// iterate from N to 1!</span>
-            <span class="hljs-keyword">if</span> (j &gt;= spaces[i]) &#123;
-                <span class="hljs-type">int</span> <span class="hljs-variable">takei</span> <span class="hljs-operator">=</span> dp[j-spaces[i]] + values[i];
-                <span class="hljs-type">int</span> <span class="hljs-variable">dtakei</span> <span class="hljs-operator">=</span> dp[j];
-                dp[j] = Math.max(takei, dtakei);
-            &#125; <span class="hljs-keyword">else</span> &#123;
-                dp[j] = dp[j];
-            &#125;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">return</span> dp[N];
+<h3 id="Encapsulation">Encapsulation</h3>
+<p>Go doesn’t use public or private keywords like Java or C++. Instead, it uses capitalization to control visibility.</p>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Account <span class="hljs-keyword">struct</span> &#123;
+    Owner   <span class="hljs-type">string</span>  <span class="hljs-comment">// Exported, other packages can read/write it.</span>
+    balance <span class="hljs-type">float64</span> <span class="hljs-comment">// Unexported, only code inside this package can access it.</span>
 &#125;
 </code></pre></div>
-<ul>
-<li>In 2D case, each row depends on the values from previous row.</li>
-<li><code>dp[i][j]</code> depends on <code>dp[i-1][j]</code> and <code>dp[i-1][j-spaces[i-1]]</code>, i.e., one top value, one top-left value.</li>
-<li>As a result, in 1D case, update the <code>dp</code> array from right to left.</li>
-</ul>
-<h3 id="When-to-update-from-left-to-right-LC-518">When to update from left to right? (LC 518)</h3>
-<p>You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.</p>
-<p>Return the number of combinations that make up that amount. If that amount of money cannot be made up by any combination of the coins, return 0.</p>
-<p>You may assume that you have an infinite number of each kind of coin.</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">change</span><span class="hljs-params">(<span class="hljs-type">int</span> amount, <span class="hljs-type">int</span>[] coins)</span> &#123;
-        <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[coins.length][amount+<span class="hljs-number">1</span>];
+<h2 id="Composition">Composition</h2>
+<p>Composition over Inheritance: Go doesn’t have classes or inheritance, but it has composition using embedding.</p>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Animal <span class="hljs-keyword">struct</span> &#123;
+    Name <span class="hljs-type">string</span>
+&#125;
 
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; coins.length; i++)&#123;
-            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
-        &#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(a Animal)</span></span> Speak() &#123;
+    fmt.Println(a.Name, <span class="hljs-string">&quot;makes a sound&quot;</span>)
+&#125;
 
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> coins[<span class="hljs-number">0</span>]; j &lt;= amount; j++)&#123;
-            dp[<span class="hljs-number">0</span>][j] += dp[<span class="hljs-number">0</span>][j-coins[<span class="hljs-number">0</span>]];
-        &#125;
-        
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; coins.length; i++)&#123;
-            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= amount; j++)&#123;
-                <span class="hljs-keyword">if</span>(j &lt; coins[i]) dp[i][j] = dp[i-<span class="hljs-number">1</span>][j];
-                <span class="hljs-keyword">else</span> dp[i][j] = dp[i][j-coins[i]] + dp[i-<span class="hljs-number">1</span>][j];
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> dp[coins.length-<span class="hljs-number">1</span>][amount];
-    &#125;
+<span class="hljs-keyword">type</span> Dog <span class="hljs-keyword">struct</span> &#123;
+    Animal <span class="hljs-comment">// embedded</span>
+    Breed <span class="hljs-type">string</span>
+&#125;
+
+<span class="hljs-comment">// Now Dog inherits the Speak() method from Animal.</span>
+d := Dog&#123;Animal: Animal&#123;Name: <span class="hljs-string">&quot;Buddy&quot;</span>&#125;, Breed: <span class="hljs-string">&quot;Labrador&quot;</span>&#125;
+d.Speak() <span class="hljs-comment">// Buddy makes a sound</span>
+</code></pre></div>
+<p>By composition, I can resue methods.</p>
+<h3 id="Override">Override</h3>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-comment">// Define a method with the same name on the outer struct, and it will shadow the embedded (override)</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(d Dog)</span></span> Speak() &#123;
+    fmt.Println(d.Name, <span class="hljs-string">&quot;barks!&quot;</span>)
 &#125;
 </code></pre></div>
-<ul>
-<li>Updation: <code>dp[i][j] = dp[i][j-coins[i]] + dp[i-1][j]</code>, which depends on both <code>previous row</code> and <code>current row but previous column</code>.</li>
-</ul>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// solution using 1D array</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">change</span><span class="hljs-params">(<span class="hljs-type">int</span> amount, <span class="hljs-type">int</span>[] coins)</span> &#123;
-        <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[amount+<span class="hljs-number">1</span>];
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; amount+<span class="hljs-number">1</span>; i++) &#123;
-            <span class="hljs-keyword">if</span> (i % coins[<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>) dp[i] = <span class="hljs-number">1</span>;
-        &#125;
+<h2 id="Interface-Polymorphism-and-Abstraction">Interface (Polymorphism and Abstraction)</h2>
+<p>An interface in Go is a set of method signatures. <strong>If a type has those methods, it automatically implements the interface</strong>.</p>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Greeter <span class="hljs-keyword">interface</span> &#123;
+    Greet() <span class="hljs-type">string</span>
+&#125;
 
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; coins.length; i++) &#123;
-            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> coins[i]; j &lt;= amount; j++) &#123;
-                dp[j] += dp[j-coins[i]];
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> dp[amount];
-    &#125;
+<span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span>&#123;&#125;
+
+<span class="hljs-comment">// Person has a Greet() method, so it automatically satisfies the Greeter interface.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Person)</span></span> Greet() <span class="hljs-type">string</span> &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello!&quot;</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sayHello</span><span class="hljs-params">(g Greeter)</span></span> &#123;
+    <span class="hljs-comment">// any type that has Greet() can be passed as a parameter (Polymorphism)</span>
+    fmt.Println(g.Greet())
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+    p := Person&#123;&#125;
+    sayHello(p) <span class="hljs-comment">// Hello!</span>
 &#125;
 </code></pre></div>
-<ul>
-<li>At iteration i, dp[j] is the number of combinations that make up amount j, using coins with indexes 0-i.</li>
-<li>Because solution using 2D array uses <code>dp[i][j] = dp[i][j-coins[i]] + dp[i-1][j]</code>, so in 1D array, we update from left to right so that <code>dp[j]</code> uses the <code>dp[j-coins[i]]</code> from the same row.</li>
-</ul>
+<p>If the method is defined on a pointer receiver, only the pointer type implements the interface.</p>
+<div class="code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Greeter <span class="hljs-keyword">interface</span> &#123;
+    Greet()
+&#125;
+
+<span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span> &#123;
+    Name <span class="hljs-type">string</span>
+&#125;
+
+<span class="hljs-comment">// This means only *Person (pointer) has the method Greet()</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *Person)</span></span> Greet() &#123;
+    fmt.Println(<span class="hljs-string">&quot;Hello, my name is&quot;</span>, p.Name)
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+    <span class="hljs-keyword">var</span> g Greeter
+
+    p := Person&#123;Name: <span class="hljs-string">&quot;Alice&quot;</span>&#125;
+
+    <span class="hljs-comment">// g = p         // ❌ error (p is a Person (value))</span>
+    g = &amp;p           <span class="hljs-comment">// ✅ &amp;p is a *Person</span>
+    g.Greet()
+&#125;</code></pre></div>
+<p>In this example, <code>Person</code> doesn’t implement the interface, but <code>*Person</code> does, so assigning a <code>Person</code> to a <code>Greeter</code> causes an error. (<code>g = &amp;p</code> works)</p>
 
                 
               </div>
@@ -486,7 +441,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Leetcode/" class="category-chain-item">Leetcode</a>
+  <a href="/categories/CSE224/" class="category-chain-item">CSE224</a>
   
   
 
@@ -501,9 +456,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Dynamic-Programming/" class="print-no-link">#Dynamic Programming</a>
-      
-        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
+        <a href="/tags/Go/" class="print-no-link">#Go</a>
       
     </div>
   
@@ -515,8 +468,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Dynamic Programming</div>
-      <div>http://example.com/2024/07/15/MIT_Weblab/dp/</div>
+      <div>CSE224 - Go OOP</div>
+      <div>http://example.com/2025/05/30/CSE224/go-oop/</div>
     </div>
     <div class="license-meta">
       
@@ -528,7 +481,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 15, 2024</div>
+          <div>May 30, 2025</div>
         </div>
       
       
@@ -560,9 +513,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/18/MIT_Weblab/account/" title="MIT Weblab笔记 - Authentication">
+                      <a href="/2025/10/24/CSE276A/CSE276A-ROS2/" title="CSE276A - ROS2">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT Weblab笔记 - Authentication</span>
+                        <span class="hidden-mobile">CSE276A - ROS2</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -570,8 +523,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/15/MIT_Weblab/mongodb/" title="MIT Weblab笔记 - MongoDB">
-                        <span class="hidden-mobile">MIT Weblab笔记 - MongoDB</span>
+                      <a href="/2025/05/21/CSE224/http-server/" title="CSE224 - HTTP server">
+                        <span class="hidden-mobile">CSE224 - HTTP server</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

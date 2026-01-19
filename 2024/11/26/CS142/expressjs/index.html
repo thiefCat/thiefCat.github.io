@@ -29,7 +29,7 @@
 <meta property="og:description" content="This blog introduces Express.js">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-11-27T04:11:00.000Z">
-<meta property="article:modified_time" content="2026-01-14T04:15:51.487Z">
+<meta property="article:modified_time" content="2026-01-17T06:35:25.621Z">
 <meta property="article:author" content="Songlin Zhao">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
@@ -309,8 +309,7 @@
                 
                 <h2 id="Introduction">Introduction</h2>
 <div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
-<span class="hljs-keyword">let</span> expressApp = <span class="hljs-title function_">express</span>();
-</code></pre></div>
+<span class="hljs-keyword">let</span> expressApp = <span class="hljs-title function_">express</span>();</code></pre></div>
 <p>The instance <code>expressAPP</code> provides all the methods to:</p>
 <ol>
 <li>Route HTTP requests (map different URLs to different logic)</li>
@@ -327,8 +326,7 @@ expressApp.<span class="hljs-title function_">all</span>(<span class="hljs-strin
 
 expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:user_id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
   res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`User ID is <span class="hljs-subst">$&#123;req.params.user_id&#125;</span>`</span>);
-&#125;);
-</code></pre></div>
+&#125;);</code></pre></div>
 <p>The order of execution in Express routes is determined by the order in which they are defined in your code. Here’s the principle:</p>
 <ul>
 <li>When a request is received, Express evaluates routes from top to bottom in the order they are defined in the code.</li>
@@ -341,15 +339,13 @@ expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-strin
 </ul>
 <div class="code-wrapper"><pre><code class="hljs javascript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:user_id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">user_id</span>); <span class="hljs-comment">// Logs the user_id</span>
-&#125;);
-</code></pre></div>
+&#125;);</code></pre></div>
 <ul>
 <li><code>request.query</code>: Contains query string parameters from the URL</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs javascript">expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/search&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(req.<span class="hljs-property">query</span>); <span class="hljs-comment">// &#123; foo: &#x27;9&#x27; &#125; ?foo=9 becomes &#123;foo: &#x27;9&#x27;&#125;</span>
-&#125;);
-</code></pre></div>
+&#125;);</code></pre></div>
 <ul>
 <li><code>request.body</code>: Contains the body of POST or PUT requests</li>
 </ul>
@@ -373,8 +369,7 @@ expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-strin
   &#125;
   response.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>).<span class="hljs-title function_">send</span>(user);
   <span class="hljs-keyword">return</span>;
-&#125;);
-</code></pre></div>
+&#125;);</code></pre></div>
 <h3 id="Middleware">Middleware</h3>
 <p>Middleware are functions that can:</p>
 <ol>
@@ -385,16 +380,14 @@ expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-strin
 <div class="code-wrapper"><pre><code class="hljs javascript">app.<span class="hljs-title function_">all</span>(<span class="hljs-string">&#x27;/specific-route&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Middleware for /specific-route&#x27;</span>);
   <span class="hljs-title function_">next</span>(); <span class="hljs-comment">// Pass control to the next handler or middleware</span>
-&#125;);
-</code></pre></div>
+&#125;);</code></pre></div>
 <ul>
 <li><code>app.all()</code>: Matches all HTTP methods for the route.</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs javascript">app.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> &#123;
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Global Middleware&#x27;</span>);
   <span class="hljs-title function_">next</span>();
-&#125;);
-</code></pre></div>
+&#125;);</code></pre></div>
 <ul>
 <li><code>app.use()</code>: Registers middleware for all routes.</li>
 </ul>
@@ -489,9 +482,9 @@ expressApp.<span class="hljs-title function_">get</span>(<span class="hljs-strin
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/24/CSE276A/CSE276A-ROS2/" title="CSE276A - ROS2">
+                      <a href="/2025/04/03/CSE224/go-basis/" title="CSE224 - Go Basis">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSE276A - ROS2</span>
+                        <span class="hidden-mobile">CSE224 - Go Basis</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
