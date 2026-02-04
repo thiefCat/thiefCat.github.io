@@ -1,0 +1,1222 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/classic.JPG">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Songlin Zhao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="This blog introduces Spring Framework, including why we use Spring framework, what Spring provides, the overall structure of a Spring Application, IoC, AOP, and how Spring works">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发基础知识 - Spring基本介绍，特性与原理">
+<meta property="og:url" content="http://example.com/2025/07/02/SWE_basis/Spring/spring-basic/index.html">
+<meta property="og:site_name" content="Songlin&#39;s Blog">
+<meta property="og:description" content="This blog introduces Spring Framework, including why we use Spring framework, what Spring provides, the overall structure of a Spring Application, IoC, AOP, and how Spring works">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-02T07:11:00.000Z">
+<meta property="article:modified_time" content="2026-01-19T23:12:38.590Z">
+<meta property="article:author" content="Songlin Zhao">
+<meta property="article:tag" content="Backend Development">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>开发基础知识 - Spring基本介绍，特性与原理 - Songlin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":false,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","app_key":"ehUPYSOnPh9yYAYEkMuT4PEH","server_url":"https://gran9wcx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Songlin Zhao</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/" target="_self">
+                <i class="iconfont icon-pen"></i>
+                <span>Posts</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/projects/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>Projects</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">开发基础知识 - Spring基本介绍，特性与原理</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-02 00:11" pubdate>
+          July 2, 2025 12:11 AM
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.2k words
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">开发基础知识 - Spring基本介绍，特性与原理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Background">Background</h2>
+<h3 id="单例模式">单例模式</h3>
+<p>单例模式是一种创建对象的设计模式，它确保一个类在整个程序运行过程中，只会被创建一个实例，并提供一个全局访问点。比如一个Printer类，这个类的功能可以被多个服务使用，因为printer实例不保存状态，只提供打印服务，我们不想每次使用时就创建一个新的printer实例，因为这样浪费内存，也容易管理混乱。</p>
+<p>示例单例模式的代码：</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Printer</span> &#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Printer instance; <span class="hljs-comment">// 1. 类的静态变量保存实例</span>
+
+    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Printer</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-comment">// 2. 私有构造函数，别人不能 new</span>
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Printer <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;       <span class="hljs-comment">// 3. 第一次调用时才创建</span>
+            instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Printer</span>();
+        &#125;
+        <span class="hljs-keyword">return</span> instance;
+    &#125;
+&#125;
+
+<span class="hljs-type">Printer</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> Printer.getInstance(); <span class="hljs-comment">// 得到单例</span>
+</code></pre></div>
+<p>但是以上代码不符合单例模式的需求：</p>
+<ul>
+<li>多线程环境下可能会出现两个线程同时判断 <code>instance == null</code> 为 true, 创建两个实例，违反单例模式的设定。</li>
+<li><code>instance = new Printer()</code>可能会被编译器重排成如下顺序：</li>
+<li>分配内存空间</li>
+<li>把内存地址赋给 instance（instance 不再为 null）</li>
+<li>调用构造函数初始化对象<br>
+如果第二个线程看到<code>instance != null</code>，但其实这个实例还没有被初始化，那么第二个线程会直接使用没有初始化的对象，导致空指针等问题。因此要使用 <code>volatile</code> 防止指令重排。</li>
+</ul>
+<p>正确的单例模式代码：</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Printer</span> &#123;
+    <span class="hljs-comment">// 确保线程可见性以及禁止指令重排</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> Printer instance;
+    <span class="hljs-comment">// private构造函数，防止外部实例化（防止外部使用new Printer()）</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Printer</span><span class="hljs-params">()</span> &#123;&#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Printer <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123; <span class="hljs-comment">// 第一次检查，如果 instance 已经有了，就直接返回，省去加锁的成本</span>
+            <span class="hljs-keyword">synchronized</span> (Printer.class) &#123; <span class="hljs-comment">// 确保同一时间只有一个线程能进入</span>
+                <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123; <span class="hljs-comment">// 第二次检查（可能两个线程同时通过了第一层的 if (instance == null)）</span>
+                    instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Printer</span>();
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> instance;
+    &#125;
+&#125;
+</code></pre></div>
+<h3 id="Dependency-Injection">Dependency Injection</h3>
+<p>依赖注入是由外部系统将对象所依赖的其他对象传入（注入）它的过程。</p>
+<p>如果不使用依赖注入，比如我的代码中，Car 依赖于具体的 Engine 实现，两者耦合度高：</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// Engine.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Engine</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;Engine started.&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-comment">// Car.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">Engine</span> <span class="hljs-variable">engine</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Engine</span>();  <span class="hljs-comment">// 手动创建依赖</span>
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">drive</span><span class="hljs-params">()</span> &#123;
+        engine.start();
+        System.out.println(<span class="hljs-string">&quot;Car is driving...&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-comment">// Main.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        <span class="hljs-type">Car</span> <span class="hljs-variable">car</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Car</span>();  <span class="hljs-comment">// 手动创建 Car 实例</span>
+        car.drive();
+    &#125;
+&#125;
+</code></pre></div>
+<p>在这个代码中，Car 类自己创建了 Engine 对象 <code>new Engine()</code>。</p>
+<ul>
+<li>如果要换成 TurboEngine，需要修改 Car 的源码。</li>
+<li>不方便测试（比如不能用一个假的 Engine）</li>
+</ul>
+<p>使用依赖注入：</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Engine</span> &#123;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span>;
+&#125;
+
+<span class="hljs-comment">// 实现不同类型的Engine</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GasEngine</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Engine</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;Gas engine started.&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ElectricEngine</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Engine</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;Electric engine started.&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-comment">// Car 接受一个 Engine 参数</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> &#123;
+    <span class="hljs-keyword">private</span> Engine engine;
+
+    <span class="hljs-comment">// 构造函数注入（最常见方式）</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Car</span><span class="hljs-params">(Engine engine)</span> &#123;
+        <span class="hljs-built_in">this</span>.engine = engine;
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;
+        engine.start();
+        System.out.println(<span class="hljs-string">&quot;Car is driving...&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 使用</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        <span class="hljs-comment">// 注入不同的引擎类型</span>
+        <span class="hljs-type">Engine</span> <span class="hljs-variable">gasEngine</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GasEngine</span>();
+        <span class="hljs-type">Car</span> <span class="hljs-variable">car1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Car</span>(gasEngine);
+        car1.start(); <span class="hljs-comment">// 输出：Gas engine started.</span>
+
+        <span class="hljs-type">Engine</span> <span class="hljs-variable">electricEngine</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ElectricEngine</span>();
+        <span class="hljs-type">Car</span> <span class="hljs-variable">car2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Car</span>(electricEngine);
+        car2.start(); <span class="hljs-comment">// 输出：Electric engine started.</span>
+    &#125;
+&#125;
+</code></pre></div>
+<h2 id="Spring-Framework">Spring Framework</h2>
+<p>Spring 框架的核心目标就是解耦和自动化。Spring负责类的创建、注入、销毁等。</p>
+<h3 id="Spring代码示例">Spring代码示例</h3>
+<p>代码结构</p>
+<div class="code-wrapper"><pre><code class="hljs stylus">spring-demo/
+├── <span class="hljs-attribute">src</span>/
+│   └── main/
+│       ├── java/
+│       │   └── com/example/demo/
+│       │       ├── DemoApplication<span class="hljs-selector-class">.java</span>          <span class="hljs-comment">// 主程序入口</span>
+│       │       ├── controller/UserController.java<span class="hljs-comment">// 控制器</span>
+│       │       ├── service/UserService<span class="hljs-selector-class">.java</span>      <span class="hljs-comment">// 业务逻辑</span>
+│       │       ├── model/User<span class="hljs-selector-class">.java</span>               <span class="hljs-comment">// 数据模型</span>
+│       │       └── repository/UserRepository.java<span class="hljs-comment">// 数据仓库</span>
+│       └── resources/
+│           └── application<span class="hljs-selector-class">.properties</span>            <span class="hljs-comment">// 配置文件</span>
+├── pom<span class="hljs-selector-class">.xml</span>                                       <span class="hljs-comment">// Maven 构建文件</span>
+</code></pre></div>
+<ul>
+<li>DemoApplication.java：应用入口</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo;
+
+<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoApplication</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        SpringApplication.run(DemoApplication.class, args);
+    &#125;
+&#125;
+</code></pre></div>
+<ul>
+<li>User.java：实体类</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.model;
+
+<span class="hljs-keyword">import</span> jakarta.persistence.*;
+
+<span class="hljs-meta">@Entity</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;
+
+    <span class="hljs-meta">@Id</span>
+    <span class="hljs-meta">@GeneratedValue(strategy = GenerationType.IDENTITY)</span>
+    <span class="hljs-keyword">private</span> Long id;
+
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String email;
+
+    <span class="hljs-comment">// Getter 和 Setter</span>
+&#125;
+</code></pre></div>
+<ul>
+<li>UserRepository.java：仓库接口</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.repository;
+
+<span class="hljs-keyword">import</span> com.example.demo.model.User;
+<span class="hljs-keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserRepository</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JpaRepository</span>&lt;User, Long&gt; &#123;
+&#125;
+</code></pre></div>
+<ul>
+<li>UserService.java：服务类（业务逻辑）</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.service;
+
+<span class="hljs-keyword">import</span> com.example.demo.model.User;
+<span class="hljs-keyword">import</span> com.example.demo.repository.UserRepository;
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Service;
+
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-meta">@Service</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> UserRepository repo;
+    
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">UserService</span><span class="hljs-params">(UserRepository repo)</span> &#123;
+        <span class="hljs-built_in">this</span>.repo = repo;
+    &#125;
+
+    <span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title function_">getAllUsers</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-keyword">return</span> repo.findAll();
+    &#125;
+
+    <span class="hljs-keyword">public</span> User <span class="hljs-title function_">createUser</span><span class="hljs-params">(User user)</span> &#123;
+        <span class="hljs-keyword">return</span> repo.save(user);
+    &#125;
+&#125;
+</code></pre></div>
+<ul>
+<li>UserController.java：控制器（REST 接口）</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo.controller;
+
+<span class="hljs-keyword">import</span> com.example.demo.model.User;
+<span class="hljs-keyword">import</span> com.example.demo.service.UserService;
+<span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.*;
+
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-meta">@RestController</span>
+<span class="hljs-meta">@RequestMapping(&quot;/users&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> UserService service;
+
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">UserController</span><span class="hljs-params">(UserService service)</span> &#123;
+        <span class="hljs-built_in">this</span>.service = service;
+    &#125;
+
+    <span class="hljs-meta">@GetMapping</span>
+    <span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title function_">getUsers</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-keyword">return</span> service.getAllUsers();
+    &#125;
+
+    <span class="hljs-meta">@PostMapping</span>
+    <span class="hljs-keyword">public</span> User <span class="hljs-title function_">addUser</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> User user)</span> &#123;
+        <span class="hljs-keyword">return</span> service.createUser(user);
+    &#125;
+&#125;
+</code></pre></div>
+<h3 id="如果没有Spring">如果没有Spring</h3>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-type">UserService</span> <span class="hljs-variable">service</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserService</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">UserRepository</span>());
+</code></pre></div>
+<ul>
+<li>手动创建对象，项目初始化的时候很复杂</li>
+<li>手动传依赖（UserService依赖UserRepository）</li>
+<li>管理对象的销毁等</li>
+<li>如果多个类依赖UserRepository，依赖关系复杂难以管理</li>
+</ul>
+<p>会导致代码耦合度高，测试困难等。Spring可以帮你：</p>
+<ul>
+<li>自动创建对象，你不用写 new。</li>
+<li>自动注入依赖</li>
+<li>控制对象的生命周期（什么时候创建、什么时候销毁）</li>
+<li>帮你管理作用域：是单例？还是每次请求一个新的？都可以</li>
+</ul>
+<h3 id="IoC">IoC</h3>
+<p>控制反转(Inversion of Control)，将对象的创建和依赖关系的维护从代码中移除，交给一个专门的容器(Spring 框架中的IoC 容器) 来管理。</p>
+<p>在 Spring 应用 中，通常 Controller、Service 和 DAO（Repository） 都是由 Spring 容器管理的 Bean，这样可以充分利用 Spring 的 IoC（控制反转）和依赖注入（DI）机制，使得各层之间的依赖关系由 Spring 自动管理，减少手动创建对象的代码，提高可维护性和解耦性。</p>
+<h4 id="Bean">Bean</h4>
+<p>Bean是一个由Spring IoC容器管理的对象。这个对象可以是任何Java类的实例。Spring通过“控制反转（IoC）”的机制，把对象的创建权和管理权交给了容器。使用者不再手动 new 对象，而是让Spring把准备好的对象（Bean）交给使用者使用。这样可以使代码更清晰，专注于业务逻辑；更容易替换实现、做单元测试。</p>
+<h4 id="声明类为Beans的方法">声明类为Beans的方法</h4>
+<ol>
+<li>使用注解 @Component</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
+
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyService</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSomething</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;Doing something...&quot;</span>);
+    &#125;
+&#125;
+</code></pre></div>
+<ul>
+<li>@Component：通用组件</li>
+<li>@Service：表示业务逻辑层</li>
+<li>@Repository：表示数据访问层</li>
+<li>@Controller：表示Web控制器</li>
+</ul>
+<ol start="2">
+<li>使用 @Bean 注解<br>
+当你希望手动控制某个 Bean 的创建过程时，用这个方式。</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;
+<span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;
+
+<span class="hljs-meta">@Configuration</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppConfig</span> &#123;
+
+    <span class="hljs-meta">@Bean</span> <span class="hljs-comment">// 在方法上使用 @Bean，Spring会调用这个方法并将返回值作为一个 Bean。</span>
+    <span class="hljs-keyword">public</span> MyService <span class="hljs-title function_">myService</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyService</span>(); <span class="hljs-comment">// 手动创建并返回对象</span>
+    &#125;
+&#125;
+</code></pre></div>
+<p>Spring 会执行这个方法，获取返回的对象，把它注册成一个 Bean。</p>
+<h4 id="自动依赖注入">自动依赖注入</h4>
+<p>Spring 会自动找到类型是 Engine 的 Bean，注入给 Car。</p>
+<ul>
+<li>构造器注入</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Engine engine;
+
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Car</span><span class="hljs-params">(Engine engine)</span> &#123;
+        <span class="hljs-built_in">this</span>.engine = engine;
+    &#125;
+&#125;
+</code></pre></div>
+<ul>
+<li>Setter 注入</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> &#123;
+
+    <span class="hljs-keyword">private</span> Engine engine;
+
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setEngine</span><span class="hljs-params">(Engine engine)</span> &#123;
+        <span class="hljs-built_in">this</span>.engine = engine;
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;
+        engine.run();
+    &#125;
+&#125;
+</code></pre></div>
+<ul>
+<li>字段注入</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> &#123;
+
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-keyword">private</span> Engine engine;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> &#123;
+        engine.run();
+    &#125;
+&#125;
+</code></pre></div>
+<h3 id="AOP">AOP</h3>
+<p>AOP（Aspect-Oriented Programming）面向切面编程。在传统的面向对象编程中，比如我们在写一个网站的业务逻辑时，比如处理订单、用户登录等，我们经常还需要加上日志记录、权限校验、事务管理等功能。这些功能虽然必须有，但它们跟业务逻辑（比如下订单）并没有直接关系。</p>
+<p>比如我有一个订单服务：</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">createOrder</span><span class="hljs-params">()</span> &#123;
+    System.out.println(<span class="hljs-string">&quot;日志：开始执行 createOrder&quot;</span>);
+    <span class="hljs-comment">// 下单逻辑</span>
+    System.out.println(<span class="hljs-string">&quot;日志：createOrder 执行完毕&quot;</span>);
+&#125;
+</code></pre></div>
+<p>Spring AOP 是 Spring 框架提供的一种实现 AOP 编程的方法，它通过代理对象把横切逻辑“织入”到业务逻辑中，不需要你改业务代码。Spring 根据配置创建一个代理对象，每当你调用业务方法（如 orderService.createOrder()）时，代理对象会先执行切面逻辑（如日志），再执行真正的业务逻辑。</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Service</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span> &#123;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">createOrder</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;执行创建订单逻辑...&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 定义一个切面类（日志逻辑）</span>
+<span class="hljs-meta">@Aspect</span>
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LogAspect</span> &#123;
+
+    <span class="hljs-comment">// 切入点表达式：拦截所有 OrderService 的方法</span>
+    <span class="hljs-meta">@Pointcut(&quot;execution(* com.example.demo.OrderService.*(..))&quot;)</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">orderMethods</span><span class="hljs-params">()</span> &#123;&#125;
+
+    <span class="hljs-comment">// 前置通知：方法执行前记录日志</span>
+    <span class="hljs-meta">@Before(&quot;orderMethods()&quot;)</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">logBefore</span><span class="hljs-params">(JoinPoint joinPoint)</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;日志：开始执行方法 -&gt; &quot;</span> + joinPoint.getSignature().getName());
+    &#125;
+
+    <span class="hljs-comment">// 后置通知：方法执行后记录日志</span>
+    <span class="hljs-meta">@After(&quot;orderMethods()&quot;)</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">logAfter</span><span class="hljs-params">(JoinPoint joinPoint)</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;日志：结束执行方法 -&gt; &quot;</span> + joinPoint.getSignature().getName());
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 启动类开启 AOP 功能</span>
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-meta">@EnableAspectJAutoProxy</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoApplication</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        SpringApplication.run(DemoApplication.class, args);
+    &#125;
+&#125;
+</code></pre></div>
+<p>这样，当我调用 orderService 的代码时，比如 <code>orderService.createOrder()</code>，控制台会打印：</p>
+<div class="code-wrapper"><pre><code class="hljs clean">日志：开始执行方法 -&gt; createOrder
+执行创建订单逻辑...
+日志：结束执行方法 -&gt; createOrder
+</code></pre></div>
+<h2 id="Spring的原理">Spring的原理</h2>
+<h3 id="反射">反射</h3>
+<p>反射是 Java 提供的一种机制，可以在程序运行时（不是写代码时），动态地获取类的信息（比如类的名字、方法、变量、构造函数等），甚至动态地调用对象的方法或访问它的属性。详细的反射介绍：<a target="_blank" rel="noopener" href="https://thiefcat.github.io/2025/07/03/JAVA/reflection/">反射</a>。</p>
+<h3 id="IoC原理">IoC原理</h3>
+<p>回顾IoC主要是将对象的创建和依赖管理的责任从程序员手中“反转”给一个容器来管理，从而降低耦合度。在Spring启动时，会进行以下处理：</p>
+<ol>
+<li>当 Spring 启动时，会扫描指定的包或目录（通常通过 @ComponentScan 注解指定），查找类上标注的注解（如 @Component、@Service、@Repository、@Controller 等）</li>
+<li>所有标注了这些注解的类会被注册为 Spring 容器中的 Bean。</li>
+<li>在创建 Bean 时，如果该 Bean 有依赖的其他 Bean（如通过 @Autowired 注解标注），Spring 会自动注入这些依赖对象。</li>
+</ol>
+<h3 id="AOP原理">AOP原理</h3>
+<h4 id="动态代理">动态代理</h4>
+<p>实例化一个接口时：</p>
+<p>静态代理：你写了一个类去实现接口，写死了逻辑，编译器在编译期生成字节码。<br>
+动态代理：<strong>你在运行时才“生成一个类”（不是写出来的源码，而是直接生成字节码并加载），这个类会去实现接口，并在方法调用时，把实际处理交给 InvocationHandler。</strong></p>
+<p>如何让Java自动生成一个类来实现一个Interface？</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// newProxyInstance 是 Java 提供的 JDK 动态代理 的入口方法。</span>
+<span class="hljs-comment">// 它能在运行时创建一个代理对象，这个代理对象会实现你指定的接口，</span>
+<span class="hljs-comment">// 但它的方法调用实际会被转发给一个你自己定义的处理器对象（InvocationHandler）</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title function_">newProxyInstance</span><span class="hljs-params">(</span>
+<span class="hljs-params">    ClassLoader loader, // 类加载器</span>
+<span class="hljs-params">    Class&lt;?&gt;[] interfaces, // 接口列表</span>
+<span class="hljs-params">    InvocationHandler h)</span>;
+
+<span class="hljs-comment">// 调用示例：实现对UserCervice interface的动态代理</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserService</span> &#123;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">createUser</span><span class="hljs-params">(String username)</span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteUser</span><span class="hljs-params">(String username)</span>;
+&#125;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        <span class="hljs-comment">// 创建一个 InvocationHandler，用来处理所有方法的调用</span>
+        <span class="hljs-type">InvocationHandler</span> <span class="hljs-variable">handler</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvocationHandler</span>() &#123;
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable &#123;
+                <span class="hljs-comment">// 打印日志</span>
+                System.out.println(<span class="hljs-string">&quot;[LOG] 调用方法：&quot;</span> + method.getName());
+                System.out.println(<span class="hljs-string">&quot;[LOG] 参数：&quot;</span> + args[<span class="hljs-number">0</span>]);
+                
+                <span class="hljs-comment">// 模拟方法执行</span>
+                <span class="hljs-keyword">if</span> (method.getName().equals(<span class="hljs-string">&quot;createUser&quot;</span>)) &#123;
+                    System.out.println(<span class="hljs-string">&quot;正在创建用户：&quot;</span> + args[<span class="hljs-number">0</span>]);
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (method.getName().equals(<span class="hljs-string">&quot;deleteUser&quot;</span>)) &#123;
+                    System.out.println(<span class="hljs-string">&quot;正在删除用户：&quot;</span> + args[<span class="hljs-number">0</span>]);
+                &#125;
+
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; <span class="hljs-comment">// 接口方法返回 void，这里返回 null</span>
+            &#125;
+        &#125;;
+
+        <span class="hljs-comment">// 创建代理对象（实现了 UserService 接口）</span>
+        <span class="hljs-type">UserService</span> <span class="hljs-variable">proxy</span> <span class="hljs-operator">=</span> (UserService) Proxy.newProxyInstance(
+            UserService.class.getClassLoader(),
+            <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[] &#123; UserService.class &#125;,
+            handler
+        );
+
+        <span class="hljs-comment">// 调用代理对象的方法，实际会被拦截并执行 handler.invoke(...)</span>
+        proxy.createUser(<span class="hljs-string">&quot;alice&quot;</span>);
+        proxy.deleteUser(<span class="hljs-string">&quot;bob&quot;</span>);
+    &#125;
+&#125;
+</code></pre></div>
+<p>以上例子，使用了动态代理的方法，创建了一个对象，实现了 UserService 接口。</p>
+<p>实际输出：</p>
+<div class="code-wrapper"><pre><code class="hljs txt">[LOG] 调用方法：createUser
+[LOG] 参数：alice
+正在创建用户：alice
+
+[LOG] 调用方法：deleteUser
+[LOG] 参数：bob
+正在删除用户：bob
+</code></pre></div>
+<p>AOP的实现使用了<strong>动态代理</strong>，其中代理对象在运行时动态地拦截方法调用并进行增强操作。</p>
+<p>大体流程：<br>
+Spring启动时，会扫描标注了 @Aspect 的类，这些 @Aspect 类内部会定义切入点（@Pointcut）和通知（@Before、@After、@Around 等）。一旦 Spring 扫描到 @Aspect 注解的类，它就会在目标类上创建一个代理对象（<strong>根据注解动态生成代理对象</strong>）。Spring 会用代理对象替换原始目标对象，放入 Beans 来管理。代理对象的 invoke 方法会被 Spring 重写。在该方法中，Spring 会根据注解里的定义执行哪些横切逻辑。此后所有的方法调用都走代理逻辑，从而实现 AOP。</p>
+<h3 id="解决循环依赖">解决循环依赖</h3>
+<p>循环依赖是指 多个 Bean 之间的依赖形成了一个闭环，例如：A 依赖 B，B 依赖 A。如果 Spring 直接实例化 A，它发现 A 需要 B，于是去创建 B，但 B 又需要 A，形成了死锁，导致程序无法继续。为了解决循环依赖，Spring 在创建 Bean 时，使用了三级缓存机制：</p>
+<ul>
+<li>一级缓存：用来存放已经创建的对象，通常是完全初始化的 Bean 实例。</li>
+<li>二级缓存：用来存放已经实例化但是还没完全初始化的Bean（还未进行注入操作）。</li>
+<li>三级缓存：这个缓存用来存放 Bean 工厂，它是用来获取 Bean 的实例。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="category-chain-item">开发基础知识</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Backend-Development/" class="print-no-link">#Backend Development</a>
+      
+        <a href="/tags/Spring/" class="print-no-link">#Spring</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>开发基础知识 - Spring基本介绍，特性与原理</div>
+      <div>http://example.com/2025/07/02/SWE_basis/Spring/spring-basic/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Songlin Zhao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 2, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/07/04/JAVA_basis/java-jvm/" title="Java基础 - JVM">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java基础 - JVM</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/01/SWE_basis/Tools/maven/" title="开发基础知识 - Maven">
+                        <span class="hidden-mobile">开发基础知识 - Maven</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","appKey":"ehUPYSOnPh9yYAYEkMuT4PEH","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>小贼猫</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        Views: 
+        <span id="leancloud-site-pv"></span>
+        
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        Visitors: 
+        <span id="leancloud-site-uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

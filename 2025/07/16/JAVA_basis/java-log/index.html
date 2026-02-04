@@ -1,0 +1,876 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/classic.JPG">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Songlin Zhao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="This blog introduces multiple logging libraries including log4j, slf4j, and how to configure the logs in Java.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础 - 日志">
+<meta property="og:url" content="http://example.com/2025/07/16/JAVA_basis/java-log/index.html">
+<meta property="og:site_name" content="Songlin&#39;s Blog">
+<meta property="og:description" content="This blog introduces multiple logging libraries including log4j, slf4j, and how to configure the logs in Java.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-16T23:55:00.000Z">
+<meta property="article:modified_time" content="2026-01-19T23:32:58.682Z">
+<meta property="article:author" content="Songlin Zhao">
+<meta property="article:tag" content="Backend Development">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Java基础 - 日志 - Songlin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":false,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","app_key":"ehUPYSOnPh9yYAYEkMuT4PEH","server_url":"https://gran9wcx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Songlin Zhao</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/" target="_self">
+                <i class="iconfont icon-pen"></i>
+                <span>Posts</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/projects/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>Projects</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">Java基础 - 日志</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-16 16:55" pubdate>
+          July 16, 2025 4:55 PM
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k words
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Java基础 - 日志</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="日志">日志</h2>
+<p>日志级别：</p>
+<ol>
+<li>TRACE:  log.trace() 最详细的日志（几乎每一行代码都记录），不常用，只在本地调试</li>
+<li>DEBUG:  log.debug() 调试用的信息，比如变量值、函数调用，但一般只在开发环境用</li>
+<li>INFO: <a target="_blank" rel="noopener" href="http://log.info">log.info</a>()  一般性的信息，比如“服务启动成功”、“任务完成”，生产环境常用</li>
+<li>WARN: log.warn()  警告，程序还能运行，但可能有问题，一定要看</li>
+<li>ERROR:  log.error() 严重错误，比如连接失败、抛异常，非常重要</li>
+<li>FATAL:  log.fatal() 致命错误，程序无法继续，较少用，一般跟 error 同级别处理</li>
+</ol>
+<p>在配置文件里可以设置希望打印的日志级别，比如<code>log4j.rootLogger=INFO, console</code>（只打印 INFO 及以上级别的日志，DEBUG 就不打印）。</p>
+<h3 id="log4j">log4j</h3>
+<p>Log4j 是一个流行的 Java 日志框架。Log4j 1.x 已经停止维护，不推荐使用。以下介绍 log4j 2.x。</p>
+<h3 id="如何使用">如何使用</h3>
+<p>配置文件 <code>src/main/resources/log4j2.xml</code>，用于定义日志的配置。主要包含两大部分：</p>
+<ol>
+<li><code>&lt;Appenders&gt;</code>：用于定义输出目的地，以及其对应的输出格式等。</li>
+<li><code>&lt;Loggers&gt;</code>：用于配置不同类/包的日志级别和使用哪些 Appenders。</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Configuration</span> <span class="hljs-attr">status</span>=<span class="hljs-string">&quot;WARN&quot;</span>&gt;</span>  
+    <span class="hljs-tag">&lt;<span class="hljs-name">Properties</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;logPath&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/home/logs&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Properties</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">Appenders</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Console</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Console&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;SYSTEM_OUT&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;[%d&#123;HH:mm:ss&#125;] [%t] %-5level %c - %msg%n&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Console</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;FileLogger&quot;</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">&quot;$&#123;logPath&#125;/app.log&quot;</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">&quot;logs/app-%d&#123;yyyy-MM-dd&#125;.log&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;[%d&#123;yyyy-MM-dd HH:mm:ss&#125;] [%t] %-5level: %msg%n&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> <span class="hljs-attr">interval</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">modulate</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Appenders</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">Loggers</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.example.main&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;debug&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;Console&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.example.util&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;info&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">Root</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;debug&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;Console&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;FileLogger&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Root</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Loggers</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Configuration</span>&gt;</span></code></pre></div>
+<p>语法解释：</p>
+<ul>
+<li>
+<p><code>&lt;Properties&gt;</code>：用于在配置文件中定义变量，这些变量可以在后续的配置元素中被引用。</p>
+</li>
+<li>
+<p><code>&lt;RollingFile&gt;</code>：用于配置 日志文件滚动，即当日志文件达到一定条件时，自动进行日志切割（例如：按大小、按日期等）。</p>
+</li>
+<li>
+<p><code>&lt;Policies&gt;</code>：定义触发日志滚动的策略</p>
+</li>
+<li>
+<p>TimeBasedTriggeringPolicy：按时间滚动</p>
+</li>
+<li>
+<p>SizeBasedTriggeringPolicy：按日志文件大小滚动</p>
+</li>
+<li>
+<p><code>&lt;PatternLayout&gt;</code>：用于设置日志输出格式，比如<code>&lt;PatternLayout pattern=&quot;[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %-5p [%c{2}] [%X{requestId}] - %m%n&quot; /&gt;</code>的输出示例为：[2025-07-20 13:47:15.324] [main] INFO  [MyService] [abc123] - 用户登录成功。</p>
+</li>
+<li>
+<p><code>%d{HH:mm:ss}</code>：时:分:秒</p>
+</li>
+<li>
+<p><code>%t</code>：当前线程名字</p>
+</li>
+<li>
+<p><code>%–5p</code>：等价于<code>%-5level</code>，以5个字符宽度，左对齐的格式来输出日志级别，比如INFO，ERROR等。</p>
+</li>
+<li>
+<p><code>%m</code>：日志消息内容，就是代码中写的那段文字</p>
+</li>
+<li>
+<p><code>%c{2}</code>：<code>%c</code>是日志记录器的名称，通常是当前类的全限定名，<code>{2}</code>表示只输出“类名的最后两级”（包名 + 类名），比如：<code>com.example.app.MyService</code>，那么<code>{2}</code>代表<code>app.MyService</code>，<code>{1}</code>代表<code>MyService</code></p>
+</li>
+<li>
+<p><code>%X{requestId}</code>：输出MDC（Mapped Diagnostic Context）中的键值对，MDC由ThreadContext定义。这里输出ThreadContext中的requestId。</p>
+</li>
+<li>
+<p><code>&lt;Loggers&gt;</code>：标签用于定义特定包、类或者模块的日志设置。它可以用来调整日志级别和指定该日志使用的输出目标。</p>
+</li>
+<li>
+<p>name：指定要配置的日志器的名称，通常是包名或类名。</p>
+</li>
+<li>
+<p>additivity：表示日志是否向上传递到上级 Logger（通常是 Root Logger）继续输出。<code>additivity=&quot;true&quot;</code>，向上传递，会输出多次。<code>additivity=&quot;false&quot;</code>：不向上传递，只在当前 Logger 配置的 Appender 中输出一次。</p>
+</li>
+<li>
+<p>AppenderRef：指定日志的输出目的地。一个 <code>&lt;Logger&gt;</code> 下可能有多个 AppenderRef，说明该包/类的日志会输出到多个目的地。</p>
+</li>
+</ul>
+<p>示例：</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.apache.logging.log4j.LogManager;
+<span class="hljs-keyword">import</span> org.apache.logging.log4j.Logger;
+<span class="hljs-keyword">import</span> org.apache.logging.log4j.ThreadContext;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyService</span> &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LogManager.getLogger(MyService.class);
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">login</span><span class="hljs-params">(String userId)</span> &#123;
+        ThreadContext.put(<span class="hljs-string">&quot;requestId&quot;</span>, userId); <span class="hljs-comment">// 设置上下文变量</span>
+        logger.info(<span class="hljs-string">&quot;用户登录成功&quot;</span>);
+        ThreadContext.clearAll(); <span class="hljs-comment">// 清理</span>
+    &#125;
+&#125;</code></pre></div>
+<h3 id="Commons-Logging">Commons Logging</h3>
+<p>Commons Logging 是 Apache 提供的一个轻量级日志抽象层，它并不实际提供日志实现，而是提供了一个统一的接口来调用不同的日志框架。在大型项目或类库中，如果直接使用 Log4j、JUL、SLF4J 等具体实现，会导致项目之间耦合太强、灵活性差。而使用 Commons Logging 可以做到代码不依赖具体的日志实现，可以切换日志底层实现。Commons Logging 会自动绑定到 Log4j，当它在 classpath 中找到 log4j.jar 时，Commons Logging 会选择 Log4j 作为底层日志实现。</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.apache.commons.logging.Log;
+<span class="hljs-keyword">import</span> org.apache.commons.logging.LogFactory;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyApp</span> &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Log</span> <span class="hljs-variable">log</span> <span class="hljs-operator">=</span> LogFactory.getLog(MyApp.class);
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        log.info(<span class="hljs-string">&quot;程序开始运行&quot;</span>);
+        log.warn(<span class="hljs-string">&quot;这是一个警告&quot;</span>);
+        log.error(<span class="hljs-string">&quot;发生了错误&quot;</span>);
+    &#125;
+&#125;</code></pre></div>
+<h3 id="SLF4J">SLF4J</h3>
+<p>类似 Commons Logging，但更加现代、稳定。它提供的是一组统一的日志接口（API），本身不处理日志的输出，而是将日志调用委托给具体的日志实现（如 Logback、Log4j2、JUL 等）来完成。</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.slf4j.Logger;
+<span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HelloSLF4J</span> &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LoggerFactory.getLogger(HelloSLF4J.class);
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Eric&quot;</span>;
+        logger.info(<span class="hljs-string">&quot;My name is &#123;&#125;&quot;</span>, name);
+        logger.info(<span class="hljs-string">&quot;Hello, SLF4J!&quot;</span>);
+    &#125;
+&#125;</code></pre></div>
+<h2 id="绑定器">绑定器</h2>
+<p>在一个项目中只使用一个日志实现库，避免多个日志框架共同参与日志处理。</p>
+<h3 id="slf4j-log4j12">slf4j-log4j12</h3>
+<p>slf4j-log4j12 是 SLF4J 提供的一个绑定器，它的作用是把 SLF4J 的日志调用转发给 Log4j 1.x 实现。只要这个绑定器在你的 classpath 中，所有使用 SLF4J 打的日志（包括你和你引入的库）就都会被转发到 Log4j，并使用你项目里的 log4j.properties 或 log4j.xml 配置输出。</p>
+<p>由于Logback 是 SLF4J 的原生实现，如果想要使用 SLF4J 作为日志门面，并使用 Log4j 作为底层日志实现，必须需要这个绑定器。</p>
+<h3 id="log4j-slf4j-impl">log4j-slf4j-impl</h3>
+<p>Log4j 2 提供的官方 SLF4J 绑定器，用于将所有 SLF4J API 的日志调用转发到 Log4j2 实现。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Backend-Development/" class="print-no-link">#Backend Development</a>
+      
+        <a href="/tags/Java/" class="print-no-link">#Java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java基础 - 日志</div>
+      <div>http://example.com/2025/07/16/JAVA_basis/java-log/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Songlin Zhao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 16, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/07/27/JAVA_basis/generics/" title="Java基础 - 泛型">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java基础 - 泛型</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/13/SWE_basis/Database/mybatis/" title="开发基础知识 - Mybatis介绍">
+                        <span class="hidden-mobile">开发基础知识 - Mybatis介绍</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","appKey":"ehUPYSOnPh9yYAYEkMuT4PEH","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>小贼猫</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        Views: 
+        <span id="leancloud-site-pv"></span>
+        
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        Visitors: 
+        <span id="leancloud-site-uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

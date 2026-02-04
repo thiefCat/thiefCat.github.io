@@ -1,0 +1,957 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/classic.JPG">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Songlin Zhao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="This blog introduces functional programming in Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础 - Java函数式编程 - 函数式接口">
+<meta property="og:url" content="http://example.com/2025/07/28/JAVA_basis/java-fp-basic/index.html">
+<meta property="og:site_name" content="Songlin&#39;s Blog">
+<meta property="og:description" content="This blog introduces functional programming in Java">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-28T07:33:00.000Z">
+<meta property="article:modified_time" content="2026-01-19T23:36:06.099Z">
+<meta property="article:author" content="Songlin Zhao">
+<meta property="article:tag" content="Backend Development">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Java基础 - Java函数式编程 - 函数式接口 - Songlin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":false,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","app_key":"ehUPYSOnPh9yYAYEkMuT4PEH","server_url":"https://gran9wcx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Songlin Zhao</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/" target="_self">
+                <i class="iconfont icon-pen"></i>
+                <span>Posts</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/projects/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>Projects</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">Java基础 - Java函数式编程 - 函数式接口</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-28 00:33" pubdate>
+          July 28, 2025 12:33 AM
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k words
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Java基础 - Java函数式编程 - 函数式接口</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Introduction">Introduction</h2>
+<p>函数式编程是一种编程范式，与其相对的是面向对象编程。</p>
+<ul>
+<li>OOP：将数据和操作该数据的行为（方法）封装在对象中。程序的设计围绕着对象及其相互作用展开。</li>
+<li>FP：它将计算视为数学函数的求值过程。程序的设计是通过组合一系列函数来完成的。</li>
+</ul>
+<p>不像JavaScript，函数可以被当作参数传入函数中。在 Java 中，函数无法独立于类或对象存在。<strong>那么如何让Java代码可以传递函数作为参数呢？答案是函数式接口</strong>。</p>
+<h2 id="回调函数">回调函数</h2>
+<p>考虑以下场景：<br>
+文件下载是一个耗时的任务，我希望调用文件下载函数（downloadFile）之后立刻返回，继续处理别的数据，当文件下载结束之后，downloadFile函数可以自动调用一个onSuccess函数来对下载的文件作处理。</p>
+<ol>
+<li>如果同步的对下载文件作处理：</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> File <span class="hljs-title function_">downloadFileSync</span><span class="hljs-params">(String url)</span> &#123;
+    <span class="hljs-comment">// ... 执行耗时的下载逻辑 ...</span>
+    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;...&quot;</span>);
+    <span class="hljs-keyword">return</span> file;
+&#125;
+
+<span class="hljs-comment">// 调用代码</span>
+System.out.println(<span class="hljs-string">&quot;开始下载...&quot;</span>);
+<span class="hljs-type">File</span> <span class="hljs-variable">myFile</span> <span class="hljs-operator">=</span> downloadFileSync(<span class="hljs-string">&quot;[http://example.com/largefile.zip](http://example.com/largefile.zip)&quot;</span>); <span class="hljs-comment">// &lt;--- 程序会在这里卡住10秒钟</span>
+System.out.println(<span class="hljs-string">&quot;下载完成！文件路径：&quot;</span> + myFile.getPath()); <span class="hljs-comment">// 10秒后才会执行这句</span></code></pre></div>
+<p>在 downloadFileSync 方法完成并返回结果之前，调用它的线程会被阻塞（Block），无法执行任何其他操作。</p>
+<ol start="2">
+<li>我们可以考虑使用两个线程来解决这个问题：一个是主线程，另一个线程负责执行下载以及之后的回调。思路：将函数作为参数传递到downloadFile的函数中。但是Java不支持函数作为参数，有什么解决方法呢？答案是：将函数包装在一个对象里。</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Callback</span>&lt;T&gt; &#123;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">onSuccess</span><span class="hljs-params">(T result)</span>; <span class="hljs-comment">// 成功时调用，结果类型为 T</span>
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">onError</span><span class="hljs-params">(Exception e)</span>;
+&#125;</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FileDownloader</span> &#123;
+    <span class="hljs-comment">// 使用线程池来管理异步任务</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">ExecutorService</span> <span class="hljs-variable">executor</span> <span class="hljs-operator">=</span> Executors.newSingleThreadExecutor();
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">downloadFile</span><span class="hljs-params">(String url, Callback&lt;File&gt; callback)</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;Downloader: 开始下载文件，URL: &quot;</span> + url);
+
+        <span class="hljs-comment">// 提交一个新任务到线程池中执行，实现异步</span>
+        executor.submit(() -&gt; &#123;
+            <span class="hljs-keyword">try</span> &#123;
+                <span class="hljs-comment">// 模拟网络延迟和下载过程</span>
+                System.out.println(<span class="hljs-string">&quot;正在下载中...&quot;</span>);
+                Thread.sleep(<span class="hljs-number">2500</span>);
+
+                <span class="hljs-type">File</span> <span class="hljs-variable">downloadedFile</span> <span class="hljs-operator">=</span> File.createTempFile(<span class="hljs-string">&quot;download_&quot;</span>, <span class="hljs-string">&quot;.tmp&quot;</span>);
+                System.out.println(<span class="hljs-string">&quot;文件下载成功&quot;</span>);
+
+                <span class="hljs-comment">// 任务成功，执行成功回调</span>
+                <span class="hljs-keyword">if</span> (callback != <span class="hljs-literal">null</span>) &#123;
+                    callback.onSuccess(downloadedFile);
+                &#125;
+
+            &#125; <span class="hljs-keyword">catch</span> (InterruptedException | IOException e) &#123;
+                <span class="hljs-comment">// 模拟下载过程中发生错误</span>
+                System.err.println(<span class="hljs-string">&quot;下载时发生错误&quot;</span>);
+                
+                <span class="hljs-keyword">if</span> (callback != <span class="hljs-literal">null</span>) &#123;
+                    callback.onError(e);
+                &#125;
+            &#125;
+        &#125;);
+        System.out.println(<span class="hljs-string">&quot;Downloader: downloadFile 方法已立即返回，主线程不会被阻塞。&quot;</span>);
+    &#125;
+
+    <span class="hljs-comment">// 提供一个关闭线程池的方法，以便在程序退出时释放资源</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shutdown</span><span class="hljs-params">()</span> &#123;
+        executor.shutdown();
+    &#125;
+&#125;</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;程序启动，准备调用下载方法。&quot;</span>);
+        
+        <span class="hljs-type">FileDownloader</span> <span class="hljs-variable">downloader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileDownloader</span>();
+        <span class="hljs-comment">// 创建了一个 Callback&lt;File&gt; 的匿名内部类实例，</span>
+        <span class="hljs-comment">// 这里相当于先创建一个class implements Callback&lt;File&gt;，再创建一个对象</span>
+        Callback&lt;File&gt; myDownloadCallback = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Callback</span>&lt;File&gt;() &#123;
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onSuccess</span><span class="hljs-params">(File result)</span> &#123;
+                System.out.println(<span class="hljs-string">&quot;回调函数被执行：任务成功！&quot;</span>);
+                System.out.println(<span class="hljs-string">&quot;文件保存在: &quot;</span> + result.getAbsolutePath());
+                <span class="hljs-comment">// 可以在这里做文件重命名、移动或通知用户等操作</span>
+            &#125;
+
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onError</span><span class="hljs-params">(Exception e)</span> &#123;
+                System.err.println(<span class="hljs-string">&quot;回调函数被执行：任务失败！&quot;</span>);
+                e.printStackTrace();
+                <span class="hljs-comment">// 可以在这里记录日志、提示用户下载失败等</span>
+            &#125;
+        &#125;;
+
+        downloader.downloadFile(fileUrl, myDownloadCallback);
+
+        System.out.println(<span class="hljs-string">&quot;downloadFile 方法已调用完毕，主线程继续执行其他任务...&quot;</span>);
+        <span class="hljs-comment">// 主线程可以继续做其他事情，比如响应用户点击等，而不会被下载任务卡住</span>
+    &#125;
+&#125;</code></pre></div>
+<h2 id="函数式接口">函数式接口</h2>
+<p>Java 8对上述模式中的“接口”进行了一次概念上的升级。如果一个接口只有一个抽象方法，它就被称为函数式接口。<strong>一个函数式接口是指有且仅有一个抽象方法的接口</strong>。Java 提供了 @FunctionalInterface 注解来在编译时强制校验这一点。一个经典的例子是 java.lang.Runnable：</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Runnable</span> &#123;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span>; <span class="hljs-comment">// 这是唯一的一个抽象方法</span>
+&#125;</code></pre></div>
+<p>创建一个线程的本质可以理解为启动一个线程来执行某个函数，这个函数通过Runnable包装起来，使得这个函数可以被当作参数传递给其他函数。</p>
+<h3 id="直接实现-Runnable-接口">直接实现 Runnable 接口</h3>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyTask</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Runnable</span> &#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;任务正在执行...&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-type">Runnable</span> <span class="hljs-variable">task</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyTask</span>();
+<span class="hljs-type">Thread</span> <span class="hljs-variable">thread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(task);
+thread.start();  <span class="hljs-comment">// 启动线程，执行 run 方法</span></code></pre></div>
+<h3 id="使用匿名类实现-Runnable">使用匿名类实现 Runnable</h3>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-type">Runnable</span> <span class="hljs-variable">task</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;任务正在执行...&quot;</span>);
+    &#125;
+&#125;;
+
+<span class="hljs-type">Thread</span> <span class="hljs-variable">thread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(task);
+thread.start();  <span class="hljs-comment">// 启动线程，执行 run 方法</span></code></pre></div>
+<p>匿名类是 Java 中的一种特殊类，用来创建一个没有名字的类并立即实例化它。本质上，<strong>以上代码创建了一个匿名类，它实现了 Runnable 接口，并提供了 run() 方法的具体实现</strong>。</p>
+<h3 id="使用-Lambda-表达式">使用 Lambda 表达式</h3>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-type">Runnable</span> <span class="hljs-variable">task</span> <span class="hljs-operator">=</span> () -&gt; System.out.println(<span class="hljs-string">&quot;任务正在执行...&quot;</span>); <span class="hljs-comment">// Runnable是一个函数式接口</span>
+<span class="hljs-type">Thread</span> <span class="hljs-variable">thread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(task);
+thread.start();  <span class="hljs-comment">// 启动线程，执行 run 方法</span></code></pre></div>
+<p><strong>Lambda函数是前两个实现方法的语法糖</strong>。它允许你直接提供那个唯一抽象方法的实现，编译器会自动为你完成“创建对象”这个包装过程。</p>
+<h2 id="java-util-function">java.util.function</h2>
+<p>java.util.function 包提供一套通用、标准化的函数式接口。</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 自定义接口</span>
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">StringOperation</span> &#123;
+    String <span class="hljs-title function_">apply</span><span class="hljs-params">(String s)</span>;
+&#125;
+<span class="hljs-type">StringOperation</span> <span class="hljs-variable">func</span> <span class="hljs-operator">=</span> (s) -&gt; s.toUpperCase();
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processString</span><span class="hljs-params">(String input, StringOperation op)</span> &#123;
+    System.out.println(op.apply(input));
+&#125;
+processString(<span class="hljs-string">&quot;hello&quot;</span>, func);</code></pre></div>
+<p>有了 java.util.function，你不再需要定义 StringOperation，可以直接使用 <code>Function&lt;String, String&gt;</code>。<strong>StringOperation这个函数式接口本质上定义了一个“接受一个 String，返回一个 String”的函数载体</strong>。<code>Function&lt;String, String&gt;</code> 精确地描述了“接受一个 String，返回一个 String”这个函数签名。</p>
+<p><code>Function&lt;String, String&gt;</code>是预先定义好的接口，它就是一个函数式接口，只不过提供了统一的规范：</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Function</span>&lt;T, R&gt; &#123;
+    R <span class="hljs-title function_">apply</span><span class="hljs-params">(T t)</span>;
+&#125;</code></pre></div>
+<h3 id="Function-T-R">Function&lt;T, R&gt;</h3>
+<ul>
+<li>接口方法: <code>R apply(T t)</code></li>
+<li>接受一个类型为 T 的参数，经过转换后，返回一个类型为 R 的结果。这是最典型的“输入 -&gt; 输出”模型。</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 将字符串转换为其长度 (Integer)</span>
+Function&lt;String, Integer&gt; lengthFunction = s -&gt; s.length();
+<span class="hljs-type">Integer</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> lengthFunction.apply(<span class="hljs-string">&quot;Hello, World!&quot;</span>); <span class="hljs-comment">// len is 13</span></code></pre></div>
+<h3 id="Predicate-T">Predicate<T></h3>
+<ul>
+<li>接口方法: <code>boolean test(T t)</code></li>
+<li>接受一个类型为 T 的参数，返回一个布尔值。用于判断输入是否满足某个条件。</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java">Predicate&lt;Integer&gt; isPositive = i -&gt; i &gt; <span class="hljs-number">0</span>;
+
+<span class="hljs-type">boolean</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> isPositive.test(<span class="hljs-number">10</span>);  <span class="hljs-comment">// true</span>
+<span class="hljs-type">boolean</span> <span class="hljs-variable">result2</span> <span class="hljs-operator">=</span> isPositive.test(-<span class="hljs-number">5</span>); <span class="hljs-comment">// false</span></code></pre></div>
+<h3 id="Consumer-T">Consumer<T></h3>
+<ul>
+<li>接口方法: <code>void accept(T t)</code></li>
+<li>接受一个类型为 T 的参数，执行某个操作，但没有返回值。</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 打印字符串到控制台</span>
+Consumer&lt;String&gt; printer = s -&gt; System.out.println(s);
+printer.accept(<span class="hljs-string">&quot;Processing data...&quot;</span>);</code></pre></div>
+<h3 id="Supplier-T">Supplier<T></h3>
+<ul>
+<li>接口方法: <code>T get()</code></li>
+<li>不接受任何参数，但返回一个类型为 T 的结果。</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 生成一个新的 UUID</span>
+Supplier&lt;UUID&gt; uuidGenerator = () -&gt; UUID.randomUUID();
+<span class="hljs-type">UUID</span> <span class="hljs-variable">newId</span> <span class="hljs-operator">=</span> uuidGenerator.get();</code></pre></div>
+<h2 id="方法引用">方法引用</h2>
+<p>方法引用可以看作是特定场景下 Lambda 表达式的一种语法糖。<strong>当一个 Lambda 表达式的全部内容只是在调用一个已经存在的方法时，提供一种更简洁的写法来直接引用那个方法</strong>。</p>
+<div class="code-wrapper"><pre><code class="hljs java">List&lt;String&gt; names = Arrays.asList(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;Charlie&quot;</span>);
+
+<span class="hljs-comment">// 使用 Lambda 表达式</span>
+names.forEach(s -&gt; System.out.println(s));</code></pre></div>
+<p>这个lambda函数本质上就是接收一个参数 s，然后将这个参数 s 原封不动地传递给了 System.out.println() 方法。</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 使用方法引用</span>
+names.forEach(System.out::println);</code></pre></div>
+<ol>
+<li>静态方法引用: <code>ClassName::staticMethodName</code><br>
+<code>str -&gt; Integer.parseInt(str)</code> 可以写成 <code>Integer::parseInt</code></li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs java">List&lt;String&gt; stringNumbers = Arrays.asList(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
+List&lt;Integer&gt; numbers = stringNumbers.stream()
+                                     .map(Integer::parseInt) <span class="hljs-comment">// 代替 s -&gt; Integer.parseInt(s)</span>
+                                     .collect(Collectors.toList());
+<span class="hljs-comment">// numbers is [1, 2, 3]</span></code></pre></div>
+<ol start="2">
+<li>指向特定对象的实例方法引用: <code>instance::instanceMethodName</code><br>
+<code>x -&gt; System.out.println(x)</code> 可以写成 <code>System.out::println</code></li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs java">List&lt;String&gt; names = Arrays.asList(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;Charlie&quot;</span>);
+names.forEach(System.out::println); <span class="hljs-comment">// 代替 name -&gt; System.out.println(name)</span></code></pre></div>
+<ol start="3">
+<li>指向任意类型实例方法引用: <code>ClassName::instanceMethodName</code><br>
+语法：<code>(arg0, rest_of_args) -&gt; arg0.instanceMethodName(rest_of_args)</code><br>
+<code>(s1, s2) -&gt; s1.compareTo(s2)</code> 可以写成 <code>String::compareTo</code></li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs java">List&lt;String&gt; list = Arrays.asList(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>);
+Predicate&lt;String&gt; isEmptyPredicate = String::isEmpty; <span class="hljs-comment">// 目标类型是 Predicate&lt;String&gt;</span>
+                                                      <span class="hljs-comment">// 其抽象方法是 boolean test(String s)</span>
+                                                      <span class="hljs-comment">// 映射为 s -&gt; s.isEmpty()</span>
+
+<span class="hljs-type">boolean</span> <span class="hljs-variable">hasEmptyString</span> <span class="hljs-operator">=</span> list.stream().anyMatch(isEmptyPredicate); <span class="hljs-comment">// true</span></code></pre></div>
+<ol start="4">
+<li>构造函数引用: <code>ClassName::new</code><br>
+<code>() -&gt; new ArrayList&lt;&gt;()</code> 可以写成 <code>ArrayList::new</code></li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;
+    String name;
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Person</span><span class="hljs-params">(String name)</span> &#123; <span class="hljs-built_in">this</span>.name = name; &#125;
+    <span class="hljs-comment">// ...</span>
+&#125;
+
+List&lt;String&gt; names = Arrays.asList(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>);
+List&lt;Person&gt; people = names.stream()
+                           .map(Person::<span class="hljs-keyword">new</span>) <span class="hljs-comment">// 代替 name -&gt; new Person(name)</span>
+                           .collect(Collectors.toList());</code></pre></div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Backend-Development/" class="print-no-link">#Backend Development</a>
+      
+        <a href="/tags/Java/" class="print-no-link">#Java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java基础 - Java函数式编程 - 函数式接口</div>
+      <div>http://example.com/2025/07/28/JAVA_basis/java-fp-basic/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Songlin Zhao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 28, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/02/JAVA_basis/java-fp-stream/" title="Java基础 - Java函数式编程 - Stream API">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java基础 - Java函数式编程 - Stream API</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/27/JAVA_basis/generics/" title="Java基础 - 泛型">
+                        <span class="hidden-mobile">Java基础 - 泛型</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"GRan9wCxdzK6L9DxsQdF2TiX-gzGzoHsz","appKey":"ehUPYSOnPh9yYAYEkMuT4PEH","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>小贼猫</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        Views: 
+        <span id="leancloud-site-pv"></span>
+        
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        Visitors: 
+        <span id="leancloud-site-uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
