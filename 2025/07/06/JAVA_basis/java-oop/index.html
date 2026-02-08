@@ -29,7 +29,7 @@
 <meta property="og:description" content="This blog introduces Java Object Oriented Programming, including Encapsulation, Inheritance, and Polymorphism. This blog also contains demos and syntax of using Java OOP.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-07T03:14:00.000Z">
-<meta property="article:modified_time" content="2026-01-19T23:17:13.417Z">
+<meta property="article:modified_time" content="2026-02-07T08:16:49.461Z">
 <meta property="article:author" content="Songlin Zhao">
 <meta property="article:tag" content="Backend Development">
 <meta property="article:tag" content="Java">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          686 words
+          700 words
         
       </span>
     
@@ -423,8 +423,7 @@ a.makeSound();  <span class="hljs-comment">// Meow!</span></code></pre></div>
 <span class="hljs-type">Flyable</span> <span class="hljs-variable">f1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Bird</span>();
 <span class="hljs-type">Flyable</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Airplane</span>();
 f1.fly();  <span class="hljs-comment">// Bird is flying</span>
-f2.fly();  <span class="hljs-comment">// Airplane is flying</span>
-</code></pre></div>
+f2.fly();  <span class="hljs-comment">// Airplane is flying</span></code></pre></div>
 <p>一个类可以实现多个接口：</p>
 <div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Flyable</span> &#123;
     <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>;
@@ -438,6 +437,7 @@ f2.fly();  <span class="hljs-comment">// Airplane is flying</span>
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span> &#123; System.out.println(<span class="hljs-string">&quot;Duck flies&quot;</span>); &#125;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swim</span><span class="hljs-params">()</span> &#123; System.out.println(<span class="hljs-string">&quot;Duck swims&quot;</span>); &#125;
 &#125;</code></pre></div>
+<p>但是一个类只能继承一个抽象类。</p>
 <p>此外</p>
 <ol>
 <li>接口中可以定义 default 方法，提供默认实现。</li>

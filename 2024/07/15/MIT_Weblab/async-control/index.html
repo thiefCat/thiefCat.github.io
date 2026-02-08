@@ -29,7 +29,7 @@
 <meta property="og:description" content="This blog introduces Node.js, async handling of promises, and await keyword">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-07-15T19:26:00.000Z">
-<meta property="article:modified_time" content="2026-01-10T08:48:39.597Z">
+<meta property="article:modified_time" content="2026-02-08T23:51:02.566Z">
 <meta property="article:author" content="Songlin Zhao">
 <meta property="article:tag" content="Web Development">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          297 words
+          363 words
         
       </span>
     
@@ -318,11 +318,33 @@
 <li>Single-Threaded Event Loop: Unlike traditional multi-threaded servers that spawn a new thread for each client, Node.js uses a single-threaded event loop to manage all client connections. The Event Loop continuously checks the event queue to see if there are any events to be handled.</li>
 <li>Non-blocking I/O: Node.js performs I/O operations (like reading from a database) asynchronously. Instead of waiting for the operation to complete, Node.js registers a callback and moves on to handle the next event. This non-blocking behavior ensures that Node.js can handle many I/O operations concurrently without getting bogged down by slow operations</li>
 </ul>
+<h2 id="Promises">Promises</h2>
+<p>Promise is an object that can exist in only one of three states.</p>
+<ul>
+<li>Pending: The initial state. The operation is ongoing.</li>
+<li>Fulfilled / Resolved: The operation completed successfully.</li>
+<li>Rejected: The operation failed due to an error.</li>
+</ul>
+<p>The state can only change from <code>Pending</code> to <code>Fulfilled</code> or from <code>Pending</code> to <code>Rejected</code>.</p>
+<div class="code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-keyword">const</span> myPromise = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;
+    <span class="hljs-comment">// This code runs immediately</span>
+    <span class="hljs-keyword">const</span> success = <span class="hljs-literal">true</span>; 
+    <span class="hljs-keyword">if</span> (success) &#123;
+        <span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;Data&quot;</span>); <span class="hljs-comment">// State becomes Fulfilled; &quot;Data&quot; is passed as the value</span>
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-title function_">reject</span>(<span class="hljs-string">&quot;Error&quot;</span>); <span class="hljs-comment">// State becomes Rejected; &quot;Error&quot; is passed as the reason</span>
+    &#125;
+&#125;);</code></pre></div>
+<p>Even if the Promise resolves immediately, the code inside .then() will not run right away. It is placed into the Microtask Queue. It will execute only after the current synchronous script has finished, but before the next Event Loop cycle begins.</p>
+<ul>
+<li>When you mark a function as async, JavaScript automatically wraps the return value in <code>Promise.resolve()</code>.</li>
+<li>The instance method <code>.then()</code> always returns a new Promise. This mechanism is what enables chaining.</li>
+<li>Some APIs like <code>fetch()</code>, <code>axios.get()</code>.</li>
+</ul>
 <h2 id="then">.then()</h2>
 <h3 id="syntax">syntax</h3>
 <div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myStories = <span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/api/stories&#x27;</span>);
-<span class="hljs-title function_">setStories</span>(myStories);
-</code></pre></div>
+<span class="hljs-title function_">setStories</span>(myStories);</code></pre></div>
 <ul>
 <li>the <code>get()</code> function returns a promise.</li>
 <li><code>myStories</code> is a promise object immediately after this line runs. The promise represents an operation that hasn’t completed yet. JavaScript continues executing subsequent code without waiting for the promise to resolve.</li>
@@ -333,12 +355,11 @@
   <span class="hljs-title function_">setStories</span>(stories);
 &#125;).<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error.<span class="hljs-property">message</span>);
-&#125;);
-</code></pre></div>
+&#125;);</code></pre></div>
 <p><code>.then((stories) =&gt; { ... })</code> sets up a handler that waits for the promise to resolve.</p>
 <ul>
-<li>If promise fulfilled, execute .then().</li>
-<li>If promise rejected, execute .catch().</li>
+<li>If promise fulfilled, execute <code>.then()</code> (the function insie <code>.then()</code> is put into the microtask queue).</li>
+<li>If promise rejected, execute <code>.catch()</code> (the function insie <code>.catch()</code> is put into the microtask queue).</li>
 </ul>
 <h3 id="Async-of-promises">Async of promises</h3>
 <p>Promises let us keep running other code:</p>
@@ -349,8 +370,7 @@
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;do thing 1&quot;</span>);
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;do thing 2&quot;</span>);
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;do thing 3&quot;</span>);
-&#125;, []);
-</code></pre></div>
+&#125;, []);</code></pre></div>
 <ul>
 <li>These <code>console.log</code> statements execute synchronously, meaning they run immediately after the API request is initiated but before the promise resolves.</li>
 <li>When the <code>get</code> function is called, it returns a promise and initiates the asynchronous operation to fetch data. JavaScript does not wait for this operation to complete. Instead, it continues executing the subsequent lines of code immediately. This is known as non-blocking behavior.</li>
