@@ -21,15 +21,15 @@
   <meta name="author" content="Songlin Zhao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="This blog introduces Java Object Oriented Programming, including Encapsulation, Inheritance, and Polymorphism. This blog also contains demos and syntax of using Java OOP.">
+    <meta name="description" content="This blog introduces what are java threads and java virtual threads in Java 21">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java基础 - Java Object Oriented Programming">
-<meta property="og:url" content="http://example.com/2025/07/06/JAVA_basis/java-oop/index.html">
+<meta property="og:title" content="Java基础 - Java Threads and Virtual Threads">
+<meta property="og:url" content="http://example.com/2025/07/06/JAVA_basis/java-virtual-threads/index.html">
 <meta property="og:site_name" content="Songlin&#39;s Blog">
-<meta property="og:description" content="This blog introduces Java Object Oriented Programming, including Encapsulation, Inheritance, and Polymorphism. This blog also contains demos and syntax of using Java OOP.">
+<meta property="og:description" content="This blog introduces what are java threads and java virtual threads in Java 21">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-07T03:14:00.000Z">
-<meta property="article:modified_time" content="2026-02-07T08:16:49.461Z">
+<meta property="article:modified_time" content="2026-02-10T00:26:12.148Z">
 <meta property="article:author" content="Songlin Zhao">
 <meta property="article:tag" content="Backend Development">
 <meta property="article:tag" content="Java">
@@ -37,7 +37,7 @@
   
   
   
-  <title>Java基础 - Java Object Oriented Programming - Songlin&#39;s Blog</title>
+  <title>Java基础 - Java Threads and Virtual Threads - Songlin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -232,7 +232,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Java基础 - Java Object Oriented Programming</span>
+            <span id="subtitle">Java基础 - Java Threads and Virtual Threads</span>
           
         </div>
 
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          700 words
+          517 words
         
       </span>
     
@@ -303,159 +303,31 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Java基础 - Java Object Oriented Programming</h1>
+            <h1 id="seo-header">Java基础 - Java Threads and Virtual Threads</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="封装">封装</h2>
-<p>封装就是“把数据和操作数据的方法打包在一起”，同时隐藏内部的实现细节。比如将字段用private修饰，只暴露getter和setter。</p>
-<ul>
-<li>防止外部随意修改对象的内部状态。</li>
-<li>保持代码的安全性和清晰性。</li>
-</ul>
-<h2 id="继承">继承</h2>
-<p>子类可以继承父类的<strong>属性和方法</strong>（使用 Extends 来继承）。</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span> &#123;
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">makeSound</span><span class="hljs-params">()</span> &#123;
-        System.out.println(<span class="hljs-string">&quot;Some sound...&quot;</span>);
-    &#125;
-&#125;
-
-<span class="hljs-comment">// Dog 类继承了 Animal 类，也可以调用 makeSound()</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Animal</span> &#123;
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">bark</span><span class="hljs-params">()</span> &#123;
-        System.out.println(<span class="hljs-string">&quot;Woof!&quot;</span>);
-    &#125;
-&#125;</code></pre></div>
-<h2 id="多态">多态</h2>
-<h3 id="编译时多态">编译时多态</h3>
-<p>也叫方法重载（Overloading），是指在编译期间就已经确定了哪个方法会被调用。</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Calculator</span> &#123;
-    <span class="hljs-comment">// 重载 add 方法</span>
-    <span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;
-        <span class="hljs-keyword">return</span> a + b;
-    &#125;
-
-    <span class="hljs-type">double</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">double</span> a, <span class="hljs-type">double</span> b)</span> &#123;
-        <span class="hljs-keyword">return</span> a + b;
-    &#125;
-
-    <span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> &#123;
-        <span class="hljs-keyword">return</span> a + b + c;
-    &#125;
-&#125;</code></pre></div>
-<p>编译器根据你传入的参数类型和个数，在编译阶段 就能决定调用哪个方法。</p>
-<h3 id="运行时多态">运行时多态</h3>
-<p>也叫 方法重写（Overriding），是指在运行期间才能决定调用哪个方法。</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span> &#123;
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">makeSound</span><span class="hljs-params">()</span> &#123;
-        System.out.println(<span class="hljs-string">&quot;Some animal sound&quot;</span>);
-    &#125;
-&#125;
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Animal</span> &#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">makeSound</span><span class="hljs-params">()</span> &#123;
-        System.out.println(<span class="hljs-string">&quot;Woof!&quot;</span>);
-    &#125;
-&#125;
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Cat</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Animal</span> &#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">makeSound</span><span class="hljs-params">()</span> &#123;
-        System.out.println(<span class="hljs-string">&quot;Meow!&quot;</span>);
-    &#125;
-&#125;
-
-<span class="hljs-type">Animal</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Dog</span>();
-a.makeSound();  <span class="hljs-comment">// Woof!</span>
-
-a = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Cat</span>();
-a.makeSound();  <span class="hljs-comment">// Meow!</span></code></pre></div>
-<p>虽然变量类型是 Animal，但真正调用的是对象 Dog 或 Cat 中的 makeSound() 方法。</p>
-<h2 id="接口和抽象类">接口和抽象类</h2>
-<h3 id="抽象类">抽象类</h3>
-<p>抽象类是一种不能直接创建对象的类，它是为了被继承而存在的。子类是否必须实现父抽象类的抽象方法。</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span> &#123;
-    String name;  <span class="hljs-comment">// 添加 name 属性</span>
-
-    <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">makeSound</span><span class="hljs-params">()</span>; <span class="hljs-comment">// 留给子类实现</span>
-
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">eat</span><span class="hljs-params">()</span> &#123;
-        System.out.println(name + <span class="hljs-string">&quot; is eating.&quot;</span>);
-    &#125;
-&#125;
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Animal</span> &#123;
-    <span class="hljs-comment">// 实现抽象方法</span>
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">makeSound</span><span class="hljs-params">()</span> &#123;
-        System.out.println(<span class="hljs-string">&quot;Woof!&quot;</span>);
-    &#125;
-&#125;
-
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
-        <span class="hljs-type">Animal</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Dog</span>();
-        a.name = <span class="hljs-string">&quot;Buddy&quot;</span>;
-        a.eat();        <span class="hljs-comment">// 输出: Buddy is eating.</span>
-        a.makeSound();  <span class="hljs-comment">// 输出: Woof!</span>
-    &#125;
-&#125;</code></pre></div>
-<h3 id="接口">接口</h3>
-<p>接口（interface）是一些方法的集合，它定义了类应该遵守的一组规范或能力。</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Flyable</span> &#123;
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>;  <span class="hljs-comment">// 自动是 public abstract</span>
-&#125;
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Bird</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Flyable</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span> &#123;
-        System.out.println(<span class="hljs-string">&quot;Bird is flying&quot;</span>);
-    &#125;
-&#125;
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Airplane</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Flyable</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span> &#123;
-        System.out.println(<span class="hljs-string">&quot;Airplane is flying&quot;</span>);
-    &#125;
-&#125;
-
-<span class="hljs-type">Flyable</span> <span class="hljs-variable">f1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Bird</span>();
-<span class="hljs-type">Flyable</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Airplane</span>();
-f1.fly();  <span class="hljs-comment">// Bird is flying</span>
-f2.fly();  <span class="hljs-comment">// Airplane is flying</span></code></pre></div>
-<p>一个类可以实现多个接口：</p>
-<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Flyable</span> &#123;
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>;
-&#125;
-
-<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Swimmable</span> &#123;
-    <span class="hljs-keyword">void</span> <span class="hljs-title function_">swim</span><span class="hljs-params">()</span>;
-&#125;
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Duck</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Flyable</span>, Swimmable &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span> &#123; System.out.println(<span class="hljs-string">&quot;Duck flies&quot;</span>); &#125;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swim</span><span class="hljs-params">()</span> &#123; System.out.println(<span class="hljs-string">&quot;Duck swims&quot;</span>); &#125;
-&#125;</code></pre></div>
-<p>但是一个类只能继承一个抽象类。</p>
-<p>此外</p>
+                <h2 id="Java线程">Java线程</h2>
+<p>在 Java 19 之前，Java 线程模型都是 1:1 模型：1 Java Thread = 1 OS Thread。</p>
+<p>Java 线程创建的过程 (<code>new Thread(() -&gt; work()).start();</code>)：</p>
 <ol>
-<li>接口中可以定义 default 方法，提供默认实现。</li>
-<li>接口中可以定义 static 方法，不属于实现类，直接通过接口调用。</li>
-<li>接口中可以定义 private 方法，用于接口内部复用代码。</li>
+<li>在 Java Heap 里 new 了个对象 (<code>Thread t = new Thread();</code>)</li>
+<li><code>t.start();</code>: 创建 OS 线程 (<code>pthread_create()</code>)</li>
+<li>在操作系统眼中，该 Java 进程创建了一个线程，因此 OS 分配 native stack (大约1M~8M)，Native Stack 用来运行 JVM 的 C++ 函数</li>
+<li>JVM 给线程分 Java Stack (mmap 一个内存区域作为 Java Stack，大小可以由 <code>-Xss</code> 参数配置)，Java Stack 用来运行 Java 方法</li>
+<li>此时该 Java 线程与 OS 线程一一对应</li>
 </ol>
-<h2 id="Java关键字">Java关键字</h2>
-<ol>
-<li>访问控制</li>
-</ol>
+<p>线程的调度由操作系统来控制。</p>
+<h3 id="1-1模型的缺点">1:1模型的缺点</h3>
+<p>由于每创建一个 Java 线程都需要创建对应的 OS 线程，这限制了一个服务器创建大量的线程。尤其是当服务器的请求大多是 IO 密集型时，有限的线程大多都处于 Waiting 状态，大大占用了服务器的请求处理能力。在Linux中，内核为了处理系统调用、中断、上下文切换，必须为每个线程维护一个内核栈（通常是 16KB 或 8KB）。由于 OS 的 Kernal Space 有限，如果要创建10 万个线程，仅内核栈就需要 1.6GB 的物理内存。</p>
+<p>在 Java 21 引入了虚拟线程的概念。</p>
+<h2 id="虚拟线程">虚拟线程</h2>
+<p>虚拟线程 (Virtual Thread) 没有自己的 Kernel Stack。它是一个 Java 对象（java.lang.VirtualThread）。当一个虚拟线程需要 CPU 计算时，JVM 会把它“挂载 (Mount)” 到一个平台线程上。此时，虚拟线程借用了这个平台线程的 Kernel Stack 和 CPU 时间片来运行。 一旦虚拟线程由于 IO 而阻塞，JVM 会把它“卸载 (Unmount)”，归还平台线程。本质上，是 JVM 内实现的一套 user-level thread system。</p>
 <ul>
-<li>public：公有，所有地方都可以访问</li>
-<li>private： 私有，只能在本类中访问</li>
-<li>protected： 受保护，同包 + 子类可访问</li>
+<li>Unmount：将当前平台线程栈上的栈帧数据（包括程序计数器、局部变量）拷贝回 Java Heap 中。平台线程清空栈底，去执行下一个虚拟线程。</li>
+<li>虚拟线程只有在 Native Stack（C++ 栈帧）为空时，才允许 Unmount。因此，JDK 21 对底层库做了大规模的重写，JDK 内部把 Socket 等 IO 操作全部改写成了 Non-blocking IO.</li>
 </ul>
-<ol start="2">
-<li>final：表示不可修改：类不能继承、方法不能重写、变量不能变值</li>
-</ol>
 
                 
               </div>
@@ -503,8 +375,8 @@ f2.fly();  <span class="hljs-comment">// Airplane is flying</span></code></pre><
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Java基础 - Java Object Oriented Programming</div>
-      <div>http://example.com/2025/07/06/JAVA_basis/java-oop/</div>
+      <div>Java基础 - Java Threads and Virtual Threads</div>
+      <div>http://example.com/2025/07/06/JAVA_basis/java-virtual-threads/</div>
     </div>
     <div class="license-meta">
       
@@ -548,9 +420,9 @@ f2.fly();  <span class="hljs-comment">// Airplane is flying</span></code></pre><
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/07/07/JAVA_basis/java-exception/" title="Java基础 - Java异常">
+                      <a href="/2025/07/06/JAVA_basis/java-oop/" title="Java基础 - Java Object Oriented Programming">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java基础 - Java异常</span>
+                        <span class="hidden-mobile">Java基础 - Java Object Oriented Programming</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -558,8 +430,8 @@ f2.fly();  <span class="hljs-comment">// Airplane is flying</span></code></pre><
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/07/06/JAVA_basis/java-virtual-threads/" title="Java基础 - Java Threads and Virtual Threads">
-                        <span class="hidden-mobile">Java基础 - Java Threads and Virtual Threads</span>
+                      <a href="/2025/07/06/Cryptography/base64/" title="密码学 - Base64编码">
+                        <span class="hidden-mobile">密码学 - Base64编码</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
